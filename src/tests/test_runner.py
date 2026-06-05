@@ -1,0 +1,67 @@
+import csv
+from dataclasses import replace
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
+
+from experimentation.config import DatasetConfig, OutputConfig, PerturbationConfig, WorkflowConfig, debug_config
+from experimentation.datasets import SyntheticDatasetConfig
+from experimentation.runner import RESULT_COLUMNS, read_result_rows, run_experiment
+from experimentation.workflows import Workflow
+
+
+class FailingWorkflow(Workflow):
+    def __init__(self) -> None:
+        super().__init__("failing_workflow")
+
+    def compute_representations(self, graphs):
+        return []
+
+    def distribution_score(self, original_graphs, perturbed_graphs):
+        raise RuntimeError("intentional failure")
+
+
+class RunnerTests(unittest.TestCase):
+    def test_debug_experiment_runs_end_to_end_and_writes_expected_columns(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+
+            result_path = run_experiment(config)
+
+            self.assertTrue(result_path.is_file())
+            with result_path.open("r", newline="", encoding="utf-8") as handle:
+                reader = csv.DictReader(handle)
+                self.assertEqual(reader.fieldnames, list(RESULT_COLUMNS))
+                rows = list(reader)
+            self.assertGreater(len(rows), 0)
+
+    def test_failed_workflow_does_not_crash_full_experiment(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+
+            result_path = run_experiment(config, workflows=[FailingWorkflow()])
+            rows = read_result_rows(result_path)
+
+            self.assertGreater(len(rows), 0)
+            self.assertTrue(all(row["status"] == "failed" for row in rows))
+            self.assertTrue(all("intentional failure" in row["error_message"] for row in rows))
+
+
+def tiny_debug_config(root: Path):
+    base = debug_config(root)
+    output = OutputConfig(root=root, results=root / "results", figures=root / "figures", logs=root / "logs")
+    return replace(
+        base,
+        datasets=DatasetConfig(families=("erdos_renyi",), graphs_per_distribution=2),
+        dataset_configs=(
+            SyntheticDatasetConfig("erdos_renyi", num_graphs=2, num_nodes=6, edge_probability=0.5, seed=0),
+        ),
+        perturbations=PerturbationConfig(methods=("edge_addition_deletion",), alpha_values=(0.0, 0.5)),
+        workflows=WorkflowConfig(names=("structural_statistics_mmd", "wl_subtree_kernel_mmd")),
+        seeds=(0,),
+        outputs=output,
+    )
+
+
+if __name__ == "__main__":
+    unittest.main()
