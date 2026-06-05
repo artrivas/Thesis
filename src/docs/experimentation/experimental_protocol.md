@@ -186,3 +186,10 @@ CSV, pass:
 ```text
 python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda --no-resume
 ```
+
+If a bug or environment issue caused failed rows, pull the fix and recompute
+only those failed rows with:
+
+```text
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda --rerun-failed
+```

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760"><rect width="100%" height="100%" fill="white"/>
+<text x="26.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#222">Figure 0: Experiment dashboard</text>
+<text x="26.0" y="58.0" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#555">1650 successful, 550 failed, 440 skipped, 2640 total workflow rows</text>
+<text x="26.0" y="94.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">A. Run coverage by workflow</text>
+<text x="610.0" y="94.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">B. Detection strength by workflow and perturbation</text>
+<text x="26.0" y="405.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">C. Sensitivity vs runtime tradeoff</text>
+<text x="610.0" y="405.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">D. Workflow-level reading guide</text>
+<text x="26.0" y="140.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">diversity_curves_l2</text>
+<rect x="211.0" y="120.0" width="241.7" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="452.7" y="120.0" width="48.3" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="140.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">660</text>
+<text x="26.0" y="195.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">netlsd_spectral_signatures</text>
+<rect x="211.0" y="175.0" width="241.7" height="32.0" fill="#d62728" stroke="#fff"/>
+<rect x="452.7" y="175.0" width="48.3" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="195.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">660</text>
+<text x="26.0" y="250.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">structural_statistics_mmd</text>
+<rect x="211.0" y="230.0" width="241.7" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="452.7" y="230.0" width="48.3" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="250.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">660</text>
+<text x="26.0" y="305.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">wl_subtree_kernel_mmd</text>
+<rect x="211.0" y="285.0" width="241.7" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="452.7" y="285.0" width="48.3" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="305.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">660</text>
+<text x="789.0" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">community</text>
+<text x="875.2" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">edge</text>
+<text x="961.5" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">hub</text>
+<text x="1047.8" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">triangle</text>
+<text x="610.0" y="142.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">diversity_curves_l2</text>
+<rect x="785.0" y="120.0" width="84.2" height="32.0" fill="rgb(128,200,128)" stroke="#fff"/>
+<text x="795.0" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.80</text>
+<rect x="871.2" y="120.0" width="84.2" height="32.0" fill="rgb(136,203,136)" stroke="#fff"/>
+<text x="881.2" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.75</text>
+<rect x="957.5" y="120.0" width="84.2" height="32.0" fill="rgb(167,215,167)" stroke="#fff"/>
+<text x="967.5" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.53</text>
+<rect x="1043.8" y="120.0" width="84.2" height="32.0" fill="rgb(111,194,111)" stroke="#fff"/>
+<text x="1053.8" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.92</text>
+<text x="610.0" y="176.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">netlsd_spectral_signatures</text>
+<rect x="785.0" y="154.0" width="84.2" height="32.0" fill="rgb(245,245,245)" stroke="#fff"/>
+<text x="795.0" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.00</text>
+<rect x="871.2" y="154.0" width="84.2" height="32.0" fill="rgb(245,245,245)" stroke="#fff"/>
+<text x="881.2" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.00</text>
+<rect x="957.5" y="154.0" width="84.2" height="32.0" fill="rgb(245,245,245)" stroke="#fff"/>
+<text x="967.5" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.00</text>
+<rect x="1043.8" y="154.0" width="84.2" height="32.0" fill="rgb(245,245,245)" stroke="#fff"/>
+<text x="1053.8" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.00</text>
+<text x="610.0" y="210.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">structural_statistics_mmd</text>
+<rect x="785.0" y="188.0" width="84.2" height="32.0" fill="rgb(120,197,120)" stroke="#fff"/>
+<text x="795.0" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.86</text>
+<rect x="871.2" y="188.0" width="84.2" height="32.0" fill="rgb(132,202,132)" stroke="#fff"/>
+<text x="881.2" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.78</text>
+<rect x="957.5" y="188.0" width="84.2" height="32.0" fill="rgb(158,212,158)" stroke="#fff"/>
+<text x="967.5" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.59</text>
+<rect x="1043.8" y="188.0" width="84.2" height="32.0" fill="rgb(103,191,103)" stroke="#fff"/>
+<text x="1053.8" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.98</text>
+<text x="610.0" y="244.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">wl_subtree_kernel_mmd</text>
+<rect x="785.0" y="222.0" width="84.2" height="32.0" fill="rgb(161,213,161)" stroke="#fff"/>
+<text x="795.0" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.58</text>
+<rect x="871.2" y="222.0" width="84.2" height="32.0" fill="rgb(138,204,138)" stroke="#fff"/>
+<text x="881.2" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.74</text>
+<rect x="957.5" y="222.0" width="84.2" height="32.0" fill="rgb(152,209,152)" stroke="#fff"/>
+<text x="967.5" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.64</text>
+<rect x="1043.8" y="222.0" width="84.2" height="32.0" fill="rgb(105,192,105)" stroke="#fff"/>
+<text x="1053.8" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.96</text>
+<text x="785.0" y="280.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#555">0 = weak alpha trend, 1 = strong monotonic detection</text>
+<line x1="70.0" y1="680.0" x2="530.0" y2="680.0" stroke="#333" stroke-width="1"/>
+<line x1="70.0" y1="450.0" x2="70.0" y2="680.0" stroke="#333" stroke-width="1"/>
+<text x="255.0" y="714.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">relative runtime</text>
+<text x="25.0" y="565.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">sensitivity</text>
+<circle cx="211.5" cy="509.7" r="7.0" fill="#1f77b4" opacity="0.85"/>
+<text x="220.5" y="513.7" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">diversity_curves_l2</text>
+<circle cx="530.0" cy="498.1" r="7.0" fill="#2ca02c" opacity="0.85"/>
+<text x="539.0" y="502.1" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">structural_statistics_</text>
+<circle cx="124.6" cy="505.5" r="7.0" fill="#9467bd" opacity="0.85"/>
+<text x="133.6" y="509.5" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">wl_subtree_kernel_mmd</text>
+<text x="610.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">workflow</text>
+<text x="820.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">sensitivity</text>
+<text x="930.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">runtime</text>
+<text x="1020.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">read</text>
+<text x="610.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">diversity_curves_l2</text>
+<text x="820.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Medium</text>
+<text x="930.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Low</text>
+<text x="1020.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">structural_statistics_mmd</text>
+<text x="820.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Low</text>
+<text x="1020.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">wl_subtree_kernel_mmd</text>
+<text x="820.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Very high</text>
+<text x="1020.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="585.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#555">Use A to see data quality, B to compare detection, and C to choose a practical workflow.</text>
+<rect x="380.0" y="81.0" width="12.0" height="12.0" fill="#2ca02c" stroke="#fff"/>
+<text x="397.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">success</text>
+<rect x="452.0" y="81.0" width="12.0" height="12.0" fill="#d62728" stroke="#fff"/>
+<text x="469.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">failed</text>
+<rect x="524.0" y="81.0" width="12.0" height="12.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="541.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">skipped</text>
+</svg>

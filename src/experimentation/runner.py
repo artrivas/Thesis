@@ -52,6 +52,7 @@ def run_experiment(
     workflows: list[Workflow] | None = None,
     *,
     resume: bool = True,
+    rerun_failed: bool = False,
     device: str = "auto",
     log_path: Path | str | None = None,
     checkpoint_path: Path | str | None = None,
@@ -69,9 +70,19 @@ def run_experiment(
     configure_acceleration(device)
     workflow_instances = workflows if workflows is not None else workflows_from_config(config)
 
+    if resume and rerun_failed:
+        _drop_failed_rows(result_path)
     completed = _completed_keys(result_path) if resume else set()
     total_rows = _expected_row_count(config, workflow_instances)
-    logger.info("run_start result_path=%s resume=%s completed=%d total=%d device=%s", result_path, resume, len(completed), total_rows, acceleration_summary())
+    logger.info(
+        "run_start result_path=%s resume=%s rerun_failed=%s completed=%d total=%d device=%s",
+        result_path,
+        resume,
+        rerun_failed,
+        len(completed),
+        total_rows,
+        acceleration_summary(),
+    )
 
     append = resume and result_path.exists() and result_path.stat().st_size > 0
     rows_written = 0
@@ -165,6 +176,13 @@ def _completed_keys(path: Path) -> set[tuple[str, str, str, str, str, str]]:
     if not path.exists() or path.stat().st_size == 0:
         return set()
     return {_row_key(row) for row in read_result_rows(path)}
+
+
+def _drop_failed_rows(path: Path) -> None:
+    if not path.exists() or path.stat().st_size == 0:
+        return
+    rows = [row for row in read_result_rows(path) if row.get("status") != "failed"]
+    write_result_rows(rows, path)
 
 
 def _row_key(row: dict[str, object]) -> tuple[str, str, str, str, str, str]:

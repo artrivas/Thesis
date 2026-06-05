@@ -19,12 +19,14 @@ def main(argv: list[str] | None = None) -> int:
     debug_parser.add_argument("--output-root", default="outputs/debug_experimentation")
     debug_parser.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
     debug_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
+    debug_parser.add_argument("--rerun-failed", action="store_true", help="Drop failed rows and recompute them")
     debug_parser.add_argument("--log-file", default=None, help="Optional run log path")
 
     full_parser = subparsers.add_parser("run_full_synthetic_experiment", help="Run the full synthetic experiment")
     full_parser.add_argument("--output-root", default="outputs/experimentation")
     full_parser.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
     full_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
+    full_parser.add_argument("--rerun-failed", action="store_true", help="Drop failed rows and recompute them")
     full_parser.add_argument("--log-file", default=None, help="Optional run log path")
 
     evaluate_parser = subparsers.add_parser("evaluate_results", help="Generate evaluation CSVs")
@@ -40,6 +42,7 @@ def main(argv: list[str] | None = None) -> int:
         path = run_experiment(
             debug_config(Path(args.output_root)),
             resume=not args.no_resume,
+            rerun_failed=args.rerun_failed,
             device=args.device,
             log_path=Path(args.log_file) if args.log_file else None,
         )
@@ -49,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
         path = run_experiment(
             full_synthetic_config(Path(args.output_root)),
             resume=not args.no_resume,
+            rerun_failed=args.rerun_failed,
             device=args.device,
             log_path=Path(args.log_file) if args.log_file else None,
         )

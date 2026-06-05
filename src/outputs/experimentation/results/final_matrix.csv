@@ -1,0 +1,4 @@
+workflow,sensitivity_label,monotonicity_label,paired_label,mean_shift_label,granularity_label,robustness_label,efficiency_label,interpretability_label
+diversity_curves_l2,Medium,High,High,Medium,multiscale,High,Low,Very high
+structural_statistics_mmd,High,Very high,High,High,multiscale,Medium,Low,Very high
+wl_subtree_kernel_mmd,High,High,High,High,multiscale,High,Very high,High

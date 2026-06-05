@@ -7,11 +7,12 @@ from html import escape
 import math
 from pathlib import Path
 
-from experimentation.evaluation import PERTURBATION_GRANULARITY, generate_evaluation_summary, mean
+from experimentation.evaluation import PERTURBATION_GRANULARITY, generate_evaluation_summary, generate_final_matrix, mean
 from experimentation.runner import read_result_rows
 
 
 FIGURE_FILES = {
+    "explanation_dashboard": "figure_0_experiment_dashboard.svg",
     "score_vs_alpha": "figure_1_score_vs_alpha.svg",
     "paired_distance_vs_alpha": "figure_2_paired_distance_vs_alpha.svg",
     "mean_shift_vs_paired_shift": "figure_3_mean_shift_vs_paired_shift.svg",
@@ -32,17 +33,21 @@ COLORS = (
 def generate_figures(results_path: Path | str, output_dir: Path | str | None = None) -> dict[str, Path]:
     """Generate all standard SVG figures from a result CSV."""
 
-    rows = [row for row in read_result_rows(results_path) if row.get("status") == "success"]
+    all_rows = read_result_rows(results_path)
+    rows = [row for row in all_rows if row.get("status") == "success"]
+    summary = generate_evaluation_summary(all_rows)
     figure_dir = Path(output_dir) if output_dir is not None else Path(results_path).parent.parent / "figures"
     figure_dir.mkdir(parents=True, exist_ok=True)
 
     outputs = {
+        "explanation_dashboard": figure_dir / FIGURE_FILES["explanation_dashboard"],
         "score_vs_alpha": figure_dir / FIGURE_FILES["score_vs_alpha"],
         "paired_distance_vs_alpha": figure_dir / FIGURE_FILES["paired_distance_vs_alpha"],
         "mean_shift_vs_paired_shift": figure_dir / FIGURE_FILES["mean_shift_vs_paired_shift"],
         "granularity_heatmap": figure_dir / FIGURE_FILES["granularity_heatmap"],
         "runtime_comparison": figure_dir / FIGURE_FILES["runtime_comparison"],
     }
+    outputs["explanation_dashboard"].write_text(explanation_dashboard_svg(all_rows, summary), encoding="utf-8")
     outputs["score_vs_alpha"].write_text(
         line_panels_svg(rows, "distribution_score", "Figure 1: Score vs alpha", "distribution_score"),
         encoding="utf-8",
@@ -52,9 +57,43 @@ def generate_figures(results_path: Path | str, output_dir: Path | str | None = N
         encoding="utf-8",
     )
     outputs["mean_shift_vs_paired_shift"].write_text(mean_vs_paired_svg(rows), encoding="utf-8")
-    outputs["granularity_heatmap"].write_text(granularity_heatmap_svg(generate_evaluation_summary(rows)), encoding="utf-8")
+    outputs["granularity_heatmap"].write_text(granularity_heatmap_svg(summary), encoding="utf-8")
     outputs["runtime_comparison"].write_text(runtime_bar_svg(rows), encoding="utf-8")
     return outputs
+
+
+def explanation_dashboard_svg(rows: list[dict[str, object]], summary_rows: list[dict[str, object]]) -> str:
+    if not rows:
+        return placeholder_svg("Figure 0: Experiment dashboard", "No result rows available")
+
+    width = 1180
+    height = 760
+    workflows = sorted({str(row["workflow"]) for row in rows})
+    perturbations = sorted({str(row["perturbation"]) for row in rows})
+    color_by_workflow = _workflow_colors(rows)
+    status_colors = {"success": "#2ca02c", "failed": "#d62728", "skipped": "#9aa0a6"}
+    total = len(rows)
+    success = sum(1 for row in rows if row.get("status") == "success")
+    failed = sum(1 for row in rows if row.get("status") == "failed")
+    skipped = sum(1 for row in rows if row.get("status") == "skipped")
+    final_rows = generate_final_matrix(summary_rows)
+
+    body = [
+        svg_header(width, height),
+        text(26, 34, "Figure 0: Experiment dashboard", size=20, weight="bold"),
+        text(26, 58, f"{success} successful, {failed} failed, {skipped} skipped, {total} total workflow rows", size=12, fill="#555"),
+        text(26, 94, "A. Run coverage by workflow", size=15, weight="bold"),
+        text(610, 94, "B. Detection strength by workflow and perturbation", size=15, weight="bold"),
+        text(26, 405, "C. Sensitivity vs runtime tradeoff", size=15, weight="bold"),
+        text(610, 405, "D. Workflow-level reading guide", size=15, weight="bold"),
+    ]
+    body.extend(_status_bars(rows, workflows, status_colors, 26, 120, 500, 220))
+    body.extend(_sensitivity_heatmap(summary_rows, workflows, perturbations, 610, 120, 520, 220))
+    body.extend(_runtime_sensitivity_scatter(summary_rows, color_by_workflow, 70, 450, 460, 230))
+    body.extend(_matrix_notes(final_rows, 610, 440))
+    body.extend(_status_legend(status_colors, 380, 94))
+    body.append("</svg>")
+    return "\n".join(body)
 
 
 def line_panels_svg(rows: list[dict[str, object]], y_key: str, title: str, y_label: str) -> str:
@@ -182,6 +221,126 @@ def runtime_bar_svg(rows: list[dict[str, object]]) -> str:
     return "\n".join(body)
 
 
+def _status_bars(
+    rows: list[dict[str, object]],
+    workflows: list[str],
+    status_colors: dict[str, str],
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+) -> list[str]:
+    elements = []
+    max_count = max(
+        (sum(1 for row in rows if row.get("workflow") == workflow) for workflow in workflows),
+        default=1,
+    )
+    bar_h = min(32, height / max(1, len(workflows)) * 0.65)
+    gap = height / max(1, len(workflows))
+    for index, workflow in enumerate(workflows):
+        y0 = y + index * gap
+        elements.append(text(x, y0 + bar_h * 0.65, workflow[:28], size=10))
+        cursor = x + 185
+        for status in ("success", "failed", "skipped"):
+            count = sum(1 for row in rows if row.get("workflow") == workflow and row.get("status") == status)
+            segment_w = (count / max_count) * (width - 210)
+            if segment_w > 0:
+                elements.append(rect(cursor, y0, segment_w, bar_h, status_colors[status]))
+                cursor += segment_w
+        elements.append(text(x + width - 18, y0 + bar_h * 0.65, str(sum(1 for row in rows if row.get("workflow") == workflow)), size=10))
+    return elements
+
+
+def _sensitivity_heatmap(
+    summary_rows: list[dict[str, object]],
+    workflows: list[str],
+    perturbations: list[str],
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+) -> list[str]:
+    elements = []
+    cell_w = (width - 175) / max(1, len(perturbations))
+    cell_h = min(34, height / max(1, len(workflows)))
+    values: dict[tuple[str, str], list[float]] = defaultdict(list)
+    for row in summary_rows:
+        values[(str(row["workflow"]), str(row["perturbation"]))].append(_float(row.get("sensitivity")))
+    for column, perturbation in enumerate(perturbations):
+        elements.append(text(x + 175 + column * cell_w + 4, y - 8, _short_label(perturbation), size=9, weight="bold"))
+    for row_index, workflow in enumerate(workflows):
+        y0 = y + row_index * cell_h
+        elements.append(text(x, y0 + 22, workflow[:28], size=10))
+        for column, perturbation in enumerate(perturbations):
+            value = mean(values.get((workflow, perturbation), [0.0]))
+            x0 = x + 175 + column * cell_w
+            elements.append(rect(x0, y0, cell_w - 2, cell_h - 2, _green_scale(value)))
+            elements.append(text(x0 + 10, y0 + 21, f"{value:.2f}", size=10, fill="#111"))
+    elements.append(text(x + 175, y + len(workflows) * cell_h + 24, "0 = weak alpha trend, 1 = strong monotonic detection", size=10, fill="#555"))
+    return elements
+
+
+def _runtime_sensitivity_scatter(
+    summary_rows: list[dict[str, object]],
+    color_by_workflow: dict[str, str],
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+) -> list[str]:
+    by_workflow: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for row in summary_rows:
+        by_workflow[str(row["workflow"])].append(row)
+    points = []
+    for workflow, rows in sorted(by_workflow.items()):
+        sensitivity = mean(_finite_values(rows, "sensitivity"))
+        runtime = mean(_finite_values(rows, "relative_runtime"))
+        points.append((workflow, runtime, sensitivity))
+    max_runtime = max((runtime for _, runtime, _ in points), default=1.0) or 1.0
+    elements = [
+        line(x, y + height, x + width, y + height),
+        line(x, y, x, y + height),
+        text(x + width / 2 - 45, y + height + 34, "relative runtime", size=11),
+        text(x - 45, y + height / 2, "sensitivity", size=11),
+    ]
+    for workflow, runtime, sensitivity in points:
+        px = x + (runtime / max_runtime) * width
+        py = y + height - max(0.0, min(1.0, sensitivity)) * height
+        elements.append(circle(px, py, 7, color_by_workflow.get(workflow, "#333"), opacity=0.85))
+        elements.append(text(px + 9, py + 4, workflow[:22], size=9))
+    return elements
+
+
+def _matrix_notes(final_rows: list[dict[str, object]], x: float, y: float) -> list[str]:
+    elements = []
+    line_h = 26
+    headings = ("workflow", "sensitivity", "runtime", "read")
+    offsets = (0, 210, 320, 410)
+    for heading, offset in zip(headings, offsets):
+        elements.append(text(x + offset, y, heading, size=10, weight="bold"))
+    for index, row in enumerate(final_rows):
+        y0 = y + 24 + index * line_h
+        workflow = str(row["workflow"])
+        sensitivity = str(row["sensitivity_label"])
+        runtime = str(row["efficiency_label"])
+        granularity = str(row["granularity_label"])
+        elements.append(text(x, y0, workflow[:30], size=10))
+        elements.append(text(x + 210, y0, sensitivity, size=10))
+        elements.append(text(x + 320, y0, runtime, size=10))
+        elements.append(text(x + 410, y0, granularity, size=10))
+    elements.append(text(x, y + 145, "Use A to see data quality, B to compare detection, and C to choose a practical workflow.", size=11, fill="#555"))
+    return elements
+
+
+def _status_legend(status_colors: dict[str, str], x: float, y: float) -> list[str]:
+    elements = []
+    for index, status in enumerate(("success", "failed", "skipped")):
+        x0 = x + index * 72
+        elements.append(rect(x0, y - 13, 12, 12, status_colors[status]))
+        elements.append(text(x0 + 17, y - 3, status, size=9))
+    return elements
+
+
 def placeholder_svg(title: str, message: str) -> str:
     return "\n".join(
         [
@@ -272,6 +431,27 @@ def _blue_scale(value: float) -> str:
     value = max(0.0, min(1.0, value))
     channel = int(245 - value * 150)
     return f"rgb({channel},{channel},{255})"
+
+
+def _green_scale(value: float) -> str:
+    value = max(0.0, min(1.0, value))
+    red_blue = int(245 - value * 145)
+    green = int(245 - value * 55)
+    return f"rgb({red_blue},{green},{red_blue})"
+
+
+def _short_label(value: str) -> str:
+    labels = {
+        "community_weakening": "community",
+        "edge_addition_deletion": "edge",
+        "hub_modification": "hub",
+        "triangle_injection_removal": "triangle",
+    }
+    return labels.get(value, value[:12])
+
+
+def _finite_values(rows: list[dict[str, object]], key: str) -> list[float]:
+    return [value for value in (_float(row.get(key)) for row in rows) if math.isfinite(value)]
 
 
 def svg_header(width: float, height: float) -> str:

@@ -21,6 +21,17 @@ class FailingWorkflow(Workflow):
         raise RuntimeError("intentional failure")
 
 
+class RecoveredWorkflow(Workflow):
+    def __init__(self) -> None:
+        super().__init__("failing_workflow")
+
+    def compute_representations(self, graphs):
+        return [[float(len(graph.edges()))] for graph in graphs]
+
+    def distribution_score(self, original_graphs, perturbed_graphs):
+        return 0.0
+
+
 class RunnerTests(unittest.TestCase):
     def test_debug_experiment_runs_end_to_end_and_writes_expected_columns(self) -> None:
         with TemporaryDirectory() as tmpdir:
@@ -67,6 +78,19 @@ class RunnerTests(unittest.TestCase):
             checkpoint_path = Path(tmpdir) / "logs" / "checkpoint.json"
             self.assertTrue(checkpoint_path.is_file())
             self.assertIn('"remaining_rows": 0', checkpoint_path.read_text(encoding="utf-8"))
+
+    def test_rerun_failed_drops_failed_rows_before_resuming(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+
+            result_path = run_experiment(config, workflows=[FailingWorkflow()])
+            self.assertTrue(all(row["status"] == "failed" for row in read_result_rows(result_path)))
+
+            run_experiment(config, workflows=[RecoveredWorkflow()], rerun_failed=True)
+            rows = read_result_rows(result_path)
+
+            self.assertGreater(len(rows), 0)
+            self.assertTrue(all(row["status"] == "success" for row in rows))
 
 
 def tiny_debug_config(root: Path):

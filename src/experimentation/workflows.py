@@ -469,7 +469,11 @@ def _accelerated_laplacian_eigenvalues(graph: Graph) -> list[float] | None:
     matrix = torch.zeros((n, n), dtype=torch.float64, device=device)
     degree_tensor = torch.tensor(degrees, dtype=torch.float64, device=device)
     diagonal = torch.arange(n, device=device)
-    matrix[diagonal, diagonal] = torch.where(degree_tensor == 0, 0.0, 1.0)
+    matrix[diagonal, diagonal] = torch.where(
+        degree_tensor == 0,
+        torch.zeros_like(degree_tensor),
+        torch.ones_like(degree_tensor),
+    )
     for u, v in graph.edges():
         if degrees[u] and degrees[v]:
             value = -1.0 / math.sqrt(degrees[u] * degrees[v])
