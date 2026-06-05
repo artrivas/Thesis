@@ -2640,3 +2640,851 @@
 2026-06-05 19:15:25,765 INFO row_complete 2639/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=failed
 2026-06-05 19:15:25,766 INFO row_complete 2640/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=4 workflow=diversity_curves_l2 status=success
 2026-06-05 19:15:25,767 INFO run_finish result_path=outputs/experimentation/results/results.csv rows_written=2640 completed=2640 total=2640
+2026-06-05 20:18:27,018 INFO run_start result_path=outputs/experimentation/results/results.csv resume=True rerun_failed=True completed=2090 total=2640 device=cuda requested; cuda_available=True
+2026-06-05 20:18:30,406 INFO row_complete 2091/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:33,122 INFO row_complete 2092/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:35,948 INFO row_complete 2093/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:38,589 INFO row_complete 2094/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:41,332 INFO row_complete 2095/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:44,113 INFO row_complete 2096/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:46,811 INFO row_complete 2097/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:49,453 INFO row_complete 2098/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:51,996 INFO row_complete 2099/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:54,609 INFO row_complete 2100/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:57,345 INFO row_complete 2101/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:18:59,887 INFO row_complete 2102/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:02,985 INFO row_complete 2103/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:06,248 INFO row_complete 2104/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:09,564 INFO row_complete 2105/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:12,708 INFO row_complete 2106/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:15,778 INFO row_complete 2107/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:19,009 INFO row_complete 2108/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:22,203 INFO row_complete 2109/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:25,362 INFO row_complete 2110/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:28,576 INFO row_complete 2111/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:31,773 INFO row_complete 2112/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:31,773 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=0
+2026-06-05 20:19:31,773 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=0
+2026-06-05 20:19:31,774 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=0
+2026-06-05 20:19:31,774 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=0
+2026-06-05 20:19:31,774 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=0
+2026-06-05 20:19:31,774 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=0
+2026-06-05 20:19:31,774 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=0
+2026-06-05 20:19:31,775 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=0
+2026-06-05 20:19:31,775 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=0
+2026-06-05 20:19:31,775 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=0
+2026-06-05 20:19:31,775 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=0
+2026-06-05 20:19:34,451 INFO row_complete 2113/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:37,006 INFO row_complete 2114/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:39,562 INFO row_complete 2115/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:42,144 INFO row_complete 2116/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:44,676 INFO row_complete 2117/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:47,237 INFO row_complete 2118/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:49,774 INFO row_complete 2119/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:52,341 INFO row_complete 2120/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:54,867 INFO row_complete 2121/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:19:57,530 INFO row_complete 2122/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:00,065 INFO row_complete 2123/2640 dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:02,287 INFO row_complete 2124/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:04,541 INFO row_complete 2125/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:06,821 INFO row_complete 2126/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:09,184 INFO row_complete 2127/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:11,427 INFO row_complete 2128/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:13,600 INFO row_complete 2129/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:15,823 INFO row_complete 2130/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:18,164 INFO row_complete 2131/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:20,441 INFO row_complete 2132/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:22,710 INFO row_complete 2133/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:25,048 INFO row_complete 2134/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:27,331 INFO row_complete 2135/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:30,046 INFO row_complete 2136/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:32,824 INFO row_complete 2137/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:35,578 INFO row_complete 2138/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:38,498 INFO row_complete 2139/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:41,503 INFO row_complete 2140/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:44,267 INFO row_complete 2141/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:47,048 INFO row_complete 2142/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:49,912 INFO row_complete 2143/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:52,797 INFO row_complete 2144/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:55,776 INFO row_complete 2145/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:20:58,143 INFO row_complete 2146/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:00,376 INFO row_complete 2147/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:02,697 INFO row_complete 2148/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:04,974 INFO row_complete 2149/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:07,243 INFO row_complete 2150/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:09,645 INFO row_complete 2151/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:12,000 INFO row_complete 2152/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:14,306 INFO row_complete 2153/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:16,551 INFO row_complete 2154/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:18,797 INFO row_complete 2155/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:21,001 INFO row_complete 2156/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:23,314 INFO row_complete 2157/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:25,516 INFO row_complete 2158/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:27,732 INFO row_complete 2159/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:29,901 INFO row_complete 2160/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:32,162 INFO row_complete 2161/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:34,370 INFO row_complete 2162/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:36,568 INFO row_complete 2163/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:38,823 INFO row_complete 2164/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:41,163 INFO row_complete 2165/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:43,360 INFO row_complete 2166/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:45,625 INFO row_complete 2167/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:47,542 INFO row_complete 2168/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:49,461 INFO row_complete 2169/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:51,478 INFO row_complete 2170/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:53,462 INFO row_complete 2171/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:55,424 INFO row_complete 2172/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:57,534 INFO row_complete 2173/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:21:59,657 INFO row_complete 2174/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:01,708 INFO row_complete 2175/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:03,700 INFO row_complete 2176/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:05,719 INFO row_complete 2177/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:07,686 INFO row_complete 2178/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:09,582 INFO row_complete 2179/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:12,172 INFO row_complete 2180/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:14,782 INFO row_complete 2181/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:17,313 INFO row_complete 2182/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:19,858 INFO row_complete 2183/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:22,416 INFO row_complete 2184/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:24,930 INFO row_complete 2185/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:27,545 INFO row_complete 2186/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:30,151 INFO row_complete 2187/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:32,713 INFO row_complete 2188/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:35,366 INFO row_complete 2189/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:35,366 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=0
+2026-06-05 20:22:35,366 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=0
+2026-06-05 20:22:35,367 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=0
+2026-06-05 20:22:35,368 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=0
+2026-06-05 20:22:35,368 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=0
+2026-06-05 20:22:35,368 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=0
+2026-06-05 20:22:37,253 INFO row_complete 2190/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:39,178 INFO row_complete 2191/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:41,269 INFO row_complete 2192/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:43,182 INFO row_complete 2193/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:45,081 INFO row_complete 2194/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:47,018 INFO row_complete 2195/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:48,993 INFO row_complete 2196/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:50,920 INFO row_complete 2197/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:52,849 INFO row_complete 2198/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:54,745 INFO row_complete 2199/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:56,688 INFO row_complete 2200/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=0 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:22:59,274 INFO row_complete 2201/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:01,945 INFO row_complete 2202/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:04,534 INFO row_complete 2203/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:07,061 INFO row_complete 2204/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:09,679 INFO row_complete 2205/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:12,313 INFO row_complete 2206/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:14,887 INFO row_complete 2207/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:17,496 INFO row_complete 2208/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:20,113 INFO row_complete 2209/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:22,841 INFO row_complete 2210/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:25,415 INFO row_complete 2211/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:27,908 INFO row_complete 2212/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:31,028 INFO row_complete 2213/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:34,122 INFO row_complete 2214/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:37,257 INFO row_complete 2215/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:40,370 INFO row_complete 2216/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:43,520 INFO row_complete 2217/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:46,816 INFO row_complete 2218/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:49,965 INFO row_complete 2219/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:53,128 INFO row_complete 2220/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:56,298 INFO row_complete 2221/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:59,500 INFO row_complete 2222/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:23:59,501 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=1
+2026-06-05 20:23:59,501 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=1
+2026-06-05 20:23:59,501 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=1
+2026-06-05 20:23:59,501 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=1
+2026-06-05 20:23:59,501 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=1
+2026-06-05 20:23:59,502 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=1
+2026-06-05 20:24:02,093 INFO row_complete 2223/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:04,686 INFO row_complete 2224/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:07,297 INFO row_complete 2225/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:09,871 INFO row_complete 2226/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:12,603 INFO row_complete 2227/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:15,236 INFO row_complete 2228/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:17,807 INFO row_complete 2229/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:20,438 INFO row_complete 2230/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:23,034 INFO row_complete 2231/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:25,589 INFO row_complete 2232/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:28,159 INFO row_complete 2233/2640 dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:30,465 INFO row_complete 2234/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:32,747 INFO row_complete 2235/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:35,241 INFO row_complete 2236/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:37,478 INFO row_complete 2237/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:39,793 INFO row_complete 2238/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:42,243 INFO row_complete 2239/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:44,799 INFO row_complete 2240/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:47,155 INFO row_complete 2241/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 20:24:49,426 INFO row_complete 2242/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:12,066 INFO run_start result_path=outputs/experimentation/results/results.csv resume=True rerun_failed=True completed=2242 total=2640 device=cuda requested; cuda_available=True
+2026-06-05 21:50:12,067 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=0
+2026-06-05 21:50:12,067 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=0
+2026-06-05 21:50:12,067 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=0
+2026-06-05 21:50:12,067 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=0
+2026-06-05 21:50:12,068 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=0
+2026-06-05 21:50:12,069 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=0
+2026-06-05 21:50:12,070 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=0
+2026-06-05 21:50:12,071 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=0
+2026-06-05 21:50:12,071 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=0
+2026-06-05 21:50:12,071 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=0
+2026-06-05 21:50:12,071 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=0
+2026-06-05 21:50:12,071 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=0
+2026-06-05 21:50:12,072 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=0
+2026-06-05 21:50:12,073 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=0
+2026-06-05 21:50:12,074 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=0
+2026-06-05 21:50:12,075 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=0
+2026-06-05 21:50:12,076 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=0
+2026-06-05 21:50:12,077 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=0
+2026-06-05 21:50:12,078 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=0
+2026-06-05 21:50:12,079 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=0
+2026-06-05 21:50:12,080 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=0
+2026-06-05 21:50:12,081 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=0
+2026-06-05 21:50:12,081 INFO grid_skip_completed dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=0
+2026-06-05 21:50:12,081 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=0
+2026-06-05 21:50:12,081 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=0
+2026-06-05 21:50:12,081 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=0
+2026-06-05 21:50:12,082 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=0
+2026-06-05 21:50:12,083 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=0
+2026-06-05 21:50:12,084 INFO grid_skip_completed dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=0
+2026-06-05 21:50:12,085 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=0
+2026-06-05 21:50:12,086 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=0
+2026-06-05 21:50:12,087 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=0
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=0
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=0
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=0
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=0
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=1
+2026-06-05 21:50:12,088 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=1
+2026-06-05 21:50:12,089 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=1
+2026-06-05 21:50:12,090 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=1
+2026-06-05 21:50:12,091 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=1
+2026-06-05 21:50:12,092 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=1
+2026-06-05 21:50:12,092 INFO grid_skip_completed dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=1
+2026-06-05 21:50:12,092 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=1
+2026-06-05 21:50:12,092 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=1
+2026-06-05 21:50:12,092 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=1
+2026-06-05 21:50:12,093 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=1
+2026-06-05 21:50:12,094 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=1
+2026-06-05 21:50:12,095 INFO grid_skip_completed dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=1
+2026-06-05 21:50:12,096 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=1
+2026-06-05 21:50:12,096 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=1
+2026-06-05 21:50:12,096 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=1
+2026-06-05 21:50:12,096 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=1
+2026-06-05 21:50:12,096 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=1
+2026-06-05 21:50:12,097 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=1
+2026-06-05 21:50:12,097 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=1
+2026-06-05 21:50:12,097 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=1
+2026-06-05 21:50:12,097 INFO grid_skip_completed dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=1
+2026-06-05 21:50:15,391 INFO row_complete 2243/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:17,798 INFO row_complete 2244/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:20,183 INFO row_complete 2245/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:23,569 INFO row_complete 2246/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:26,570 INFO row_complete 2247/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:29,723 INFO row_complete 2248/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:32,756 INFO row_complete 2249/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:35,794 INFO row_complete 2250/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:38,774 INFO row_complete 2251/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:41,865 INFO row_complete 2252/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:44,886 INFO row_complete 2253/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:47,873 INFO row_complete 2254/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:51,075 INFO row_complete 2255/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:53,587 INFO row_complete 2256/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:56,009 INFO row_complete 2257/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:50:58,452 INFO row_complete 2258/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:00,889 INFO row_complete 2259/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:03,297 INFO row_complete 2260/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:05,705 INFO row_complete 2261/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:08,126 INFO row_complete 2262/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:10,594 INFO row_complete 2263/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:12,956 INFO row_complete 2264/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:15,503 INFO row_complete 2265/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:17,915 INFO row_complete 2266/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:20,394 INFO row_complete 2267/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:22,819 INFO row_complete 2268/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:25,198 INFO row_complete 2269/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:27,579 INFO row_complete 2270/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:30,016 INFO row_complete 2271/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:32,522 INFO row_complete 2272/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:35,027 INFO row_complete 2273/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:37,405 INFO row_complete 2274/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:39,787 INFO row_complete 2275/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:42,212 INFO row_complete 2276/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:44,602 INFO row_complete 2277/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:46,711 INFO row_complete 2278/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:48,862 INFO row_complete 2279/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:51,039 INFO row_complete 2280/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:53,140 INFO row_complete 2281/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:55,374 INFO row_complete 2282/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:57,494 INFO row_complete 2283/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:51:59,608 INFO row_complete 2284/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:01,809 INFO row_complete 2285/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:03,979 INFO row_complete 2286/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:06,135 INFO row_complete 2287/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:08,272 INFO row_complete 2288/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:10,397 INFO row_complete 2289/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:13,117 INFO row_complete 2290/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:15,936 INFO row_complete 2291/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:18,652 INFO row_complete 2292/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:21,420 INFO row_complete 2293/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:24,093 INFO row_complete 2294/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:26,808 INFO row_complete 2295/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:29,534 INFO row_complete 2296/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:32,276 INFO row_complete 2297/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:35,057 INFO row_complete 2298/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:37,825 INFO row_complete 2299/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:37,825 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=1
+2026-06-05 21:52:37,826 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=1
+2026-06-05 21:52:37,827 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=1
+2026-06-05 21:52:37,827 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=1
+2026-06-05 21:52:37,827 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=1
+2026-06-05 21:52:37,827 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=1
+2026-06-05 21:52:40,036 INFO row_complete 2300/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:42,148 INFO row_complete 2301/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:44,205 INFO row_complete 2302/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:46,406 INFO row_complete 2303/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:48,481 INFO row_complete 2304/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:50,572 INFO row_complete 2305/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:52,813 INFO row_complete 2306/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:54,917 INFO row_complete 2307/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:57,140 INFO row_complete 2308/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:52:59,274 INFO row_complete 2309/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:01,534 INFO row_complete 2310/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=1 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:04,164 INFO row_complete 2311/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:06,911 INFO row_complete 2312/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:09,638 INFO row_complete 2313/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:12,357 INFO row_complete 2314/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:15,134 INFO row_complete 2315/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:17,862 INFO row_complete 2316/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:20,726 INFO row_complete 2317/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:23,568 INFO row_complete 2318/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:26,294 INFO row_complete 2319/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:29,094 INFO row_complete 2320/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:31,838 INFO row_complete 2321/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:34,549 INFO row_complete 2322/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:37,904 INFO row_complete 2323/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:41,297 INFO row_complete 2324/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:44,586 INFO row_complete 2325/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:48,095 INFO row_complete 2326/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:51,601 INFO row_complete 2327/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:54,987 INFO row_complete 2328/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:53:58,358 INFO row_complete 2329/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:01,735 INFO row_complete 2330/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:05,133 INFO row_complete 2331/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:08,517 INFO row_complete 2332/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:08,518 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=2
+2026-06-05 21:54:08,518 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=2
+2026-06-05 21:54:08,518 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=2
+2026-06-05 21:54:08,519 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=2
+2026-06-05 21:54:08,519 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=2
+2026-06-05 21:54:08,519 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=2
+2026-06-05 21:54:08,519 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=2
+2026-06-05 21:54:08,519 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=2
+2026-06-05 21:54:08,520 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=2
+2026-06-05 21:54:08,520 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=2
+2026-06-05 21:54:08,520 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=2
+2026-06-05 21:54:11,245 INFO row_complete 2333/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:13,867 INFO row_complete 2334/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:16,684 INFO row_complete 2335/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:19,390 INFO row_complete 2336/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:22,209 INFO row_complete 2337/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:24,974 INFO row_complete 2338/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:27,682 INFO row_complete 2339/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:30,398 INFO row_complete 2340/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:33,175 INFO row_complete 2341/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:35,904 INFO row_complete 2342/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:38,626 INFO row_complete 2343/2640 dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:41,217 INFO row_complete 2344/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:43,683 INFO row_complete 2345/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:46,159 INFO row_complete 2346/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:48,580 INFO row_complete 2347/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:51,140 INFO row_complete 2348/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:53,570 INFO row_complete 2349/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:55,950 INFO row_complete 2350/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:54:58,404 INFO row_complete 2351/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:00,995 INFO row_complete 2352/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:03,513 INFO row_complete 2353/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:05,951 INFO row_complete 2354/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:08,317 INFO row_complete 2355/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:11,428 INFO row_complete 2356/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:14,430 INFO row_complete 2357/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:17,431 INFO row_complete 2358/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:20,467 INFO row_complete 2359/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:23,544 INFO row_complete 2360/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:26,745 INFO row_complete 2361/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:29,719 INFO row_complete 2362/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:32,840 INFO row_complete 2363/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:35,885 INFO row_complete 2364/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:38,951 INFO row_complete 2365/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:41,418 INFO row_complete 2366/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:43,844 INFO row_complete 2367/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:46,317 INFO row_complete 2368/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:48,753 INFO row_complete 2369/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:51,385 INFO row_complete 2370/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:53,827 INFO row_complete 2371/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:56,279 INFO row_complete 2372/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:55:58,698 INFO row_complete 2373/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:01,275 INFO row_complete 2374/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:03,714 INFO row_complete 2375/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:06,132 INFO row_complete 2376/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:08,533 INFO row_complete 2377/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:11,033 INFO row_complete 2378/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:13,424 INFO row_complete 2379/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:15,857 INFO row_complete 2380/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:18,283 INFO row_complete 2381/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:20,795 INFO row_complete 2382/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:23,253 INFO row_complete 2383/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:25,644 INFO row_complete 2384/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:28,060 INFO row_complete 2385/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:30,474 INFO row_complete 2386/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:33,000 INFO row_complete 2387/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:35,133 INFO row_complete 2388/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:37,288 INFO row_complete 2389/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:39,527 INFO row_complete 2390/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:41,760 INFO row_complete 2391/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:43,928 INFO row_complete 2392/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:46,123 INFO row_complete 2393/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:48,218 INFO row_complete 2394/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:50,363 INFO row_complete 2395/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:52,625 INFO row_complete 2396/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:54,772 INFO row_complete 2397/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:56,927 INFO row_complete 2398/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:56:58,955 INFO row_complete 2399/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:01,712 INFO row_complete 2400/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:04,449 INFO row_complete 2401/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:07,176 INFO row_complete 2402/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:09,929 INFO row_complete 2403/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:12,874 INFO row_complete 2404/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:15,612 INFO row_complete 2405/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:18,365 INFO row_complete 2406/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:21,195 INFO row_complete 2407/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:24,001 INFO row_complete 2408/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:26,785 INFO row_complete 2409/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:26,786 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=2
+2026-06-05 21:57:26,786 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=2
+2026-06-05 21:57:26,786 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=2
+2026-06-05 21:57:26,786 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=2
+2026-06-05 21:57:26,786 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=2
+2026-06-05 21:57:26,787 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=2
+2026-06-05 21:57:28,835 INFO row_complete 2410/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:30,903 INFO row_complete 2411/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:33,085 INFO row_complete 2412/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:35,270 INFO row_complete 2413/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:37,359 INFO row_complete 2414/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:39,502 INFO row_complete 2415/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:41,614 INFO row_complete 2416/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:43,720 INFO row_complete 2417/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:45,902 INFO row_complete 2418/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:48,003 INFO row_complete 2419/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:50,199 INFO row_complete 2420/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=2 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:52,946 INFO row_complete 2421/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:55,766 INFO row_complete 2422/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:57:58,529 INFO row_complete 2423/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:01,295 INFO row_complete 2424/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:04,061 INFO row_complete 2425/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:06,797 INFO row_complete 2426/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:09,562 INFO row_complete 2427/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:12,321 INFO row_complete 2428/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:15,027 INFO row_complete 2429/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:17,769 INFO row_complete 2430/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:20,624 INFO row_complete 2431/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:23,327 INFO row_complete 2432/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:26,730 INFO row_complete 2433/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:30,034 INFO row_complete 2434/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:33,338 INFO row_complete 2435/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:36,626 INFO row_complete 2436/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:40,031 INFO row_complete 2437/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:43,377 INFO row_complete 2438/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:46,802 INFO row_complete 2439/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:50,340 INFO row_complete 2440/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:53,728 INFO row_complete 2441/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:57,114 INFO row_complete 2442/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:58:57,114 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=3
+2026-06-05 21:58:57,114 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=3
+2026-06-05 21:58:57,115 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=3
+2026-06-05 21:58:57,115 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=3
+2026-06-05 21:58:57,115 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=3
+2026-06-05 21:58:57,115 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=3
+2026-06-05 21:58:57,115 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=3
+2026-06-05 21:58:57,116 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=3
+2026-06-05 21:58:57,116 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=3
+2026-06-05 21:58:57,116 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=3
+2026-06-05 21:58:57,116 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=3
+2026-06-05 21:58:59,786 INFO row_complete 2443/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:02,531 INFO row_complete 2444/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:05,189 INFO row_complete 2445/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:07,932 INFO row_complete 2446/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:10,687 INFO row_complete 2447/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:13,527 INFO row_complete 2448/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:16,256 INFO row_complete 2449/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:18,961 INFO row_complete 2450/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:21,735 INFO row_complete 2451/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:24,415 INFO row_complete 2452/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:27,165 INFO row_complete 2453/2640 dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:29,535 INFO row_complete 2454/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:32,032 INFO row_complete 2455/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:34,476 INFO row_complete 2456/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:37,019 INFO row_complete 2457/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:39,424 INFO row_complete 2458/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:41,896 INFO row_complete 2459/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:44,309 INFO row_complete 2460/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:46,745 INFO row_complete 2461/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:49,195 INFO row_complete 2462/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:51,649 INFO row_complete 2463/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:54,084 INFO row_complete 2464/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:56,484 INFO row_complete 2465/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 21:59:59,561 INFO row_complete 2466/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:02,618 INFO row_complete 2467/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:05,576 INFO row_complete 2468/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:08,610 INFO row_complete 2469/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:11,676 INFO row_complete 2470/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:14,753 INFO row_complete 2471/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:17,801 INFO row_complete 2472/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:20,895 INFO row_complete 2473/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:23,953 INFO row_complete 2474/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:27,096 INFO row_complete 2475/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:29,565 INFO row_complete 2476/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:32,033 INFO row_complete 2477/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:34,473 INFO row_complete 2478/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:36,868 INFO row_complete 2479/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:39,290 INFO row_complete 2480/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:41,774 INFO row_complete 2481/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:44,168 INFO row_complete 2482/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:46,686 INFO row_complete 2483/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:49,092 INFO row_complete 2484/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:51,533 INFO row_complete 2485/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:53,943 INFO row_complete 2486/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:56,328 INFO row_complete 2487/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:00:58,715 INFO row_complete 2488/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:01,110 INFO row_complete 2489/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:03,557 INFO row_complete 2490/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:05,986 INFO row_complete 2491/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:08,476 INFO row_complete 2492/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:10,937 INFO row_complete 2493/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:13,372 INFO row_complete 2494/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:15,844 INFO row_complete 2495/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:18,267 INFO row_complete 2496/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:20,720 INFO row_complete 2497/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:22,824 INFO row_complete 2498/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:24,970 INFO row_complete 2499/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:27,259 INFO row_complete 2500/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:29,400 INFO row_complete 2501/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:31,574 INFO row_complete 2502/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:33,741 INFO row_complete 2503/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:35,886 INFO row_complete 2504/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:38,038 INFO row_complete 2505/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:40,255 INFO row_complete 2506/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:42,451 INFO row_complete 2507/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:44,640 INFO row_complete 2508/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:46,837 INFO row_complete 2509/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:49,580 INFO row_complete 2510/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:52,424 INFO row_complete 2511/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:55,179 INFO row_complete 2512/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:01:57,923 INFO row_complete 2513/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:00,654 INFO row_complete 2514/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:03,450 INFO row_complete 2515/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:06,156 INFO row_complete 2516/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:08,941 INFO row_complete 2517/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:11,873 INFO row_complete 2518/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:14,639 INFO row_complete 2519/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:14,640 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=3
+2026-06-05 22:02:14,640 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=3
+2026-06-05 22:02:14,640 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=3
+2026-06-05 22:02:14,640 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=3
+2026-06-05 22:02:14,640 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=3
+2026-06-05 22:02:14,641 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=3
+2026-06-05 22:02:14,641 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=3
+2026-06-05 22:02:14,641 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=3
+2026-06-05 22:02:14,641 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=3
+2026-06-05 22:02:14,641 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=3
+2026-06-05 22:02:14,642 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=3
+2026-06-05 22:02:16,717 INFO row_complete 2520/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:18,816 INFO row_complete 2521/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:21,095 INFO row_complete 2522/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:23,261 INFO row_complete 2523/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:25,348 INFO row_complete 2524/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:27,486 INFO row_complete 2525/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:29,537 INFO row_complete 2526/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:31,796 INFO row_complete 2527/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:33,919 INFO row_complete 2528/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:35,989 INFO row_complete 2529/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:38,101 INFO row_complete 2530/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=3 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:40,795 INFO row_complete 2531/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:43,609 INFO row_complete 2532/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:46,323 INFO row_complete 2533/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:49,044 INFO row_complete 2534/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:51,865 INFO row_complete 2535/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:54,672 INFO row_complete 2536/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:02:57,440 INFO row_complete 2537/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:00,195 INFO row_complete 2538/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:03,066 INFO row_complete 2539/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:05,779 INFO row_complete 2540/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:08,530 INFO row_complete 2541/2640 dataset=erdos_renyi perturbation=edge_addition_deletion alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:11,240 INFO row_complete 2542/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:14,543 INFO row_complete 2543/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:17,955 INFO row_complete 2544/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:21,362 INFO row_complete 2545/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:24,695 INFO row_complete 2546/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:28,071 INFO row_complete 2547/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:31,375 INFO row_complete 2548/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:34,711 INFO row_complete 2549/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:38,116 INFO row_complete 2550/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:41,548 INFO row_complete 2551/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:44,981 INFO row_complete 2552/2640 dataset=erdos_renyi perturbation=triangle_injection_removal alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:44,982 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.0 seed=4
+2026-06-05 22:03:44,982 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.1 seed=4
+2026-06-05 22:03:44,982 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.2 seed=4
+2026-06-05 22:03:44,982 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.3 seed=4
+2026-06-05 22:03:44,983 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.4 seed=4
+2026-06-05 22:03:44,983 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.5 seed=4
+2026-06-05 22:03:44,983 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.6 seed=4
+2026-06-05 22:03:44,983 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.7 seed=4
+2026-06-05 22:03:44,984 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.8 seed=4
+2026-06-05 22:03:44,984 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=0.9 seed=4
+2026-06-05 22:03:44,984 INFO grid_skip_completed dataset=erdos_renyi perturbation=community_weakening alpha=1.0 seed=4
+2026-06-05 22:03:47,873 INFO row_complete 2553/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:50,601 INFO row_complete 2554/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:53,354 INFO row_complete 2555/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:55,981 INFO row_complete 2556/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:03:58,669 INFO row_complete 2557/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:01,406 INFO row_complete 2558/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:04,118 INFO row_complete 2559/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:06,817 INFO row_complete 2560/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:09,491 INFO row_complete 2561/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:12,324 INFO row_complete 2562/2640 dataset=erdos_renyi perturbation=hub_modification alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:15,006 INFO row_complete 2563/2640 dataset=erdos_renyi perturbation=hub_modification alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:17,342 INFO row_complete 2564/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:19,765 INFO row_complete 2565/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:22,201 INFO row_complete 2566/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:24,628 INFO row_complete 2567/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:27,054 INFO row_complete 2568/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:29,471 INFO row_complete 2569/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:31,924 INFO row_complete 2570/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:34,465 INFO row_complete 2571/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:36,921 INFO row_complete 2572/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:39,368 INFO row_complete 2573/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:41,836 INFO row_complete 2574/2640 dataset=stochastic_block_model perturbation=edge_addition_deletion alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:44,244 INFO row_complete 2575/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:47,230 INFO row_complete 2576/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:50,249 INFO row_complete 2577/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:53,290 INFO row_complete 2578/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:56,428 INFO row_complete 2579/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:04:59,451 INFO row_complete 2580/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:02,647 INFO row_complete 2581/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:05,757 INFO row_complete 2582/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:08,828 INFO row_complete 2583/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:11,934 INFO row_complete 2584/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:15,028 INFO row_complete 2585/2640 dataset=stochastic_block_model perturbation=triangle_injection_removal alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:17,431 INFO row_complete 2586/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:19,942 INFO row_complete 2587/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:22,511 INFO row_complete 2588/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:25,063 INFO row_complete 2589/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:27,472 INFO row_complete 2590/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:29,887 INFO row_complete 2591/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:32,434 INFO row_complete 2592/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:34,880 INFO row_complete 2593/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:37,342 INFO row_complete 2594/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:39,717 INFO row_complete 2595/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:42,285 INFO row_complete 2596/2640 dataset=stochastic_block_model perturbation=community_weakening alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:44,709 INFO row_complete 2597/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:47,161 INFO row_complete 2598/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:49,605 INFO row_complete 2599/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:51,985 INFO row_complete 2600/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:54,396 INFO row_complete 2601/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:56,850 INFO row_complete 2602/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:05:59,285 INFO row_complete 2603/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:01,872 INFO row_complete 2604/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:04,437 INFO row_complete 2605/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:06,897 INFO row_complete 2606/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:09,355 INFO row_complete 2607/2640 dataset=stochastic_block_model perturbation=hub_modification alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:11,534 INFO row_complete 2608/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:13,620 INFO row_complete 2609/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:15,712 INFO row_complete 2610/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:17,861 INFO row_complete 2611/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:20,049 INFO row_complete 2612/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:22,314 INFO row_complete 2613/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:24,547 INFO row_complete 2614/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:26,736 INFO row_complete 2615/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:28,855 INFO row_complete 2616/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:31,195 INFO row_complete 2617/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:33,436 INFO row_complete 2618/2640 dataset=barabasi_albert perturbation=edge_addition_deletion alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:35,529 INFO row_complete 2619/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:38,339 INFO row_complete 2620/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:41,095 INFO row_complete 2621/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:43,884 INFO row_complete 2622/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:46,728 INFO row_complete 2623/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:49,550 INFO row_complete 2624/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:52,355 INFO row_complete 2625/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:55,212 INFO row_complete 2626/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:06:57,954 INFO row_complete 2627/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:00,723 INFO row_complete 2628/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:03,568 INFO row_complete 2629/2640 dataset=barabasi_albert perturbation=triangle_injection_removal alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:03,568 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.0 seed=4
+2026-06-05 22:07:03,568 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.1 seed=4
+2026-06-05 22:07:03,568 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.2 seed=4
+2026-06-05 22:07:03,568 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.3 seed=4
+2026-06-05 22:07:03,569 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.4 seed=4
+2026-06-05 22:07:03,569 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.5 seed=4
+2026-06-05 22:07:03,569 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.6 seed=4
+2026-06-05 22:07:03,569 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.7 seed=4
+2026-06-05 22:07:03,569 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.8 seed=4
+2026-06-05 22:07:03,570 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=0.9 seed=4
+2026-06-05 22:07:03,570 INFO grid_skip_completed dataset=barabasi_albert perturbation=community_weakening alpha=1.0 seed=4
+2026-06-05 22:07:05,570 INFO row_complete 2630/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:07,649 INFO row_complete 2631/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.1 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:09,879 INFO row_complete 2632/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.2 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:12,038 INFO row_complete 2633/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.3 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:14,203 INFO row_complete 2634/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.4 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:16,310 INFO row_complete 2635/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.5 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:18,432 INFO row_complete 2636/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.6 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:20,563 INFO row_complete 2637/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.7 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:22,777 INFO row_complete 2638/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.8 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:25,016 INFO row_complete 2639/2640 dataset=barabasi_albert perturbation=hub_modification alpha=0.9 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:27,201 INFO row_complete 2640/2640 dataset=barabasi_albert perturbation=hub_modification alpha=1.0 seed=4 workflow=netlsd_spectral_signatures status=success
+2026-06-05 22:07:27,201 INFO run_finish result_path=outputs/experimentation/results/results.csv rows_written=398 completed=2640 total=2640
