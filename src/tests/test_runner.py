@@ -46,6 +46,28 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(all(row["status"] == "failed" for row in rows))
             self.assertTrue(all("intentional failure" in row["error_message"] for row in rows))
 
+    def test_resume_skips_existing_result_rows(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+
+            result_path = run_experiment(config)
+            initial_rows = read_result_rows(result_path)
+            resumed_path = run_experiment(config)
+            resumed_rows = read_result_rows(resumed_path)
+
+            self.assertEqual(result_path, resumed_path)
+            self.assertEqual(len(initial_rows), len(resumed_rows))
+
+    def test_checkpoint_file_records_progress(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+
+            run_experiment(config)
+
+            checkpoint_path = Path(tmpdir) / "logs" / "checkpoint.json"
+            self.assertTrue(checkpoint_path.is_file())
+            self.assertIn('"remaining_rows": 0', checkpoint_path.read_text(encoding="utf-8"))
+
 
 def tiny_debug_config(root: Path):
     base = debug_config(root)

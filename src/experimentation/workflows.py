@@ -13,6 +13,34 @@ from experimentation.graph import Graph
 
 Vector = list[float]
 SparseVector = dict[str, float]
+Representation = Vector | SparseVector
+
+_DEVICE_PREFERENCE = "auto"
+
+
+def configure_acceleration(device: str = "auto") -> None:
+    """Configure optional tensor acceleration for supported workflow internals."""
+
+    normalized = device.strip().lower()
+    if normalized not in {"auto", "cpu"} and not normalized.startswith("cuda"):
+        raise ValueError("device must be 'auto', 'cpu', 'cuda', or a CUDA device such as 'cuda:0'")
+    global _DEVICE_PREFERENCE
+    _DEVICE_PREFERENCE = normalized
+
+
+def acceleration_summary() -> str:
+    """Return a short description of the active acceleration preference."""
+
+    if _DEVICE_PREFERENCE == "cpu":
+        return "cpu"
+    torch = _import_torch()
+    if torch is None:
+        return f"{_DEVICE_PREFERENCE} requested; torch not installed"
+    if _DEVICE_PREFERENCE.startswith("cuda"):
+        return f"{_DEVICE_PREFERENCE} requested; cuda_available={torch.cuda.is_available()}"
+    if torch.cuda.is_available():
+        return f"auto using cuda:{torch.cuda.current_device()}"
+    return "auto using cpu fallback"
 
 
 def squared_l2(left: Vector, right: Vector) -> float:
@@ -84,6 +112,13 @@ class Workflow:
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         raise NotImplementedError
 
+    def distribution_score_from_representations(
+        self,
+        original: list[Representation],
+        perturbed: list[Representation],
+    ) -> float:
+        raise NotImplementedError
+
     def mean_shift_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         original = self.compute_representations(original_graphs)
         perturbed = self.compute_representations(perturbed_graphs)
@@ -101,9 +136,16 @@ class Workflow:
     def run(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> dict[str, object]:
         start = time.perf_counter()
         try:
-            distribution = self.distribution_score(original_graphs, perturbed_graphs)
-            mean_shift = self.mean_shift_score(original_graphs, perturbed_graphs)
-            paired = self.paired_score(original_graphs, perturbed_graphs)
+            if self._uses_cached_representations():
+                original = self.compute_representations(original_graphs)
+                perturbed = self.compute_representations(perturbed_graphs)
+                distribution = self.distribution_score_from_representations(original, perturbed)
+                mean_shift = representation_mean_distance(original, perturbed)
+                paired = paired_representation_distance(original, perturbed)
+            else:
+                distribution = self.distribution_score(original_graphs, perturbed_graphs)
+                mean_shift = self.mean_shift_score(original_graphs, perturbed_graphs)
+                paired = self.paired_score(original_graphs, perturbed_graphs)
             status = "success"
             error_message = None
         except Exception as exc:  # pragma: no cover - tested through status behavior in orchestration later.
@@ -123,6 +165,9 @@ class Workflow:
             "error_message": error_message,
         }
 
+    def _uses_cached_representations(self) -> bool:
+        return type(self).distribution_score_from_representations is not Workflow.distribution_score_from_representations
+
 
 @dataclass
 class StructuralStatisticsMMDWorkflow(Workflow):
@@ -136,11 +181,17 @@ class StructuralStatisticsMMDWorkflow(Workflow):
         return [structural_statistics(graph) for graph in graphs]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
-        return rbf_mmd(
+        return self.distribution_score_from_representations(
             self.compute_representations(original_graphs),
             self.compute_representations(perturbed_graphs),
-            self.bandwidth,
         )
+
+    def distribution_score_from_representations(
+        self,
+        original: list[Representation],
+        perturbed: list[Representation],
+    ) -> float:
+        return rbf_mmd(original, perturbed, self.bandwidth)  # type: ignore[arg-type]
 
 
 @dataclass
@@ -155,10 +206,17 @@ class WLSubtreeMMDWorkflow(Workflow):
         return [wl_features(graph, self.iterations) for graph in graphs]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
-        return sparse_linear_mmd(
+        return self.distribution_score_from_representations(
             self.compute_representations(original_graphs),
             self.compute_representations(perturbed_graphs),
         )
+
+    def distribution_score_from_representations(
+        self,
+        original: list[Representation],
+        perturbed: list[Representation],
+    ) -> float:
+        return sparse_linear_mmd(original, perturbed)  # type: ignore[arg-type]
 
 
 @dataclass
@@ -176,11 +234,17 @@ class NetLSDWorkflow(Workflow):
         return [netlsd_signature(graph, self.timescales) for graph in graphs]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
-        return rbf_mmd(
+        return self.distribution_score_from_representations(
             self.compute_representations(original_graphs),
             self.compute_representations(perturbed_graphs),
-            self.bandwidth,
         )
+
+    def distribution_score_from_representations(
+        self,
+        original: list[Representation],
+        perturbed: list[Representation],
+    ) -> float:
+        return rbf_mmd(original, perturbed, self.bandwidth)  # type: ignore[arg-type]
 
 
 @dataclass
@@ -195,9 +259,17 @@ class DiversityCurvesWorkflow(Workflow):
         return [diversity_curve(graph, self.max_radius) for graph in graphs]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
-        original = self.compute_representations(original_graphs)
-        perturbed = self.compute_representations(perturbed_graphs)
-        return l2(dense_mean(original), dense_mean(perturbed))
+        return self.distribution_score_from_representations(
+            self.compute_representations(original_graphs),
+            self.compute_representations(perturbed_graphs),
+        )
+
+    def distribution_score_from_representations(
+        self,
+        original: list[Representation],
+        perturbed: list[Representation],
+    ) -> float:
+        return l2(dense_mean(original), dense_mean(perturbed))  # type: ignore[arg-type]
 
 
 def default_workflows() -> list[Workflow]:
@@ -272,6 +344,10 @@ def netlsd_signature(graph: Graph, timescales: Iterable[float]) -> Vector:
 
 
 def normalized_laplacian_eigenvalues(graph: Graph) -> list[float]:
+    accelerated = _accelerated_laplacian_eigenvalues(graph)
+    if accelerated is not None:
+        return accelerated
+
     n = graph.num_nodes
     if n == 0:
         return []
@@ -364,3 +440,65 @@ def representation_mean_distance(original, perturbed) -> float:
     if isinstance(original[0], dict):
         return sparse_l2(sparse_mean(original), sparse_mean(perturbed))
     return l2(dense_mean(original), dense_mean(perturbed))
+
+
+def paired_representation_distance(original, perturbed) -> float:
+    if len(original) != len(perturbed):
+        raise ValueError("paired_score requires equal-size graph distributions")
+    if not original:
+        return 0.0
+    return sum(representation_distance(a, b) for a, b in zip(original, perturbed)) / len(original)
+
+
+def _accelerated_laplacian_eigenvalues(graph: Graph) -> list[float] | None:
+    device_name = _torch_device_name()
+    if device_name is None:
+        return None
+
+    torch = _import_torch()
+    if torch is None:
+        if _DEVICE_PREFERENCE.startswith("cuda"):
+            raise RuntimeError("CUDA device was requested, but torch is not installed")
+        return None
+
+    n = graph.num_nodes
+    if n == 0:
+        return []
+    device = torch.device(device_name)
+    degrees = graph.degrees()
+    matrix = torch.zeros((n, n), dtype=torch.float64, device=device)
+    degree_tensor = torch.tensor(degrees, dtype=torch.float64, device=device)
+    diagonal = torch.arange(n, device=device)
+    matrix[diagonal, diagonal] = torch.where(degree_tensor == 0, 0.0, 1.0)
+    for u, v in graph.edges():
+        if degrees[u] and degrees[v]:
+            value = -1.0 / math.sqrt(degrees[u] * degrees[v])
+            matrix[u, v] = value
+            matrix[v, u] = value
+    eigenvalues = torch.linalg.eigvalsh(matrix)
+    return sorted(max(0.0, float(value)) for value in eigenvalues.detach().cpu().tolist())
+
+
+def _torch_device_name() -> str | None:
+    if _DEVICE_PREFERENCE == "cpu":
+        return None
+    torch = _import_torch()
+    if torch is None:
+        if _DEVICE_PREFERENCE.startswith("cuda"):
+            return _DEVICE_PREFERENCE
+        return None
+    if _DEVICE_PREFERENCE.startswith("cuda"):
+        if not torch.cuda.is_available():
+            raise RuntimeError(f"{_DEVICE_PREFERENCE} was requested, but CUDA is not available to torch")
+        return _DEVICE_PREFERENCE
+    if torch.cuda.is_available():
+        return "cuda"
+    return None
+
+
+def _import_torch():
+    try:
+        import torch  # type: ignore[import-not-found]
+    except ImportError:
+        return None
+    return torch

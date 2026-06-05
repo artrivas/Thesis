@@ -5,9 +5,10 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from experimentation.config import debug_config, full_synthetic_config
 from experimentation.evaluation import evaluate_results
 from experimentation.figures import generate_figures
-from experimentation.runner import run_debug_experiment, run_full_synthetic_experiment
+from experimentation.runner import run_experiment
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -16,9 +17,15 @@ def main(argv: list[str] | None = None) -> int:
 
     debug_parser = subparsers.add_parser("run_debug_experiment", help="Run the small debug experiment")
     debug_parser.add_argument("--output-root", default="outputs/debug_experimentation")
+    debug_parser.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
+    debug_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
+    debug_parser.add_argument("--log-file", default=None, help="Optional run log path")
 
     full_parser = subparsers.add_parser("run_full_synthetic_experiment", help="Run the full synthetic experiment")
     full_parser.add_argument("--output-root", default="outputs/experimentation")
+    full_parser.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
+    full_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
+    full_parser.add_argument("--log-file", default=None, help="Optional run log path")
 
     evaluate_parser = subparsers.add_parser("evaluate_results", help="Generate evaluation CSVs")
     evaluate_parser.add_argument("--results", required=True)
@@ -30,11 +37,21 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
     if args.command == "run_debug_experiment":
-        path = run_debug_experiment(Path(args.output_root))
+        path = run_experiment(
+            debug_config(Path(args.output_root)),
+            resume=not args.no_resume,
+            device=args.device,
+            log_path=Path(args.log_file) if args.log_file else None,
+        )
         print(path)
         return 0
     if args.command == "run_full_synthetic_experiment":
-        path = run_full_synthetic_experiment(Path(args.output_root))
+        path = run_experiment(
+            full_synthetic_config(Path(args.output_root)),
+            resume=not args.no_resume,
+            device=args.device,
+            log_path=Path(args.log_file) if args.log_file else None,
+        )
         print(path)
         return 0
     if args.command == "evaluate_results":

@@ -158,3 +158,31 @@ python3 -m experimentation.cli run_full_synthetic_experiment --output-root outpu
 python3 -m experimentation.cli evaluate_results --results outputs/debug_experimentation/results/results.csv
 python3 -m experimentation.cli generate_figures --results outputs/debug_experimentation/results/results.csv
 ```
+
+## 9. Remote GPU and Resume Behavior
+
+Experiment runs write each completed workflow row to `results.csv` immediately,
+then update `logs/checkpoint.json` with completed and remaining row counts.
+Rerunning the same command resumes from the existing result file by default and
+skips rows that are already present.
+
+The runner also writes a durable progress log to `logs/run.log`. Use this on a
+remote server to inspect what the job has completed without waiting for the
+full experiment to finish.
+
+GPU acceleration is optional. The NetLSD spectral eigenvalue path uses PyTorch
+with CUDA when available under `--device auto`, or fails loudly if CUDA is
+explicitly requested but unavailable.
+
+Recommended remote command:
+
+```text
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda
+```
+
+To intentionally discard an existing checkpoint/result file and start a fresh
+CSV, pass:
+
+```text
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda --no-resume
+```
