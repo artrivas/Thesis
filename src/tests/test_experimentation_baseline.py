@@ -14,6 +14,7 @@ class ExperimentationBaselineTests(unittest.TestCase):
         self.assertEqual(config.seeds, tuple(range(5)))
         self.assertIn("erdos_renyi", config.datasets.families)
         self.assertIn("wl_subtree_kernel_mmd", config.workflows.names)
+        self.assertIn("diversity_curves_shortest_path", config.workflows.names)
 
     def test_output_directories_can_be_created(self) -> None:
         with TemporaryDirectory() as tmpdir:

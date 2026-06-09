@@ -48,7 +48,7 @@ The workflows are:
 - MMD over structural graph statistics.
 - WL subtree kernel with MMD.
 - NetLSD spectral signatures.
-- Diversity Curves with L2 distance.
+- Diversity Curves with shortest-path spread.
 
 ## 6. Measurement Levels
 
@@ -161,13 +161,20 @@ outputs/debug_experimentation/figures/
 outputs/experimentation/figures/
 ```
 
+Run the interactive dashboard for sanity checks:
+
+```bash
+python3 -m pip install -r requirements-dashboard.txt
+streamlit run experimentation/dashboard.py
+```
+
 ## 11. Limitations
 
 Current limitations:
 
 - No real datasets are included yet.
-- Diversity Curves are implemented as a first operational version and may be
-  refined.
+- Diversity Curves use shortest-path spread over deterministic edge-contraction
+  scales; external implementations may still differ in coarsening choices.
 - WL and NetLSD use standard-library fallback implementations. External
   dependencies may change speed or exact representations in future versions.
 - Full synthetic runs can be slow with the fallback NetLSD eigensolver.

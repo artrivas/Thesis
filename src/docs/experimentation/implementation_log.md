@@ -31,7 +31,7 @@ Configuration defaults established today:
 - Perturbations: edge addition/deletion, triangle injection/removal, community
   weakening, hub modification.
 - Workflows: structural-statistics MMD, WL subtree kernel MMD, NetLSD spectral
-  signatures, Diversity Curves with L2 distance.
+  signatures, Diversity Curves with shortest-path spread.
 - Alpha values: `0.0, 0.1, 0.2, ..., 1.0`.
 - Seeds: `0, 1, 2, 3, 4`.
 - Graphs per distribution: `100`.
@@ -65,7 +65,7 @@ Files added:
   hub modification. Each perturbation returns a graph copy plus metadata.
 - `experimentation/workflows.py`: implements the common workflow interface and
   four workflows: structural-statistics MMD, WL subtree kernel MMD, NetLSD
-  spectral signatures, and Diversity Curves with L2 distance.
+  spectral signatures, and Diversity Curves with shortest-path spread.
 - `tests/test_synthetic_datasets.py`: tests generator size, non-empty graphs,
   reproducibility, and SBM community labels.
 - `tests/test_perturbations.py`: tests alpha-zero copy behavior, edge
@@ -97,8 +97,8 @@ Dependency notes:
   eigenvalues. This is appropriate for tiny synthetic smoke tests but should be
   replaced by NumPy/SciPy for larger experiments.
 - WL subtree features are implemented manually with deterministic relabeling.
-- Diversity Curves are an operational first version based on neighborhood
-  reach and local degree-signature diversity by radius.
+- Diversity Curves use shortest-path spread over deterministic
+  edge-contraction scales.
 
 ## Days 5-7
 
@@ -150,3 +150,16 @@ Dependency notes:
 - Figures are SVG files generated without matplotlib.
 - Memory measurement uses `tracemalloc`; values are best-effort and intended
   for relative comparison in this phase.
+
+## Sanity Check Fixes
+
+Updated the experiment code to avoid known sources of misleading results:
+
+- Replaced the first-pass Diversity Curves neighborhood summary with
+  shortest-path spread over deterministic edge-contraction scales.
+- Renamed the default diversity workflow to `diversity_curves_shortest_path`.
+- Fixed WL subtree features so iteration labels are canonical across graphs
+  rather than remapped independently per graph.
+- Prevented hub modification from removing a hub edge and then adding that same
+  edge back while counting it as a rewire.
+- Added regression tests for the corrected metric and perturbation behavior.

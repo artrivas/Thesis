@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1140" viewBox="0 0 600 1140"><rect width="100%" height="100%" fill="white"/>
+<text x="20.0" y="30.0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#222">Figure 2: Paired distance vs alpha</text>
+<text x="20.0" y="55.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#555">x: alpha, y: paired_score</text>
+<text x="30.0" y="57.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / edge_addition_deletion</text>
+<line x1="30.0" y1="240.0" x2="270.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="75.0" x2="30.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,240.0 150.0,228.5 270.0,232.0" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="232.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="30.0,240.0 150.0,237.1 270.0,236.5" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="236.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="30.0,240.0 150.0,193.8 270.0,130.4" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="130.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="30.0,240.0 150.0,86.3 270.0,75.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="75.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="310.0" y="57.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / hub_modification</text>
+<line x1="310.0" y1="240.0" x2="550.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="75.0" x2="310.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,240.0 430.0,229.9 550.0,229.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="229.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="310.0,240.0 430.0,238.8 550.0,238.8" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="238.8" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="310.0,240.0 430.0,221.3 550.0,221.3" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="221.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="310.0,240.0 430.0,75.0 550.0,75.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="75.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="30.0" y="267.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / triangle_injection_removal</text>
+<line x1="30.0" y1="450.0" x2="270.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="285.0" x2="30.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,450.0 150.0,438.0 270.0,439.1" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="439.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="30.0,450.0 150.0,423.8 270.0,447.7" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="447.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="30.0,450.0 150.0,397.8 270.0,343.5" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="343.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="30.0,450.0 150.0,292.8 270.0,285.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="285.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="310.0" y="267.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / edge_addition_deletion</text>
+<line x1="310.0" y1="450.0" x2="550.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="285.0" x2="310.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,450.0 430.0,443.4 550.0,444.4" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="444.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="310.0,450.0 430.0,401.0 550.0,382.5" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="382.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="310.0,450.0 430.0,419.8 550.0,418.1" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="418.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="310.0,450.0 430.0,343.3 550.0,285.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="285.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="30.0" y="477.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / hub_modification</text>
+<line x1="30.0" y1="660.0" x2="270.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="495.0" x2="30.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,660.0 150.0,651.5 270.0,654.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="654.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="30.0,660.0 150.0,637.2 270.0,617.2" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="617.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="30.0,660.0 150.0,649.5 270.0,631.5" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="631.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="30.0,660.0 150.0,495.0 270.0,523.3" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="523.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="310.0" y="477.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / triangle_injection_removal</text>
+<line x1="310.0" y1="660.0" x2="550.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="495.0" x2="310.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,660.0 430.0,647.6 550.0,647.3" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="647.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="310.0,660.0 430.0,648.5 550.0,619.1" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="619.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="310.0,660.0 430.0,584.5 550.0,584.1" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="584.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="310.0,660.0 430.0,495.0 550.0,498.1" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="498.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="30.0" y="687.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / community_weakening</text>
+<line x1="30.0" y1="870.0" x2="270.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="705.0" x2="30.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,870.0 150.0,858.4 270.0,851.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="851.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="30.0,870.0 150.0,849.4 270.0,785.6" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="785.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="30.0,870.0 150.0,860.3 270.0,831.1" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="831.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="30.0,870.0 150.0,705.0 270.0,735.3" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="735.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="310.0" y="687.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / edge_addition_deletion</text>
+<line x1="310.0" y1="870.0" x2="550.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="705.0" x2="310.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,870.0 430.0,862.8 550.0,861.6" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="861.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="310.0,870.0 430.0,837.0 550.0,785.7" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="785.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="310.0,870.0 430.0,841.4 550.0,820.8" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="820.8" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="310.0,870.0 430.0,770.1 550.0,705.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="705.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="30.0" y="897.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / hub_modification</text>
+<line x1="30.0" y1="1080.0" x2="270.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="915.0" x2="30.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,1080.0 150.0,1069.7 270.0,1069.7" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="1069.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="30.0,1080.0 150.0,1079.4 270.0,1079.4" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="1079.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="30.0,1080.0 150.0,1026.8 270.0,1026.8" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="1026.8" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="30.0,1080.0 150.0,915.0 270.0,915.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="915.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+<text x="310.0" y="897.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / triangle_injection_removal</text>
+<line x1="310.0" y1="1080.0" x2="550.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="915.0" x2="310.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,1080.0 430.0,1069.4 550.0,1072.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="1072.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">diversity_curves</text>
+<polyline points="310.0,1080.0 430.0,1074.8 550.0,1075.3" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="1075.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">netlsd_spectral_</text>
+<polyline points="310.0,1080.0 430.0,1017.2 550.0,1052.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="1052.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">structural_stati</text>
+<polyline points="310.0,1080.0 430.0,915.0 550.0,1010.2" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="1010.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">wl_subtree_kerne</text>
+</svg>

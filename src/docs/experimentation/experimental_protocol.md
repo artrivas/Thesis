@@ -77,7 +77,7 @@ Run one representative workflow per methodological family:
 - MMD over structural graph statistics.
 - WL subtree kernel with MMD.
 - NetLSD spectral signatures.
-- Diversity Curves with L2 distance.
+- Diversity Curves with shortest-path spread.
 
 Each workflow exposes a common interface:
 
@@ -150,6 +150,9 @@ Figure generation reads a result CSV and writes SVG files for:
 - Granularity heatmap.
 - Runtime comparison.
 
+For interactive sanity checks, use the Streamlit dashboard instead of the static
+SVGs when labels or dense panels make the figures hard to read.
+
 Supported commands:
 
 ```text
@@ -157,6 +160,8 @@ python3 -m experimentation.cli run_debug_experiment --output-root outputs/debug_
 python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation
 python3 -m experimentation.cli evaluate_results --results outputs/debug_experimentation/results/results.csv
 python3 -m experimentation.cli generate_figures --results outputs/debug_experimentation/results/results.csv
+python3 -m pip install -r requirements-dashboard.txt
+streamlit run experimentation/dashboard.py
 ```
 
 ## 9. Remote GPU and Resume Behavior

@@ -2,7 +2,13 @@ import math
 import unittest
 
 from experimentation.datasets import SyntheticDatasetConfig, generate_paired_distribution
-from experimentation.workflows import default_workflows
+from experimentation.graph import Graph
+from experimentation.workflows import (
+    default_workflows,
+    diversity_curve,
+    shortest_path_spread,
+    wl_features,
+)
 
 
 class WorkflowTests(unittest.TestCase):
@@ -41,6 +47,43 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(workflow.name):
                 self.assertTrue(math.isfinite(workflow.distribution_score(self.original, self.perturbed)))
                 self.assertTrue(math.isfinite(workflow.mean_shift_score(self.original, self.perturbed)))
+
+    def test_wl_iteration_labels_are_canonical_across_graphs(self) -> None:
+        edge_with_isolate = Graph(3)
+        edge_with_isolate.add_edge(0, 1)
+        path = Graph(3)
+        path.add_edge(0, 1)
+        path.add_edge(1, 2)
+
+        edge_features = wl_features(edge_with_isolate, iterations=1)
+        path_features = wl_features(path, iterations=1)
+        iteration_overlap = {
+            key
+            for key in edge_features
+            if key in path_features and key.startswith("i0:")
+        }
+
+        self.assertEqual(iteration_overlap, set())
+
+    def test_diversity_curve_uses_shortest_path_spread(self) -> None:
+        path = Graph(3)
+        path.add_edge(0, 1)
+        path.add_edge(1, 2)
+
+        curve = diversity_curve(path, max_scales=3, repetitions=1)
+
+        self.assertAlmostEqual(curve[0], 1.0)
+        self.assertAlmostEqual(curve[-1], shortest_path_spread(path))
+
+    def test_disconnected_diversity_curve_interpolates_unreachable_scales(self) -> None:
+        graph = Graph(3)
+
+        curve = diversity_curve(graph, max_scales=3, repetitions=1)
+
+        self.assertEqual(curve, [1.0, 2.0, 3.0])
+
+    def test_default_diversity_workflow_uses_shortest_path_name(self) -> None:
+        self.assertIn("diversity_curves_shortest_path", {workflow.name for workflow in default_workflows()})
 
 
 if __name__ == "__main__":

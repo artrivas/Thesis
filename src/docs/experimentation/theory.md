@@ -28,7 +28,7 @@ methodological family:
 - MMD over structural graph statistics.
 - Weisfeiler-Lehman subtree kernel with MMD.
 - NetLSD spectral signatures.
-- Diversity Curves with L2 distance.
+- Diversity Curves with shortest-path spread.
 
 Only synthetic graph families are in scope for this phase: Erdős-Rényi,
 Stochastic Block Model, and Barabási-Albert. Real datasets are intentionally
@@ -88,11 +88,11 @@ mean-shift and paired scores use L2 distances. This is suitable for small
 synthetic smoke runs; larger experiments should eventually use NumPy/SciPy or a
 dedicated NetLSD package.
 
-Diversity Curves are implemented as an operational first version. For each
-radius, the workflow summarizes average neighborhood reach and diversity of
-local degree signatures, producing a curve compared with L2 distance. The
-module is intentionally modular so the theoretical curve definition can be
-refined later without changing the workflow interface.
+Diversity Curves compute graph structural diversity as spread over
+shortest-path distances. The workflow evaluates spread across deterministic
+edge-contraction scales and compares the resulting curve representations. This
+matches the default graph metric described in the Diversity Curves paper while
+keeping the local experiment runner reproducible.
 
 ## Evaluation Metrics
 

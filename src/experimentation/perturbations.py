@@ -160,15 +160,20 @@ def _hub_modification(graph: Graph, alpha: float, seed: int) -> PerturbationResu
     hub_edges = [edge for edge in graph.edges() if edge[0] in hubs or edge[1] in hubs]
     rng.shuffle(hub_edges)
     removals = min(budget, len(hub_edges))
+    removed_edges: set[Edge] = set()
     for u, v in hub_edges[:removals]:
         if perturbed.remove_edge(u, v):
+            removed_edges.add(normalize_edge(u, v))
             info["edges_removed"] = int(info["edges_removed"]) + 1
 
     candidates: list[Edge] = []
     for hub in hubs:
         for node in range(graph.num_nodes):
-            if node != hub and not perturbed.has_edge(hub, node):
-                candidates.append(normalize_edge(hub, node))
+            if node == hub:
+                continue
+            edge = normalize_edge(hub, node)
+            if edge not in removed_edges and not perturbed.has_edge(hub, node):
+                candidates.append(edge)
     rng.shuffle(candidates)
     additions = min(removals, len(candidates))
     seen: set[Edge] = set()

@@ -61,6 +61,16 @@ class PerturbationTests(unittest.TestCase):
         self.assertIn(highest_degree_node, result.metadata["target_hubs"])
         self.assertGreater(result.metadata["edges_removed"], 0)
 
+    def test_hub_modification_metadata_matches_actual_edge_changes(self) -> None:
+        graph = generate_graph_distribution(
+            SyntheticDatasetConfig("barabasi_albert", num_graphs=1, num_nodes=25, m=2, seed=10)
+        )[0]
+
+        result = perturb_graph(graph, 0.8, "hub_modification", seed=12)
+        changed = len(set(graph.edges()).symmetric_difference(set(result.graph.edges())))
+
+        self.assertEqual(changed, result.metadata["edges_added"] + result.metadata["edges_removed"])
+
 
 if __name__ == "__main__":
     unittest.main()

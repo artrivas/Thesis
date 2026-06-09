@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, deque
 from dataclasses import dataclass
+import hashlib
 import math
 import time
 from typing import Iterable
 
-from experimentation.graph import Graph
+from experimentation.graph import Edge, Graph, normalize_edge
 
 
 Vector = list[float]
@@ -249,14 +250,16 @@ class NetLSDWorkflow(Workflow):
 
 @dataclass
 class DiversityCurvesWorkflow(Workflow):
-    max_radius: int = 4
+    max_scales: int = 4
+    repetitions: int = 3
 
-    def __init__(self, max_radius: int = 4) -> None:
-        super().__init__("diversity_curves_l2")
-        self.max_radius = max_radius
+    def __init__(self, max_scales: int = 4, repetitions: int = 3) -> None:
+        super().__init__("diversity_curves_shortest_path")
+        self.max_scales = max_scales
+        self.repetitions = repetitions
 
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
-        return [diversity_curve(graph, self.max_radius) for graph in graphs]
+        return [diversity_curve(graph, self.max_scales, self.repetitions) for graph in graphs]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         return self.distribution_score_from_representations(
@@ -332,8 +335,7 @@ def wl_features(graph: Graph, iterations: int) -> SparseVector:
         for node in range(graph.num_nodes):
             neighbor_labels = sorted(labels[neighbor] for neighbor in graph.adjacency[node])
             signatures[node] = f"{labels[node]}|{'/'.join(neighbor_labels)}"
-        mapping = {signature: f"i{iteration}_{index}" for index, signature in enumerate(sorted(set(signatures.values())))}
-        labels = {node: mapping[signature] for node, signature in signatures.items()}
+        labels = {node: f"i{iteration}:{signature}" for node, signature in signatures.items()}
         features.update(labels.values())
     return dict(features)
 
@@ -399,33 +401,135 @@ def jacobi_eigenvalues(matrix: list[list[float]], tolerance: float = 1e-10, max_
     return sorted(max(0.0, a[i][i]) for i in range(n))
 
 
-def diversity_curve(graph: Graph, max_radius: int) -> Vector:
-    curve = []
-    for radius in range(1, max_radius + 1):
-        neighborhoods = [_reachable_within_radius(graph, node, radius) for node in range(graph.num_nodes)]
-        sizes = [len(nodes) for nodes in neighborhoods]
-        unique_signatures = {
-            tuple(sorted(graph.degree(node) for node in nodes))
-            for nodes in neighborhoods
-        }
-        average_size = sum(sizes) / len(sizes) if sizes else 0.0
-        curve.extend([average_size / max(1, graph.num_nodes), len(unique_signatures) / max(1, graph.num_nodes)])
-    return curve
+def diversity_curve(graph: Graph, max_scales: int, repetitions: int = 3) -> Vector:
+    """Compute spread over deterministic edge-contraction levels.
+
+    The spread at each level uses graph shortest-path distances. Multiple
+    deterministic pseudo-random contraction orders approximate the repeated
+    random coarsening used by the reference diversity-curves method while
+    keeping experiment rows reproducible.
+    """
+
+    if max_scales < 1:
+        raise ValueError("max_scales must be at least 1")
+    if repetitions < 1:
+        raise ValueError("repetitions must be at least 1")
+    if graph.num_nodes == 0:
+        return [0.0] * max_scales
+
+    scales = _diversity_scales(graph.num_nodes, max_scales)
+    totals = [0.0 for _ in scales]
+    for repeat in range(repetitions):
+        values = _diversity_curve_once(graph, scales, repeat)
+        for index, value in enumerate(values):
+            totals[index] += value
+    return [value / repetitions for value in totals]
 
 
-def _reachable_within_radius(graph: Graph, source: int, radius: int) -> set[int]:
-    reached = {source}
-    frontier = {source}
-    for _ in range(radius):
-        next_frontier: set[int] = set()
-        for node in frontier:
-            next_frontier.update(graph.adjacency[node])
-        next_frontier -= reached
-        reached |= next_frontier
-        frontier = next_frontier
-        if not frontier:
-            break
-    return reached
+def shortest_path_spread(graph: Graph) -> float:
+    distances = all_pairs_shortest_path_distances(graph)
+    spread = 0.0
+    for row in distances:
+        denominator = sum(math.exp(-distance) for distance in row if math.isfinite(distance))
+        if denominator > 0.0:
+            spread += 1.0 / denominator
+    return spread
+
+
+def all_pairs_shortest_path_distances(graph: Graph) -> list[list[float]]:
+    distances = []
+    for source in range(graph.num_nodes):
+        row = [math.inf] * graph.num_nodes
+        row[source] = 0.0
+        queue: deque[int] = deque([source])
+        while queue:
+            node = queue.popleft()
+            for neighbor in graph.adjacency[node]:
+                if math.isinf(row[neighbor]):
+                    row[neighbor] = row[node] + 1.0
+                    queue.append(neighbor)
+        distances.append(row)
+    return distances
+
+
+def _diversity_scales(num_nodes: int, max_scales: int) -> list[int]:
+    count = min(max_scales, num_nodes)
+    if count == 1:
+        return [num_nodes]
+    raw_scales = [
+        1 + round(index * (num_nodes - 1) / (count - 1))
+        for index in range(count)
+    ]
+    return sorted(set(raw_scales))
+
+
+def _diversity_curve_once(graph: Graph, scales: list[int], repeat: int) -> Vector:
+    values_by_scale: dict[int, float] = {}
+    current = graph.copy()
+    for scale in sorted(scales, reverse=True):
+        current = _coarsen_to_scale(current, scale, repeat)
+        values_by_scale[scale] = shortest_path_spread(current)
+
+    components = len(graph.connected_components())
+    known_scales = sorted(values_by_scale)
+    first_reachable = next((scale for scale in known_scales if scale >= components), None)
+    if first_reachable is not None and first_reachable > 1:
+        first_value = values_by_scale[first_reachable]
+        for scale in known_scales:
+            if scale < first_reachable:
+                values_by_scale[scale] = _linear_interpolate(scale, 1, 1.0, first_reachable, first_value)
+    return [values_by_scale[scale] for scale in scales]
+
+
+def _coarsen_to_scale(graph: Graph, target_nodes: int, repeat: int) -> Graph:
+    current = graph.copy()
+    while current.num_nodes > target_nodes and current.number_of_edges() > 0:
+        edge = _selected_contraction_edge(current, repeat)
+        current = contract_edge(current, edge)
+    return current
+
+
+def _selected_contraction_edge(graph: Graph, repeat: int) -> Edge:
+    edges = graph.edges()
+    if not edges:
+        raise ValueError("Cannot select a contraction edge from an edgeless graph")
+    graph_signature = f"{repeat}|{graph.num_nodes}|{sorted(edges)}"
+    return min(edges, key=lambda edge: _edge_priority(graph_signature, edge))
+
+
+def _edge_priority(graph_signature: str, edge: Edge) -> str:
+    payload = f"{graph_signature}|{edge}".encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def contract_edge(graph: Graph, edge: Edge) -> Graph:
+    u, v = normalize_edge(*edge)
+    if not graph.has_edge(u, v):
+        raise ValueError(f"Cannot contract missing edge {(u, v)}")
+    if graph.num_nodes <= 1:
+        return graph.copy()
+
+    mapping = {}
+    next_node = 0
+    for node in range(graph.num_nodes):
+        if node == v:
+            continue
+        mapping[node] = next_node
+        next_node += 1
+    merged = mapping[u]
+    contracted = Graph(graph.num_nodes - 1, metadata=dict(graph.metadata))
+    for left, right in graph.edges():
+        mapped_left = merged if left == v else mapping[left]
+        mapped_right = merged if right == v else mapping[right]
+        if mapped_left != mapped_right:
+            contracted.add_edge(mapped_left, mapped_right)
+    return contracted
+
+
+def _linear_interpolate(x: int, x0: int, y0: float, x1: int, y1: float) -> float:
+    if x1 == x0:
+        return y1
+    return y0 + (y1 - y0) * ((x - x0) / (x1 - x0))
 
 
 def representation_distance(left, right) -> float:

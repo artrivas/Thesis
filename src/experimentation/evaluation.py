@@ -41,6 +41,7 @@ INTERPRETABILITY_SCORES = {
     "structural_statistics_mmd": 3,
     "wl_subtree_kernel_mmd": 2,
     "netlsd_spectral_signatures": 2,
+    "diversity_curves_shortest_path": 3,
     "diversity_curves_l2": 3,
 }
 

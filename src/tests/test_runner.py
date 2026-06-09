@@ -6,7 +6,7 @@ import unittest
 
 from experimentation.config import DatasetConfig, OutputConfig, PerturbationConfig, WorkflowConfig, debug_config
 from experimentation.datasets import SyntheticDatasetConfig
-from experimentation.runner import RESULT_COLUMNS, read_result_rows, run_experiment
+from experimentation.runner import RESULT_COLUMNS, read_result_rows, run_experiment, write_result_rows
 from experimentation.workflows import Workflow
 
 
@@ -91,6 +91,38 @@ class RunnerTests(unittest.TestCase):
 
             self.assertGreater(len(rows), 0)
             self.assertTrue(all(row["status"] == "success" for row in rows))
+
+    def test_resume_rejects_legacy_diversity_results(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = replace(
+                tiny_debug_config(Path(tmpdir)),
+                workflows=WorkflowConfig(names=("diversity_curves_shortest_path",)),
+            )
+            result_path = config.outputs.results / "results.csv"
+            write_result_rows(
+                [
+                    {
+                        "dataset": "erdos_renyi",
+                        "dataset_params": "{}",
+                        "perturbation": "edge_addition_deletion",
+                        "perturbation_params": "{}",
+                        "alpha": 0.0,
+                        "seed": 0,
+                        "workflow": "diversity_curves_l2",
+                        "distribution_score": 0.0,
+                        "mean_shift_score": 0.0,
+                        "paired_score": 0.0,
+                        "runtime_seconds": 0.0,
+                        "memory_mb": 0.0,
+                        "status": "success",
+                        "error_message": "",
+                    }
+                ],
+                result_path,
+            )
+
+            with self.assertRaisesRegex(ValueError, "legacy workflow"):
+                run_experiment(config)
 
 
 def tiny_debug_config(root: Path):

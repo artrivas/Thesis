@@ -20,7 +20,7 @@ DEFAULT_WORKFLOW_NAMES = (
     "structural_statistics_mmd",
     "wl_subtree_kernel_mmd",
     "netlsd_spectral_signatures",
-    "diversity_curves_l2",
+    "diversity_curves_shortest_path",
 )
 
 

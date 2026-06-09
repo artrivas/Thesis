@@ -70,6 +70,8 @@ def run_experiment(
     configure_acceleration(device)
     workflow_instances = workflows if workflows is not None else workflows_from_config(config)
 
+    if resume:
+        _raise_on_incompatible_resume(result_path, workflow_instances)
     if resume and rerun_failed:
         _drop_failed_rows(result_path)
     completed = _completed_keys(result_path) if resume else set()
@@ -148,6 +150,7 @@ def workflows_from_config(config: ExperimentConfig) -> list[Workflow]:
     """Instantiate workflows listed in the experiment config."""
 
     available = {workflow.name: workflow for workflow in default_workflows()}
+    available["diversity_curves_l2"] = available["diversity_curves_shortest_path"]
     workflows = []
     for name in config.workflows.names:
         if name not in available:
@@ -183,6 +186,25 @@ def _drop_failed_rows(path: Path) -> None:
         return
     rows = [row for row in read_result_rows(path) if row.get("status") != "failed"]
     write_result_rows(rows, path)
+
+
+def _raise_on_incompatible_resume(path: Path, workflows: list[Workflow]) -> None:
+    if not path.exists() or path.stat().st_size == 0:
+        return
+    expected_workflows = {workflow.name for workflow in workflows}
+    if "diversity_curves_shortest_path" not in expected_workflows:
+        return
+    legacy_workflows = {
+        str(row.get("workflow"))
+        for row in read_result_rows(path)
+        if row.get("workflow") == "diversity_curves_l2"
+    }
+    if legacy_workflows:
+        legacy = ", ".join(sorted(legacy_workflows))
+        raise ValueError(
+            f"Existing result file contains legacy workflow rows ({legacy}). "
+            "Start a fresh CSV with --no-resume or use a new output root before running fixed experiments."
+        )
 
 
 def _row_key(row: dict[str, object]) -> tuple[str, str, str, str, str, str]:
