@@ -43,12 +43,15 @@ Perturbations are:
 
 ## 5. Workflows
 
-The workflows are:
+The workflows are representation plus discrepancy pipelines:
 
-- MMD over structural graph statistics.
-- WL subtree kernel with MMD.
-- NetLSD spectral signatures.
-- Diversity Curves with shortest-path spread.
+- `GraphStats+MMD`: structural graph statistics followed by RBF MMD.
+- `WLFeatures+MMD`: Weisfeiler-Lehman subtree feature counts followed by
+  linear MMD.
+- `NativeNetLSD`: NetLSD heat-trace signatures compared by L2 distance between
+  mean signatures.
+- `DiversityCurveDistance`: shortest-path Diversity Curves followed by L2
+  distance between mean curve representations.
 
 ## 6. Measurement Levels
 
@@ -127,7 +130,7 @@ python3 -m experimentation.cli run_debug_experiment --output-root outputs/debug_
 Run the full synthetic experiment:
 
 ```bash
-python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation_native_netlsd --console-log
 ```
 
 Evaluate results:
@@ -151,14 +154,14 @@ outputs/debug_experimentation/results/
 Full synthetic results are saved under:
 
 ```text
-outputs/experimentation/results/
+outputs/experimentation_native_netlsd/results/
 ```
 
 Figures are saved under:
 
 ```text
 outputs/debug_experimentation/figures/
-outputs/experimentation/figures/
+outputs/experimentation_native_netlsd/figures/
 ```
 
 Run the interactive dashboard for sanity checks:

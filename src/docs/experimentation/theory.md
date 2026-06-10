@@ -22,13 +22,16 @@ Evaluation should expose four complementary behaviors:
 - Granular behavior: whether sensitivity differs across dataset families,
   perturbation types, seeds, and perturbation strengths.
 
-For feasibility, the initial implementation uses one classic representative per
-methodological family:
+For feasibility, the initial implementation uses one representation plus
+discrepancy pipeline per methodological family:
 
-- MMD over structural graph statistics.
-- Weisfeiler-Lehman subtree kernel with MMD.
-- NetLSD spectral signatures.
-- Diversity Curves with shortest-path spread.
+- `GraphStats+MMD`: structural graph statistics followed by RBF MMD.
+- `WLFeatures+MMD`: Weisfeiler-Lehman subtree feature counts followed by
+  linear MMD.
+- `NativeNetLSD`: NetLSD heat-trace signatures compared by L2 distance between
+  mean signatures.
+- `DiversityCurveDistance`: shortest-path Diversity Curves followed by L2
+  distance between mean curve representations.
 
 Only synthetic graph families are in scope for this phase: Erdős-Rényi,
 Stochastic Block Model, and Barabási-Albert. Real datasets are intentionally
@@ -68,31 +71,33 @@ rewires, and triangles affected when available.
 
 ## Workflow Rationale
 
-MMD over structural graph statistics represents each graph with a compact
+`GraphStats+MMD` represents each graph with a compact
 feature vector containing node count, edge count, density, average degree,
 degree variance, average clustering, triangle count, transitivity, and connected
 component count. An RBF-kernel MMD score then compares the original and
 perturbed graph distributions.
 
-The WL subtree kernel workflow uses iterative neighborhood relabeling to create
+`WLFeatures+MMD` uses iterative neighborhood relabeling to create
 graph-level counts of rooted subtree features. The current implementation uses
 degree labels at initialization and a deterministic manual relabeling fallback.
 Distribution separation is measured by the squared distance between mean WL
 feature count vectors, equivalent to a linear-kernel MMD.
 
-NetLSD represents each graph with heat-trace signatures over log-spaced time
-scales. The current fallback computes eigenvalues of the normalized Laplacian
-with a small Jacobi eigensolver and evaluates the heat trace from those
-eigenvalues. Distribution separation uses RBF MMD over signatures, while
-mean-shift and paired scores use L2 distances. This is suitable for small
-synthetic smoke runs; larger experiments should eventually use NumPy/SciPy or a
-dedicated NetLSD package.
+`NativeNetLSD` represents each graph with heat-trace signatures over log-spaced
+time scales. The current fallback computes eigenvalues of the normalized
+Laplacian with a small Jacobi eigensolver and evaluates the heat trace from
+those eigenvalues. Distribution separation is the L2 distance between the mean
+NetLSD signatures of the two graph samples, and paired behavior is the average
+within-pair signature L2 distance. This is suitable for small synthetic smoke
+runs; larger experiments should eventually use NumPy/SciPy or a dedicated
+NetLSD package.
 
-Diversity Curves compute graph structural diversity as spread over
+`DiversityCurveDistance` computes graph structural diversity as spread over
 shortest-path distances. The workflow evaluates spread across deterministic
-edge-contraction scales and compares the resulting curve representations. This
-matches the default graph metric described in the Diversity Curves paper while
-keeping the local experiment runner reproducible.
+edge-contraction scales and compares the resulting curve representations with
+L2 distance between mean curves. This matches the default graph metric described
+in the Diversity Curves paper while keeping the local experiment runner
+reproducible.
 
 ## Evaluation Metrics
 
@@ -126,10 +131,10 @@ workflow_runtime / fastest_runtime_for_same_dataset_perturbation_alpha_seed
 
 Interpretability is assigned as a fixed qualitative score for this phase:
 
-- MMD over structural statistics: `3`.
-- WL subtree kernel with MMD: `2`.
-- NetLSD spectral signatures: `2`.
-- Diversity Curves: `3`.
+- `GraphStats+MMD`: `3`.
+- `WLFeatures+MMD`: `2`.
+- `NativeNetLSD`: `2`.
+- `DiversityCurveDistance`: `3`.
 
 Granularity maps perturbations to their main structural scale:
 

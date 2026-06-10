@@ -21,13 +21,15 @@ def main(argv: list[str] | None = None) -> int:
     debug_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
     debug_parser.add_argument("--rerun-failed", action="store_true", help="Drop failed rows and recompute them")
     debug_parser.add_argument("--log-file", default=None, help="Optional run log path")
+    debug_parser.add_argument("--console-log", action="store_true", help="Print progress logs to the terminal")
 
     full_parser = subparsers.add_parser("run_full_synthetic_experiment", help="Run the full synthetic experiment")
-    full_parser.add_argument("--output-root", default="outputs/experimentation")
+    full_parser.add_argument("--output-root", default="outputs/experimentation_native_netlsd")
     full_parser.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
     full_parser.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
     full_parser.add_argument("--rerun-failed", action="store_true", help="Drop failed rows and recompute them")
     full_parser.add_argument("--log-file", default=None, help="Optional run log path")
+    full_parser.add_argument("--console-log", action="store_true", help="Print progress logs to the terminal")
 
     evaluate_parser = subparsers.add_parser("evaluate_results", help="Generate evaluation CSVs")
     evaluate_parser.add_argument("--results", required=True)
@@ -45,6 +47,7 @@ def main(argv: list[str] | None = None) -> int:
             rerun_failed=args.rerun_failed,
             device=args.device,
             log_path=Path(args.log_file) if args.log_file else None,
+            console_log=args.console_log,
         )
         print(path)
         return 0
@@ -55,6 +58,7 @@ def main(argv: list[str] | None = None) -> int:
             rerun_failed=args.rerun_failed,
             device=args.device,
             log_path=Path(args.log_file) if args.log_file else None,
+            console_log=args.console_log,
         )
         print(path)
         return 0

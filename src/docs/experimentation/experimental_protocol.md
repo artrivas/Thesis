@@ -72,12 +72,16 @@ Pairs:                  {(G_i, G_i^alpha)} for i = 1..n
 
 ## 4. Workflows
 
-Run one representative workflow per methodological family:
+Run one representative representation plus discrepancy pipeline per
+methodological family:
 
-- MMD over structural graph statistics.
-- WL subtree kernel with MMD.
-- NetLSD spectral signatures.
-- Diversity Curves with shortest-path spread.
+- `GraphStats+MMD`: structural graph statistics followed by RBF MMD.
+- `WLFeatures+MMD`: Weisfeiler-Lehman subtree feature counts followed by
+  linear MMD.
+- `NativeNetLSD`: NetLSD heat-trace signatures compared by L2 distance between
+  mean signatures.
+- `DiversityCurveDistance`: shortest-path Diversity Curves followed by L2
+  distance between mean curve representations.
 
 Each workflow exposes a common interface:
 
@@ -130,7 +134,7 @@ outputs/debug_experimentation/results/results.csv
 The full synthetic run writes:
 
 ```text
-outputs/experimentation/results/results.csv
+outputs/experimentation_native_netlsd/results/results.csv
 ```
 
 ## 8. Evaluation and Figures
@@ -157,7 +161,7 @@ Supported commands:
 
 ```text
 python3 -m experimentation.cli run_debug_experiment --output-root outputs/debug_experimentation
-python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation_native_netlsd
 python3 -m experimentation.cli evaluate_results --results outputs/debug_experimentation/results/results.csv
 python3 -m experimentation.cli generate_figures --results outputs/debug_experimentation/results/results.csv
 python3 -m pip install -r requirements-dashboard.txt
@@ -182,19 +186,23 @@ explicitly requested but unavailable.
 Recommended remote command:
 
 ```text
-python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation_native_netlsd --device cuda --console-log
 ```
 
 To intentionally discard an existing checkpoint/result file and start a fresh
 CSV, pass:
 
 ```text
-python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda --no-resume
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation_native_netlsd --device cuda --no-resume --console-log
 ```
 
 If a bug or environment issue caused failed rows, pull the fix and recompute
 only those failed rows with:
 
 ```text
-python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation --device cuda --rerun-failed
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/experimentation_native_netlsd --device cuda --rerun-failed
 ```
+
+Use `--console-log` to print the same progress messages written to
+`logs/run.log`. Each completed workflow row reports dataset, perturbation, alpha,
+seed, workflow, status, and total completed rows.

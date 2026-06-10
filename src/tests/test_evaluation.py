@@ -5,6 +5,7 @@ import unittest
 from experimentation.evaluation import (
     correlation_label,
     evaluate_results,
+    generate_final_matrix,
     generate_evaluation_summary,
     monotonicity_label,
     monotonicity_violation_fraction,
@@ -44,6 +45,24 @@ class EvaluationTests(unittest.TestCase):
         self.assertEqual(len(summary), 2)
         self.assertTrue(all(row["sensitivity"] == 1.0 for row in summary))
         self.assertTrue(all(row["monotonicity"] == 0.0 for row in summary))
+
+    def test_duplicate_mean_shift_is_not_labeled_as_independent_evidence(self) -> None:
+        rows = [
+            {
+                **fake_result_rows()[0],
+                "workflow": "native_netlsd",
+                "alpha": alpha,
+                "distribution_score": score,
+                "mean_shift_score": score,
+                "paired_score": score,
+            }
+            for alpha, score in ((0.0, 0.0), (0.5, 0.5), (1.0, 1.0))
+        ]
+
+        matrix = generate_final_matrix(generate_evaluation_summary(rows))
+
+        self.assertEqual(matrix[0]["workflow"], "native_netlsd")
+        self.assertEqual(matrix[0]["mean_shift_label"], "Duplicate")
 
     def test_evaluate_results_writes_outputs(self) -> None:
         with TemporaryDirectory() as tmpdir:

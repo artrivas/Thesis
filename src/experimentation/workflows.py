@@ -16,6 +16,10 @@ Vector = list[float]
 SparseVector = dict[str, float]
 Representation = Vector | SparseVector
 
+NATIVE_NETLSD_WORKFLOW = "native_netlsd"
+LEGACY_NETLSD_MMD_WORKFLOW = "netlsd_spectral_signatures"
+DIVERSITY_CURVES_WORKFLOW = "diversity_curves_shortest_path"
+
 _DEVICE_PREFERENCE = "auto"
 
 
@@ -84,6 +88,8 @@ def sparse_mean(vectors: list[SparseVector]) -> SparseVector:
 
 
 def rbf_mmd(vectors_x: list[Vector], vectors_y: list[Vector], bandwidth: float = 1.0) -> float:
+    """Return biased quadratic RBF-MMD with diagonal kernel terms included."""
+
     if not vectors_x or not vectors_y:
         return 0.0
     gamma = 1.0 / (2.0 * bandwidth * bandwidth)
@@ -97,7 +103,29 @@ def rbf_mmd(vectors_x: list[Vector], vectors_y: list[Vector], bandwidth: float =
     return max(0.0, xx + yy - 2.0 * xy)
 
 
+def rbf_kernel_is_nearly_constant(
+    vectors: list[Vector],
+    bandwidth: float = 1.0,
+    *,
+    range_tolerance: float = 1e-3,
+    high_similarity_threshold: float = 0.99,
+) -> bool:
+    """Detect RBF bandwidths that collapse the biased-MMD kernel matrix."""
+
+    if len(vectors) < 2:
+        return False
+    gamma = 1.0 / (2.0 * bandwidth * bandwidth)
+    values = [
+        math.exp(-gamma * squared_l2(left, right))
+        for left in vectors
+        for right in vectors
+    ]
+    return max(values) - min(values) <= range_tolerance or min(values) >= high_similarity_threshold
+
+
 def sparse_linear_mmd(vectors_x: list[SparseVector], vectors_y: list[SparseVector]) -> float:
+    """Return linear-kernel MMD as squared distance between mean sparse features."""
+
     mean_x = sparse_mean(vectors_x)
     mean_y = sparse_mean(vectors_y)
     return sparse_l2(mean_x, mean_y) ** 2
@@ -223,13 +251,11 @@ class WLSubtreeMMDWorkflow(Workflow):
 @dataclass
 class NetLSDWorkflow(Workflow):
     timescales: tuple[float, ...] = tuple(10 ** (-2 + i * 4 / 15) for i in range(16))
-    bandwidth: float = 10.0
 
-    def __init__(self, timescales: Iterable[float] | None = None, bandwidth: float = 10.0) -> None:
-        super().__init__("netlsd_spectral_signatures")
+    def __init__(self, timescales: Iterable[float] | None = None, bandwidth: float | None = None) -> None:
+        super().__init__(NATIVE_NETLSD_WORKFLOW)
         if timescales is not None:
             self.timescales = tuple(timescales)
-        self.bandwidth = bandwidth
 
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
         return [netlsd_signature(graph, self.timescales) for graph in graphs]
@@ -245,7 +271,7 @@ class NetLSDWorkflow(Workflow):
         original: list[Representation],
         perturbed: list[Representation],
     ) -> float:
-        return rbf_mmd(original, perturbed, self.bandwidth)  # type: ignore[arg-type]
+        return l2(dense_mean(original), dense_mean(perturbed))  # type: ignore[arg-type]
 
 
 @dataclass
@@ -254,7 +280,7 @@ class DiversityCurvesWorkflow(Workflow):
     repetitions: int = 3
 
     def __init__(self, max_scales: int = 4, repetitions: int = 3) -> None:
-        super().__init__("diversity_curves_shortest_path")
+        super().__init__(DIVERSITY_CURVES_WORKFLOW)
         self.max_scales = max_scales
         self.repetitions = repetitions
 
@@ -493,8 +519,48 @@ def _selected_contraction_edge(graph: Graph, repeat: int) -> Edge:
     edges = graph.edges()
     if not edges:
         raise ValueError("Cannot select a contraction edge from an edgeless graph")
-    graph_signature = f"{repeat}|{graph.num_nodes}|{sorted(edges)}"
-    return min(edges, key=lambda edge: _edge_priority(graph_signature, edge))
+    graph_signature = f"{repeat}|{graph.num_nodes}|{_graph_structural_signature(graph)}"
+    return min(
+        edges,
+        key=lambda edge: (
+            _edge_structural_signature(graph, edge),
+            _edge_priority(graph_signature, edge),
+        ),
+    )
+
+
+def _graph_structural_signature(graph: Graph) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    degrees = graph.degrees()
+    component_sizes = sorted(len(component) for component in graph.connected_components())
+    return tuple(sorted(degrees)), tuple(component_sizes)
+
+
+def _edge_structural_signature(graph: Graph, edge: Edge) -> tuple[tuple[object, object], int, tuple[int, ...]]:
+    u, v = edge
+    endpoint_signatures = tuple(sorted((_node_local_signature(graph, u), _node_local_signature(graph, v))))
+    common_neighbors = len(graph.adjacency[u] & graph.adjacency[v])
+    neighbor_degrees = tuple(
+        sorted(
+            graph.degree(node)
+            for node in (graph.adjacency[u] | graph.adjacency[v])
+            if node not in edge
+        )
+    )
+    return endpoint_signatures, common_neighbors, neighbor_degrees
+
+
+def _node_local_signature(graph: Graph, node: int) -> tuple[int, tuple[int, ...], tuple[int, ...]]:
+    neighbors = graph.adjacency[node]
+    neighbor_degrees = tuple(sorted(graph.degree(neighbor) for neighbor in neighbors))
+    two_hop_degrees = tuple(
+        sorted(
+            graph.degree(two_hop)
+            for neighbor in neighbors
+            for two_hop in graph.adjacency[neighbor]
+            if two_hop != node
+        )
+    )
+    return graph.degree(node), neighbor_degrees, two_hop_degrees
 
 
 def _edge_priority(graph_signature: str, edge: Edge) -> str:

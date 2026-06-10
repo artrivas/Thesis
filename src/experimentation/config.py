@@ -19,7 +19,7 @@ DEFAULT_PERTURBATION_METHODS = (
 DEFAULT_WORKFLOW_NAMES = (
     "structural_statistics_mmd",
     "wl_subtree_kernel_mmd",
-    "netlsd_spectral_signatures",
+    "native_netlsd",
     "diversity_curves_shortest_path",
 )
 
@@ -85,10 +85,10 @@ class WorkflowConfig:
 class OutputConfig:
     """Filesystem locations for generated experiment artifacts."""
 
-    root: Path = Path("outputs/experimentation")
-    results: Path = Path("outputs/experimentation/results")
-    figures: Path = Path("outputs/experimentation/figures")
-    logs: Path = Path("outputs/experimentation/logs")
+    root: Path = Path("outputs/experimentation_native_netlsd")
+    results: Path = Path("outputs/experimentation_native_netlsd/results")
+    figures: Path = Path("outputs/experimentation_native_netlsd/figures")
+    logs: Path = Path("outputs/experimentation_native_netlsd/logs")
 
     def create_directories(self) -> None:
         """Create configured output directories if they do not exist."""
@@ -145,7 +145,7 @@ def debug_config(output_root: Path | str = Path("outputs/debug_experimentation")
     )
 
 
-def full_synthetic_config(output_root: Path | str = Path("outputs/experimentation")) -> ExperimentConfig:
+def full_synthetic_config(output_root: Path | str = Path("outputs/experimentation_native_netlsd")) -> ExperimentConfig:
     """Return the full synthetic-only grid configuration."""
 
     root = Path(output_root)

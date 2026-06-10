@@ -4,14 +4,43 @@ from __future__ import annotations
 
 import csv
 import math
+import sys
 from pathlib import Path
 from typing import Iterable
 
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from experimentation.evaluation import generate_evaluation_summary, generate_final_matrix
 from experimentation.runner import read_result_rows
+from experimentation.workflows import DIVERSITY_CURVES_WORKFLOW, LEGACY_NETLSD_MMD_WORKFLOW, NATIVE_NETLSD_WORKFLOW
 
 
-DEFAULT_RESULTS_PATH = Path("outputs/experimentation/results/results.csv")
+DEFAULT_RESULTS_PATH_CANDIDATES = (
+    Path("outputs/experimentation_native_netlsd/results/results.csv"),
+)
+LEGACY_DIVERSITY_WORKFLOW = "diversity_curves_l2"
+FIXED_DIVERSITY_WORKFLOW = DIVERSITY_CURVES_WORKFLOW
+LEGACY_WORKFLOWS = {LEGACY_DIVERSITY_WORKFLOW, LEGACY_NETLSD_MMD_WORKFLOW}
+DATASET_LABELS = {
+    "erdos_renyi": "ER",
+    "stochastic_block_model": "SBM",
+    "barabasi_albert": "BA",
+}
+PERTURBATION_LABELS = {
+    "edge_addition_deletion": "edge",
+    "triangle_injection_removal": "triangle",
+    "community_weakening": "community",
+    "hub_modification": "hub",
+}
+WORKFLOW_LABELS = {
+    "structural_statistics_mmd": "GraphStats+MMD",
+    "wl_subtree_kernel_mmd": "WLFeatures+MMD",
+    NATIVE_NETLSD_WORKFLOW: "NativeNetLSD",
+    LEGACY_NETLSD_MMD_WORKFLOW: "NetLSD+MMD legacy",
+    FIXED_DIVERSITY_WORKFLOW: "DiversityCurveDistance",
+    LEGACY_DIVERSITY_WORKFLOW: "Diversity L2 legacy",
+}
 NUMERIC_FLOAT_COLUMNS = (
     "alpha",
     "distribution_score",
@@ -22,6 +51,13 @@ NUMERIC_FLOAT_COLUMNS = (
 )
 NUMERIC_INT_COLUMNS = ("seed",)
 SCORE_COLUMNS = ("distribution_score", "paired_score", "mean_shift_score")
+
+
+def default_results_path(candidates: tuple[Path, ...] = DEFAULT_RESULTS_PATH_CANDIDATES) -> Path:
+    for path in candidates:
+        if path.is_file():
+            return path
+    return candidates[0]
 
 
 def load_result_rows(path: Path | str) -> list[dict[str, object]]:
@@ -58,7 +94,11 @@ def default_chart_rows(rows: Iterable[dict[str, object]]) -> list[dict[str, obje
 
 
 def has_legacy_diversity_rows(rows: Iterable[dict[str, object]]) -> bool:
-    return any(row.get("workflow") == "diversity_curves_l2" for row in rows)
+    return any(row.get("workflow") == LEGACY_DIVERSITY_WORKFLOW for row in rows)
+
+
+def has_legacy_workflow_rows(rows: Iterable[dict[str, object]]) -> bool:
+    return any(row.get("workflow") in LEGACY_WORKFLOWS for row in rows)
 
 
 def build_evaluation_tables(rows: list[dict[str, object]]) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
@@ -80,10 +120,10 @@ def main() -> None:
     df = pd.DataFrame(prepared_rows)
     _render_status_summary(st, df)
 
-    if has_legacy_diversity_rows(prepared_rows):
+    if has_legacy_workflow_rows(prepared_rows):
         st.warning(
-            "This result file contains legacy `diversity_curves_l2` rows. "
-            "Run the fixed experiments with `--no-resume` or a fresh output root before interpreting diversity results."
+            "This result file contains legacy workflow rows. "
+            f"Use `{DEFAULT_RESULTS_PATH_CANDIDATES[0]}` for corrected NativeNetLSD and shortest-path diversity results."
         )
 
     filtered = _filter_dataframe(st, df)
@@ -120,7 +160,7 @@ def main() -> None:
 def _load_rows_from_sidebar(st) -> list[dict[str, object]]:
     st.sidebar.header("Results")
     uploaded = st.sidebar.file_uploader("Upload result CSV", type="csv")
-    path_text = st.sidebar.text_input("Or result path", str(DEFAULT_RESULTS_PATH))
+    path_text = st.sidebar.text_input("Or result path", str(default_results_path()))
     if uploaded is not None:
         return parse_uploaded_csv(uploaded.getvalue().decode("utf-8"))
     path = Path(path_text)
@@ -170,18 +210,48 @@ def _line_chart(st, px, df, y_column: str, title: str) -> None:
         .mean()
         .sort_values(["dataset", "perturbation", "workflow", "alpha"])
     )
+    grouped = _add_display_labels(grouped)
+    normalized_column = f"{y_column}_normalized"
+    grouped = _add_normalized_metric(grouped, y_column, normalized_column)
     fig = px.line(
         grouped,
         x="alpha",
-        y=y_column,
-        color="workflow",
-        facet_col="dataset",
-        facet_row="perturbation",
+        y=normalized_column,
+        color="workflow_label",
+        facet_col="dataset_label",
+        facet_row="perturbation_label",
         markers=True,
-        title=title,
-        hover_data=["dataset", "perturbation", "workflow"],
+        title=f"{title} (normalized per workflow)",
+        hover_data={
+            "dataset": True,
+            "perturbation": True,
+            "workflow": True,
+            y_column: ":.4g",
+            normalized_column: ":.3f",
+            "dataset_label": False,
+            "perturbation_label": False,
+            "workflow_label": False,
+        },
+        category_orders={
+            "dataset_label": list(DATASET_LABELS.values()),
+            "perturbation_label": list(PERTURBATION_LABELS.values()),
+            "workflow_label": list(WORKFLOW_LABELS.values()),
+        },
+        facet_row_spacing=0.055,
+        facet_col_spacing=0.045,
+        labels={
+            "alpha": "Alpha",
+            normalized_column: "Normalized score",
+            "workflow_label": "Workflow",
+        },
     )
-    fig.update_layout(legend_title_text="Workflow", margin=dict(l=20, r=20, t=60, b=20))
+    _clean_facet_annotations(fig)
+    fig.update_yaxes(range=[0, 1.05])
+    fig.update_layout(
+        height=_facet_chart_height(grouped["perturbation_label"].nunique()),
+        legend_title_text="Workflow",
+        margin=dict(l=30, r=30, t=80, b=30),
+    )
     st.plotly_chart(fig, width="stretch")
 
 
@@ -190,14 +260,23 @@ def _scatter_chart(st, px, df) -> None:
     if chart_df.empty:
         st.info("No successful rows with finite mean-shift and paired scores.")
         return
+    chart_df = _add_display_labels(chart_df)
     fig = px.scatter(
         chart_df,
         x="mean_shift_score",
         y="paired_score",
-        color="workflow",
-        symbol="dataset",
+        color="workflow_label",
+        symbol="dataset_label",
         hover_data=["dataset", "perturbation", "alpha", "seed", "workflow"],
         title="Mean Shift vs Paired Distance",
+        category_orders={
+            "dataset_label": list(DATASET_LABELS.values()),
+            "workflow_label": list(WORKFLOW_LABELS.values()),
+        },
+        labels={
+            "workflow_label": "Workflow",
+            "dataset_label": "Dataset",
+        },
     )
     fig.update_layout(legend_title_text="Workflow", margin=dict(l=20, r=20, t=60, b=20))
     st.plotly_chart(fig, width="stretch")
@@ -235,6 +314,44 @@ def _finite_frame(df, columns: tuple[str, ...]):
     for column in columns:
         filtered = filtered[filtered[column].apply(lambda value: math.isfinite(_float(value)))]
     return filtered
+
+
+def _add_display_labels(df):
+    labeled = df.copy()
+    labeled["dataset_label"] = labeled["dataset"].apply(lambda value: _display_label(DATASET_LABELS, value))
+    labeled["perturbation_label"] = labeled["perturbation"].apply(
+        lambda value: _display_label(PERTURBATION_LABELS, value)
+    )
+    labeled["workflow_label"] = labeled["workflow"].apply(lambda value: _display_label(WORKFLOW_LABELS, value))
+    return labeled
+
+
+def _add_normalized_metric(df, value_column: str, output_column: str):
+    normalized = df.copy()
+    max_by_panel = normalized.groupby(["dataset", "perturbation", "workflow"])[value_column].transform("max")
+    denominator = max_by_panel.mask(max_by_panel <= 0, 1.0)
+    normalized[output_column] = normalized[value_column] / denominator
+    return normalized
+
+
+def _display_label(labels: dict[str, str], value: object) -> str:
+    text = str(value)
+    return labels.get(text, text)
+
+
+def _clean_facet_annotations(fig) -> None:
+    for annotation in fig.layout.annotations:
+        annotation.text = _clean_facet_label_text(annotation.text)
+
+
+def _clean_facet_label_text(text: str) -> str:
+    if "=" not in text:
+        return text
+    return text.split("=", 1)[1]
+
+
+def _facet_chart_height(row_count: int) -> int:
+    return max(620, 210 * max(1, row_count) + 160)
 
 
 def _dashboard_dependencies():

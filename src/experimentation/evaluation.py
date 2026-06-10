@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 
 from experimentation.runner import read_result_rows
+from experimentation.workflows import DIVERSITY_CURVES_WORKFLOW, NATIVE_NETLSD_WORKFLOW
 
 
 EVALUATION_SUMMARY_COLUMNS = (
@@ -40,9 +41,15 @@ FINAL_MATRIX_COLUMNS = (
 INTERPRETABILITY_SCORES = {
     "structural_statistics_mmd": 3,
     "wl_subtree_kernel_mmd": 2,
-    "netlsd_spectral_signatures": 2,
-    "diversity_curves_shortest_path": 3,
+    NATIVE_NETLSD_WORKFLOW: 2,
+    DIVERSITY_CURVES_WORKFLOW: 3,
     "diversity_curves_l2": 3,
+}
+
+MEAN_SHIFT_DUPLICATE_WORKFLOWS = {
+    NATIVE_NETLSD_WORKFLOW,
+    DIVERSITY_CURVES_WORKFLOW,
+    "diversity_curves_l2",
 }
 
 PERTURBATION_GRANULARITY = {
@@ -99,6 +106,7 @@ def generate_evaluation_summary(rows: list[dict[str, object]]) -> list[dict[str,
                 "monotonicity": monotonicity_violation_fraction(alpha_distribution),
                 "paired_detectability": spearman_correlation_from_pairs(alpha_paired),
                 "mean_shift_detectability": spearman_correlation_from_pairs(alpha_mean_shift),
+                "mean_shift_duplicates_distribution": mean_shift_duplicates_distribution(group_rows),
                 "robustness_cv": coefficient_of_variation(list(seed_means.values())),
                 "ranking_stability_tau": ranking_tau_by_group.get((dataset, perturbation), 1.0),
                 "relative_runtime": mean(relative_runtimes),
@@ -123,13 +131,14 @@ def generate_final_matrix(summary_rows: list[dict[str, object]]) -> list[dict[st
         robustness = mean(_numbers(rows, "robustness_cv"))
         runtime = mean(_numbers(rows, "relative_runtime"))
         interpretability = mean(_numbers(rows, "interpretability_score"))
+        duplicate_mean_shift = is_duplicate_mean_shift_workflow(workflow, rows)
         final_rows.append(
             {
                 "workflow": workflow,
                 "sensitivity_label": correlation_label(sensitivity),
                 "monotonicity_label": monotonicity_label(monotonicity),
                 "paired_label": correlation_label(paired),
-                "mean_shift_label": correlation_label(mean_shift),
+                "mean_shift_label": "Duplicate" if duplicate_mean_shift else correlation_label(mean_shift),
                 "granularity_label": summarize_granularity(rows),
                 "robustness_label": robustness_label(robustness),
                 "efficiency_label": efficiency_label(runtime),
@@ -137,6 +146,23 @@ def generate_final_matrix(summary_rows: list[dict[str, object]]) -> list[dict[st
             }
         )
     return final_rows
+
+
+def is_duplicate_mean_shift_workflow(workflow: str, summary_rows: list[dict[str, object]]) -> bool:
+    if workflow in MEAN_SHIFT_DUPLICATE_WORKFLOWS:
+        return True
+    duplicate_flags = [row.get("mean_shift_duplicates_distribution") for row in summary_rows]
+    return bool(duplicate_flags) and all(_truthy(value) for value in duplicate_flags)
+
+
+def mean_shift_duplicates_distribution(rows: list[dict[str, object]], tolerance: float = 1e-12) -> bool:
+    pairs = []
+    for row in rows:
+        distribution = _float(row.get("distribution_score"))
+        mean_shift = _float(row.get("mean_shift_score"))
+        if math.isfinite(distribution) and math.isfinite(mean_shift):
+            pairs.append((distribution, mean_shift))
+    return bool(pairs) and all(abs(distribution - mean_shift) <= tolerance for distribution, mean_shift in pairs)
 
 
 def spearman_correlation_from_pairs(pairs: list[tuple[float, float]]) -> float:
@@ -388,6 +414,14 @@ def _float(value: object) -> float:
         return float(value)
     except (TypeError, ValueError):
         return math.nan
+
+
+def _truthy(value: object) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return False
+    return str(value).strip().lower() in {"1", "true", "yes"}
 
 
 def _csv_value(value: object) -> object:

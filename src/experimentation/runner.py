@@ -9,11 +9,20 @@ import json
 import logging
 import os
 from pathlib import Path
+import sys
 import tracemalloc
 
 from experimentation.config import ExperimentConfig, debug_config, full_synthetic_config
 from experimentation.datasets import PairedDistribution, SyntheticDatasetConfig, generate_paired_distribution
-from experimentation.workflows import Workflow, acceleration_summary, configure_acceleration, default_workflows
+from experimentation.workflows import (
+    DIVERSITY_CURVES_WORKFLOW,
+    LEGACY_NETLSD_MMD_WORKFLOW,
+    NATIVE_NETLSD_WORKFLOW,
+    Workflow,
+    acceleration_summary,
+    configure_acceleration,
+    default_workflows,
+)
 
 
 RESULT_COLUMNS = (
@@ -40,7 +49,7 @@ def run_debug_experiment(output_root: Path | str = Path("outputs/debug_experimen
     return run_experiment(debug_config(output_root))
 
 
-def run_full_synthetic_experiment(output_root: Path | str = Path("outputs/experimentation")) -> Path:
+def run_full_synthetic_experiment(output_root: Path | str = Path("outputs/experimentation_native_netlsd")) -> Path:
     """Run the full synthetic-only grid and return the result CSV path."""
 
     return run_experiment(full_synthetic_config(output_root))
@@ -56,6 +65,7 @@ def run_experiment(
     device: str = "auto",
     log_path: Path | str | None = None,
     checkpoint_path: Path | str | None = None,
+    console_log: bool = False,
 ) -> Path:
     """Execute dataset x perturbation x alpha x seed x workflow and save CSV results."""
 
@@ -66,7 +76,7 @@ def run_experiment(
     checkpoint_file = (
         Path(checkpoint_path) if checkpoint_path is not None else config.outputs.logs / "checkpoint.json"
     )
-    logger = _experiment_logger(log_file)
+    logger = _experiment_logger(log_file, console=console_log)
     configure_acceleration(device)
     workflow_instances = workflows if workflows is not None else workflows_from_config(config)
 
@@ -150,7 +160,7 @@ def workflows_from_config(config: ExperimentConfig) -> list[Workflow]:
     """Instantiate workflows listed in the experiment config."""
 
     available = {workflow.name: workflow for workflow in default_workflows()}
-    available["diversity_curves_l2"] = available["diversity_curves_shortest_path"]
+    available["diversity_curves_l2"] = available[DIVERSITY_CURVES_WORKFLOW]
     workflows = []
     for name in config.workflows.names:
         if name not in available:
@@ -192,13 +202,16 @@ def _raise_on_incompatible_resume(path: Path, workflows: list[Workflow]) -> None
     if not path.exists() or path.stat().st_size == 0:
         return
     expected_workflows = {workflow.name for workflow in workflows}
-    if "diversity_curves_shortest_path" not in expected_workflows:
-        return
-    legacy_workflows = {
-        str(row.get("workflow"))
-        for row in read_result_rows(path)
-        if row.get("workflow") == "diversity_curves_l2"
+    legacy_by_current = {
+        DIVERSITY_CURVES_WORKFLOW: {"diversity_curves_l2"},
+        NATIVE_NETLSD_WORKFLOW: {LEGACY_NETLSD_MMD_WORKFLOW},
     }
+    incompatible = set()
+    existing_workflows = {str(row.get("workflow")) for row in read_result_rows(path)}
+    for current, legacy_names in legacy_by_current.items():
+        if current in expected_workflows:
+            incompatible.update(existing_workflows & legacy_names)
+    legacy_workflows = incompatible
     if legacy_workflows:
         legacy = ", ".join(sorted(legacy_workflows))
         raise ValueError(
@@ -271,22 +284,36 @@ def _flush_checkpoint(handle) -> None:
     os.fsync(handle.fileno())
 
 
-def _experiment_logger(log_path: Path) -> logging.Logger:
+def _experiment_logger(log_path: Path, console: bool = False) -> logging.Logger:
     logger = logging.getLogger("experimentation.runner")
     logger.setLevel(logging.INFO)
     logger.propagate = False
     resolved = log_path.resolve()
+    has_file_handler = False
     for handler in logger.handlers:
         if isinstance(handler, logging.FileHandler) and Path(handler.baseFilename) == resolved:
-            return logger
+            has_file_handler = True
     for handler in list(logger.handlers):
-        if isinstance(handler, logging.FileHandler):
+        if isinstance(handler, logging.FileHandler) and Path(handler.baseFilename) != resolved:
             logger.removeHandler(handler)
             handler.close()
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    handler = logging.FileHandler(log_path, encoding="utf-8")
-    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-    logger.addHandler(handler)
+        elif getattr(handler, "_experiment_console_handler", False) and not console:
+            logger.removeHandler(handler)
+            handler.close()
+    if not has_file_handler:
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        handler = logging.FileHandler(log_path, encoding="utf-8")
+        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+        logger.addHandler(handler)
+    has_console_handler = any(
+        getattr(handler, "_experiment_console_handler", False)
+        for handler in logger.handlers
+    )
+    if console and not has_console_handler:
+        console_handler = logging.StreamHandler(sys.stderr)
+        console_handler._experiment_console_handler = True  # type: ignore[attr-defined]
+        console_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+        logger.addHandler(console_handler)
     return logger
 
 

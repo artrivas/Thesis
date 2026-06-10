@@ -1,5 +1,7 @@
 import csv
+from contextlib import redirect_stderr
 from dataclasses import replace
+from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
@@ -7,7 +9,7 @@ import unittest
 from experimentation.config import DatasetConfig, OutputConfig, PerturbationConfig, WorkflowConfig, debug_config
 from experimentation.datasets import SyntheticDatasetConfig
 from experimentation.runner import RESULT_COLUMNS, read_result_rows, run_experiment, write_result_rows
-from experimentation.workflows import Workflow
+from experimentation.workflows import NATIVE_NETLSD_WORKFLOW, Workflow
 
 
 class FailingWorkflow(Workflow):
@@ -79,6 +81,19 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(checkpoint_path.is_file())
             self.assertIn('"remaining_rows": 0', checkpoint_path.read_text(encoding="utf-8"))
 
+    def test_console_log_streams_progress_messages(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = tiny_debug_config(Path(tmpdir))
+            stderr = StringIO()
+
+            with redirect_stderr(stderr):
+                run_experiment(config, console_log=True)
+
+            output = stderr.getvalue()
+            self.assertIn("run_start", output)
+            self.assertIn("row_complete", output)
+            self.assertIn("run_finish", output)
+
     def test_rerun_failed_drops_failed_rows_before_resuming(self) -> None:
         with TemporaryDirectory() as tmpdir:
             config = tiny_debug_config(Path(tmpdir))
@@ -109,6 +124,38 @@ class RunnerTests(unittest.TestCase):
                         "alpha": 0.0,
                         "seed": 0,
                         "workflow": "diversity_curves_l2",
+                        "distribution_score": 0.0,
+                        "mean_shift_score": 0.0,
+                        "paired_score": 0.0,
+                        "runtime_seconds": 0.0,
+                        "memory_mb": 0.0,
+                        "status": "success",
+                        "error_message": "",
+                    }
+                ],
+                result_path,
+            )
+
+            with self.assertRaisesRegex(ValueError, "legacy workflow"):
+                run_experiment(config)
+
+    def test_resume_rejects_legacy_netlsd_mmd_results_for_native_netlsd(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = replace(
+                tiny_debug_config(Path(tmpdir)),
+                workflows=WorkflowConfig(names=(NATIVE_NETLSD_WORKFLOW,)),
+            )
+            result_path = config.outputs.results / "results.csv"
+            write_result_rows(
+                [
+                    {
+                        "dataset": "erdos_renyi",
+                        "dataset_params": "{}",
+                        "perturbation": "edge_addition_deletion",
+                        "perturbation_params": "{}",
+                        "alpha": 0.0,
+                        "seed": 0,
+                        "workflow": "netlsd_spectral_signatures",
                         "distribution_score": 0.0,
                         "mean_shift_score": 0.0,
                         "paired_score": 0.0,

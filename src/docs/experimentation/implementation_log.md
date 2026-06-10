@@ -30,12 +30,12 @@ Configuration defaults established today:
 - Synthetic families: Erdős-Rényi, Stochastic Block Model, Barabási-Albert.
 - Perturbations: edge addition/deletion, triangle injection/removal, community
   weakening, hub modification.
-- Workflows: structural-statistics MMD, WL subtree kernel MMD, NetLSD spectral
-  signatures, Diversity Curves with shortest-path spread.
+- Workflows: `GraphStats+MMD`, `WLFeatures+MMD`, `NativeNetLSD`, and
+  `DiversityCurveDistance`.
 - Alpha values: `0.0, 0.1, 0.2, ..., 1.0`.
 - Seeds: `0, 1, 2, 3, 4`.
 - Graphs per distribution: `100`.
-- Default output root: `outputs/experimentation`.
+- Default output root: `outputs/experimentation_native_netlsd`.
 
 Known Day 1 limitations:
 
@@ -64,8 +64,8 @@ Files added:
   edge addition/deletion, triangle injection/removal, community weakening, and
   hub modification. Each perturbation returns a graph copy plus metadata.
 - `experimentation/workflows.py`: implements the common workflow interface and
-  four workflows: structural-statistics MMD, WL subtree kernel MMD, NetLSD
-  spectral signatures, and Diversity Curves with shortest-path spread.
+  four representation/discrepancy pipelines: `GraphStats+MMD`,
+  `WLFeatures+MMD`, `NativeNetLSD`, and `DiversityCurveDistance`.
 - `tests/test_synthetic_datasets.py`: tests generator size, non-empty graphs,
   reproducibility, and SBM community labels.
 - `tests/test_perturbations.py`: tests alpha-zero copy behavior, edge

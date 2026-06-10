@@ -9,6 +9,7 @@ from pathlib import Path
 
 from experimentation.evaluation import PERTURBATION_GRANULARITY, generate_evaluation_summary, generate_final_matrix, mean
 from experimentation.runner import read_result_rows
+from experimentation.workflows import DIVERSITY_CURVES_WORKFLOW, LEGACY_NETLSD_MMD_WORKFLOW, NATIVE_NETLSD_WORKFLOW
 
 
 FIGURE_FILES = {
@@ -28,6 +29,15 @@ COLORS = (
     "#ff7f0e",
     "#17becf",
 )
+
+WORKFLOW_LABELS = {
+    "structural_statistics_mmd": "GraphStats+MMD",
+    "wl_subtree_kernel_mmd": "WLFeatures+MMD",
+    NATIVE_NETLSD_WORKFLOW: "NativeNetLSD",
+    LEGACY_NETLSD_MMD_WORKFLOW: "NetLSD+MMD legacy",
+    DIVERSITY_CURVES_WORKFLOW: "DiversityCurveDistance",
+    "diversity_curves_l2": "Diversity L2 legacy",
+}
 
 
 def generate_figures(results_path: Path | str, output_dir: Path | str | None = None) -> dict[str, Path]:
@@ -177,7 +187,7 @@ def granularity_heatmap_svg(summary_rows: list[dict[str, object]]) -> str:
         body.append(text(left + column * cell_w + 8, top - 15, scale, size=11, weight="bold"))
     for row_index, workflow in enumerate(workflows):
         y = top + row_index * cell_h
-        body.append(text(20, y + 22, workflow, size=11))
+        body.append(text(20, y + 22, _workflow_label(workflow), size=11))
         for column, scale in enumerate(scales):
             x = left + column * cell_w
             value = values[(workflow, scale)]
@@ -216,7 +226,7 @@ def runtime_bar_svg(rows: list[dict[str, object]]) -> str:
         x = plot_x + index * gap + gap * 0.15
         bar_h = (value / max_value) * plot_h
         body.append(rect(x, plot_y + plot_h - bar_h, bar_w, bar_h, COLORS[index % len(COLORS)]))
-        body.append(text(x, plot_y + plot_h + 18, workflow[:22], size=10))
+        body.append(text(x, plot_y + plot_h + 18, _workflow_label(workflow)[:22], size=10))
     body.append("</svg>")
     return "\n".join(body)
 
@@ -239,7 +249,7 @@ def _status_bars(
     gap = height / max(1, len(workflows))
     for index, workflow in enumerate(workflows):
         y0 = y + index * gap
-        elements.append(text(x, y0 + bar_h * 0.65, workflow[:28], size=10))
+        elements.append(text(x, y0 + bar_h * 0.65, _workflow_label(workflow)[:28], size=10))
         cursor = x + 185
         for status in ("success", "failed", "skipped"):
             count = sum(1 for row in rows if row.get("workflow") == workflow and row.get("status") == status)
@@ -270,7 +280,7 @@ def _sensitivity_heatmap(
         elements.append(text(x + 175 + column * cell_w + 4, y - 8, _short_label(perturbation), size=9, weight="bold"))
     for row_index, workflow in enumerate(workflows):
         y0 = y + row_index * cell_h
-        elements.append(text(x, y0 + 22, workflow[:28], size=10))
+        elements.append(text(x, y0 + 22, _workflow_label(workflow)[:28], size=10))
         for column, perturbation in enumerate(perturbations):
             value = mean(values.get((workflow, perturbation), [0.0]))
             x0 = x + 175 + column * cell_w
@@ -307,7 +317,7 @@ def _runtime_sensitivity_scatter(
         px = x + (runtime / max_runtime) * width
         py = y + height - max(0.0, min(1.0, sensitivity)) * height
         elements.append(circle(px, py, 7, color_by_workflow.get(workflow, "#333"), opacity=0.85))
-        elements.append(text(px + 9, py + 4, workflow[:22], size=9))
+        elements.append(text(px + 9, py + 4, _workflow_label(workflow)[:22], size=9))
     return elements
 
 
@@ -324,7 +334,7 @@ def _matrix_notes(final_rows: list[dict[str, object]], x: float, y: float) -> li
         sensitivity = str(row["sensitivity_label"])
         runtime = str(row["efficiency_label"])
         granularity = str(row["granularity_label"])
-        elements.append(text(x, y0, workflow[:30], size=10))
+        elements.append(text(x, y0, _workflow_label(workflow)[:30], size=10))
         elements.append(text(x + 210, y0, sensitivity, size=10))
         elements.append(text(x + 320, y0, runtime, size=10))
         elements.append(text(x + 410, y0, granularity, size=10))
@@ -398,7 +408,7 @@ def _line_panel(
             elements.append(circle(points[0][0], points[0][1], 3, color_by_workflow[workflow]))
         elif points:
             elements.append(polyline(points, color_by_workflow[workflow]))
-            elements.append(text(points[-1][0] + 4, points[-1][1], workflow[:16], size=8, fill=color_by_workflow[workflow]))
+            elements.append(text(points[-1][0] + 4, points[-1][1], _workflow_label(workflow)[:16], size=8, fill=color_by_workflow[workflow]))
     return "\n".join(elements)
 
 
@@ -450,6 +460,10 @@ def _short_label(value: str) -> str:
     return labels.get(value, value[:12])
 
 
+def _workflow_label(value: str) -> str:
+    return WORKFLOW_LABELS.get(value, value)
+
+
 def _finite_values(rows: list[dict[str, object]], key: str) -> list[float]:
     return [value for value in (_float(row.get(key)) for row in rows) if math.isfinite(value)]
 
@@ -491,7 +505,7 @@ def _legend(color_by_workflow: dict[str, str], x: float, y: float) -> str:
     for index, (workflow, color) in enumerate(sorted(color_by_workflow.items())):
         item_y = y + index * 20
         items.append(circle(x, item_y - 4, 4, color))
-        items.append(text(x + 10, item_y, workflow, size=10))
+        items.append(text(x + 10, item_y, _workflow_label(workflow), size=10))
     return "\n".join(items)
 
 
