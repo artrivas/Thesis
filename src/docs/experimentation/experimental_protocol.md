@@ -206,3 +206,14 @@ python3 -m experimentation.cli run_full_synthetic_experiment --output-root outpu
 Use `--console-log` to print the same progress messages written to
 `logs/run.log`. Each completed workflow row reports dataset, perturbation, alpha,
 seed, workflow, status, and total completed rows.
+
+Use `--workflow` to run one or more workflow families in an isolated output root.
+This is the recommended way to parallelize full runs across terminals without
+multiple processes writing the same CSV:
+
+```text
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/attempt2_graphstats --workflow structural_statistics_mmd --no-resume --console-log
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/attempt2_wl --workflow wl_subtree_kernel_mmd --no-resume --console-log
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/attempt2_netlsd --workflow native_netlsd --no-resume --console-log --device cuda
+python3 -m experimentation.cli run_full_synthetic_experiment --output-root outputs/attempt2_diversity --workflow diversity_curves_shortest_path --no-resume --console-log
+```
