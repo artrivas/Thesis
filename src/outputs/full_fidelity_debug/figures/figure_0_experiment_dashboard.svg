@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760"><rect width="100%" height="100%" fill="white"/>
+<text x="26.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#222">Figure 0: Experiment dashboard</text>
+<text x="26.0" y="58.0" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#555">192 successful, 0 failed, 24 skipped, 216 total workflow rows</text>
+<text x="26.0" y="94.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">A. Run coverage by workflow</text>
+<text x="610.0" y="94.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">B. Detection strength by workflow and perturbation</text>
+<text x="26.0" y="405.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">C. Sensitivity vs runtime tradeoff</text>
+<text x="610.0" y="405.0" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#222">D. Workflow-level reading guide</text>
+<text x="26.0" y="140.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">DiversityCurveDistance</text>
+<rect x="211.0" y="120.0" width="257.8" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="468.8" y="120.0" width="32.2" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="140.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">54</text>
+<text x="26.0" y="195.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">NativeNetLSD</text>
+<rect x="211.0" y="175.0" width="257.8" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="468.8" y="175.0" width="32.2" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="195.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">54</text>
+<text x="26.0" y="250.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">GraphStats+MMD</text>
+<rect x="211.0" y="230.0" width="257.8" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="468.8" y="230.0" width="32.2" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="250.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">54</text>
+<text x="26.0" y="305.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">WLFeatures+MMD</text>
+<rect x="211.0" y="285.0" width="257.8" height="32.0" fill="#2ca02c" stroke="#fff"/>
+<rect x="468.8" y="285.0" width="32.2" height="32.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="508.0" y="305.8" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">54</text>
+<text x="789.0" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">community</text>
+<text x="846.5" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">edge del.</text>
+<text x="904.0" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">edge ins.</text>
+<text x="961.5" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">hub</text>
+<text x="1019.0" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">tri. del.</text>
+<text x="1076.5" y="112.0" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#222">tri. ins.</text>
+<text x="610.0" y="142.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">DiversityCurveDistance</text>
+<rect x="785.0" y="120.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="795.0" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="842.5" y="120.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="852.5" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="900.0" y="120.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="910.0" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="957.5" y="120.0" width="55.5" height="32.0" fill="rgb(119,197,119)" stroke="#fff"/>
+<text x="967.5" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="1015.0" y="120.0" width="55.5" height="32.0" fill="rgb(196,226,196)" stroke="#fff"/>
+<text x="1025.0" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.33</text>
+<rect x="1072.5" y="120.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="1082.5" y="141.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<text x="610.0" y="176.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">NativeNetLSD</text>
+<rect x="785.0" y="154.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="795.0" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="842.5" y="154.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="852.5" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="900.0" y="154.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="910.0" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="957.5" y="154.0" width="55.5" height="32.0" fill="rgb(119,197,119)" stroke="#fff"/>
+<text x="967.5" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="1015.0" y="154.0" width="55.5" height="32.0" fill="rgb(196,226,196)" stroke="#fff"/>
+<text x="1025.0" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.33</text>
+<rect x="1072.5" y="154.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="1082.5" y="175.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<text x="610.0" y="210.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">GraphStats+MMD</text>
+<rect x="785.0" y="188.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="795.0" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="842.5" y="188.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="852.5" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="900.0" y="188.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="910.0" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="957.5" y="188.0" width="55.5" height="32.0" fill="rgb(119,197,119)" stroke="#fff"/>
+<text x="967.5" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="1015.0" y="188.0" width="55.5" height="32.0" fill="rgb(196,226,196)" stroke="#fff"/>
+<text x="1025.0" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.33</text>
+<rect x="1072.5" y="188.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="1082.5" y="209.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<text x="610.0" y="244.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">WLFeatures+MMD</text>
+<rect x="785.0" y="222.0" width="55.5" height="32.0" fill="rgb(172,217,172)" stroke="#fff"/>
+<text x="795.0" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.50</text>
+<rect x="842.5" y="222.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="852.5" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="900.0" y="222.0" width="55.5" height="32.0" fill="rgb(100,190,100)" stroke="#fff"/>
+<text x="910.0" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">1.00</text>
+<rect x="957.5" y="222.0" width="55.5" height="32.0" fill="rgb(119,197,119)" stroke="#fff"/>
+<text x="967.5" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="1015.0" y="222.0" width="55.5" height="32.0" fill="rgb(196,226,196)" stroke="#fff"/>
+<text x="1025.0" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.33</text>
+<rect x="1072.5" y="222.0" width="55.5" height="32.0" fill="rgb(106,192,106)" stroke="#fff"/>
+<text x="1082.5" y="243.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.96</text>
+<text x="785.0" y="280.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#555">0 = weak alpha trend, 1 = strong monotonic detection</text>
+<line x1="70.0" y1="680.0" x2="530.0" y2="680.0" stroke="#333" stroke-width="1"/>
+<line x1="70.0" y1="450.0" x2="70.0" y2="680.0" stroke="#333" stroke-width="1"/>
+<text x="255.0" y="714.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">relative runtime</text>
+<text x="25.0" y="565.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">sensitivity</text>
+<circle cx="530.0" cy="484.5" r="7.0" fill="#1f77b4" opacity="0.85"/>
+<text x="539.0" y="488.5" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">DiversityCurveDistance</text>
+<circle cx="382.3" cy="484.5" r="7.0" fill="#d62728" opacity="0.85"/>
+<text x="391.3" y="488.5" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">NativeNetLSD</text>
+<circle cx="88.3" cy="484.5" r="7.0" fill="#2ca02c" opacity="0.85"/>
+<text x="97.3" y="488.5" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">GraphStats+MMD</text>
+<circle cx="100.9" cy="493.6" r="7.0" fill="#9467bd" opacity="0.85"/>
+<text x="109.9" y="497.6" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">WLFeatures+MMD</text>
+<text x="610.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">workflow</text>
+<text x="820.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">sensitivity</text>
+<text x="930.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">runtime</text>
+<text x="1020.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">read</text>
+<text x="610.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">DiversityCurveDistance</text>
+<text x="820.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Low</text>
+<text x="1020.0" y="464.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">NativeNetLSD</text>
+<text x="820.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Low</text>
+<text x="1020.0" y="490.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">GraphStats+MMD</text>
+<text x="820.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">Very high</text>
+<text x="1020.0" y="516.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="542.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">WLFeatures+MMD</text>
+<text x="820.0" y="542.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="930.0" y="542.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">High</text>
+<text x="1020.0" y="542.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#222">multiscale</text>
+<text x="610.0" y="585.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#555">Use A to see data quality, B to compare detection, and C to choose a practical workflow.</text>
+<rect x="380.0" y="81.0" width="12.0" height="12.0" fill="#2ca02c" stroke="#fff"/>
+<text x="397.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">success</text>
+<rect x="452.0" y="81.0" width="12.0" height="12.0" fill="#d62728" stroke="#fff"/>
+<text x="469.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">failed</text>
+<rect x="524.0" y="81.0" width="12.0" height="12.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="541.0" y="91.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">skipped</text>
+</svg>

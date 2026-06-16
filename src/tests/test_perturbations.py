@@ -28,6 +28,38 @@ class PerturbationTests(unittest.TestCase):
         self.assertEqual(result.metadata["edges_added"] + result.metadata["edges_removed"], expected_budget)
         self.assertFalse(result.graph.structurally_equal(graph))
 
+    def test_edge_insertion_and_deletion_are_separate_operations(self) -> None:
+        graph = generate_graph_distribution(
+            SyntheticDatasetConfig("erdos_renyi", num_graphs=1, num_nodes=14, edge_probability=0.5, seed=2)
+        )[0]
+
+        insertion = perturb_graph(graph, 0.4, "edge_insertion", seed=9)
+        deletion = perturb_graph(graph, 0.4, "edge_deletion", seed=9)
+
+        self.assertEqual(insertion.metadata["perturbation_family"], "edge")
+        self.assertEqual(insertion.metadata["perturbation_direction"], "insertion")
+        self.assertGreater(insertion.metadata["edges_added"], 0)
+        self.assertEqual(insertion.metadata["edges_removed"], 0)
+        self.assertEqual(deletion.metadata["perturbation_family"], "edge")
+        self.assertEqual(deletion.metadata["perturbation_direction"], "deletion")
+        self.assertGreater(deletion.metadata["edges_removed"], 0)
+        self.assertEqual(deletion.metadata["edges_added"], 0)
+
+    def test_triangle_insertion_and_deletion_are_separate_operations(self) -> None:
+        graph = generate_graph_distribution(
+            SyntheticDatasetConfig("stochastic_block_model", num_graphs=1, num_nodes=12, num_blocks=2, p_in=0.9, p_out=0.0, seed=3)
+        )[0]
+
+        insertion = perturb_graph(graph, 0.5, "triangle_insertion", seed=4)
+        deletion = perturb_graph(graph, 0.5, "triangle_deletion", seed=4)
+
+        self.assertEqual(insertion.metadata["perturbation_family"], "triangle")
+        self.assertEqual(insertion.metadata["perturbation_direction"], "insertion")
+        self.assertEqual(insertion.metadata["edges_removed"], 0)
+        self.assertEqual(deletion.metadata["perturbation_family"], "triangle")
+        self.assertEqual(deletion.metadata["perturbation_direction"], "deletion")
+        self.assertEqual(deletion.metadata["edges_added"], 0)
+
     def test_community_weakening_uses_sbm_metadata(self) -> None:
         graph = generate_graph_distribution(
             SyntheticDatasetConfig("stochastic_block_model", num_graphs=1, num_nodes=18, num_blocks=3, p_in=0.9, p_out=0.0, seed=4)

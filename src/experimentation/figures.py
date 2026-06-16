@@ -453,8 +453,12 @@ def _green_scale(value: float) -> str:
 def _short_label(value: str) -> str:
     labels = {
         "community_weakening": "community",
+        "edge_insertion": "edge ins.",
+        "edge_deletion": "edge del.",
         "edge_addition_deletion": "edge",
         "hub_modification": "hub",
+        "triangle_insertion": "tri. ins.",
+        "triangle_deletion": "tri. del.",
         "triangle_injection_removal": "triangle",
     }
     return labels.get(value, value[:12])

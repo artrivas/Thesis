@@ -58,6 +58,7 @@ def generate_paired_distribution(
         result = perturb_graph(graph, alpha, perturbation_type, seed + index, graph.metadata)
         perturbed_graphs.append(result.graph)
         perturbation_metadata.append(result.metadata)
+    first_metadata = perturbation_metadata[0] if perturbation_metadata else {}
     return PairedDistribution(
         original_graphs=original_graphs,
         perturbed_graphs=perturbed_graphs,
@@ -65,6 +66,8 @@ def generate_paired_distribution(
         metadata={
             "dataset": dataset_config.family,
             "perturbation": perturbation_type,
+            "perturbation_family": first_metadata.get("perturbation_family"),
+            "perturbation_direction": first_metadata.get("perturbation_direction"),
             "alpha": alpha,
             "seed": seed,
             "num_pairs": len(original_graphs),

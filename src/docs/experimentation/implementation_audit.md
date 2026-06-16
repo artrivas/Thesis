@@ -2,6 +2,10 @@
 
 Date: 2026-06-10
 
+Status update: this is a historical pre-upgrade audit. For the current
+paper-faithful thesis defaults and remaining limitations, see
+`src/docs/experimentation/full_fidelity_implementation_netlsd_diversity_wl.md`.
+
 This report audits the local experiment implementation against the main concepts
 behind the methods it names. It focuses on whether the code implements the
 intended concepts closely enough for the current synthetic perturbation study,

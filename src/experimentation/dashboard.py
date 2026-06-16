@@ -28,7 +28,11 @@ DATASET_LABELS = {
     "barabasi_albert": "BA",
 }
 PERTURBATION_LABELS = {
+    "edge_insertion": "edge insertion",
+    "edge_deletion": "edge deletion",
     "edge_addition_deletion": "edge",
+    "triangle_insertion": "triangle insertion",
+    "triangle_deletion": "triangle deletion",
     "triangle_injection_removal": "triangle",
     "community_weakening": "community",
     "hub_modification": "hub",

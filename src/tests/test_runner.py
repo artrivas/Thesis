@@ -47,6 +47,12 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual(reader.fieldnames, list(RESULT_COLUMNS))
                 rows = list(reader)
             self.assertGreater(len(rows), 0)
+            first = rows[0]
+            self.assertIn("workflow_params", first)
+            self.assertIn("implementation_mode", first)
+            self.assertEqual(first["perturbation_family"], "edge")
+            self.assertEqual(first["perturbation_direction"], "insertion")
+            self.assertEqual(first["graph_count"], "2")
 
     def test_failed_workflow_does_not_crash_full_experiment(self) -> None:
         with TemporaryDirectory() as tmpdir:
@@ -171,6 +177,34 @@ class RunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "legacy workflow"):
                 run_experiment(config)
 
+    def test_directional_perturbations_are_written_as_separate_rows(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            config = replace(
+                tiny_debug_config(Path(tmpdir)),
+                perturbations=PerturbationConfig(
+                    methods=(
+                        "edge_insertion",
+                        "edge_deletion",
+                        "triangle_insertion",
+                        "triangle_deletion",
+                    ),
+                    alpha_values=(0.5,),
+                ),
+                workflows=WorkflowConfig(names=("structural_statistics_mmd",)),
+            )
+
+            rows = read_result_rows(run_experiment(config))
+
+            by_name = {row["perturbation"]: row for row in rows}
+            self.assertEqual(
+                set(by_name),
+                {"edge_insertion", "edge_deletion", "triangle_insertion", "triangle_deletion"},
+            )
+            self.assertEqual(by_name["edge_insertion"]["perturbation_direction"], "insertion")
+            self.assertEqual(by_name["edge_deletion"]["perturbation_direction"], "deletion")
+            self.assertEqual(by_name["triangle_insertion"]["perturbation_direction"], "insertion")
+            self.assertEqual(by_name["triangle_deletion"]["perturbation_direction"], "deletion")
+
 
 def tiny_debug_config(root: Path):
     base = debug_config(root)
@@ -181,7 +215,7 @@ def tiny_debug_config(root: Path):
         dataset_configs=(
             SyntheticDatasetConfig("erdos_renyi", num_graphs=2, num_nodes=6, edge_probability=0.5, seed=0),
         ),
-        perturbations=PerturbationConfig(methods=("edge_addition_deletion",), alpha_values=(0.0, 0.5)),
+        perturbations=PerturbationConfig(methods=("edge_insertion",), alpha_values=(0.0, 0.5)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd", "wl_subtree_kernel_mmd")),
         seeds=(0,),
         outputs=output,

@@ -14,6 +14,15 @@ Expected result table columns:
 | `alpha` | float | Perturbation strength. |
 | `seed` | integer | Random seed used for the run. |
 | `workflow` | string | Workflow name. |
+| `implementation_mode` | string | Workflow implementation mode, such as `paper_faithful` or `descriptor_baseline`. |
+| `workflow_params` | JSON string | Reproducibility metadata for the workflow configuration. |
+| `perturbation_family` | string | Perturbation family, such as `edge`, `triangle`, `community`, or `hub`. |
+| `perturbation_direction` | string | Direction, such as `insertion`, `deletion`, `weakening`, or `modification`. |
+| `graph_count` | integer | Number of paired source graphs in the row. |
+| `node_count_min` | integer | Minimum node count across original and perturbed graphs. |
+| `node_count_max` | integer | Maximum node count across original and perturbed graphs. |
+| `edge_count_min` | integer | Minimum edge count across original and perturbed graphs. |
+| `edge_count_max` | integer | Maximum edge count across original and perturbed graphs. |
 | `distribution_score` | float/null | Distribution-level comparison score. |
 | `mean_shift_score` | float/null | Mean representation shift score. |
 | `paired_score` | float/null | Paired graph comparison score. |
@@ -22,10 +31,14 @@ Expected result table columns:
 | `status` | string | Run status, such as `success`, `failed`, or `skipped`. |
 | `error_message` | string/null | Error detail when `status` is not `success`. |
 
-The schema is intentionally narrow for the first synthetic experiments.
-Perturbation metadata such as edges added, edges removed, rewires, triangles
-affected, or target hubs can be stored in sidecar metadata or added as optional
-columns during orchestration if needed.
+`workflow_params` must include enough detail to reproduce the method behavior,
+including NetLSD time-scale schedule and normalization, Diversity Curve scale
+schedule and coarsening policy, WL iterations and label initialization, and the
+random seed when relevant.
+
+Perturbation insertion and deletion must remain separate rows. Do not merge
+`edge_insertion` with `edge_deletion`, and do not merge `triangle_insertion`
+with `triangle_deletion`.
 
 ## Evaluation Summary Schema
 

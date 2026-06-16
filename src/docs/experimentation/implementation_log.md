@@ -163,3 +163,35 @@ Updated the experiment code to avoid known sources of misleading results:
 - Prevented hub modification from removing a hub edge and then adding that same
   edge back while counting it as a rewire.
 - Added regression tests for the corrected metric and perturbation behavior.
+
+## Full-Fidelity Method Upgrade
+
+Upgraded the thesis-facing defaults for NetLSD, Diversity Curves, and
+Weisfeiler-Lehman workflows.
+
+Files modified:
+
+- `experimentation/workflows.py`: adds 250-scale NetLSD heat traces with
+  neutral normalization, shared-compression WL subtree features, WL kernel
+  matrix generation, dataset-level Diversity Curves with all-cardinality scale
+  schedules, seeded random contraction, and upsampling.
+- `experimentation/perturbations.py`: adds separate `edge_insertion`,
+  `edge_deletion`, `triangle_insertion`, and `triangle_deletion` perturbations
+  while keeping the older mixed perturbations as legacy aliases.
+- `experimentation/runner.py`: writes workflow implementation metadata,
+  perturbation family/direction, graph counts, and node/edge size ranges to
+  each result row; workflow parameters are part of the resume key.
+- `experimentation/config.py`, `evaluation.py`, `figures.py`, and
+  `dashboard.py`: update defaults, labels, and summaries for the directional
+  perturbation split.
+- `docs/experimentation/full_fidelity_implementation_netlsd_diversity_wl.md`:
+  records the implemented algorithms, deviations, commands, tests, and
+  remaining thesis review items.
+
+Validation:
+
+- `python3 -m unittest discover -s tests` passed with 72 tests and 2 skipped.
+- `python3 -m experimentation.cli run_debug_experiment --output-root outputs/full_fidelity_debug --no-resume --device cpu`
+  regenerated debug result rows with the upgraded defaults.
+- Evaluation CSVs and SVG figures were regenerated for
+  `outputs/full_fidelity_debug`.

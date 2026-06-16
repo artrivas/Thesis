@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1770" viewBox="0 0 600 1770"><rect width="100%" height="100%" fill="white"/>
+<text x="20.0" y="30.0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#222">Figure 2: Paired distance vs alpha</text>
+<text x="20.0" y="55.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#555">x: alpha, y: paired_score</text>
+<text x="30.0" y="57.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / edge_deletion</text>
+<line x1="30.0" y1="240.0" x2="270.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="75.0" x2="30.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,240.0 150.0,216.0 270.0,162.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="162.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,240.0 150.0,225.7 270.0,148.0" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="148.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,240.0 150.0,169.0 270.0,88.1" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="88.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,240.0 150.0,157.0 270.0,75.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="75.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="57.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / edge_insertion</text>
+<line x1="310.0" y1="240.0" x2="550.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="75.0" x2="310.0" y2="240.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,240.0 430.0,237.3 550.0,235.6" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="235.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,240.0 430.0,239.5 550.0,239.2" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="239.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,240.0 430.0,191.4 550.0,75.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="75.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,240.0 430.0,204.2 550.0,189.1" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="189.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="267.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / hub_modification</text>
+<line x1="30.0" y1="450.0" x2="270.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="285.0" x2="30.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,450.0 150.0,436.5 270.0,436.5" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="436.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,450.0 150.0,446.2 270.0,446.2" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="446.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,450.0 150.0,344.4 270.0,344.4" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="344.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,450.0 150.0,285.0 270.0,285.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="285.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="267.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / triangle_deletion</text>
+<line x1="310.0" y1="450.0" x2="550.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="285.0" x2="310.0" y2="450.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,450.0 430.0,417.4 550.0,364.7" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="364.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,450.0 430.0,430.4 550.0,368.5" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="368.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,450.0 430.0,351.1 550.0,285.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="285.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,450.0 430.0,320.1 550.0,288.4" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="288.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="477.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">barabasi_albert / triangle_insertion</text>
+<line x1="30.0" y1="660.0" x2="270.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="495.0" x2="30.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,660.0 150.0,657.4 270.0,655.6" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="655.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,660.0 150.0,659.5 270.0,659.2" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="659.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,660.0 150.0,605.5 270.0,495.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="495.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,660.0 150.0,624.3 270.0,609.4" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="609.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="477.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / edge_deletion</text>
+<line x1="310.0" y1="660.0" x2="550.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="495.0" x2="310.0" y2="660.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,660.0 430.0,641.4 550.0,626.8" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="626.8" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,660.0 430.0,636.0 550.0,597.0" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="597.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,660.0 430.0,633.6 550.0,594.8" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="594.8" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,660.0 430.0,556.3 550.0,495.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="495.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="687.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / edge_insertion</text>
+<line x1="30.0" y1="870.0" x2="270.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="705.0" x2="30.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,870.0 150.0,849.7 270.0,823.6" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="823.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,870.0 150.0,849.1 270.0,822.1" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="822.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,870.0 150.0,838.8 270.0,792.2" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="792.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,870.0 150.0,741.6 270.0,705.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="705.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="687.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / hub_modification</text>
+<line x1="310.0" y1="870.0" x2="550.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="705.0" x2="310.0" y2="870.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,870.0 430.0,869.0 550.0,869.0" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="869.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,870.0 430.0,865.4 550.0,865.4" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="865.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,870.0 430.0,864.3 550.0,864.3" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="864.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,870.0 430.0,705.0 550.0,705.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="705.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="897.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / triangle_deletion</text>
+<line x1="30.0" y1="1080.0" x2="270.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="915.0" x2="30.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,1080.0 150.0,1080.0 270.0,1080.0" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="1080.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,1080.0 150.0,1080.0 270.0,1080.0" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="1080.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,1080.0 150.0,1080.0 270.0,1080.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="1080.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,1080.0 150.0,1080.0 270.0,1080.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="1080.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="897.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">erdos_renyi / triangle_insertion</text>
+<line x1="310.0" y1="1080.0" x2="550.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="915.0" x2="310.0" y2="1080.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,1080.0 430.0,1071.9 550.0,1068.5" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="1068.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,1080.0 430.0,1076.3 550.0,1075.5" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="1075.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,1080.0 430.0,1027.0 550.0,997.3" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="997.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,1080.0 430.0,931.8 550.0,915.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="915.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="1107.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / community_weakening</text>
+<line x1="30.0" y1="1290.0" x2="270.0" y2="1290.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="1125.0" x2="30.0" y2="1290.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,1290.0 150.0,1283.3 270.0,1263.7" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="1263.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,1290.0 150.0,1284.6 270.0,1269.0" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="1269.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,1290.0 150.0,1285.0 270.0,1270.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="1270.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,1290.0 150.0,1125.0 270.0,1127.4" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="1127.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="1107.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / edge_deletion</text>
+<line x1="310.0" y1="1290.0" x2="550.0" y2="1290.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="1125.0" x2="310.0" y2="1290.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,1290.0 430.0,1273.8 550.0,1254.6" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="1254.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,1290.0 430.0,1271.8 550.0,1226.4" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="1226.4" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,1290.0 430.0,1266.8 550.0,1221.5" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="1221.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,1290.0 430.0,1227.9 550.0,1125.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="1125.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="1317.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / edge_insertion</text>
+<line x1="30.0" y1="1500.0" x2="270.0" y2="1500.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="1335.0" x2="30.0" y2="1500.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,1500.0 150.0,1481.2 270.0,1464.1" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="1464.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,1500.0 150.0,1484.0 270.0,1460.6" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="1460.6" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,1500.0 150.0,1473.2 270.0,1419.3" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="1419.3" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,1500.0 150.0,1415.9 270.0,1335.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="1335.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="1317.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / hub_modification</text>
+<line x1="310.0" y1="1500.0" x2="550.0" y2="1500.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="1335.0" x2="310.0" y2="1500.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,1500.0 430.0,1494.9 550.0,1494.9" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="1494.9" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,1500.0 430.0,1498.1 550.0,1498.1" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="1498.1" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,1500.0 430.0,1473.2 550.0,1473.2" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="1473.2" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,1500.0 430.0,1335.0 550.0,1335.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="1335.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="30.0" y="1527.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / triangle_deletion</text>
+<line x1="30.0" y1="1710.0" x2="270.0" y2="1710.0" stroke="#333" stroke-width="1"/>
+<line x1="30.0" y1="1545.0" x2="30.0" y2="1710.0" stroke="#333" stroke-width="1"/>
+<polyline points="30.0,1710.0 150.0,1710.0 270.0,1710.0" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="274.0" y="1710.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="30.0,1710.0 150.0,1710.0 270.0,1710.0" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="274.0" y="1710.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="30.0,1710.0 150.0,1710.0 270.0,1710.0" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="274.0" y="1710.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="30.0,1710.0 150.0,1710.0 270.0,1710.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="274.0" y="1710.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+<text x="310.0" y="1527.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">stochastic_block_model / triangle_insertion</text>
+<line x1="310.0" y1="1710.0" x2="550.0" y2="1710.0" stroke="#333" stroke-width="1"/>
+<line x1="310.0" y1="1545.0" x2="310.0" y2="1710.0" stroke="#333" stroke-width="1"/>
+<polyline points="310.0,1710.0 430.0,1701.8 550.0,1698.7" fill="none" stroke="#1f77b4" stroke-width="1.8"/>
+<text x="554.0" y="1698.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#1f77b4">DiversityCurveDi</text>
+<polyline points="310.0,1710.0 430.0,1707.0 550.0,1706.5" fill="none" stroke="#d62728" stroke-width="1.8"/>
+<text x="554.0" y="1706.5" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#d62728">NativeNetLSD</text>
+<polyline points="310.0,1710.0 430.0,1642.5 550.0,1585.7" fill="none" stroke="#2ca02c" stroke-width="1.8"/>
+<text x="554.0" y="1585.7" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#2ca02c">GraphStats+MMD</text>
+<polyline points="310.0,1710.0 430.0,1547.7 550.0,1545.0" fill="none" stroke="#9467bd" stroke-width="1.8"/>
+<text x="554.0" y="1545.0" font-family="Arial, sans-serif" font-size="8" font-weight="normal" fill="#9467bd">WLFeatures+MMD</text>
+</svg>

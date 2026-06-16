@@ -176,11 +176,13 @@ streamlit run experimentation/dashboard.py
 Current limitations:
 
 - No real datasets are included yet.
-- Diversity Curves use shortest-path spread over deterministic edge-contraction
-  scales; external implementations may still differ in coarsening choices.
+- Diversity Curves use shortest-path spread with seeded random edge-contraction
+  repetitions and upsampling; external implementations may still differ in
+  exact coarsening choices.
 - WL and NetLSD use standard-library fallback implementations. External
   dependencies may change speed or exact representations in future versions.
-- Full synthetic runs can be slow with the fallback NetLSD eigensolver.
+- Full synthetic runs can be slow with the fallback NetLSD eigensolver because
+  the paper-faithful default evaluates 250 time scales.
 
 ## 12. Future Work
 

@@ -11,8 +11,10 @@ from experimentation.datasets import SyntheticDatasetConfig
 DEFAULT_ALPHA_VALUES = tuple(round(i / 10, 1) for i in range(11))
 DEFAULT_SEEDS = tuple(range(5))
 DEFAULT_PERTURBATION_METHODS = (
-    "edge_addition_deletion",
-    "triangle_injection_removal",
+    "edge_insertion",
+    "edge_deletion",
+    "triangle_insertion",
+    "triangle_deletion",
     "community_weakening",
     "hub_modification",
 )

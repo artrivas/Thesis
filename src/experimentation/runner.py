@@ -33,6 +33,15 @@ RESULT_COLUMNS = (
     "alpha",
     "seed",
     "workflow",
+    "implementation_mode",
+    "workflow_params",
+    "perturbation_family",
+    "perturbation_direction",
+    "graph_count",
+    "node_count_min",
+    "node_count_max",
+    "edge_count_min",
+    "edge_count_max",
     "distribution_score",
     "mean_shift_score",
     "paired_score",
@@ -131,7 +140,7 @@ def run_experiment(
                         pending_workflows = [
                             workflow
                             for workflow in workflow_instances
-                            if _grid_key(dataset_config, perturbation, alpha, seed, workflow.name) not in completed
+                            if _grid_key(dataset_config, perturbation, alpha, seed, workflow) not in completed
                         ]
                         if not pending_workflows:
                             logger.info(
@@ -185,7 +194,10 @@ def read_result_rows(path: Path | str) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
-def _completed_keys(path: Path) -> set[tuple[str, str, str, str, str, str]]:
+RowKey = tuple[str, str, str, str, str, str, str]
+
+
+def _completed_keys(path: Path) -> set[RowKey]:
     if not path.exists() or path.stat().st_size == 0:
         return set()
     return {_row_key(row) for row in read_result_rows(path)}
@@ -220,7 +232,7 @@ def _raise_on_incompatible_resume(path: Path, workflows: list[Workflow]) -> None
         )
 
 
-def _row_key(row: dict[str, object]) -> tuple[str, str, str, str, str, str]:
+def _row_key(row: dict[str, object]) -> RowKey:
     return (
         str(row.get("dataset", "")),
         str(row.get("dataset_params", "")),
@@ -228,6 +240,7 @@ def _row_key(row: dict[str, object]) -> tuple[str, str, str, str, str, str]:
         str(row.get("alpha", "")),
         str(row.get("seed", "")),
         str(row.get("workflow", "")),
+        _canonical_jsonish(row.get("workflow_params", "")),
     )
 
 
@@ -236,16 +249,23 @@ def _grid_key(
     perturbation: str,
     alpha: float,
     seed: int,
-    workflow_name: str,
-) -> tuple[str, str, str, str, str, str]:
+    workflow: Workflow,
+) -> RowKey:
     return (
         dataset_config.family,
         json.dumps(asdict(dataset_config), sort_keys=True),
         perturbation,
         str(alpha),
         str(seed),
-        workflow_name,
+        workflow.name,
+        json.dumps(workflow.parameters(), sort_keys=True),
     )
+
+
+def _canonical_jsonish(value: object) -> str:
+    if isinstance(value, (dict, list, tuple)):
+        return json.dumps(value, sort_keys=True)
+    return str(value)
 
 
 def _expected_row_count(config: ExperimentConfig, workflows: list[Workflow]) -> int:
@@ -261,7 +281,7 @@ def _expected_row_count(config: ExperimentConfig, workflows: list[Workflow]) -> 
 def _write_checkpoint(
     path: Path,
     result_path: Path,
-    completed: set[tuple[str, str, str, str, str, str]],
+    completed: set[RowKey],
     total_rows: int,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -326,14 +346,19 @@ def _run_workflow_grid(
     workflows: list[Workflow],
 ) -> list[dict[str, object]]:
     dataset_params = json.dumps(asdict(dataset_config), sort_keys=True)
-    perturbation_params = json.dumps(_summarize_perturbations(paired), sort_keys=True)
+    perturbation_summary = _summarize_perturbations(paired)
+    perturbation_params = json.dumps(perturbation_summary, sort_keys=True)
+    size_summary = _graph_size_summary(paired)
     skip_error = _skip_error(paired)
 
     rows = []
     for workflow in workflows:
+        workflow_params = workflow.parameters()
         if skip_error is not None:
             result = {
                 "workflow": workflow.name,
+                "implementation_mode": workflow_params.get("implementation_mode", "paper_faithful"),
+                "workflow_params": workflow_params,
                 "distribution_score": None,
                 "mean_shift_score": None,
                 "paired_score": None,
@@ -351,6 +376,9 @@ def _run_workflow_grid(
                 "dataset_params": dataset_params,
                 "perturbation": perturbation,
                 "perturbation_params": perturbation_params,
+                "perturbation_family": perturbation_summary.get("perturbation_family"),
+                "perturbation_direction": perturbation_summary.get("perturbation_direction"),
+                **size_summary,
                 "alpha": alpha,
                 "seed": seed,
                 **result,
@@ -376,6 +404,8 @@ def _summarize_perturbations(paired: PairedDistribution) -> dict[str, object]:
     metadata = paired.metadata.get("perturbations", [])
     summary: dict[str, object] = {
         "method": paired.metadata.get("perturbation"),
+        "perturbation_family": paired.metadata.get("perturbation_family"),
+        "perturbation_direction": paired.metadata.get("perturbation_direction"),
         "alpha": paired.metadata.get("alpha"),
         "graphs": len(metadata),
         "graphs_success": 0,
@@ -392,7 +422,30 @@ def _summarize_perturbations(paired: PairedDistribution) -> dict[str, object]:
             summary["graphs_success"] = int(summary["graphs_success"]) + 1
         for key in ("edges_added", "edges_removed", "rewires", "triangles_affected"):
             summary[key] = int(summary[key]) + int(item.get(key, 0) or 0)
+        summary["perturbation_family"] = summary["perturbation_family"] or item.get("perturbation_family")
+        summary["perturbation_direction"] = summary["perturbation_direction"] or item.get("perturbation_direction")
     return summary
+
+
+def _graph_size_summary(paired: PairedDistribution) -> dict[str, object]:
+    graphs = paired.original_graphs + paired.perturbed_graphs
+    if not graphs:
+        return {
+            "graph_count": 0,
+            "node_count_min": 0,
+            "node_count_max": 0,
+            "edge_count_min": 0,
+            "edge_count_max": 0,
+        }
+    node_counts = [graph.num_nodes for graph in graphs]
+    edge_counts = [graph.number_of_edges() for graph in graphs]
+    return {
+        "graph_count": len(paired.original_graphs),
+        "node_count_min": min(node_counts),
+        "node_count_max": max(node_counts),
+        "edge_count_min": min(edge_counts),
+        "edge_count_max": max(edge_counts),
+    }
 
 
 def _skip_error(paired: PairedDistribution) -> str | None:
@@ -408,4 +461,6 @@ def _skip_error(paired: PairedDistribution) -> str | None:
 def _csv_value(value: object) -> object:
     if value is None:
         return ""
+    if isinstance(value, (dict, list, tuple)):
+        return json.dumps(value, sort_keys=True)
     return value

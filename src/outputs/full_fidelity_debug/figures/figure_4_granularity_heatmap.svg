@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="770" height="271" viewBox="0 0 770 271"><rect width="100%" height="100%" fill="white"/>
+<text x="20.0" y="30.0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#222">Figure 4: Granularity heatmap</text>
+<text x="218.0" y="60.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">local</text>
+<text x="348.0" y="60.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">mesoscopic</text>
+<text x="478.0" y="60.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">global</text>
+<text x="608.0" y="60.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">multiscale</text>
+<text x="20.0" y="97.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">DiversityCurveDistance</text>
+<rect x="210.0" y="75.0" width="128.0" height="32.0" fill="rgb(120,120,255)" stroke="#fff"/>
+<text x="254.0" y="97.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.83</text>
+<rect x="340.0" y="75.0" width="128.0" height="32.0" fill="rgb(137,137,255)" stroke="#fff"/>
+<text x="384.0" y="97.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.71</text>
+<rect x="470.0" y="75.0" width="128.0" height="32.0" fill="rgb(115,115,255)" stroke="#fff"/>
+<text x="514.0" y="97.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="600.0" y="75.0" width="128.0" height="32.0" fill="rgb(117,117,255)" stroke="#fff"/>
+<text x="644.0" y="97.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.85</text>
+<text x="20.0" y="131.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">NativeNetLSD</text>
+<rect x="210.0" y="109.0" width="128.0" height="32.0" fill="rgb(120,120,255)" stroke="#fff"/>
+<text x="254.0" y="131.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.83</text>
+<rect x="340.0" y="109.0" width="128.0" height="32.0" fill="rgb(137,137,255)" stroke="#fff"/>
+<text x="384.0" y="131.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.71</text>
+<rect x="470.0" y="109.0" width="128.0" height="32.0" fill="rgb(115,115,255)" stroke="#fff"/>
+<text x="514.0" y="131.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="600.0" y="109.0" width="128.0" height="32.0" fill="rgb(117,117,255)" stroke="#fff"/>
+<text x="644.0" y="131.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.85</text>
+<text x="20.0" y="165.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">GraphStats+MMD</text>
+<rect x="210.0" y="143.0" width="128.0" height="32.0" fill="rgb(120,120,255)" stroke="#fff"/>
+<text x="254.0" y="165.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.83</text>
+<rect x="340.0" y="143.0" width="128.0" height="32.0" fill="rgb(137,137,255)" stroke="#fff"/>
+<text x="384.0" y="165.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.71</text>
+<rect x="470.0" y="143.0" width="128.0" height="32.0" fill="rgb(115,115,255)" stroke="#fff"/>
+<text x="514.0" y="165.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="600.0" y="143.0" width="128.0" height="32.0" fill="rgb(117,117,255)" stroke="#fff"/>
+<text x="644.0" y="165.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.85</text>
+<text x="20.0" y="199.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#222">WLFeatures+MMD</text>
+<rect x="210.0" y="177.0" width="128.0" height="32.0" fill="rgb(121,121,255)" stroke="#fff"/>
+<text x="254.0" y="199.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.82</text>
+<rect x="340.0" y="177.0" width="128.0" height="32.0" fill="rgb(151,151,255)" stroke="#fff"/>
+<text x="384.0" y="199.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.62</text>
+<rect x="470.0" y="177.0" width="128.0" height="32.0" fill="rgb(115,115,255)" stroke="#fff"/>
+<text x="514.0" y="199.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.87</text>
+<rect x="600.0" y="177.0" width="128.0" height="32.0" fill="rgb(123,123,255)" stroke="#fff"/>
+<text x="644.0" y="199.0" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="#111">0.81</text>
+</svg>

@@ -27,8 +27,16 @@ def perturb_graph(
     if alpha < 0.0 or alpha > 1.0:
         raise ValueError("alpha must be between 0.0 and 1.0")
     context = metadata or {}
+    if perturbation_type == "edge_insertion":
+        return _edge_insertion(graph, alpha, seed)
+    if perturbation_type == "edge_deletion":
+        return _edge_deletion(graph, alpha, seed)
     if perturbation_type == "edge_addition_deletion":
         return _edge_addition_deletion(graph, alpha, seed)
+    if perturbation_type == "triangle_insertion":
+        return _triangle_insertion(graph, alpha, seed)
+    if perturbation_type == "triangle_deletion":
+        return _triangle_deletion(graph, alpha, seed)
     if perturbation_type == "triangle_injection_removal":
         return _triangle_injection_removal(graph, alpha, seed)
     if perturbation_type == "community_weakening":
@@ -38,9 +46,17 @@ def perturb_graph(
     raise ValueError(f"Unknown perturbation type: {perturbation_type}")
 
 
-def _base_metadata(alpha: float, perturbation_type: str) -> dict[str, object]:
+def _base_metadata(
+    alpha: float,
+    perturbation_type: str,
+    *,
+    family: str | None = None,
+    direction: str | None = None,
+) -> dict[str, object]:
     return {
         "perturbation_type": perturbation_type,
+        "perturbation_family": family or perturbation_type,
+        "perturbation_direction": direction or "mixed",
         "alpha": alpha,
         "edges_added": 0,
         "edges_removed": 0,
@@ -51,10 +67,42 @@ def _base_metadata(alpha: float, perturbation_type: str) -> dict[str, object]:
     }
 
 
+def _edge_insertion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
+    rng = random.Random(seed)
+    perturbed = graph.copy()
+    info = _base_metadata(alpha, "edge_insertion", family="edge", direction="insertion")
+    additions = math.floor(alpha * graph.number_of_edges())
+    if additions == 0:
+        return PerturbationResult(perturbed, info)
+
+    non_edges = graph.non_edges()
+    rng.shuffle(non_edges)
+    for u, v in non_edges[: min(additions, len(non_edges))]:
+        if perturbed.add_edge(u, v):
+            info["edges_added"] = int(info["edges_added"]) + 1
+    return PerturbationResult(perturbed, info)
+
+
+def _edge_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
+    rng = random.Random(seed)
+    perturbed = graph.copy()
+    info = _base_metadata(alpha, "edge_deletion", family="edge", direction="deletion")
+    removals = math.floor(alpha * graph.number_of_edges())
+    if removals == 0:
+        return PerturbationResult(perturbed, info)
+
+    edges = graph.edges()
+    rng.shuffle(edges)
+    for u, v in edges[: min(removals, len(edges))]:
+        if perturbed.remove_edge(u, v):
+            info["edges_removed"] = int(info["edges_removed"]) + 1
+    return PerturbationResult(perturbed, info)
+
+
 def _edge_addition_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
     rng = random.Random(seed)
     perturbed = graph.copy()
-    info = _base_metadata(alpha, "edge_addition_deletion")
+    info = _base_metadata(alpha, "edge_addition_deletion", family="edge", direction="mixed")
     edge_count = graph.number_of_edges()
     changes = math.floor(alpha * edge_count)
     if changes == 0:
@@ -76,10 +124,48 @@ def _edge_addition_deletion(graph: Graph, alpha: float, seed: int) -> Perturbati
     return PerturbationResult(perturbed, info)
 
 
+def _triangle_insertion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
+    rng = random.Random(seed)
+    perturbed = graph.copy()
+    info = _base_metadata(alpha, "triangle_insertion", family="triangle", direction="insertion")
+    budget = math.floor(alpha * max(1, graph.number_of_edges()))
+    if budget == 0:
+        return PerturbationResult(perturbed, info)
+
+    open_wedges = graph.open_wedges()
+    rng.shuffle(open_wedges)
+    for u, v in open_wedges[: min(budget, len(open_wedges))]:
+        if perturbed.add_edge(u, v):
+            info["edges_added"] = int(info["edges_added"]) + 1
+            info["triangles_affected"] = int(info["triangles_affected"]) + 1
+    return PerturbationResult(perturbed, info)
+
+
+def _triangle_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
+    rng = random.Random(seed)
+    perturbed = graph.copy()
+    info = _base_metadata(alpha, "triangle_deletion", family="triangle", direction="deletion")
+    budget = math.floor(alpha * max(1, graph.number_of_edges()))
+    if budget == 0:
+        return PerturbationResult(perturbed, info)
+
+    triangle_edges = list(graph.triangle_edges())
+    rng.shuffle(triangle_edges)
+    removed = 0
+    for u, v in triangle_edges:
+        if removed >= budget:
+            break
+        if perturbed.remove_edge(u, v):
+            removed += 1
+            info["edges_removed"] = int(info["edges_removed"]) + 1
+            info["triangles_affected"] = int(info["triangles_affected"]) + 1
+    return PerturbationResult(perturbed, info)
+
+
 def _triangle_injection_removal(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
     rng = random.Random(seed)
     perturbed = graph.copy()
-    info = _base_metadata(alpha, "triangle_injection_removal")
+    info = _base_metadata(alpha, "triangle_injection_removal", family="triangle", direction="mixed")
     budget = math.floor(alpha * max(1, graph.number_of_edges()))
     if budget == 0:
         return PerturbationResult(perturbed, info)
@@ -114,7 +200,7 @@ def _community_weakening(
 ) -> PerturbationResult:
     rng = random.Random(seed)
     perturbed = graph.copy()
-    info = _base_metadata(alpha, "community_weakening")
+    info = _base_metadata(alpha, "community_weakening", family="community", direction="weakening")
     labels = metadata.get("community_labels") or graph.metadata.get("community_labels")
     if labels is None:
         info["status"] = "skipped"
@@ -145,7 +231,7 @@ def _community_weakening(
 def _hub_modification(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
     rng = random.Random(seed)
     perturbed = graph.copy()
-    info = _base_metadata(alpha, "hub_modification")
+    info = _base_metadata(alpha, "hub_modification", family="hub", direction="modification")
     edge_count = graph.number_of_edges()
     budget = math.floor(alpha * edge_count)
     if budget == 0 or edge_count == 0:

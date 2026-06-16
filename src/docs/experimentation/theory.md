@@ -56,10 +56,12 @@ structural regimes:
 
 Perturbations are grouped by the structural scale they primarily affect:
 
-- Local perturbations: edge addition/deletion changes the adjacency relation
-  directly while preserving the graph family and paired source graph.
-- Motif and clustering perturbations: triangle injection/removal changes local
-  closure and clustering by closing open wedges or deleting triangle edges.
+- Local perturbations: edge insertion and edge deletion change the adjacency
+  relation directly while preserving the graph family and paired source graph.
+  They are evaluated as separate perturbation directions.
+- Motif and clustering perturbations: triangle insertion and triangle deletion
+  change local closure and clustering by closing open wedges or deleting
+  triangle edges. They are evaluated as separate perturbation directions.
 - Mesoscopic perturbations: community weakening rewires intra-community edges
   into inter-community edges, primarily for SBM graphs with community labels.
 - Hub and global perturbations: hub modification targets high-degree nodes,
@@ -77,27 +79,28 @@ degree variance, average clustering, triangle count, transitivity, and connected
 component count. An RBF-kernel MMD score then compares the original and
 perturbed graph distributions.
 
-`WLFeatures+MMD` uses iterative neighborhood relabeling to create
-graph-level counts of rooted subtree features. The current implementation uses
-degree labels at initialization and a deterministic manual relabeling fallback.
-Distribution separation is measured by the squared distance between mean WL
-feature count vectors, equivalent to a linear-kernel MMD.
+`WLFeatures+MMD` uses 1-WL neighborhood relabeling to create graph-level counts
+of rooted subtree features. The implementation uses discrete node labels when
+present and degree labels as the unlabeled fallback. WL compression is shared
+across the graph collection being compared. Distribution separation is measured
+by the squared distance between mean WL feature count vectors, equivalent to a
+linear-kernel MMD; a WL subtree kernel matrix helper is also available.
 
-`NativeNetLSD` represents each graph with heat-trace signatures over log-spaced
-time scales. The current fallback computes eigenvalues of the normalized
-Laplacian with a small Jacobi eigensolver and evaluates the heat trace from
-those eigenvalues. Distribution separation is the L2 distance between the mean
-NetLSD signatures of the two graph samples, and paired behavior is the average
-within-pair signature L2 distance. This is suitable for small synthetic smoke
-runs; larger experiments should eventually use NumPy/SciPy or a dedicated
-NetLSD package.
+`NativeNetLSD` represents each graph with normalized-Laplacian heat-trace
+signatures over the NetLSD paper's default 250 log-spaced time scales from
+`1e-2` to `1e2`. The default signature divides by the empty neutral-graph heat
+trace for size normalization. The fallback computes exact full-spectrum
+eigenvalues with PyTorch when available or a small Jacobi eigensolver.
+Distribution separation is the L2 distance between the mean NetLSD signatures
+of the two graph samples, and paired behavior is the average within-pair
+signature L2 distance.
 
 `DiversityCurveDistance` computes graph structural diversity as spread over
-shortest-path distances. The workflow evaluates spread across deterministic
-edge-contraction scales and compares the resulting curve representations with
-L2 distance between mean curves. This matches the default graph metric described
-in the Diversity Curves paper while keeping the local experiment runner
-reproducible.
+shortest-path distances. The workflow now evaluates dataset-level curves over
+all integer cardinalities up to the largest graph in the compared collection,
+averages seeded random edge-contraction repetitions, upsamples smaller graphs to
+the common scale, and compares curve representations with L2 distance between
+mean curves.
 
 ## Evaluation Metrics
 

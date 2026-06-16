@@ -53,7 +53,11 @@ MEAN_SHIFT_DUPLICATE_WORKFLOWS = {
 }
 
 PERTURBATION_GRANULARITY = {
+    "edge_insertion": "local",
+    "edge_deletion": "local",
     "edge_addition_deletion": "local",
+    "triangle_insertion": "local/mesoscopic",
+    "triangle_deletion": "local/mesoscopic",
     "triangle_injection_removal": "local/mesoscopic",
     "community_weakening": "mesoscopic",
     "hub_modification": "global",

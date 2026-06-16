@@ -6,8 +6,9 @@ from collections import Counter, deque
 from dataclasses import dataclass
 import hashlib
 import math
+import random
 import time
-from typing import Iterable
+from typing import Iterable, Sequence
 
 from experimentation.graph import Edge, Graph, normalize_edge
 
@@ -19,6 +20,17 @@ Representation = Vector | SparseVector
 NATIVE_NETLSD_WORKFLOW = "native_netlsd"
 LEGACY_NETLSD_MMD_WORKFLOW = "netlsd_spectral_signatures"
 DIVERSITY_CURVES_WORKFLOW = "diversity_curves_shortest_path"
+
+NETLSD_TIME_SCALE_COUNT = 250
+NETLSD_TIME_MIN = 1e-2
+NETLSD_TIME_MAX = 1e2
+NETLSD_DEFAULT_TIMESCALES = tuple(
+    NETLSD_TIME_MIN * (NETLSD_TIME_MAX / NETLSD_TIME_MIN) ** (index / (NETLSD_TIME_SCALE_COUNT - 1))
+    for index in range(NETLSD_TIME_SCALE_COUNT)
+)
+
+NETLSD_NORMALIZATION_MODES = {"none", "empty", "complete"}
+WL_LABEL_INITIALIZATION_MODES = {"node_label_or_degree", "degree", "constant"}
 
 _DEVICE_PREFERENCE = "auto"
 
@@ -49,6 +61,8 @@ def acceleration_summary() -> str:
 
 
 def squared_l2(left: Vector, right: Vector) -> float:
+    if len(left) != len(right):
+        raise ValueError(f"Vector length mismatch: {len(left)} != {len(right)}")
     return sum((a - b) ** 2 for a, b in zip(left, right))
 
 
@@ -60,6 +74,8 @@ def dense_mean(vectors: list[Vector]) -> Vector:
     if not vectors:
         return []
     width = len(vectors[0])
+    if any(len(vector) != width for vector in vectors):
+        raise ValueError("Cannot average dense vectors with different lengths")
     return [sum(vector[index] for vector in vectors) / len(vectors) for index in range(width)]
 
 
@@ -135,6 +151,12 @@ def sparse_linear_mmd(vectors_x: list[SparseVector], vectors_y: list[SparseVecto
 class Workflow:
     name: str
 
+    def parameters(self) -> dict[str, object]:
+        return {
+            "method": self.name,
+            "implementation_mode": "paper_faithful",
+        }
+
     def compute_representations(self, graphs: list[Graph]):
         raise NotImplementedError
 
@@ -164,6 +186,7 @@ class Workflow:
 
     def run(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> dict[str, object]:
         start = time.perf_counter()
+        parameters = self.parameters()
         try:
             if self._uses_cached_representations():
                 original = self.compute_representations(original_graphs)
@@ -185,6 +208,8 @@ class Workflow:
             error_message = str(exc)
         return {
             "workflow": self.name,
+            "implementation_mode": parameters.get("implementation_mode", "paper_faithful"),
+            "workflow_params": parameters,
             "distribution_score": distribution,
             "mean_shift_score": mean_shift,
             "paired_score": paired,
@@ -209,6 +234,15 @@ class StructuralStatisticsMMDWorkflow(Workflow):
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
         return [structural_statistics(graph) for graph in graphs]
 
+    def parameters(self) -> dict[str, object]:
+        return {
+            **super().parameters(),
+            "implementation_mode": "descriptor_baseline",
+            "kernel": "rbf_mmd",
+            "bandwidth": self.bandwidth,
+            "feature_count": 9,
+        }
+
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         return self.distribution_score_from_representations(
             self.compute_representations(original_graphs),
@@ -226,19 +260,42 @@ class StructuralStatisticsMMDWorkflow(Workflow):
 @dataclass
 class WLSubtreeMMDWorkflow(Workflow):
     iterations: int = 3
+    label_initialization: str = "node_label_or_degree"
+    node_label_key: str = "node_labels"
+    kernel_mode: str = "linear_mmd"
 
-    def __init__(self, iterations: int = 3) -> None:
+    def __init__(
+        self,
+        iterations: int = 3,
+        label_initialization: str = "node_label_or_degree",
+        node_label_key: str = "node_labels",
+        kernel_mode: str = "linear_mmd",
+    ) -> None:
         super().__init__("wl_subtree_kernel_mmd")
+        if iterations < 0:
+            raise ValueError("WL iterations must be non-negative")
+        if label_initialization not in WL_LABEL_INITIALIZATION_MODES:
+            raise ValueError(
+                f"label_initialization must be one of {sorted(WL_LABEL_INITIALIZATION_MODES)}"
+            )
+        if kernel_mode != "linear_mmd":
+            raise ValueError("Only linear_mmd distribution comparison is implemented for WL features")
         self.iterations = iterations
+        self.label_initialization = label_initialization
+        self.node_label_key = node_label_key
+        self.kernel_mode = kernel_mode
 
     def compute_representations(self, graphs: list[Graph]) -> list[SparseVector]:
-        return [wl_features(graph, self.iterations) for graph in graphs]
+        return wl_feature_matrix(
+            graphs,
+            iterations=self.iterations,
+            label_initialization=self.label_initialization,
+            node_label_key=self.node_label_key,
+        )
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
-        return self.distribution_score_from_representations(
-            self.compute_representations(original_graphs),
-            self.compute_representations(perturbed_graphs),
-        )
+        original, perturbed = self._joint_representations(original_graphs, perturbed_graphs)
+        return sparse_linear_mmd(original, perturbed)
 
     def distribution_score_from_representations(
         self,
@@ -247,18 +304,98 @@ class WLSubtreeMMDWorkflow(Workflow):
     ) -> float:
         return sparse_linear_mmd(original, perturbed)  # type: ignore[arg-type]
 
+    def mean_shift_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
+        original, perturbed = self._joint_representations(original_graphs, perturbed_graphs)
+        return sparse_l2(sparse_mean(original), sparse_mean(perturbed))
+
+    def paired_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
+        original, perturbed = self._joint_representations(original_graphs, perturbed_graphs)
+        return paired_representation_distance(original, perturbed)
+
+    def run(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> dict[str, object]:
+        start = time.perf_counter()
+        parameters = self.parameters()
+        try:
+            original, perturbed = self._joint_representations(original_graphs, perturbed_graphs)
+            distribution = sparse_linear_mmd(original, perturbed)
+            mean_shift = sparse_l2(sparse_mean(original), sparse_mean(perturbed))
+            paired = paired_representation_distance(original, perturbed)
+            status = "success"
+            error_message = None
+        except Exception as exc:  # pragma: no cover - exercised through runner status behavior.
+            distribution = None
+            mean_shift = None
+            paired = None
+            status = "failed"
+            error_message = str(exc)
+        return {
+            "workflow": self.name,
+            "implementation_mode": parameters.get("implementation_mode", "paper_faithful"),
+            "workflow_params": parameters,
+            "distribution_score": distribution,
+            "mean_shift_score": mean_shift,
+            "paired_score": paired,
+            "runtime_seconds": time.perf_counter() - start,
+            "memory_mb": None,
+            "status": status,
+            "error_message": error_message,
+        }
+
+    def parameters(self) -> dict[str, object]:
+        return {
+            **super().parameters(),
+            "wl_iterations": self.iterations,
+            "wl_label_initialization": self.label_initialization,
+            "wl_node_label_key": self.node_label_key,
+            "wl_feature_construction": "subtree_histograms_across_iterations",
+            "wl_compression": "shared_canonical_dictionary_per_comparison",
+            "wl_kernel_distance_mode": self.kernel_mode,
+        }
+
+    def _joint_representations(
+        self,
+        original_graphs: list[Graph],
+        perturbed_graphs: list[Graph],
+    ) -> tuple[list[SparseVector], list[SparseVector]]:
+        features = self.compute_representations(original_graphs + perturbed_graphs)
+        split = len(original_graphs)
+        return features[:split], features[split:]
+
 
 @dataclass
 class NetLSDWorkflow(Workflow):
-    timescales: tuple[float, ...] = tuple(10 ** (-2 + i * 4 / 15) for i in range(16))
+    timescales: tuple[float, ...] = NETLSD_DEFAULT_TIMESCALES
+    normalization: str = "empty"
+    laplacian: str = "normalized"
 
-    def __init__(self, timescales: Iterable[float] | None = None, bandwidth: float | None = None) -> None:
+    def __init__(
+        self,
+        timescales: Iterable[float] | None = None,
+        bandwidth: float | None = None,
+        normalization: str = "empty",
+        laplacian: str = "normalized",
+    ) -> None:
         super().__init__(NATIVE_NETLSD_WORKFLOW)
+        if normalization not in NETLSD_NORMALIZATION_MODES:
+            raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
+        if laplacian != "normalized":
+            raise ValueError("NetLSD currently implements the normalized Laplacian from the paper")
         if timescales is not None:
             self.timescales = tuple(timescales)
+        else:
+            self.timescales = NETLSD_DEFAULT_TIMESCALES
+        if not self.timescales:
+            raise ValueError("NetLSD requires at least one time scale")
+        if any((not math.isfinite(time_value)) or time_value < 0.0 for time_value in self.timescales):
+            raise ValueError("NetLSD time scales must be finite non-negative values")
+        self.normalization = normalization
+        self.laplacian = laplacian
 
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
-        return [netlsd_signature(graph, self.timescales) for graph in graphs]
+        return [
+            netlsd_signature(graph, self.timescales, normalization=self.normalization)
+            for graph in graphs
+        ]
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         return self.distribution_score_from_representations(
@@ -272,20 +409,69 @@ class NetLSDWorkflow(Workflow):
         perturbed: list[Representation],
     ) -> float:
         return l2(dense_mean(original), dense_mean(perturbed))  # type: ignore[arg-type]
+
+    def parameters(self) -> dict[str, object]:
+        return {
+            **super().parameters(),
+            "netlsd_time_scale_count": len(self.timescales),
+            "netlsd_time_scale_min": min(self.timescales),
+            "netlsd_time_scale_max": max(self.timescales),
+            "netlsd_time_scale_schedule": "logspace",
+            "netlsd_normalization": self.normalization,
+            "laplacian_type": self.laplacian,
+            "heat_signature": "heat_trace",
+            "eigenvalue_mode": "full_spectrum",
+            "eigenvalue_count": "all",
+            "distribution_distance": "l2_between_mean_signatures",
+        }
 
 
 @dataclass
 class DiversityCurvesWorkflow(Workflow):
-    max_scales: int = 4
+    max_scales: int | None = None
     repetitions: int = 3
+    scales: tuple[int, ...] | None = None
+    upsampling: bool = True
+    contraction_mode: str = "random_edge"
+    random_seed: int = 0
 
-    def __init__(self, max_scales: int = 4, repetitions: int = 3) -> None:
+    def __init__(
+        self,
+        max_scales: int | None = None,
+        repetitions: int = 3,
+        scales: Iterable[int] | None = None,
+        upsampling: bool = True,
+        contraction_mode: str = "random_edge",
+        random_seed: int = 0,
+    ) -> None:
         super().__init__(DIVERSITY_CURVES_WORKFLOW)
+        if max_scales is not None and max_scales < 1:
+            raise ValueError("max_scales must be at least 1 when provided")
+        if repetitions < 1:
+            raise ValueError("repetitions must be at least 1")
+        if contraction_mode not in {"random_edge", "legacy_deterministic"}:
+            raise ValueError("contraction_mode must be 'random_edge' or 'legacy_deterministic'")
         self.max_scales = max_scales
         self.repetitions = repetitions
+        self.scales = tuple(sorted(set(scales))) if scales is not None else None
+        if self.scales is not None and not self.scales:
+            raise ValueError("At least one Diversity Curve scale is required")
+        if self.scales is not None and any(scale < 1 for scale in self.scales):
+            raise ValueError("Diversity Curve scales must be positive integers")
+        self.upsampling = upsampling
+        self.contraction_mode = contraction_mode
+        self.random_seed = random_seed
 
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
-        return [diversity_curve(graph, self.max_scales, self.repetitions) for graph in graphs]
+        return diversity_curve_representations(
+            graphs,
+            scales=self.scales,
+            max_scales=self.max_scales,
+            repetitions=self.repetitions,
+            upsampling=self.upsampling,
+            contraction_mode=self.contraction_mode,
+            random_seed=self.random_seed,
+        )
 
     def distribution_score(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> float:
         return self.distribution_score_from_representations(
@@ -299,6 +485,20 @@ class DiversityCurvesWorkflow(Workflow):
         perturbed: list[Representation],
     ) -> float:
         return l2(dense_mean(original), dense_mean(perturbed))  # type: ignore[arg-type]
+
+    def parameters(self) -> dict[str, object]:
+        return {
+            **super().parameters(),
+            "diversity_curve_definition": "shortest_path_spread",
+            "diversity_scale_schedule": "explicit" if self.scales is not None else "all_integer_cardinalities",
+            "diversity_scale_count": len(self.scales) if self.scales is not None else self.max_scales or "dataset_max_nodes",
+            "diversity_repetitions": self.repetitions,
+            "diversity_upsampling_enabled": self.upsampling,
+            "diversity_contraction_mode": self.contraction_mode,
+            "distance_metric": "shortest_path",
+            "random_seed": self.random_seed,
+            "distribution_distance": "l2_between_mean_curves",
+        }
 
 
 def default_workflows() -> list[Workflow]:
@@ -353,22 +553,144 @@ def average_clustering(graph: Graph) -> float:
     return sum(values) / len(values) if values else 0.0
 
 
-def wl_features(graph: Graph, iterations: int) -> SparseVector:
-    labels = {node: f"d{graph.degree(node)}" for node in range(graph.num_nodes)}
-    features: Counter[str] = Counter(labels.values())
-    for iteration in range(iterations):
-        signatures = {}
-        for node in range(graph.num_nodes):
-            neighbor_labels = sorted(labels[neighbor] for neighbor in graph.adjacency[node])
-            signatures[node] = f"{labels[node]}|{'/'.join(neighbor_labels)}"
-        labels = {node: f"i{iteration}:{signature}" for node, signature in signatures.items()}
-        features.update(labels.values())
-    return dict(features)
+def wl_features(
+    graph: Graph,
+    iterations: int,
+    *,
+    label_initialization: str = "node_label_or_degree",
+    node_label_key: str = "node_labels",
+) -> SparseVector:
+    return wl_feature_matrix(
+        [graph],
+        iterations=iterations,
+        label_initialization=label_initialization,
+        node_label_key=node_label_key,
+    )[0]
 
 
-def netlsd_signature(graph: Graph, timescales: Iterable[float]) -> Vector:
+def wl_feature_matrix(
+    graphs: Sequence[Graph],
+    iterations: int,
+    *,
+    label_initialization: str = "node_label_or_degree",
+    node_label_key: str = "node_labels",
+) -> list[SparseVector]:
+    """Return WL subtree histograms with shared canonical compression."""
+
+    if iterations < 0:
+        raise ValueError("WL iterations must be non-negative")
+    if label_initialization not in WL_LABEL_INITIALIZATION_MODES:
+        raise ValueError(f"label_initialization must be one of {sorted(WL_LABEL_INITIALIZATION_MODES)}")
+
+    labels_by_graph = [
+        _initial_wl_labels(graph, label_initialization=label_initialization, node_label_key=node_label_key)
+        for graph in graphs
+    ]
+    features = [Counter(_iteration_feature_label(0, label) for label in labels.values()) for labels in labels_by_graph]
+
+    for iteration in range(1, iterations + 1):
+        signatures_by_graph: list[dict[int, tuple[str, tuple[str, ...]]]] = []
+        signature_space: set[tuple[str, tuple[str, ...]]] = set()
+        for graph, labels in zip(graphs, labels_by_graph):
+            signatures: dict[int, tuple[str, tuple[str, ...]]] = {}
+            for node in range(graph.num_nodes):
+                neighbor_labels = tuple(sorted(labels[neighbor] for neighbor in graph.adjacency[node]))
+                signature = (labels[node], neighbor_labels)
+                signatures[node] = signature
+                signature_space.add(signature)
+            signatures_by_graph.append(signatures)
+
+        compression = {
+            signature: f"c{iteration}:{index}"
+            for index, signature in enumerate(sorted(signature_space, key=_wl_signature_sort_key))
+        }
+        labels_by_graph = [
+            {node: compression[signature] for node, signature in signatures.items()}
+            for signatures in signatures_by_graph
+        ]
+        for feature_counts, labels in zip(features, labels_by_graph):
+            feature_counts.update(_iteration_feature_label(iteration, label) for label in labels.values())
+
+    return [dict(feature_counts) for feature_counts in features]
+
+
+def wl_subtree_kernel_matrix(features: Sequence[SparseVector]) -> list[list[float]]:
+    return [[sparse_dot(left, right) for right in features] for left in features]
+
+
+def _initial_wl_labels(
+    graph: Graph,
+    *,
+    label_initialization: str,
+    node_label_key: str,
+) -> dict[int, str]:
+    if label_initialization == "constant":
+        return {node: "unlabeled" for node in range(graph.num_nodes)}
+    if label_initialization == "node_label_or_degree":
+        node_labels = _node_labels_from_metadata(graph, node_label_key)
+        if node_labels is not None:
+            return {node: f"label:{node_labels[node]}" for node in range(graph.num_nodes)}
+    return {node: f"degree:{graph.degree(node)}" for node in range(graph.num_nodes)}
+
+
+def _node_labels_from_metadata(graph: Graph, node_label_key: str) -> list[str] | None:
+    labels = graph.metadata.get(node_label_key)
+    if labels is None and node_label_key != "labels":
+        labels = graph.metadata.get("labels")
+    if labels is None:
+        return None
+    if isinstance(labels, dict):
+        try:
+            return [str(labels[node]) for node in range(graph.num_nodes)]
+        except KeyError as exc:
+            raise ValueError(f"Missing WL node label for node {exc.args[0]}") from exc
+    if isinstance(labels, (list, tuple)):
+        if len(labels) != graph.num_nodes:
+            raise ValueError(
+                f"WL node label count {len(labels)} does not match graph node count {graph.num_nodes}"
+            )
+        return [str(value) for value in labels]
+    raise ValueError("WL node labels must be a sequence or a node-indexed dictionary")
+
+
+def _iteration_feature_label(iteration: int, label: str) -> str:
+    return f"h{iteration}:{label}"
+
+
+def _wl_signature_sort_key(signature: tuple[str, tuple[str, ...]]) -> str:
+    own_label, neighbor_labels = signature
+    return f"{own_label}|{'/'.join(neighbor_labels)}"
+
+
+def netlsd_signature(
+    graph: Graph,
+    timescales: Iterable[float],
+    *,
+    normalization: str = "empty",
+) -> Vector:
+    if normalization not in NETLSD_NORMALIZATION_MODES:
+        raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
     eigenvalues = normalized_laplacian_eigenvalues(graph)
-    return [sum(math.exp(-time_value * eigenvalue) for eigenvalue in eigenvalues) for time_value in timescales]
+    signature = []
+    for time_value in timescales:
+        if not math.isfinite(time_value) or time_value < 0.0:
+            raise ValueError("NetLSD time scales must be finite non-negative values")
+        heat_trace = sum(math.exp(-time_value * eigenvalue) for eigenvalue in eigenvalues)
+        normalizer = netlsd_neutral_heat_trace(graph.num_nodes, time_value, normalization)
+        signature.append(heat_trace / normalizer)
+    return signature
+
+
+def netlsd_neutral_heat_trace(num_nodes: int, time_value: float, normalization: str) -> float:
+    if normalization == "none":
+        return 1.0
+    if normalization == "empty":
+        return float(num_nodes) if num_nodes > 0 else 1.0
+    if normalization == "complete":
+        if num_nodes <= 1:
+            return 1.0
+        return 1.0 + (num_nodes - 1) * math.exp(-time_value)
+    raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
 
 
 def normalized_laplacian_eigenvalues(graph: Graph) -> list[float]:
@@ -428,7 +750,7 @@ def jacobi_eigenvalues(matrix: list[list[float]], tolerance: float = 1e-10, max_
 
 
 def diversity_curve(graph: Graph, max_scales: int, repetitions: int = 3) -> Vector:
-    """Compute spread over deterministic edge-contraction levels.
+    """Compute legacy graph-local spread over deterministic edge-contraction levels.
 
     The spread at each level uses graph shortest-path distances. Multiple
     deterministic pseudo-random contraction orders approximate the repeated
@@ -450,6 +772,208 @@ def diversity_curve(graph: Graph, max_scales: int, repetitions: int = 3) -> Vect
         for index, value in enumerate(values):
             totals[index] += value
     return [value / repetitions for value in totals]
+
+
+def diversity_curve_representations(
+    graphs: Sequence[Graph],
+    *,
+    scales: Iterable[int] | None = None,
+    max_scales: int | None = None,
+    repetitions: int = 3,
+    upsampling: bool = True,
+    contraction_mode: str = "random_edge",
+    random_seed: int = 0,
+) -> list[Vector]:
+    if repetitions < 1:
+        raise ValueError("repetitions must be at least 1")
+    if contraction_mode not in {"random_edge", "legacy_deterministic"}:
+        raise ValueError("contraction_mode must be 'random_edge' or 'legacy_deterministic'")
+    if not graphs:
+        return []
+    target_scales = _resolve_diversity_workflow_scales(graphs, scales=scales, max_scales=max_scales)
+    return [
+        diversity_curve_for_scales(
+            graph,
+            target_scales,
+            repetitions=repetitions,
+            upsampling=upsampling,
+            contraction_mode=contraction_mode,
+            random_seed=_diversity_seed_for_graph(graph, random_seed),
+        )
+        for graph in graphs
+    ]
+
+
+def _diversity_seed_for_graph(graph: Graph, random_seed: int) -> int:
+    payload = f"{random_seed}|{_graph_structural_signature(graph)}|{graph.num_nodes}|{graph.number_of_edges()}"
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    return int(digest[:16], 16)
+
+
+def diversity_curve_for_scales(
+    graph: Graph,
+    scales: Sequence[int],
+    *,
+    repetitions: int = 3,
+    upsampling: bool = True,
+    contraction_mode: str = "random_edge",
+    random_seed: int = 0,
+) -> Vector:
+    if repetitions < 1:
+        raise ValueError("repetitions must be at least 1")
+    if any(scale < 1 for scale in scales):
+        raise ValueError("Diversity Curve scales must be positive integers")
+    if graph.num_nodes == 0:
+        return [0.0] * len(scales)
+
+    totals = [0.0 for _ in scales]
+    for repeat in range(repetitions):
+        rng = random.Random(random_seed + repeat * 1_009)
+        values = _paper_diversity_curve_once(
+            graph,
+            scales,
+            upsampling=upsampling,
+            contraction_mode=contraction_mode,
+            rng=rng,
+            repeat=repeat,
+        )
+        for index, value in enumerate(values):
+            totals[index] += value
+    return [value / repetitions for value in totals]
+
+
+def _resolve_diversity_workflow_scales(
+    graphs: Sequence[Graph],
+    *,
+    scales: Iterable[int] | None,
+    max_scales: int | None,
+) -> tuple[int, ...]:
+    if scales is not None:
+        resolved = tuple(sorted(set(scales)))
+        if not resolved:
+            raise ValueError("At least one Diversity Curve scale is required")
+        if any(scale < 1 for scale in resolved):
+            raise ValueError("Diversity Curve scales must be positive integers")
+        return resolved
+    max_nodes = max((graph.num_nodes for graph in graphs), default=0)
+    if max_nodes == 0:
+        return (1,)
+    if max_scales is None:
+        return tuple(range(1, max_nodes + 1))
+    return tuple(_diversity_scales(max_nodes, max_scales))
+
+
+def _paper_diversity_curve_once(
+    graph: Graph,
+    scales: Sequence[int],
+    *,
+    upsampling: bool,
+    contraction_mode: str,
+    rng: random.Random,
+    repeat: int,
+) -> Vector:
+    values_by_scale: dict[int, float] = {}
+    down_scales = sorted({scale for scale in scales if scale <= graph.num_nodes}, reverse=True)
+    current_down = graph.copy()
+    for scale in down_scales:
+        current_down = _coarsen_to_scale_paper(
+            current_down,
+            scale,
+            contraction_mode=contraction_mode,
+            rng=rng,
+            repeat=repeat,
+        )
+        values_by_scale[scale] = shortest_path_spread(current_down)
+
+    up_scales = sorted({scale for scale in scales if scale > graph.num_nodes})
+    if up_scales:
+        if not upsampling:
+            raise ValueError(
+                "Diversity Curve scale exceeds graph size and upsampling is disabled"
+            )
+        current_up = graph.copy()
+        for scale in up_scales:
+            current_up = upsample_graph_to_scale(current_up, scale, rng)
+            values_by_scale[scale] = shortest_path_spread(current_up)
+
+    _interpolate_unreachable_diversity_scales(graph, values_by_scale)
+    return [values_by_scale[scale] for scale in scales]
+
+
+def _coarsen_to_scale_paper(
+    graph: Graph,
+    target_nodes: int,
+    *,
+    contraction_mode: str,
+    rng: random.Random,
+    repeat: int,
+) -> Graph:
+    if target_nodes < 1:
+        raise ValueError("target_nodes must be at least 1")
+    if contraction_mode == "legacy_deterministic":
+        return _coarsen_to_scale(graph, target_nodes, repeat)
+    current = graph.copy()
+    while current.num_nodes > target_nodes and current.number_of_edges() > 0:
+        edge = _selected_random_contraction_edge(current, rng)
+        current = contract_edge(current, edge)
+    return current
+
+
+def _selected_random_contraction_edge(graph: Graph, rng: random.Random) -> Edge:
+    edges = sorted(
+        graph.edges(),
+        key=lambda edge: (
+            _edge_structural_signature(graph, edge),
+            _edge_priority(str(_graph_structural_signature(graph)), edge),
+        ),
+    )
+    if not edges:
+        raise ValueError("Cannot select a contraction edge from an edgeless graph")
+    return edges[rng.randrange(len(edges))]
+
+
+def upsample_graph_to_scale(graph: Graph, target_nodes: int, rng: random.Random | None = None) -> Graph:
+    if target_nodes < graph.num_nodes:
+        raise ValueError("target_nodes must be at least the graph node count")
+    if graph.num_nodes == 0:
+        return Graph(target_nodes, metadata=dict(graph.metadata))
+    rng = rng or random.Random(0)
+    current = graph.copy()
+    sources: list[int] = []
+    while len(sources) < target_nodes - graph.num_nodes:
+        block = list(range(graph.num_nodes))
+        rng.shuffle(block)
+        sources.extend(block)
+    for source in sources[: target_nodes - graph.num_nodes]:
+        current = _duplicate_node_with_closed_neighborhood(current, source)
+    return current
+
+
+def _duplicate_node_with_closed_neighborhood(graph: Graph, source: int) -> Graph:
+    expanded = Graph(graph.num_nodes + 1, metadata=dict(graph.metadata))
+    for u, v in graph.edges():
+        expanded.add_edge(u, v)
+    new_node = graph.num_nodes
+    expanded.add_edge(source, new_node)
+    for neighbor in graph.adjacency[source]:
+        expanded.add_edge(new_node, neighbor)
+    return expanded
+
+
+def _interpolate_unreachable_diversity_scales(graph: Graph, values_by_scale: dict[int, float]) -> None:
+    components = len(graph.connected_components())
+    known_scales = sorted(values_by_scale)
+    first_reachable = next((scale for scale in known_scales if scale >= components), None)
+    if first_reachable is None and components > 1:
+        for scale in known_scales:
+            if scale < components:
+                values_by_scale[scale] = 1.0
+        return
+    if first_reachable is not None and first_reachable > 1:
+        first_value = values_by_scale[first_reachable]
+        for scale in known_scales:
+            if scale < first_reachable:
+                values_by_scale[scale] = _linear_interpolate(scale, 1, 1.0, first_reachable, first_value)
 
 
 def shortest_path_spread(graph: Graph) -> float:
