@@ -30,12 +30,14 @@ DATASET_LABELS = {
 PERTURBATION_LABELS = {
     "edge_insertion": "edge insertion",
     "edge_deletion": "edge deletion",
-    "edge_addition_deletion": "edge",
     "triangle_insertion": "triangle insertion",
     "triangle_deletion": "triangle deletion",
-    "triangle_injection_removal": "triangle",
     "community_weakening": "community",
     "hub_modification": "hub",
+}
+EXCLUDED_PERTURBATIONS = {
+    "edge_addition_deletion",
+    "triangle_injection_removal",
 }
 WORKFLOW_LABELS = {
     "structural_statistics_mmd": "GraphStats+MMD",
@@ -55,6 +57,16 @@ NUMERIC_FLOAT_COLUMNS = (
 )
 NUMERIC_INT_COLUMNS = ("seed",)
 SCORE_COLUMNS = ("distribution_score", "paired_score", "mean_shift_score")
+EVALUATION_HEATMAP_METRICS = {
+    "Sensitivity": "sensitivity",
+    "Monotonicity violations": "monotonicity",
+    "Paired detectability": "paired_detectability",
+    "Mean-shift detectability": "mean_shift_detectability",
+    "Robustness CV": "robustness_cv",
+    "Ranking stability tau": "ranking_stability_tau",
+    "Relative runtime": "relative_runtime",
+    "Interpretability": "interpretability_score",
+}
 
 
 def default_results_path(candidates: tuple[Path, ...] = DEFAULT_RESULTS_PATH_CANDIDATES) -> Path:
@@ -94,7 +106,16 @@ def default_chart_rows(rows: Iterable[dict[str, object]]) -> list[dict[str, obje
         row
         for row in rows
         if row.get("status") == "success" and math.isfinite(_float(row.get("distribution_score")))
+        and not is_excluded_perturbation(row)
     ]
+
+
+def is_excluded_perturbation(row: dict[str, object]) -> bool:
+    return str(row.get("perturbation") or "") in EXCLUDED_PERTURBATIONS
+
+
+def exclude_aggregate_perturbations(rows: Iterable[dict[str, object]]) -> list[dict[str, object]]:
+    return [row for row in rows if not is_excluded_perturbation(row)]
 
 
 def has_legacy_diversity_rows(rows: Iterable[dict[str, object]]) -> bool:
@@ -120,7 +141,10 @@ def main() -> None:
         st.info("No result rows loaded.")
         return
 
-    prepared_rows = prepare_result_rows(rows)
+    prepared_rows = exclude_aggregate_perturbations(prepare_result_rows(rows))
+    if not prepared_rows:
+        st.info("No result rows loaded after removing legacy aggregate edge/triangle perturbations.")
+        return
     df = pd.DataFrame(prepared_rows)
     _render_status_summary(st, df)
 
@@ -265,23 +289,41 @@ def _scatter_chart(st, px, df) -> None:
         st.info("No successful rows with finite mean-shift and paired scores.")
         return
     chart_df = _add_display_labels(chart_df)
+    chart_df = _add_normalized_metric(chart_df, "mean_shift_score", "mean_shift_score_normalized")
+    chart_df = _add_normalized_metric(chart_df, "paired_score", "paired_score_normalized")
     fig = px.scatter(
         chart_df,
-        x="mean_shift_score",
-        y="paired_score",
+        x="mean_shift_score_normalized",
+        y="paired_score_normalized",
         color="workflow_label",
         symbol="dataset_label",
-        hover_data=["dataset", "perturbation", "alpha", "seed", "workflow"],
-        title="Mean Shift vs Paired Distance",
+        hover_data={
+            "dataset": True,
+            "perturbation": True,
+            "alpha": True,
+            "seed": True,
+            "workflow": True,
+            "mean_shift_score": ":.4g",
+            "paired_score": ":.4g",
+            "mean_shift_score_normalized": ":.3f",
+            "paired_score_normalized": ":.3f",
+            "dataset_label": False,
+            "workflow_label": False,
+        },
+        title="Mean Shift vs Paired Distance (normalized per dataset, perturbation, workflow)",
         category_orders={
             "dataset_label": list(DATASET_LABELS.values()),
             "workflow_label": list(WORKFLOW_LABELS.values()),
         },
         labels={
+            "mean_shift_score_normalized": "Normalized mean-shift",
+            "paired_score_normalized": "Normalized paired distance",
             "workflow_label": "Workflow",
             "dataset_label": "Dataset",
         },
     )
+    fig.update_xaxes(range=[0, 1.05])
+    fig.update_yaxes(range=[0, 1.05])
     fig.update_layout(legend_title_text="Workflow", margin=dict(l=20, r=20, t=60, b=20))
     st.plotly_chart(fig, width="stretch")
 
@@ -289,14 +331,17 @@ def _scatter_chart(st, px, df) -> None:
 def _summary_heatmap(st, px, summary_df) -> None:
     if summary_df.empty:
         return
+    selected_label = st.selectbox("Metric", list(EVALUATION_HEATMAP_METRICS), key="evaluation_heatmap_metric")
+    metric = EVALUATION_HEATMAP_METRICS[selected_label]
     fig = px.density_heatmap(
         summary_df,
         x="perturbation",
         y="workflow",
-        z="sensitivity",
+        z=metric,
         histfunc="avg",
         color_continuous_scale="Greens",
-        title="Average Sensitivity",
+        title=f"Average {selected_label}",
+        labels={metric: selected_label},
     )
     fig.update_layout(margin=dict(l=20, r=20, t=60, b=20))
     st.plotly_chart(fig, width="stretch")

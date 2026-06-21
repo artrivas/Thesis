@@ -7,11 +7,14 @@ from experimentation.dashboard import (
     _add_display_labels,
     _add_normalized_metric,
     _clean_facet_label_text,
+    EVALUATION_HEATMAP_METRICS,
     build_evaluation_tables,
     default_chart_rows,
     default_results_path,
+    exclude_aggregate_perturbations,
     has_legacy_diversity_rows,
     has_legacy_workflow_rows,
+    is_excluded_perturbation,
     prepare_result_rows,
 )
 from tests.test_evaluation import fake_result_rows
@@ -47,9 +50,30 @@ class DashboardTests(unittest.TestCase):
     def test_default_chart_rows_include_only_successful_finite_scores(self) -> None:
         rows = prepare_result_rows(
             [
-                {**fake_result_rows()[0], "status": "success", "distribution_score": "1.0"},
-                {**fake_result_rows()[0], "status": "failed", "distribution_score": "2.0"},
-                {**fake_result_rows()[0], "status": "success", "distribution_score": ""},
+                {
+                    **fake_result_rows()[0],
+                    "status": "success",
+                    "distribution_score": "1.0",
+                    "perturbation": "edge_insertion",
+                },
+                {
+                    **fake_result_rows()[0],
+                    "status": "failed",
+                    "distribution_score": "2.0",
+                    "perturbation": "edge_insertion",
+                },
+                {
+                    **fake_result_rows()[0],
+                    "status": "success",
+                    "distribution_score": "",
+                    "perturbation": "edge_insertion",
+                },
+                {
+                    **fake_result_rows()[0],
+                    "status": "success",
+                    "distribution_score": "3.0",
+                    "perturbation": "edge_addition_deletion",
+                },
             ]
         )
 
@@ -57,6 +81,22 @@ class DashboardTests(unittest.TestCase):
 
         self.assertEqual(len(chart_rows), 1)
         self.assertEqual(chart_rows[0]["distribution_score"], 1.0)
+
+    def test_aggregate_edge_triangle_perturbations_are_excluded(self) -> None:
+        rows = prepare_result_rows(
+            [
+                {**fake_result_rows()[0], "perturbation": "edge_addition_deletion"},
+                {**fake_result_rows()[0], "perturbation": "triangle_injection_removal"},
+                {**fake_result_rows()[0], "perturbation": "edge_insertion"},
+            ]
+        )
+
+        filtered = exclude_aggregate_perturbations(rows)
+
+        self.assertTrue(is_excluded_perturbation(rows[0]))
+        self.assertTrue(is_excluded_perturbation(rows[1]))
+        self.assertFalse(is_excluded_perturbation(rows[2]))
+        self.assertEqual([row["perturbation"] for row in filtered], ["edge_insertion"])
 
     def test_legacy_diversity_rows_are_detected(self) -> None:
         rows = prepare_result_rows([{**fake_result_rows()[0], "workflow": "diversity_curves_l2"}])
@@ -84,7 +124,7 @@ class DashboardTests(unittest.TestCase):
             [
                 {
                     "dataset": "stochastic_block_model",
-                    "perturbation": "edge_addition_deletion",
+                    "perturbation": "edge_insertion",
                     "workflow": "native_netlsd",
                 }
             ]
@@ -93,7 +133,7 @@ class DashboardTests(unittest.TestCase):
         labeled = _add_display_labels(rows)
 
         self.assertEqual(labeled.loc[0, "dataset_label"], "SBM")
-        self.assertEqual(labeled.loc[0, "perturbation_label"], "edge")
+        self.assertEqual(labeled.loc[0, "perturbation_label"], "edge insertion")
         self.assertEqual(labeled.loc[0, "workflow_label"], "NativeNetLSD")
 
     def test_normalized_metric_scales_each_panel_workflow(self) -> None:
@@ -124,6 +164,11 @@ class DashboardTests(unittest.TestCase):
         normalized = _add_normalized_metric(rows, "distribution_score", "normalized")
 
         self.assertEqual(list(normalized["normalized"]), [0.5, 1.0, 1.0])
+
+    def test_evaluation_heatmap_metrics_include_non_sensitivity_options(self) -> None:
+        self.assertEqual(EVALUATION_HEATMAP_METRICS["Sensitivity"], "sensitivity")
+        self.assertEqual(EVALUATION_HEATMAP_METRICS["Relative runtime"], "relative_runtime")
+        self.assertEqual(EVALUATION_HEATMAP_METRICS["Robustness CV"], "robustness_cv")
 
     def test_facet_label_text_drops_plotly_column_prefix(self) -> None:
         self.assertEqual(_clean_facet_label_text("perturbation_label=edge"), "edge")
