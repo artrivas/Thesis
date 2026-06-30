@@ -3,6 +3,29 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 7 — Streamlit dashboard updates
+
+**Modules:** `dashboard.py`, `tests/test_dashboard.py`,
+`docs/experimentation/dashboard.md`.
+
+- Sidebar **run selector**: scans the traceable `results/runs/` tree (default)
+  for run dirs with `results/results.csv`, newest first, and surfaces the run's
+  `run_manifest.json` path. Falls back to upload / manual path for legacy
+  `outputs/`.
+- New panels: **alpha-vs-score with a per-seed band** (mean ± std over seeds),
+  the **failure map** (colored by diagnosed cause; prefers the run's precomputed
+  `failure_map.csv`), the **edit-distance-vs-score validation** scatter, and the
+  **ground_truth-vs-detected community** comparison.
+- Evaluation-summary heatmap metric list now includes
+  `edit_distance_validation` / `paired_edit_distance_validation`; numeric
+  coercion covers the edit-distance columns.
+- CPU-only and read-only: no graph recompute in the UI; panels are tabular
+  passes / read the precomputed evaluation CSVs. `requirements-dashboard.txt`
+  unchanged (streamlit/plotly/pandas).
+- Tests: `discover_runs`, `seed_band_table`, `edit_distance_validation_rows`,
+  `community_label_source_rows`, `load_failure_map_rows`; renderers smoke-tested
+  against a real run.
+
 ## Item 6 — Real dataset loader (IMDB-BINARY)
 
 **Modules:** new `real_datasets.py`, `datasets.py`, `config.py`, `cli.py`,
