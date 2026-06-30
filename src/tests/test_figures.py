@@ -54,6 +54,7 @@ def tiny_figure_config(root: Path):
         perturbations=PerturbationConfig(methods=("edge_addition_deletion",), alpha_values=(0.0, 0.5)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd",)),
         seeds=(0,),
+        seed_count=None,  # explicit seeds: clear the inherited debug seed_count
         outputs=OutputConfig(root=root, results=root / "results", figures=root / "figures", logs=root / "logs"),
     )
 

@@ -3,6 +3,30 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 8 — Seed-sweep config knob
+
+**Modules:** `config.py`, `runner.py`, `cli.py`, `tests/test_seed_sweep.py`,
+`docs/experimentation/seed_sweep.md`.
+
+- `seeds_from_count(n, base_seed=0)` expands a seed COUNT into a deterministic,
+  machine-independent seed list `(base_seed, …, base_seed+n-1)`.
+- `ExperimentConfig` gains `seed_count` and a `resolved_seeds()` method:
+  `seed_count` takes precedence over an explicit `seeds` list when both are set;
+  an explicit list is used otherwise; **neither** raises a clear error. The
+  `seeds` field default is now `None`.
+- Named configs: `debug_config` uses `seed_count=2`; new `replication_config`
+  uses `seed_count=24` (20–30 band). CLI: `--config {debug,full,replication,imdb}`
+  and `--seed-count N` (deterministic override).
+- Runner and `resolved_config_payload`/manifest now use `resolved_seeds()`, so the
+  resolved list drives the sweep, the config hash, the manifest, and
+  `--seed-range` slicing. `--seed-count 30` resolves to a 30-seed list recorded
+  in `run_manifest.json`.
+- Test helpers that build on `debug_config` and want an explicit `seeds` list now
+  pass `seed_count=None` (documented contract).
+- Tests: `seeds_from_count` determinism/correctness, precedence, missing-both
+  error, debug/replication resolved lists, `seed_count=30`, `--seed-range` slice
+  equals the sublist and disjoint shards partition the list.
+
 ## Item 7 — Streamlit dashboard updates
 
 **Modules:** `dashboard.py`, `tests/test_dashboard.py`,

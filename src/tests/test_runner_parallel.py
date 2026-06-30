@@ -42,6 +42,7 @@ def multi_seed_config(root: Path, seeds=(0, 1, 2, 3)):
         perturbations=PerturbationConfig(methods=("edge_insertion", "edge_deletion"), alpha_values=(0.0, 0.5, 1.0)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd", "wl_subtree_kernel_mmd")),
         seeds=seeds,
+        seed_count=None,  # explicit seeds: clear the inherited debug seed_count
         outputs=output_config_for_root(root),
     )
 

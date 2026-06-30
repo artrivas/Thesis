@@ -74,6 +74,7 @@ class RealDatasetGridIntegrationTests(unittest.TestCase):
                 ),
                 workflows=WorkflowConfig(names=("structural_statistics_mmd", "native_netlsd")),
                 seeds=(0, 1),
+                seed_count=None,  # explicit seeds: clear the inherited debug seed_count
                 outputs=OutputConfig(
                     root=root,
                     results=root / "results",

@@ -15,6 +15,7 @@ from experimentation.config import (
     full_synthetic_config,
     imdb_config,
     output_config_for_root,
+    replication_config,
 )
 from experimentation.evaluation import evaluate_results
 from experimentation.figures import generate_figures
@@ -24,6 +25,7 @@ from experimentation.runner import merge_runs, run_experiment
 CONFIG_BUILDERS = {
     "debug": debug_config,
     "full": full_synthetic_config,
+    "replication": replication_config,
     "imdb": imdb_config,
 }
 DEFAULT_RESULTS_ROOT = "results/runs"
@@ -96,6 +98,7 @@ def _add_run_parser(subparsers) -> None:
     run.add_argument("--run-id", default=None, help="Resume/target an existing run directory by id")
     run.add_argument("--output-root", default=None, help="Legacy: write directly into this directory")
     run.add_argument("--workers", type=int, default=default_workers(), help="CPU worker processes (1 = serial)")
+    run.add_argument("--seed-count", type=int, default=None, help="Override the seed sweep breadth (deterministic)")
     run.add_argument("--seed-range", default=None, help="Half-open index slice A:B into the resolved seed list")
     run.add_argument("--device", default="cpu", help="Acceleration device (CPU-only target): cpu, auto, cuda:N")
     run.add_argument("--resume", action="store_true", help="Resume an existing run dir (default; explicit for clarity)")
@@ -136,6 +139,8 @@ def _run_legacy(args) -> int:
 
 def _run(args) -> int:
     config = _with_workflows(CONFIG_BUILDERS[args.config](), args.workflow)
+    if args.seed_count is not None:
+        config = replace(config, seed_count=args.seed_count)
     seed_range = _parse_seed_range(args.seed_range)
     if args.output_root:
         outputs = output_config_for_root(Path(args.output_root))

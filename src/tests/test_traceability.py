@@ -24,6 +24,7 @@ def fast_config(root: Path, seeds=(0, 1)):
         perturbations=PerturbationConfig(methods=("edge_insertion",), alpha_values=(0.0, 0.5)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd",)),
         seeds=seeds,
+        seed_count=None,  # explicit seeds: clear the inherited debug seed_count
     )
 
 

@@ -218,6 +218,7 @@ def tiny_debug_config(root: Path):
         perturbations=PerturbationConfig(methods=("edge_insertion",), alpha_values=(0.0, 0.5)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd", "wl_subtree_kernel_mmd")),
         seeds=(0,),
+        seed_count=None,  # explicit seeds: clear the inherited debug seed_count
         outputs=output,
     )
 

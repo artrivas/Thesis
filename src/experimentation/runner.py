@@ -183,7 +183,7 @@ def run_experiment(
     logger = _experiment_logger(log_file, console=console_log)
     configure_acceleration(device)
     workflow_instances = workflows if workflows is not None else workflows_from_config(config)
-    seeds = _resolve_seeds(config.seeds, seed_range)
+    seeds = _resolve_seeds(config.resolved_seeds(), seed_range)
 
     if resume:
         _raise_on_incompatible_resume(result_path, workflow_instances)
@@ -581,7 +581,7 @@ def _canonical_jsonish(value: object) -> str:
 
 
 def _expected_row_count(config: ExperimentConfig, workflows: list[Workflow], num_seeds: int | None = None) -> int:
-    seed_count = len(config.seeds) if num_seeds is None else num_seeds
+    seed_count = len(config.resolved_seeds()) if num_seeds is None else num_seeds
     return (
         seed_count
         * len(config.resolved_dataset_configs())
