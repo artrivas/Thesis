@@ -13,6 +13,7 @@ from experimentation.config import (
     output_config_for_root,
 )
 from experimentation.datasets import SyntheticDatasetConfig
+from experimentation.evaluation import generate_evaluation_summary
 from experimentation.runner import (
     _resolve_seeds,
     _row_key,
@@ -180,6 +181,20 @@ class SeedShardingTests(unittest.TestCase):
         self.assertNotEqual(outputs_a.root, outputs_b.root)
         self.assertTrue(str(outputs_a.root).endswith("fixed_shard-0-2"))
         self.assertTrue(str(outputs_b.root).endswith("fixed_shard-2-4"))
+
+
+class NonDegenerateReplicationTests(unittest.TestCase):
+    def test_multi_seed_run_yields_nonzero_cv(self) -> None:
+        # The CV=0 / tau=1 degeneracy was a single-seed artifact. With several
+        # distinct seeds the per-seed means genuinely vary, so robustness CV
+        # must be strictly positive for at least one cell.
+        with TemporaryDirectory() as tmp:
+            result_path = run_experiment(
+                multi_seed_config(Path(tmp) / "rep", seeds=(0, 1, 2, 3, 4)), workers=2
+            )
+            summary = generate_evaluation_summary(read_result_rows(result_path))
+            cvs = [float(row["robustness_cv"]) for row in summary]
+            self.assertTrue(any(cv > 0.0 for cv in cvs), "multi-seed run produced degenerate CV=0 everywhere")
 
 
 class ConfigHashTests(unittest.TestCase):

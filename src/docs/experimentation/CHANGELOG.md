@@ -3,6 +3,29 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 4 — Seed-replication band + failure map
+
+**Modules:** `evaluation.py`, `figures.py`, `tests/test_failure_map.py`,
+`tests/test_runner_parallel.py`, `docs/experimentation/failure_map.md`.
+
+- `figure_1_score_vs_alpha` now overlays a per-seed dispersion band: shaded
+  mean ± std plus a deterministic bootstrap 95% CI envelope over seeds, so the
+  "it's just randomness" objection is visible. Added `polygon`, dashed
+  `polyline`, `_std`, `_bootstrap_ci` (deterministic), `_dispersion_band`.
+- New `figure_6_failure_map.svg` and machine-readable `failure_map.csv`
+  (written by `evaluate_results`). `generate_failure_map` diagnoses each
+  `(dataset, perturbation)` cell with a cause: `inapplicable`,
+  `perturbation_starved`, `method_blind`, `unstable`, or `ok`, derived from
+  logged `edit_distance_raw` + sensitivity/monotonicity/CV, in that precedence
+  order. The map explains WHY a cell behaves as it does (e.g.
+  triangle_deletion-on-ER = `perturbation_starved`).
+- Verified the multi-seed path yields non-degenerate CV (the old CV=0/tau=1 was a
+  single-seed artifact); added a regression test.
+- `failure_map.md` documents the causes, precedence, and the
+  triangle_deletion-on-ER worked example.
+- Tests: each cause label is triggered by synthetic rows; SVG renders;
+  multi-seed CV is non-zero.
+
 ## Item 3 — Edit-distance ground truth + alpha validation
 
 **Modules:** new `ground_truth.py`, `perturbations.py`, `runner.py`,

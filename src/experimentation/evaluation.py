@@ -40,6 +40,27 @@ FINAL_MATRIX_COLUMNS = (
     "interpretability_label",
 )
 
+FAILURE_MAP_COLUMNS = (
+    "dataset",
+    "perturbation",
+    "cause",
+    "mean_edit_distance_raw",
+    "max_edit_distance_raw",
+    "best_workflow",
+    "best_sensitivity",
+    "monotonicity",
+    "robustness_cv",
+    "note",
+)
+
+# Diagnosis thresholds for the failure map. Documented in failure_map.md.
+EDIT_STARVED_MAX_EDITS = 1.0  # fewer than one edited edge even at the largest alpha
+METHOD_BLIND_SENSITIVITY = 0.30  # edits happened but the best workflow stays flat
+UNSTABLE_MONOTONICITY = 0.30  # violation fraction above this is non-monotone
+UNSTABLE_CV = 0.35  # seed CV above this is unstable
+
+FAILURE_CAUSES = ("inapplicable", "perturbation_starved", "method_blind", "unstable", "ok")
+
 INTERPRETABILITY_SCORES = {
     "structural_statistics_mmd": 3,
     "wl_subtree_kernel_mmd": 2,
@@ -74,12 +95,19 @@ def evaluate_results(results_path: Path | str, output_dir: Path | str | None = N
     output_root.mkdir(parents=True, exist_ok=True)
     summary = generate_evaluation_summary(rows)
     final_matrix = generate_final_matrix(summary)
+    failure_map = generate_failure_map(rows, summary)
 
     summary_path = output_root / "evaluation_summary.csv"
     matrix_path = output_root / "final_matrix.csv"
+    failure_map_path = output_root / "failure_map.csv"
     write_table(summary, EVALUATION_SUMMARY_COLUMNS, summary_path)
     write_table(final_matrix, FINAL_MATRIX_COLUMNS, matrix_path)
-    return {"evaluation_summary": summary_path, "final_matrix": matrix_path}
+    write_table(failure_map, FAILURE_MAP_COLUMNS, failure_map_path)
+    return {
+        "evaluation_summary": summary_path,
+        "final_matrix": matrix_path,
+        "failure_map": failure_map_path,
+    }
 
 
 def generate_evaluation_summary(rows: list[dict[str, object]]) -> list[dict[str, object]]:
@@ -156,6 +184,112 @@ def generate_final_matrix(summary_rows: list[dict[str, object]]) -> list[dict[st
             }
         )
     return final_rows
+
+
+def generate_failure_map(
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]] | None = None,
+) -> list[dict[str, object]]:
+    """Diagnose, per (dataset, perturbation), WHY a hypothesis succeeded or failed.
+
+    The failure map is an EXPLANATION artifact: each cell is labeled with a
+    diagnosed cause (see ``failure_map.md``) derived from logged metadata and
+    scores, not merely a score value. Causes, in precedence order:
+
+    - ``inapplicable`` — no successful rows (cell skipped). Rare after detected
+      community labels were added.
+    - ``perturbation_starved`` — alpha > 0 but almost nothing was edited (e.g.
+      triangle_deletion on ER: too few triangles to spend the budget).
+    - ``method_blind`` — edits happened but the best workflow's scores stayed flat.
+    - ``unstable`` — the best workflow responds but is non-monotone or high-CV
+      across seeds.
+    - ``ok`` — behaves as intended.
+    """
+
+    if summary_rows is None:
+        summary_rows = generate_evaluation_summary(rows)
+    summary_by_cell: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
+    for summary_row in summary_rows:
+        summary_by_cell[(str(summary_row["dataset"]), str(summary_row["perturbation"]))].append(summary_row)
+    rows_by_cell: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
+    for row in rows:
+        rows_by_cell[(str(row.get("dataset")), str(row.get("perturbation")))].append(row)
+
+    diagnoses = []
+    for cell in sorted(rows_by_cell):
+        dataset, perturbation = cell
+        diagnoses.append(
+            _diagnose_cell(dataset, perturbation, rows_by_cell[cell], summary_by_cell.get(cell, []))
+        )
+    return diagnoses
+
+
+def _diagnose_cell(
+    dataset: str,
+    perturbation: str,
+    cell_rows: list[dict[str, object]],
+    cell_summary: list[dict[str, object]],
+) -> dict[str, object]:
+    success_rows = [row for row in cell_rows if row.get("status") == "success"]
+    edits_by_alpha = _edit_amounts_by_alpha(success_rows)
+    positive_alpha_edits = [value for alpha, value in edits_by_alpha.items() if alpha > 0]
+    max_edits = max(positive_alpha_edits, default=0.0)
+    mean_edits = mean(positive_alpha_edits)
+
+    best = max(cell_summary, key=lambda row: _float(row.get("sensitivity")), default=None)
+    best_workflow = str(best["workflow"]) if best else ""
+    best_sensitivity = _float(best.get("sensitivity")) if best else math.nan
+    best_monotonicity = _float(best.get("monotonicity")) if best else math.nan
+    best_cv = _float(best.get("robustness_cv")) if best else math.nan
+
+    if not success_rows:
+        cause = "inapplicable"
+        note = "no successful rows (cell skipped)"
+    elif max_edits < EDIT_STARVED_MAX_EDITS:
+        cause = "perturbation_starved"
+        note = f"max mean edits at alpha>0 = {max_edits:.2f} (< {EDIT_STARVED_MAX_EDITS})"
+    elif not math.isfinite(best_sensitivity) or best_sensitivity < METHOD_BLIND_SENSITIVITY:
+        cause = "method_blind"
+        note = f"edits occurred but best sensitivity = {_fmt(best_sensitivity)}"
+    elif (math.isfinite(best_monotonicity) and best_monotonicity > UNSTABLE_MONOTONICITY) or (
+        math.isfinite(best_cv) and best_cv > UNSTABLE_CV
+    ):
+        cause = "unstable"
+        note = f"monotonicity={_fmt(best_monotonicity)}, cv={_fmt(best_cv)}"
+    else:
+        cause = "ok"
+        note = f"sensitivity={_fmt(best_sensitivity)}, cv={_fmt(best_cv)}"
+
+    return {
+        "dataset": dataset,
+        "perturbation": perturbation,
+        "cause": cause,
+        "mean_edit_distance_raw": round(mean_edits, 4),
+        "max_edit_distance_raw": round(max_edits, 4),
+        "best_workflow": best_workflow,
+        "best_sensitivity": _round_or_blank(best_sensitivity),
+        "monotonicity": _round_or_blank(best_monotonicity),
+        "robustness_cv": _round_or_blank(best_cv),
+        "note": note,
+    }
+
+
+def _edit_amounts_by_alpha(success_rows: list[dict[str, object]]) -> dict[float, float]:
+    by_alpha: dict[float, list[float]] = defaultdict(list)
+    for row in success_rows:
+        edits = _float(row.get("edit_distance_raw"))
+        alpha = _float(row.get("alpha"))
+        if math.isfinite(edits) and math.isfinite(alpha):
+            by_alpha[alpha].append(edits)
+    return {alpha: mean(values) for alpha, values in by_alpha.items()}
+
+
+def _fmt(value: float) -> str:
+    return f"{value:.2f}" if math.isfinite(value) else "n/a"
+
+
+def _round_or_blank(value: float) -> object:
+    return round(value, 4) if math.isfinite(value) else ""
 
 
 def is_duplicate_mean_shift_workflow(workflow: str, summary_rows: list[dict[str, object]]) -> bool:
