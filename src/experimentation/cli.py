@@ -96,6 +96,7 @@ def _add_run_parser(subparsers) -> None:
     run.add_argument("--workers", type=int, default=default_workers(), help="CPU worker processes (1 = serial)")
     run.add_argument("--seed-range", default=None, help="Half-open index slice A:B into the resolved seed list")
     run.add_argument("--device", default="cpu", help="Acceleration device (CPU-only target): cpu, auto, cuda:N")
+    run.add_argument("--resume", action="store_true", help="Resume an existing run dir (default; explicit for clarity)")
     run.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")
     run.add_argument("--rerun-failed", action="store_true", help="Drop failed rows and recompute them")
     run.add_argument("--console-log", action="store_true", help="Print progress logs to the terminal")
@@ -150,6 +151,7 @@ def _run(args) -> int:
         console_log=args.console_log,
         workers=args.workers,
         seed_range=seed_range,
+        run_id=run_id,
     )
     print(f"run_id={run_id}")
     print(result_path)

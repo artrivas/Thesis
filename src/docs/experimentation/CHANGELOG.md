@@ -3,6 +3,29 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 5 — Traceable run directories + run manifest
+
+**Modules:** `runner.py`, `cli.py`, `config.py` (item 1 helpers),
+`results/.gitignore`, `results/runs/.gitkeep`,
+`tests/test_traceability.py`, `docs/experimentation/traceability.md`.
+
+- `run_experiment` writes `run_manifest.json` into the run directory at start
+  (`status=running`) and end (`status=finished`), atomically. It records git
+  commit, full resolved config + config hash, the **resolved** seed list (after
+  any `--seed-range`), workflow list, hostname, start/end UTC timestamps, library
+  versions, result path, and checkpoint path.
+- The traceable layout `results/runs/<timestamp>_<cfghash>[_shard-A-B]/` (helpers
+  from item 1) is the default for the `run` subcommand via `--results-root`
+  (default `results/runs`); `checkpoint.json` lives inside the run dir. `outputs/`
+  still works for back-compat.
+- Resume targets an existing run dir by id:
+  `run --resume --results-root results/runs --run-id <id>`. Added the explicit
+  `--resume` flag and threaded `run_id` into the manifest.
+- `results/.gitignore` keeps run structure + `run_manifest.json` tracked while
+  ignoring bulky `results/`, `logs/`, `figures/`, `evaluation/` artifacts.
+- Tests: run-dir layout, auto run-id format, manifest fields, sharded seed
+  subset recorded, resume-by-run-id targets the same directory.
+
 ## Item 4 — Seed-replication band + failure map
 
 **Modules:** `evaluation.py`, `figures.py`, `tests/test_failure_map.py`,

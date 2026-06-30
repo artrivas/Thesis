@@ -11,10 +11,19 @@ import logging
 import multiprocessing
 import os
 from pathlib import Path
+import platform
+import socket
+import subprocess
 import sys
 import tracemalloc
 
-from experimentation.config import ExperimentConfig, debug_config, full_synthetic_config
+from experimentation.config import (
+    ExperimentConfig,
+    config_hash,
+    debug_config,
+    full_synthetic_config,
+    resolved_config_payload,
+)
 from experimentation.datasets import PairedDistribution, SyntheticDatasetConfig, generate_paired_distribution
 from experimentation.ground_truth import cell_edit_distances
 from experimentation.workflows import (
@@ -150,6 +159,8 @@ def run_experiment(
     console_log: bool = False,
     workers: int = 1,
     seed_range: tuple[int, int] | None = None,
+    run_id: str | None = None,
+    write_manifest: bool = True,
 ) -> Path:
     """Execute dataset x perturbation x alpha x seed x workflow and save CSV results.
 
@@ -180,6 +191,20 @@ def run_experiment(
         _drop_failed_rows(result_path)
     completed = _completed_keys(result_path) if resume else set()
     total_rows = _expected_row_count(config, workflow_instances, len(seeds))
+    started_at = datetime.now(timezone.utc).isoformat()
+    resolved_run_id = run_id or config.outputs.root.name
+    manifest_kwargs = dict(
+        run_id=resolved_run_id,
+        seeds=seeds,
+        workflows=workflow_instances,
+        result_path=result_path,
+        checkpoint_path=checkpoint_file,
+        started_at=started_at,
+        seed_range=seed_range,
+        workers=workers,
+    )
+    if write_manifest:
+        write_run_manifest(config, status="running", **manifest_kwargs)
     logger.info(
         "run_start result_path=%s resume=%s rerun_failed=%s workers=%d seed_range=%s "
         "seeds=%d completed=%d total=%d device=%s",
@@ -227,6 +252,13 @@ def run_experiment(
         else:
             _run_parallel(pending_cells, persist, workers=workers, logger=logger)
 
+    if write_manifest:
+        write_run_manifest(
+            config,
+            status="finished",
+            ended_at=datetime.now(timezone.utc).isoformat(),
+            **manifest_kwargs,
+        )
     logger.info(
         "run_finish result_path=%s rows_written=%d completed=%d total=%d",
         result_path,
@@ -583,6 +615,92 @@ def _write_checkpoint(
 def _flush_checkpoint(handle) -> None:
     handle.flush()
     os.fsync(handle.fileno())
+
+
+MANIFEST_FILENAME = "run_manifest.json"
+
+
+def _git_commit() -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=5,
+            cwd=str(Path(__file__).resolve().parent),
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip() or None
+
+
+def _library_versions() -> dict[str, str | None]:
+    from importlib.metadata import PackageNotFoundError, version
+
+    versions: dict[str, str | None] = {
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+    }
+    for package in ("numpy", "torch", "streamlit", "plotly", "pandas"):
+        try:
+            versions[package] = version(package)
+        except PackageNotFoundError:
+            versions[package] = None
+        except Exception:  # pragma: no cover - metadata backend quirks
+            versions[package] = None
+    return versions
+
+
+def write_run_manifest(
+    config: ExperimentConfig,
+    *,
+    run_id: str,
+    seeds: tuple[int, ...],
+    workflows: list[Workflow],
+    result_path: Path,
+    checkpoint_path: Path,
+    started_at: str,
+    ended_at: str | None = None,
+    status: str = "running",
+    seed_range: tuple[int, int] | None = None,
+    workers: int = 1,
+    manifest_path: Path | None = None,
+) -> Path:
+    """Write the per-run manifest for reproducibility/traceability (atomic).
+
+    Records the git commit, the full resolved config, the resolved seed list,
+    the workflow list, hostname, start/end timestamps, library versions, and the
+    checkpoint path, all inside the run directory.
+    """
+
+    path = manifest_path if manifest_path is not None else config.outputs.root / MANIFEST_FILENAME
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "run_id": run_id,
+        "status": status,
+        "git_commit": _git_commit(),
+        "hostname": socket.gethostname(),
+        "started_at": started_at,
+        "ended_at": ended_at,
+        "config_hash": config_hash(config),
+        "config": resolved_config_payload(config),
+        "seeds": [int(seed) for seed in seeds],
+        "seed_range": list(seed_range) if seed_range is not None else None,
+        "workers": workers,
+        "workflows": [workflow.name for workflow in workflows],
+        "output_root": str(config.outputs.root),
+        "result_path": str(result_path),
+        "checkpoint_path": str(checkpoint_path),
+        "library_versions": _library_versions(),
+    }
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+    temporary.replace(path)
+    return path
 
 
 def _experiment_logger(log_path: Path, console: bool = False) -> logging.Logger:

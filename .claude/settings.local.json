@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(wsl -d ubuntu -- bash -lc \"cd /home/artrivas/Thesis/src && rm -rf /tmp/it3 && .venv/bin/python -m experimentation.cli run --config debug --workers 2 --output-root /tmp/it3 --evaluate >/dev/null 2>&1 && .venv/bin/python /tmp/it3_check.py\")"
+      "PowerShell(wsl -d ubuntu -- bash -lc \"cd /home/artrivas/Thesis/src && rm -rf /tmp/it3 && .venv/bin/python -m experimentation.cli run --config debug --workers 2 --output-root /tmp/it3 --evaluate >/dev/null 2>&1 && .venv/bin/python /tmp/it3_check.py\")",
+      "PowerShell(wsl -d ubuntu -- bash -lc \"cd /home/artrivas/Thesis/src && .venv/bin/python -m unittest tests.test_traceability -v 2>&1 | tail -20\")",
+      "PowerShell(wsl -d ubuntu -- bash -lc \"cd /home/artrivas/Thesis && echo '=== trackable files under testrun \\(untracked-all, gitignore applied\\) ===' && git status --porcelain --untracked-files=all results/runs/testrun/ && echo '=== removing throwaway test run, keeping structure ===' && rm -rf results/runs/testrun && ls -la results/ results/runs/\")"
     ]
   }
 }

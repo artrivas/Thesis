@@ -1,0 +1,14 @@
+# Traceable experiment results live here, one directory per run:
+#   results/runs/<timestamp>_<cfghash>[_shard-A-B]/
+#
+# Keep the run directory structure and the run_manifest.json files tracked for
+# reproducibility/traceability, but never commit the bulky generated artifacts
+# (result CSVs, logs, figures, evaluation tables).
+
+runs/*/results/
+runs/*/logs/
+runs/*/figures/
+runs/*/evaluation/
+
+# run_manifest.json sits at the run-directory root and stays tracked.
+!runs/*/run_manifest.json
