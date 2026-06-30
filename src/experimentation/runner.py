@@ -106,6 +106,7 @@ RESULT_COLUMNS = (
     "workflow_params",
     "perturbation_family",
     "perturbation_direction",
+    "label_source",
     "graph_count",
     "node_count_min",
     "node_count_max",
@@ -655,6 +656,7 @@ def _run_workflow_grid(
                 "perturbation_params": perturbation_params,
                 "perturbation_family": perturbation_summary.get("perturbation_family"),
                 "perturbation_direction": perturbation_summary.get("perturbation_direction"),
+                "label_source": perturbation_summary.get("label_source"),
                 **size_summary,
                 "alpha": alpha,
                 "seed": seed,
@@ -683,6 +685,7 @@ def _summarize_perturbations(paired: PairedDistribution) -> dict[str, object]:
         "method": paired.metadata.get("perturbation"),
         "perturbation_family": paired.metadata.get("perturbation_family"),
         "perturbation_direction": paired.metadata.get("perturbation_direction"),
+        "label_source": None,
         "alpha": paired.metadata.get("alpha"),
         "graphs": len(metadata),
         "graphs_success": 0,
@@ -701,6 +704,7 @@ def _summarize_perturbations(paired: PairedDistribution) -> dict[str, object]:
             summary[key] = int(summary[key]) + int(item.get(key, 0) or 0)
         summary["perturbation_family"] = summary["perturbation_family"] or item.get("perturbation_family")
         summary["perturbation_direction"] = summary["perturbation_direction"] or item.get("perturbation_direction")
+        summary["label_source"] = summary["label_source"] or item.get("label_source")
     return summary
 
 

@@ -63,7 +63,16 @@ Perturbations are grouped by the structural scale they primarily affect:
   change local closure and clustering by closing open wedges or deleting
   triangle edges. They are evaluated as separate perturbation directions.
 - Mesoscopic perturbations: community weakening rewires intra-community edges
-  into inter-community edges, primarily for SBM graphs with community labels.
+  into inter-community edges. When a planted partition is available (SBM's
+  `community_labels`) it is used and the result is tagged
+  `label_source = ground_truth`; otherwise communities are detected with
+  dependency-free greedy modularity maximization (Clauset–Newman–Moore) and the
+  result is tagged `label_source = detected`. The perturbation therefore applies
+  to every family and is never skipped for missing labels. On Erdős–Rényi this
+  is a deliberate negative control: a structureless graph has no real
+  communities, so a detected partition is noise and low sensitivity is the
+  expected, correct outcome rather than a method failure. See
+  `community_detection.md`.
 - Hub and global perturbations: hub modification targets high-degree nodes,
   primarily for BA graphs, and changes the role of central attachment points.
 

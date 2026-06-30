@@ -1,7 +1,8 @@
 import unittest
 
 from experimentation.datasets import SyntheticDatasetConfig, generate_graph_distribution
-from experimentation.perturbations import perturb_graph
+from experimentation.graph import Graph
+from experimentation.perturbations import detect_communities, perturb_graph
 
 
 class PerturbationTests(unittest.TestCase):
@@ -68,18 +69,55 @@ class PerturbationTests(unittest.TestCase):
         result = perturb_graph(graph, 0.5, "community_weakening", seed=8, metadata=graph.metadata)
 
         self.assertEqual(result.metadata["status"], "success")
+        self.assertEqual(result.metadata["label_source"], "ground_truth")
         self.assertGreater(result.metadata["rewires"], 0)
         self.assertEqual(graph.number_of_edges(), result.graph.number_of_edges())
 
-    def test_community_weakening_skips_without_metadata(self) -> None:
+    def test_community_weakening_detects_communities_without_metadata(self) -> None:
         graph = generate_graph_distribution(
-            SyntheticDatasetConfig("erdos_renyi", num_graphs=1, num_nodes=10, edge_probability=0.4, seed=6)
+            SyntheticDatasetConfig("erdos_renyi", num_graphs=1, num_nodes=20, edge_probability=0.3, seed=6)
         )[0]
 
         result = perturb_graph(graph, 0.5, "community_weakening", seed=8)
 
-        self.assertEqual(result.metadata["status"], "skipped")
-        self.assertTrue(result.graph.structurally_equal(graph))
+        # No longer skipped: communities are detected and the row is tagged.
+        self.assertNotEqual(result.metadata["status"], "skipped")
+        self.assertEqual(result.metadata["label_source"], "detected")
+        self.assertIn("num_communities", result.metadata)
+
+    def test_community_weakening_detected_on_barabasi_albert(self) -> None:
+        graph = generate_graph_distribution(
+            SyntheticDatasetConfig("barabasi_albert", num_graphs=1, num_nodes=30, m=2, seed=7)
+        )[0]
+
+        result = perturb_graph(graph, 0.6, "community_weakening", seed=3)
+
+        self.assertNotEqual(result.metadata["status"], "skipped")
+        self.assertEqual(result.metadata["label_source"], "detected")
+
+    def test_detect_communities_recovers_planted_partition(self) -> None:
+        # Two 6-cliques joined by a single bridge edge.
+        graph = Graph(12)
+        for block_start in (0, 6):
+            members = range(block_start, block_start + 6)
+            for u in members:
+                for v in members:
+                    if u < v:
+                        graph.add_edge(u, v)
+        graph.add_edge(5, 6)  # bridge
+
+        labels = detect_communities(graph)
+
+        self.assertEqual(len(labels), 12)
+        self.assertEqual(len(set(labels)), 2)
+        self.assertEqual(len(set(labels[0:6])), 1)
+        self.assertEqual(len(set(labels[6:12])), 1)
+        self.assertNotEqual(labels[0], labels[6])
+
+    def test_detect_communities_handles_edgeless_graph(self) -> None:
+        graph = Graph(5)
+        labels = detect_communities(graph)
+        self.assertEqual(len(labels), 5)
 
     def test_hub_modification_targets_high_degree_nodes(self) -> None:
         graph = generate_graph_distribution(

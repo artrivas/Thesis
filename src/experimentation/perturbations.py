@@ -202,12 +202,18 @@ def _community_weakening(
     perturbed = graph.copy()
     info = _base_metadata(alpha, "community_weakening", family="community", direction="weakening")
     labels = metadata.get("community_labels") or graph.metadata.get("community_labels")
-    if labels is None:
-        info["status"] = "skipped"
-        info["error_message"] = "community_weakening requires community_labels metadata"
-        return PerturbationResult(perturbed, info)
+    if labels is not None:
+        # Ground-truth blocks (e.g. the SBM planted partition).
+        labels = tuple(labels)
+        info["label_source"] = "ground_truth"
+    else:
+        # No planted partition (ER/BA): detect communities so the perturbation
+        # is always applicable. On a structureless graph the detected partition
+        # is essentially noise, which is the intended negative control.
+        labels = detect_communities(graph)
+        info["label_source"] = "detected"
+    info["num_communities"] = len(set(labels))
 
-    labels = tuple(labels)
     intra_edges = [(u, v) for u, v in graph.edges() if labels[u] == labels[v]]
     rewires = math.floor(alpha * len(intra_edges))
     rng.shuffle(intra_edges)
@@ -273,3 +279,79 @@ def _hub_modification(graph: Graph, alpha: float, seed: int) -> PerturbationResu
             info["edges_added"] = int(info["edges_added"]) + 1
             info["rewires"] = int(info["rewires"]) + 1
     return PerturbationResult(perturbed, info)
+
+
+def detect_communities(graph: Graph) -> tuple[int, ...]:
+    """Detect communities by greedy modularity maximization (Clauset-Newman-Moore).
+
+    Dependency-free agglomerative maximization of Newman's modularity. Every node
+    starts in its own community; on each step the pair of adjacent communities
+    whose merge yields the largest positive modularity gain is merged, stopping
+    when no merge improves modularity. Returns a community label per node with
+    contiguous ids starting at ``0``.
+
+    The merge gain for communities ``c`` and ``d`` is
+
+        dQ(c, d) = B_cd / m  -  (D_c * D_d) / (2 * m^2)
+
+    where ``B_cd`` is the number of edges between the communities, ``D_c`` the
+    total degree of community ``c`` and ``m`` the edge count. The procedure is
+    deterministic: ties are broken toward the lowest community ids.
+    """
+
+    n = graph.num_nodes
+    if n == 0:
+        return ()
+    community_of = list(range(n))
+    m = graph.number_of_edges()
+    if m == 0:
+        return _contiguous_labels(community_of)
+
+    degree = {node: graph.degree(node) for node in range(n)}
+    between: dict[int, dict[int, int]] = {node: {} for node in range(n)}
+    for u, v in graph.edges():
+        between[u][v] = between[u].get(v, 0) + 1
+        between[v][u] = between[v].get(u, 0) + 1
+
+    members: dict[int, set[int]] = {node: {node} for node in range(n)}
+    active = set(range(n))
+    two_m_squared = 2.0 * m * m
+    while len(active) > 1:
+        best_gain = 1e-12
+        best_pair: tuple[int, int] | None = None
+        for c in sorted(active):
+            degree_c = degree[c]
+            for d, edges_between in sorted(between[c].items()):
+                if d <= c:
+                    continue
+                gain = edges_between / m - (degree_c * degree[d]) / two_m_squared
+                if gain > best_gain:
+                    best_gain = gain
+                    best_pair = (c, d)
+        if best_pair is None:
+            break
+        c, d = best_pair
+        members[c] |= members[d]
+        degree[c] += degree[d]
+        for neighbor, edges_between in between[d].items():
+            if neighbor == c:
+                continue
+            between[c][neighbor] = between[c].get(neighbor, 0) + edges_between
+            between[neighbor][c] = between[neighbor].get(c, 0) + edges_between
+            between[neighbor].pop(d, None)
+        between[c].pop(d, None)
+        between.pop(d, None)
+        for node in members[d]:
+            community_of[node] = c
+        active.discard(d)
+    return _contiguous_labels(community_of)
+
+
+def _contiguous_labels(community_of: list[int]) -> tuple[int, ...]:
+    remap: dict[int, int] = {}
+    labels = []
+    for community in community_of:
+        if community not in remap:
+            remap[community] = len(remap)
+        labels.append(remap[community])
+    return tuple(labels)

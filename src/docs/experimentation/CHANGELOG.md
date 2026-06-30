@@ -3,6 +3,26 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 2 — Detected-community fallback (Clauset–Newman–Moore)
+
+**Modules:** `perturbations.py`, `runner.py`, `tests/test_perturbations.py`,
+`docs/experimentation/community_detection.md`, `docs/experimentation/theory.md`.
+
+- `_community_weakening` no longer skips when `community_labels` are missing.
+  Added `detect_communities`, a dependency-free deterministic greedy modularity
+  maximizer (CNM agglomerative; merge gain `B_cd/m - D_c·D_d/(2m²)`, ties to the
+  lowest ids). Ground-truth labels (SBM) are used when present and tagged
+  `label_source=ground_truth`; otherwise communities are detected and tagged
+  `label_source=detected`.
+- New result column `label_source` (empty for non-community perturbations),
+  propagated through `_summarize_perturbations` → `_run_workflow_grid`. Also
+  records `num_communities` in metadata.
+- Documented the algorithm, the ER negative-control interpretation (a detected
+  partition of a structureless graph is noise → low sensitivity is expected),
+  and the ground_truth-vs-detected distinction; updated theory.md.
+- Tests: SBM ground_truth path unchanged; ER/BA produce non-skipped `detected`
+  rows; detector recovers a planted two-community graph; edgeless graph handled.
+
 ## Item 1 — Grid-cell parallel runner + seed-range sharding
 
 **Modules:** `runner.py`, `config.py`, `cli.py`,
