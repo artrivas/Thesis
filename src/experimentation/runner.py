@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 import csv
 from dataclasses import asdict, replace
 from datetime import datetime, timezone
 import json
 import logging
+import multiprocessing
 import os
 from pathlib import Path
 import sys
@@ -23,6 +25,73 @@ from experimentation.workflows import (
     configure_acceleration,
     default_workflows,
 )
+
+
+# Environment variables that force single-threaded numeric libraries in each
+# worker. Keeping every worker single-threaded is what preserves the validity of
+# the relative_runtime and tracemalloc memory metrics: we parallelize ACROSS grid
+# cells and keep the workflows serial WITHIN a cell, so each measured workflow
+# runs under the same controlled, single-core contention as the serial path.
+_WORKER_THREAD_CAP_VARS = (
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+)
+
+
+def _apply_thread_caps() -> None:
+    for variable in _WORKER_THREAD_CAP_VARS:
+        os.environ[variable] = "1"
+
+
+def _init_worker(device: str = "cpu") -> None:
+    """ProcessPool initializer: pin each worker to a single CPU thread."""
+
+    _apply_thread_caps()
+    try:  # torch stays optional and CPU-only inside workers.
+        import torch  # type: ignore[import-not-found]
+
+        torch.set_num_threads(1)
+    except ImportError:
+        pass
+    configure_acceleration(device)
+
+
+def _multiprocessing_context():
+    """Pick a safe start method for CPU workers.
+
+    ``forkserver`` forks every worker from a clean, single-threaded server
+    process, so the thread-cap initializer runs before any heavy import and we
+    avoid the fork-from-multithreaded-parent deadlock hazard. We fall back to
+    ``spawn`` where ``forkserver`` is unavailable (e.g. Windows).
+    """
+
+    available = multiprocessing.get_all_start_methods()
+    for method in ("forkserver", "spawn"):
+        if method in available:
+            return multiprocessing.get_context(method)
+    return multiprocessing.get_context()
+
+
+def _compute_cell_rows(
+    dataset_config: SyntheticDatasetConfig,
+    perturbation: str,
+    alpha: float,
+    seed: int,
+    workflows: list[Workflow],
+) -> list[dict[str, object]]:
+    """Compute every workflow row for one grid cell (worker entry point).
+
+    A "cell" is one ``(seed, dataset_config, perturbation, alpha)`` combination.
+    The worker generates the PairedDistribution once and runs ALL pending
+    workflows on it SERIALLY, returning the rows for the parent to persist. The
+    worker never touches the result files; only the parent process writes.
+    """
+
+    paired = generate_paired_distribution(dataset_config, perturbation, alpha, seed)
+    return _run_workflow_grid(dataset_config, perturbation, alpha, seed, paired, workflows)
 
 
 RESULT_COLUMNS = (
@@ -75,8 +144,19 @@ def run_experiment(
     log_path: Path | str | None = None,
     checkpoint_path: Path | str | None = None,
     console_log: bool = False,
+    workers: int = 1,
+    seed_range: tuple[int, int] | None = None,
 ) -> Path:
-    """Execute dataset x perturbation x alpha x seed x workflow and save CSV results."""
+    """Execute dataset x perturbation x alpha x seed x workflow and save CSV results.
+
+    With ``workers == 1`` the run is serial and byte-for-byte identical to the
+    historical behavior. With ``workers > 1`` the grid is executed in parallel,
+    one CPU process per grid cell, while the parent process remains the sole
+    writer so the append + fsync + checkpoint crash-safety story is unchanged.
+
+    ``seed_range`` is a half-open ``(start, stop)`` index slice into the resolved
+    seed list, used to shard a replication sweep across machines.
+    """
 
     config.outputs.create_directories()
     result_path = Path(output_path) if output_path is not None else config.outputs.results / "results.csv"
@@ -88,18 +168,23 @@ def run_experiment(
     logger = _experiment_logger(log_file, console=console_log)
     configure_acceleration(device)
     workflow_instances = workflows if workflows is not None else workflows_from_config(config)
+    seeds = _resolve_seeds(config.seeds, seed_range)
 
     if resume:
         _raise_on_incompatible_resume(result_path, workflow_instances)
     if resume and rerun_failed:
         _drop_failed_rows(result_path)
     completed = _completed_keys(result_path) if resume else set()
-    total_rows = _expected_row_count(config, workflow_instances)
+    total_rows = _expected_row_count(config, workflow_instances, len(seeds))
     logger.info(
-        "run_start result_path=%s resume=%s rerun_failed=%s completed=%d total=%d device=%s",
+        "run_start result_path=%s resume=%s rerun_failed=%s workers=%d seed_range=%s "
+        "seeds=%d completed=%d total=%d device=%s",
         result_path,
         resume,
         rerun_failed,
+        workers,
+        seed_range,
+        len(seeds),
         len(completed),
         total_rows,
         acceleration_summary(),
@@ -132,28 +217,11 @@ def run_experiment(
                 row.get("status"),
             )
 
-        for seed in config.seeds:
-            for dataset_template in config.resolved_dataset_configs():
-                dataset_config = replace(dataset_template, seed=seed)
-                for perturbation in config.perturbations.methods:
-                    for alpha in config.perturbations.alpha_values:
-                        pending_workflows = [
-                            workflow
-                            for workflow in workflow_instances
-                            if _grid_key(dataset_config, perturbation, alpha, seed, workflow) not in completed
-                        ]
-                        if not pending_workflows:
-                            logger.info(
-                                "grid_skip_completed dataset=%s perturbation=%s alpha=%s seed=%s",
-                                dataset_config.family,
-                                perturbation,
-                                alpha,
-                                seed,
-                            )
-                            continue
-                        paired = generate_paired_distribution(dataset_config, perturbation, alpha, seed)
-                        for row in _run_workflow_grid(dataset_config, perturbation, alpha, seed, paired, pending_workflows):
-                            persist(row)
+        pending_cells = _pending_cells(config, workflow_instances, seeds, completed, logger)
+        if workers <= 1:
+            _run_serial(pending_cells, persist)
+        else:
+            _run_parallel(pending_cells, persist, workers=workers, logger=logger)
 
     logger.info(
         "run_finish result_path=%s rows_written=%d completed=%d total=%d",
@@ -163,6 +231,179 @@ def run_experiment(
         total_rows,
     )
     return result_path
+
+
+Cell = tuple[SyntheticDatasetConfig, str, float, int]
+
+
+def _resolve_seeds(seeds: tuple[int, ...], seed_range: tuple[int, int] | None) -> tuple[int, ...]:
+    if seed_range is None:
+        return tuple(seeds)
+    start, stop = seed_range
+    if start < 0 or stop < start:
+        raise ValueError(f"seed_range must be a half-open (start, stop) with 0 <= start <= stop, got {seed_range}")
+    return tuple(seeds)[start:stop]
+
+
+def _iter_cells(config: ExperimentConfig, seeds: tuple[int, ...]):
+    """Yield grid cells in the historical serial order for deterministic output."""
+
+    for seed in seeds:
+        for dataset_template in config.resolved_dataset_configs():
+            dataset_config = replace(dataset_template, seed=seed)
+            for perturbation in config.perturbations.methods:
+                for alpha in config.perturbations.alpha_values:
+                    yield (dataset_config, perturbation, alpha, seed)
+
+
+def _pending_cells(
+    config: ExperimentConfig,
+    workflow_instances: list[Workflow],
+    seeds: tuple[int, ...],
+    completed: set[RowKey],
+    logger: logging.Logger,
+) -> list[tuple[Cell, list[Workflow]]]:
+    pending: list[tuple[Cell, list[Workflow]]] = []
+    for cell in _iter_cells(config, seeds):
+        dataset_config, perturbation, alpha, seed = cell
+        pending_workflows = [
+            workflow
+            for workflow in workflow_instances
+            if _grid_key(dataset_config, perturbation, alpha, seed, workflow) not in completed
+        ]
+        if not pending_workflows:
+            logger.info(
+                "grid_skip_completed dataset=%s perturbation=%s alpha=%s seed=%s",
+                dataset_config.family,
+                perturbation,
+                alpha,
+                seed,
+            )
+            continue
+        pending.append((cell, pending_workflows))
+    return pending
+
+
+def _run_serial(pending_cells: list[tuple[Cell, list[Workflow]]], persist) -> None:
+    for (dataset_config, perturbation, alpha, seed), pending_workflows in pending_cells:
+        rows = _compute_cell_rows(dataset_config, perturbation, alpha, seed, pending_workflows)
+        for row in rows:
+            persist(row)
+
+
+def _run_parallel(
+    pending_cells: list[tuple[Cell, list[Workflow]]],
+    persist,
+    *,
+    workers: int,
+    logger: logging.Logger,
+) -> None:
+    """Run cells across a CPU process pool; the parent stays the sole writer.
+
+    Submission is bounded (about two cells per worker in flight) so memory stays
+    flat and an abrupt kill loses at most a handful of in-flight cells, which the
+    next resume simply recomputes. A worker crash records ``failed`` rows for the
+    cell instead of killing the whole run.
+    """
+
+    context = _multiprocessing_context()
+    cell_iterator = iter(pending_cells)
+    inflight: dict[object, tuple[Cell, list[Workflow]]] = {}
+    max_inflight = max(1, workers * 2)
+    executor = ProcessPoolExecutor(
+        max_workers=workers,
+        mp_context=context,
+        initializer=_init_worker,
+        initargs=("cpu",),
+    )
+    try:
+        def submit_next() -> bool:
+            item = next(cell_iterator, None)
+            if item is None:
+                return False
+            cell, pending_workflows = item
+            future = executor.submit(_compute_cell_rows, *cell, pending_workflows)
+            inflight[future] = (cell, pending_workflows)
+            return True
+
+        for _ in range(max_inflight):
+            if not submit_next():
+                break
+
+        while inflight:
+            done, _ = wait(list(inflight), return_when=FIRST_COMPLETED)
+            for future in done:
+                cell, pending_workflows = inflight.pop(future)
+                try:
+                    rows = future.result()
+                except Exception as exc:  # pragma: no cover - exercised via failing-cell test.
+                    rows = _failed_cell_rows(cell, pending_workflows, exc)
+                    logger.warning(
+                        "cell_failed dataset=%s perturbation=%s alpha=%s seed=%s error=%s",
+                        cell[0].family,
+                        cell[1],
+                        cell[2],
+                        cell[3],
+                        exc,
+                    )
+                for row in rows:
+                    persist(row)
+                submit_next()
+    except KeyboardInterrupt:
+        logger.warning("run_interrupted flushing and shutting down workers")
+        executor.shutdown(wait=False, cancel_futures=True)
+        raise
+    else:
+        executor.shutdown(wait=True)
+
+
+def _failed_cell_rows(
+    cell: Cell,
+    workflows: list[Workflow],
+    exc: Exception,
+) -> list[dict[str, object]]:
+    """Synthesize ``failed`` rows for a cell whose worker raised.
+
+    These rows carry the full row key so resume recognizes them and
+    ``--rerun-failed`` can re-pick them, but they hold no scores.
+    """
+
+    dataset_config, perturbation, alpha, seed = cell
+    dataset_params = json.dumps(asdict(dataset_config), sort_keys=True)
+    rows = []
+    for workflow in workflows:
+        parameters = workflow.parameters()
+        rows.append(
+            {
+                "dataset": dataset_config.family,
+                "dataset_params": dataset_params,
+                "perturbation": perturbation,
+                "perturbation_params": "",
+                "perturbation_family": None,
+                "perturbation_direction": None,
+                "label_source": None,
+                "edit_distance_raw": None,
+                "edit_distance_weighted": None,
+                "graph_count": 0,
+                "node_count_min": 0,
+                "node_count_max": 0,
+                "edge_count_min": 0,
+                "edge_count_max": 0,
+                "alpha": alpha,
+                "seed": seed,
+                "workflow": workflow.name,
+                "implementation_mode": parameters.get("implementation_mode", "paper_faithful"),
+                "workflow_params": parameters,
+                "distribution_score": None,
+                "mean_shift_score": None,
+                "paired_score": None,
+                "runtime_seconds": 0.0,
+                "memory_mb": None,
+                "status": "failed",
+                "error_message": f"cell_execution_failed: {exc}",
+            }
+        )
+    return rows
 
 
 def workflows_from_config(config: ExperimentConfig) -> list[Workflow]:
@@ -192,6 +433,41 @@ def write_result_rows(rows: list[dict[str, object]], output_path: Path | str) ->
 def read_result_rows(path: Path | str) -> list[dict[str, str]]:
     with Path(path).open("r", newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
+
+
+def _shard_result_csv(path: Path) -> Path:
+    """Resolve a shard pointer (results.csv, a run dir, or a results dir)."""
+
+    path = Path(path)
+    if path.is_file():
+        return path
+    for candidate in (path / "results.csv", path / "results" / "results.csv"):
+        if candidate.is_file():
+            return candidate
+    raise FileNotFoundError(f"No results.csv found for shard {path}")
+
+
+def merge_runs(shard_paths: list[Path | str], output_path: Path | str) -> Path:
+    """Concatenate shard result CSVs into one, de-duplicating on the row key.
+
+    Each shard owns its own crash-safe results.csv; merging simply unions the
+    rows. Because the global seed list is deterministic and shards slice disjoint
+    index ranges, two disjoint shards plus a merge reproduce a single unsharded
+    run exactly. De-duplication on the row key makes the merge idempotent and
+    tolerant of accidental shard overlap.
+    """
+
+    seen: set[RowKey] = set()
+    merged: list[dict[str, object]] = []
+    for shard in shard_paths:
+        for row in read_result_rows(_shard_result_csv(Path(shard))):
+            key = _row_key(row)
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(row)
+    merged.sort(key=_row_key)
+    return write_result_rows(merged, output_path)
 
 
 RowKey = tuple[str, str, str, str, str, str, str]
@@ -268,9 +544,10 @@ def _canonical_jsonish(value: object) -> str:
     return str(value)
 
 
-def _expected_row_count(config: ExperimentConfig, workflows: list[Workflow]) -> int:
+def _expected_row_count(config: ExperimentConfig, workflows: list[Workflow], num_seeds: int | None = None) -> int:
+    seed_count = len(config.seeds) if num_seeds is None else num_seeds
     return (
-        len(config.seeds)
+        seed_count
         * len(config.resolved_dataset_configs())
         * len(config.perturbations.methods)
         * len(config.perturbations.alpha_values)
