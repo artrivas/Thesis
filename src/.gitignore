@@ -1,3 +1,7 @@
 __pycache__/
 *.py[cod]
 
+# Downloaded real datasets (fetched by scripts/fetch_imdb_binary.py) are never
+# committed; only the tiny TU fixture under tests/fixtures/ is tracked.
+data/
+

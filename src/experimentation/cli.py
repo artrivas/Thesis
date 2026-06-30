@@ -13,6 +13,7 @@ from experimentation.config import (
     build_run_output_config,
     debug_config,
     full_synthetic_config,
+    imdb_config,
     output_config_for_root,
 )
 from experimentation.evaluation import evaluate_results
@@ -23,6 +24,7 @@ from experimentation.runner import merge_runs, run_experiment
 CONFIG_BUILDERS = {
     "debug": debug_config,
     "full": full_synthetic_config,
+    "imdb": imdb_config,
 }
 DEFAULT_RESULTS_ROOT = "results/runs"
 

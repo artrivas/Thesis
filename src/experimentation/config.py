@@ -172,6 +172,40 @@ def full_synthetic_config(output_root: Path | str = Path("outputs/experimentatio
     )
 
 
+def imdb_binary_dataset_config(num_graphs: int = 100, data_root: str = "data") -> SyntheticDatasetConfig:
+    """Return a dataset config that loads IMDB-BINARY from disk into the grid."""
+
+    return SyntheticDatasetConfig(
+        family="imdb_binary",
+        num_graphs=num_graphs,
+        data_root=data_root,
+        dataset_name="IMDB-BINARY",
+    )
+
+
+def imdb_config(
+    output_root: Path | str = Path("outputs/imdb_binary"),
+    data_root: str = "data",
+    num_graphs: int = 100,
+) -> ExperimentConfig:
+    """Full grid on the real IMDB-BINARY family (perturbations/workflows unchanged).
+
+    Community labels are absent (IMDB-BINARY is unlabeled), so community_weakening
+    uses detected communities. Requires the dataset on disk; fetch it with
+    scripts/fetch_imdb_binary.py. See docs/experimentation/real_datasets.md for
+    the MMD-bandwidth / NetLSD-normalization sensitivity to variable graph sizes.
+    """
+
+    root = Path(output_root)
+    return ExperimentConfig(
+        datasets=DatasetConfig(families=("imdb_binary",), graphs_per_distribution=num_graphs),
+        dataset_configs=(imdb_binary_dataset_config(num_graphs=num_graphs, data_root=data_root),),
+        perturbations=PerturbationConfig(alpha_values=DEFAULT_ALPHA_VALUES),
+        seeds=DEFAULT_SEEDS,
+        outputs=output_config_for_root(root),
+    )
+
+
 def resolved_config_payload(config: ExperimentConfig) -> dict[str, object]:
     """Return a JSON-serializable, seed-normalized view of a config.
 

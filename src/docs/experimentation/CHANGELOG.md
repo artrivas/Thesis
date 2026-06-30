@@ -3,6 +3,31 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 6 — Real dataset loader (IMDB-BINARY)
+
+**Modules:** new `real_datasets.py`, `datasets.py`, `config.py`, `cli.py`,
+`workflows.py`, `scripts/fetch_imdb_binary.py`, `tests/fixtures/TINYTU/`,
+`tests/test_real_datasets.py`, `src/.gitignore`,
+`docs/experimentation/real_datasets.md`.
+
+- New `real_datasets.py`: dependency-free TUDataset text-format loader
+  (`_A.txt`, `_graph_indicator.txt`, `_graph_labels.txt`, optional
+  `_node_labels.txt`) into the repo's `Graph` objects, targeting IMDB-BINARY.
+- Integrated as a dataset family `imdb_binary`: `SyntheticDatasetConfig` gains
+  `data_root` / `dataset_name`; `generate_graph_distribution` dispatches to the
+  loader (seed-dependent subsample for replication). All perturbations,
+  workflows, edit-distance ground truth, and the failure map apply unchanged;
+  community_weakening uses detected labels (unlabeled data).
+- `config.imdb_config` / `imdb_binary_dataset_config`; `--config imdb` in the CLI.
+- `scripts/fetch_imdb_binary.py` downloads + unzips into `src/data/IMDB-BINARY/`
+  (stdlib only); `src/.gitignore` ignores `data/` so the real dataset is never
+  committed. Only the tiny `tests/fixtures/TINYTU/` is tracked.
+- `workflows.median_heuristic_bandwidth` added for variable-size auto-bandwidth
+  (not wired into defaults, to preserve synthetic reproducibility); documented
+  MMD-bandwidth and NetLSD-normalization sensitivity for variable graph sizes.
+- Tests: fixture structure/labels, missing-data error, real family through
+  `generate_graph_distribution` and a full run, median-heuristic bandwidth.
+
 ## Item 5 — Traceable run directories + run manifest
 
 **Modules:** `runner.py`, `cli.py`, `config.py` (item 1 helpers),

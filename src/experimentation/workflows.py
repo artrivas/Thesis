@@ -139,6 +139,33 @@ def rbf_kernel_is_nearly_constant(
     return max(values) - min(values) <= range_tolerance or min(values) >= high_similarity_threshold
 
 
+def median_heuristic_bandwidth(vectors: list[Vector]) -> float:
+    """Median pairwise L2 distance: the standard RBF-MMD bandwidth heuristic.
+
+    Recommended for variable-size real datasets (e.g. IMDB-BINARY) where a fixed
+    bandwidth tuned for n=50 can saturate or collapse the kernel. Returns ``1.0``
+    when there are fewer than two vectors or all distances are zero, keeping the
+    bandwidth positive. The default synthetic workflows do not use this so their
+    results stay reproducible; pass it explicitly:
+    ``StructuralStatisticsMMDWorkflow(bandwidth=median_heuristic_bandwidth(vecs))``.
+    """
+
+    if len(vectors) < 2:
+        return 1.0
+    distances = [
+        l2(vectors[i], vectors[j])
+        for i in range(len(vectors))
+        for j in range(i + 1, len(vectors))
+    ]
+    positive = sorted(distance for distance in distances if distance > 0.0)
+    if not positive:
+        return 1.0
+    middle = len(positive) // 2
+    if len(positive) % 2:
+        return positive[middle]
+    return 0.5 * (positive[middle - 1] + positive[middle])
+
+
 def sparse_linear_mmd(vectors_x: list[SparseVector], vectors_y: list[SparseVector]) -> float:
     """Return linear-kernel MMD as squared distance between mean sparse features."""
 

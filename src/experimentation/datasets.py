@@ -7,6 +7,7 @@ import random
 
 from experimentation.graph import Graph
 from experimentation.perturbations import PerturbationResult, perturb_graph
+from experimentation.real_datasets import REAL_DATASET_FAMILIES, load_tu_dataset
 
 
 @dataclass(frozen=True)
@@ -20,6 +21,10 @@ class SyntheticDatasetConfig:
     p_out: float = 0.03
     m: int = 2
     seed: int = 0
+    # Real-dataset fields (empty for the synthetic families). A non-empty
+    # ``data_root`` switches the family to a disk-loaded TU dataset.
+    data_root: str = ""
+    dataset_name: str = ""
 
 
 @dataclass(frozen=True)
@@ -40,7 +45,27 @@ def generate_graph_distribution(dataset_config: SyntheticDatasetConfig) -> list[
         return _generate_stochastic_block_model(dataset_config)
     if family == "barabasi_albert":
         return _generate_barabasi_albert(dataset_config)
+    if family in REAL_DATASET_FAMILIES or dataset_config.data_root:
+        return _load_real_distribution(dataset_config)
     raise ValueError(f"Unknown synthetic dataset family: {family}")
+
+
+def _load_real_distribution(config: SyntheticDatasetConfig) -> list[Graph]:
+    """Load a real TU dataset and (optionally) seed-subsample to ``num_graphs``.
+
+    The original graphs come from disk, so different seeds select a different
+    subsample of real graphs (giving genuine across-seed replication variation)
+    while perturbations vary by seed as usual. Loading is deterministic per seed.
+    """
+
+    name = config.dataset_name or REAL_DATASET_FAMILIES.get(config.family, config.family)
+    data_root = config.data_root or "data"
+    graphs = load_tu_dataset(data_root, name, family=config.family)
+    if config.num_graphs and 0 < config.num_graphs < len(graphs):
+        rng = random.Random(config.seed)
+        indices = sorted(rng.sample(range(len(graphs)), config.num_graphs))
+        graphs = [graphs[index] for index in indices]
+    return graphs
 
 
 def generate_paired_distribution(
