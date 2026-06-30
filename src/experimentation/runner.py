@@ -16,6 +16,7 @@ import tracemalloc
 
 from experimentation.config import ExperimentConfig, debug_config, full_synthetic_config
 from experimentation.datasets import PairedDistribution, SyntheticDatasetConfig, generate_paired_distribution
+from experimentation.ground_truth import cell_edit_distances
 from experimentation.workflows import (
     DIVERSITY_CURVES_WORKFLOW,
     LEGACY_NETLSD_MMD_WORKFLOW,
@@ -115,6 +116,8 @@ RESULT_COLUMNS = (
     "distribution_score",
     "mean_shift_score",
     "paired_score",
+    "edit_distance_raw",
+    "edit_distance_weighted",
     "runtime_seconds",
     "memory_mb",
     "status",
@@ -628,6 +631,7 @@ def _run_workflow_grid(
     perturbation_params = json.dumps(perturbation_summary, sort_keys=True)
     size_summary = _graph_size_summary(paired)
     skip_error = _skip_error(paired)
+    edit_distance_raw, edit_distance_weighted = cell_edit_distances(paired)
 
     rows = []
     for workflow in workflows:
@@ -657,6 +661,8 @@ def _run_workflow_grid(
                 "perturbation_family": perturbation_summary.get("perturbation_family"),
                 "perturbation_direction": perturbation_summary.get("perturbation_direction"),
                 "label_source": perturbation_summary.get("label_source"),
+                "edit_distance_raw": edit_distance_raw,
+                "edit_distance_weighted": edit_distance_weighted,
                 **size_summary,
                 "alpha": alpha,
                 "seed": seed,

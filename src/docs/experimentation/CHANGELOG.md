@@ -3,6 +3,32 @@
 Running log of changes to the `src/experimentation/` module and its docs. Newest
 entries first. Each entry corresponds to one committed work item.
 
+## Item 3 — Edit-distance ground truth + alpha validation
+
+**Modules:** new `ground_truth.py`, `perturbations.py`, `runner.py`,
+`evaluation.py`, `tests/test_ground_truth.py`,
+`docs/experimentation/alpha_validation.md`.
+
+- New `ground_truth.py`: exact per-pair edit distance from logged operations
+  (never NP-hard GED). `raw` = symmetric-difference size of the edge sets;
+  `weighted` = sum of edited-edge importances on the **original** graph. Importance
+  weighting is pluggable: dependency-free Brandes `brandes_betweenness`,
+  `edge_betweenness`, `node_betweenness`; default `betweenness_product_weight`
+  (`1 + cb[u]·cb[v]`, defined for added and removed edges).
+- `perturb_graph` now records the exact net `edited_edges` (symmetric difference,
+  so add-then-remove cancels) in every perturbation's metadata.
+- Runner computes per-cell mean `edit_distance_raw` and `edit_distance_weighted`
+  (new result columns) once per cell and attaches them to every workflow row.
+- Evaluation adds `edit_distance_validation` (Spearman of `distribution_score` vs
+  `edit_distance_weighted`) and `paired_edit_distance_validation` (vs
+  `paired_score`) to `evaluation_summary.csv`.
+- `alpha_validation.md`: alpha is a nominal control validated empirically by
+  (a) replication over seeds and (b) monotone correlation with the
+  importance-weighted edit-distance ground truth; explicitly flags paired
+  analysis as a synthetic-only diagnostic, not a distribution distance.
+- Tests: known raw counts, hub-vs-leaf weighting ordering, bridge edge
+  betweenness peak, cell-mean edit distance scaling with alpha.
+
 ## Item 2 — Detected-community fallback (Clauset–Newman–Moore)
 
 **Modules:** `perturbations.py`, `runner.py`, `tests/test_perturbations.py`,

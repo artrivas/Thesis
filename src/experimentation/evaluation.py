@@ -19,6 +19,8 @@ EVALUATION_SUMMARY_COLUMNS = (
     "monotonicity",
     "paired_detectability",
     "mean_shift_detectability",
+    "edit_distance_validation",
+    "paired_edit_distance_validation",
     "robustness_cv",
     "ranking_stability_tau",
     "relative_runtime",
@@ -95,6 +97,8 @@ def generate_evaluation_summary(rows: list[dict[str, object]]) -> list[dict[str,
         alpha_distribution = _numeric_pairs(group_rows, "alpha", "distribution_score")
         alpha_paired = _numeric_pairs(group_rows, "alpha", "paired_score")
         alpha_mean_shift = _numeric_pairs(group_rows, "alpha", "mean_shift_score")
+        edit_distribution = _numeric_pairs(group_rows, "edit_distance_weighted", "distribution_score")
+        edit_paired = _numeric_pairs(group_rows, "edit_distance_weighted", "paired_score")
         relative_runtimes = [
             relative_runtime_by_id[id(row)]
             for row in group_rows
@@ -110,6 +114,8 @@ def generate_evaluation_summary(rows: list[dict[str, object]]) -> list[dict[str,
                 "monotonicity": monotonicity_violation_fraction(alpha_distribution),
                 "paired_detectability": spearman_correlation_from_pairs(alpha_paired),
                 "mean_shift_detectability": spearman_correlation_from_pairs(alpha_mean_shift),
+                "edit_distance_validation": spearman_correlation_from_pairs(edit_distribution),
+                "paired_edit_distance_validation": spearman_correlation_from_pairs(edit_paired),
                 "mean_shift_duplicates_distribution": mean_shift_duplicates_distribution(group_rows),
                 "robustness_cv": coefficient_of_variation(list(seed_means.values())),
                 "ranking_stability_tau": ranking_tau_by_group.get((dataset, perturbation), 1.0),

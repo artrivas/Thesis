@@ -7,6 +7,7 @@ import math
 import random
 
 from experimentation.graph import Edge, Graph, normalize_edge
+from experimentation.ground_truth import edited_edge_ops
 
 
 @dataclass(frozen=True)
@@ -28,22 +29,28 @@ def perturb_graph(
         raise ValueError("alpha must be between 0.0 and 1.0")
     context = metadata or {}
     if perturbation_type == "edge_insertion":
-        return _edge_insertion(graph, alpha, seed)
-    if perturbation_type == "edge_deletion":
-        return _edge_deletion(graph, alpha, seed)
-    if perturbation_type == "edge_addition_deletion":
-        return _edge_addition_deletion(graph, alpha, seed)
-    if perturbation_type == "triangle_insertion":
-        return _triangle_insertion(graph, alpha, seed)
-    if perturbation_type == "triangle_deletion":
-        return _triangle_deletion(graph, alpha, seed)
-    if perturbation_type == "triangle_injection_removal":
-        return _triangle_injection_removal(graph, alpha, seed)
-    if perturbation_type == "community_weakening":
-        return _community_weakening(graph, alpha, seed, context)
-    if perturbation_type == "hub_modification":
-        return _hub_modification(graph, alpha, seed)
-    raise ValueError(f"Unknown perturbation type: {perturbation_type}")
+        result = _edge_insertion(graph, alpha, seed)
+    elif perturbation_type == "edge_deletion":
+        result = _edge_deletion(graph, alpha, seed)
+    elif perturbation_type == "edge_addition_deletion":
+        result = _edge_addition_deletion(graph, alpha, seed)
+    elif perturbation_type == "triangle_insertion":
+        result = _triangle_insertion(graph, alpha, seed)
+    elif perturbation_type == "triangle_deletion":
+        result = _triangle_deletion(graph, alpha, seed)
+    elif perturbation_type == "triangle_injection_removal":
+        result = _triangle_injection_removal(graph, alpha, seed)
+    elif perturbation_type == "community_weakening":
+        result = _community_weakening(graph, alpha, seed, context)
+    elif perturbation_type == "hub_modification":
+        result = _hub_modification(graph, alpha, seed)
+    else:
+        raise ValueError(f"Unknown perturbation type: {perturbation_type}")
+
+    # Record the exact net edited edges for importance-weighted edit distance.
+    # This is the symmetric difference of edge sets, so add-then-remove cancels.
+    result.metadata["edited_edges"] = edited_edge_ops(graph, result.graph)
+    return result
 
 
 def _base_metadata(

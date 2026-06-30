@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(wsl -d ubuntu -- bash -lc \"cd /home/artrivas/Thesis/src && rm -rf /tmp/it3 && .venv/bin/python -m experimentation.cli run --config debug --workers 2 --output-root /tmp/it3 --evaluate >/dev/null 2>&1 && .venv/bin/python /tmp/it3_check.py\")"
+    ]
+  }
+}
