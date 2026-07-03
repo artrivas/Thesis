@@ -1,0 +1,2 @@
+2026-07-02 20:58:32,691 INFO run_start result_path=results/runs/2026-07-03T0158_3bb151a6/results/results.csv resume=True rerun_failed=False workers=12 seed_range=None seeds=5 completed=0 total=1320 device=cpu
+2026-07-02 20:58:54,915 INFO run_start result_path=results/runs/2026-07-03T0158_3bb151a6/results/results.csv resume=True rerun_failed=False workers=12 seed_range=None seeds=5 completed=0 total=1320 device=cpu

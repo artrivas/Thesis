@@ -947,15 +947,34 @@ def _coarsen_to_scale_paper(
 
 
 def _selected_random_contraction_edge(graph: Graph, rng: random.Random) -> Edge:
+    unsorted_edges = graph.edges()
+    if not unsorted_edges:
+        raise ValueError("Cannot select a contraction edge from an edgeless graph")
+    # The whole-graph signature is identical for every edge in this call, so it
+    # is a loop invariant: computing it once (instead of once per edge inside the
+    # sort key) leaves the ordering — and therefore the random pick — unchanged,
+    # while removing an O(edges) x O(nodes+edges) redundant recomputation that
+    # dominated the diversity-curve workflow's runtime.
+    graph_signature = str(_graph_structural_signature(graph))
+    # Every edge's structural signature reads node degrees and per-node local
+    # signatures for its endpoints. Those depend only on the (fixed) graph, so a
+    # node incident to d edges would otherwise recompute its signature d times.
+    # Precomputing both once per call is loop-invariant hoisting: identical
+    # values, but the per-node work happens once instead of O(degree) times.
+    degrees = [len(graph.adjacency[node]) for node in range(graph.num_nodes)]
+    node_signatures = [
+        _node_local_signature(graph, node, degrees=degrees)
+        for node in range(graph.num_nodes)
+    ]
     edges = sorted(
-        graph.edges(),
+        unsorted_edges,
         key=lambda edge: (
-            _edge_structural_signature(graph, edge),
-            _edge_priority(str(_graph_structural_signature(graph)), edge),
+            _edge_structural_signature(
+                graph, edge, degrees=degrees, node_signatures=node_signatures
+            ),
+            _edge_priority(graph_signature, edge),
         ),
     )
-    if not edges:
-        raise ValueError("Cannot select a contraction edge from an edgeless graph")
     return edges[rng.randrange(len(edges))]
 
 
@@ -1086,13 +1105,24 @@ def _graph_structural_signature(graph: Graph) -> tuple[tuple[int, ...], tuple[in
     return tuple(sorted(degrees)), tuple(component_sizes)
 
 
-def _edge_structural_signature(graph: Graph, edge: Edge) -> tuple[tuple[object, object], int, tuple[int, ...]]:
+def _edge_structural_signature(
+    graph: Graph,
+    edge: Edge,
+    *,
+    degrees: Sequence[int] | None = None,
+    node_signatures: Sequence[object] | None = None,
+) -> tuple[tuple[object, object], int, tuple[int, ...]]:
     u, v = edge
-    endpoint_signatures = tuple(sorted((_node_local_signature(graph, u), _node_local_signature(graph, v))))
+    if node_signatures is not None:
+        sig_u, sig_v = node_signatures[u], node_signatures[v]
+    else:
+        sig_u, sig_v = _node_local_signature(graph, u, degrees=degrees), _node_local_signature(graph, v, degrees=degrees)
+    endpoint_signatures = tuple(sorted((sig_u, sig_v)))
     common_neighbors = len(graph.adjacency[u] & graph.adjacency[v])
+    degree_of = (lambda node: degrees[node]) if degrees is not None else graph.degree
     neighbor_degrees = tuple(
         sorted(
-            graph.degree(node)
+            degree_of(node)
             for node in (graph.adjacency[u] | graph.adjacency[v])
             if node not in edge
         )
@@ -1100,18 +1130,21 @@ def _edge_structural_signature(graph: Graph, edge: Edge) -> tuple[tuple[object, 
     return endpoint_signatures, common_neighbors, neighbor_degrees
 
 
-def _node_local_signature(graph: Graph, node: int) -> tuple[int, tuple[int, ...], tuple[int, ...]]:
+def _node_local_signature(
+    graph: Graph, node: int, *, degrees: Sequence[int] | None = None
+) -> tuple[int, tuple[int, ...], tuple[int, ...]]:
+    degree_of = (lambda index: degrees[index]) if degrees is not None else graph.degree
     neighbors = graph.adjacency[node]
-    neighbor_degrees = tuple(sorted(graph.degree(neighbor) for neighbor in neighbors))
+    neighbor_degrees = tuple(sorted(degree_of(neighbor) for neighbor in neighbors))
     two_hop_degrees = tuple(
         sorted(
-            graph.degree(two_hop)
+            degree_of(two_hop)
             for neighbor in neighbors
             for two_hop in graph.adjacency[neighbor]
             if two_hop != node
         )
     )
-    return graph.degree(node), neighbor_degrees, two_hop_degrees
+    return degree_of(node), neighbor_degrees, two_hop_degrees
 
 
 def _edge_priority(graph_signature: str, edge: Edge) -> str:

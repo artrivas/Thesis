@@ -1,0 +1,153 @@
+{
+  "checkpoint_path": "results/runs/2026-07-01T0441_278e5a7d/logs/checkpoint.json",
+  "config": {
+    "dataset_configs": [
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.12,
+        "family": "erdos_renyi",
+        "m": 2,
+        "num_blocks": 3,
+        "num_graphs": 100,
+        "num_nodes": 50,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "seed": 0
+      },
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.1,
+        "family": "stochastic_block_model",
+        "m": 2,
+        "num_blocks": 4,
+        "num_graphs": 100,
+        "num_nodes": 50,
+        "p_in": 0.28,
+        "p_out": 0.04,
+        "seed": 0
+      },
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.1,
+        "family": "barabasi_albert",
+        "m": 2,
+        "num_blocks": 3,
+        "num_graphs": 100,
+        "num_nodes": 50,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "seed": 0
+      }
+    ],
+    "perturbations": {
+      "alpha_values": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "methods": [
+        "edge_insertion",
+        "edge_deletion",
+        "triangle_insertion",
+        "triangle_deletion",
+        "community_weakening",
+        "hub_modification"
+      ]
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "workflows": [
+      "structural_statistics_mmd",
+      "wl_subtree_kernel_mmd",
+      "native_netlsd",
+      "diversity_curves_shortest_path"
+    ]
+  },
+  "config_hash": "278e5a7d",
+  "ended_at": null,
+  "git_commit": "4f5249c01a3ccf2f5f7544464e70f08d79545c7c",
+  "hostname": "DESKTOP-AFQJDSS",
+  "library_versions": {
+    "numpy": null,
+    "pandas": null,
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "plotly": null,
+    "python": "3.14.4",
+    "streamlit": null,
+    "torch": null
+  },
+  "output_root": "results/runs/2026-07-01T0441_278e5a7d",
+  "result_path": "results/runs/2026-07-01T0441_278e5a7d/results/results.csv",
+  "run_id": "2026-07-01T0441_278e5a7d",
+  "seed_range": null,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "started_at": "2026-07-01T04:41:25.632952+00:00",
+  "status": "running",
+  "workers": 8,
+  "workflows": [
+    "structural_statistics_mmd",
+    "wl_subtree_kernel_mmd",
+    "native_netlsd",
+    "diversity_curves_shortest_path"
+  ]
+}

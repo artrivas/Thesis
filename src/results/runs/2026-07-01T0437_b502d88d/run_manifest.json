@@ -1,0 +1,101 @@
+{
+  "checkpoint_path": "results/runs/2026-07-01T0437_b502d88d/logs/checkpoint.json",
+  "config": {
+    "dataset_configs": [
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.12,
+        "family": "erdos_renyi",
+        "m": 2,
+        "num_blocks": 3,
+        "num_graphs": 5,
+        "num_nodes": 8,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "seed": 0
+      },
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.1,
+        "family": "stochastic_block_model",
+        "m": 2,
+        "num_blocks": 4,
+        "num_graphs": 5,
+        "num_nodes": 8,
+        "p_in": 0.28,
+        "p_out": 0.04,
+        "seed": 0
+      },
+      {
+        "data_root": "",
+        "dataset_name": "",
+        "edge_probability": 0.1,
+        "family": "barabasi_albert",
+        "m": 2,
+        "num_blocks": 3,
+        "num_graphs": 5,
+        "num_nodes": 8,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "seed": 0
+      }
+    ],
+    "perturbations": {
+      "alpha_values": [
+        0.0,
+        0.5,
+        1.0
+      ],
+      "methods": [
+        "edge_insertion",
+        "edge_deletion",
+        "triangle_insertion",
+        "triangle_deletion",
+        "community_weakening",
+        "hub_modification"
+      ]
+    },
+    "seeds": [
+      0,
+      1
+    ],
+    "workflows": [
+      "structural_statistics_mmd",
+      "wl_subtree_kernel_mmd",
+      "native_netlsd",
+      "diversity_curves_shortest_path"
+    ]
+  },
+  "config_hash": "b502d88d",
+  "ended_at": "2026-07-01T04:37:48.431469+00:00",
+  "git_commit": "4f5249c01a3ccf2f5f7544464e70f08d79545c7c",
+  "hostname": "DESKTOP-AFQJDSS",
+  "library_versions": {
+    "numpy": null,
+    "pandas": null,
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "plotly": null,
+    "python": "3.14.4",
+    "streamlit": null,
+    "torch": null
+  },
+  "output_root": "results/runs/2026-07-01T0437_b502d88d",
+  "result_path": "results/runs/2026-07-01T0437_b502d88d/results/results.csv",
+  "run_id": "2026-07-01T0437_b502d88d",
+  "seed_range": null,
+  "seeds": [
+    0,
+    1
+  ],
+  "started_at": "2026-07-01T04:37:46.753340+00:00",
+  "status": "finished",
+  "workers": 8,
+  "workflows": [
+    "structural_statistics_mmd",
+    "wl_subtree_kernel_mmd",
+    "native_netlsd",
+    "diversity_curves_shortest_path"
+  ]
+}

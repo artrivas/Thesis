@@ -1,0 +1,89 @@
+{
+  "checkpoint_path": "results/runs/2026-07-03T0158_3bb151a6/logs/checkpoint.json",
+  "config": {
+    "dataset_configs": [
+      {
+        "data_root": "data",
+        "dataset_name": "IMDB-BINARY",
+        "edge_probability": 0.1,
+        "family": "imdb_binary",
+        "m": 2,
+        "num_blocks": 3,
+        "num_graphs": 100,
+        "num_nodes": 50,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "seed": 0
+      }
+    ],
+    "perturbations": {
+      "alpha_values": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "methods": [
+        "edge_insertion",
+        "edge_deletion",
+        "triangle_insertion",
+        "triangle_deletion",
+        "community_weakening",
+        "hub_modification"
+      ]
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "workflows": [
+      "structural_statistics_mmd",
+      "wl_subtree_kernel_mmd",
+      "native_netlsd",
+      "diversity_curves_shortest_path"
+    ]
+  },
+  "config_hash": "3bb151a6",
+  "ended_at": null,
+  "git_commit": "4f5249c01a3ccf2f5f7544464e70f08d79545c7c",
+  "hostname": "DESKTOP-AFQJDSS",
+  "library_versions": {
+    "numpy": null,
+    "pandas": null,
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "plotly": null,
+    "python": "3.14.4",
+    "streamlit": null,
+    "torch": null
+  },
+  "output_root": "results/runs/2026-07-03T0158_3bb151a6",
+  "result_path": "results/runs/2026-07-03T0158_3bb151a6/results/results.csv",
+  "run_id": "2026-07-03T0158_3bb151a6",
+  "seed_range": null,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "started_at": "2026-07-03T01:58:54.892926+00:00",
+  "status": "running",
+  "workers": 12,
+  "workflows": [
+    "structural_statistics_mmd",
+    "wl_subtree_kernel_mmd",
+    "native_netlsd",
+    "diversity_curves_shortest_path"
+  ]
+}

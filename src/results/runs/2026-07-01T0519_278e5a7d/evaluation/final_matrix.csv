@@ -1,0 +1,5 @@
+workflow,sensitivity_label,monotonicity_label,paired_label,mean_shift_label,granularity_label,robustness_label,efficiency_label,interpretability_label
+diversity_curves_shortest_path,High,Very high,Very high,Duplicate,multiscale,Very high,Low,Very high
+native_netlsd,High,Very high,Very high,Duplicate,multiscale,High,Low,High
+structural_statistics_mmd,Low,Low,Very high,High,global,High,Low,Very high
+wl_subtree_kernel_mmd,High,High,Very high,High,multiscale,Very high,Very high,High

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1090" height="368" viewBox="0 0 1090 368"><rect width="100%" height="100%" fill="white"/>
+<text x="20.0" y="32.0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#222">Figure 6: Failure map (diagnosed cause)</text>
+<text x="20.0" y="56.0" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#555">Explains WHY a (dataset, perturbation) hypothesis behaves as it does.</text>
+<text x="156.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">community</text>
+<text x="306.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">edge del.</text>
+<text x="456.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">edge ins.</text>
+<text x="606.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">hub</text>
+<text x="756.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">tri. del.</text>
+<text x="906.0" y="86.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">tri. ins.</text>
+<text x="20.0" y="123.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">BA</text>
+<rect x="150.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="157.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="157.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 114.66</text>
+<rect x="300.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="307.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="307.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 97.0</text>
+<rect x="450.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="457.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="457.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 97.0</text>
+<rect x="600.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="607.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="607.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 107.5567</text>
+<rect x="750.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="757.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="757.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 41.8504</text>
+<rect x="900.0" y="96.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="907.0" y="116.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="907.0" y="134.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 97.0</text>
+<text x="20.0" y="177.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">ER</text>
+<rect x="150.0" y="150.0" width="147.0" height="50.0" fill="#9467bd" stroke="#fff"/>
+<text x="157.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">unstable</text>
+<text x="157.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 156.0958</text>
+<rect x="300.0" y="150.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="307.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="307.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 147.2479</text>
+<rect x="450.0" y="150.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="457.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="457.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 147.2479</text>
+<rect x="600.0" y="150.0" width="147.0" height="50.0" fill="#9467bd" stroke="#fff"/>
+<text x="607.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">unstable</text>
+<text x="607.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 92.7992</text>
+<rect x="750.0" y="150.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="757.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="757.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 74.0371</text>
+<rect x="900.0" y="150.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="907.0" y="170.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="907.0" y="188.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 147.2479</text>
+<text x="20.0" y="231.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#222">SBM</text>
+<rect x="150.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="157.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="157.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 161.6325</text>
+<rect x="300.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="307.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="307.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 118.3083</text>
+<rect x="450.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="457.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="457.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 118.3083</text>
+<rect x="600.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="607.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="607.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 75.885</text>
+<rect x="750.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="757.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="757.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 58.4</text>
+<rect x="900.0" y="204.0" width="147.0" height="50.0" fill="#2ca02c" stroke="#fff"/>
+<text x="907.0" y="224.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff">ok</text>
+<text x="907.0" y="242.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#fff">edits 118.3083</text>
+<text x="20.0" y="292.0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#222">cause:</text>
+<rect x="150.0" y="281.0" width="12.0" height="12.0" fill="#9aa0a6" stroke="#fff"/>
+<text x="166.0" y="291.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">inapplicable</text>
+<rect x="246.0" y="281.0" width="12.0" height="12.0" fill="#ff7f0e" stroke="#fff"/>
+<text x="262.0" y="291.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">perturbation_starved</text>
+<rect x="390.0" y="281.0" width="12.0" height="12.0" fill="#d62728" stroke="#fff"/>
+<text x="406.0" y="291.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">method_blind</text>
+<rect x="486.0" y="281.0" width="12.0" height="12.0" fill="#9467bd" stroke="#fff"/>
+<text x="502.0" y="291.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">unstable</text>
+<rect x="558.0" y="281.0" width="12.0" height="12.0" fill="#2ca02c" stroke="#fff"/>
+<text x="574.0" y="291.0" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#222">ok</text>
+</svg>

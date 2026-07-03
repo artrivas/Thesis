@@ -31,9 +31,47 @@ CONFIG_BUILDERS = {
 DEFAULT_RESULTS_ROOT = "results/runs"
 
 
-def default_workers() -> int:
-    """Default to one process per core, leaving a core for the parent writer."""
+def _physical_core_count() -> int | None:
+    """Best-effort physical (non-SMT) core count on Linux; None if unknown.
 
+    ``os.cpu_count()`` reports logical threads, which double-counts cores on an
+    SMT machine (e.g. WSL on an 8-core/16-thread laptop reports 16). Parsing
+    ``/proc/cpuinfo`` recovers the real core count across sockets.
+    """
+
+    try:
+        with open("/proc/cpuinfo") as handle:
+            cpuinfo = handle.read()
+    except OSError:
+        return None
+    cores: set[tuple[str, str]] = set()
+    physical_id = core_id = None
+    for line in cpuinfo.splitlines():
+        if line.startswith("physical id"):
+            physical_id = line.split(":", 1)[1].strip()
+        elif line.startswith("core id"):
+            core_id = line.split(":", 1)[1].strip()
+        elif not line.strip():
+            if physical_id is not None and core_id is not None:
+                cores.add((physical_id, core_id))
+            physical_id = core_id = None
+    if physical_id is not None and core_id is not None:
+        cores.add((physical_id, core_id))
+    return len(cores) or None
+
+
+def default_workers() -> int:
+    """One worker per physical core (falling back to logical count - 1).
+
+    Cells are pure-Python and each worker is pinned single-threaded, so the
+    second SMT thread of a core buys almost no throughput and only adds
+    scheduling and thermal pressure. Targeting physical cores keeps the machine
+    usable and avoids oversubscription. Override with --workers to push SMT.
+    """
+
+    physical = _physical_core_count()
+    if physical:
+        return max(1, physical)
     return max(1, (os.cpu_count() or 2) - 1)
 
 
