@@ -23,7 +23,8 @@ from experimentation.workflows import DIVERSITY_CURVES_WORKFLOW, LEGACY_NETLSD_M
 
 DEFAULT_RESULTS_ROOT = Path("results/runs")
 DEFAULT_RESULTS_PATH_CANDIDATES = (
-    Path("outputs/experimentation_native_netlsd/results/results.csv"),
+    Path("results/runs/2026-07-03_merged/results/results.csv"),
+    Path("results/runs/2026-07-03_merged/results/results.csv.gz"),
 )
 FAILURE_CAUSE_COLORS = {
     "ok": "#2ca02c",
@@ -281,10 +282,12 @@ def main() -> None:
     filtered = _filter_dataframe(st, df)
     chart_df = filtered[filtered["status"] == "success"].copy()
 
+    st.sidebar.header("Display")
+    normalize = st.sidebar.checkbox("Normalize distribution scores", value=True)
+
     tabs = st.tabs(
         [
             "Score vs Alpha (seed band)",
-            "Failure Map",
             "Edit-distance Validation",
             "Community: truth vs detected",
             "Paired Distance",
@@ -295,26 +298,24 @@ def main() -> None:
         ]
     )
     with tabs[0]:
-        _seed_band_chart(st, px, pd, chart_df)
+        _seed_band_chart(st, px, pd, chart_df, normalize)
     with tabs[1]:
-        _failure_map_panel(st, px, pd, _records_for_evaluation(filtered), run_dir)
+        _edit_distance_validation_chart(st, px, pd, chart_df, normalize)
     with tabs[2]:
-        _edit_distance_validation_chart(st, px, pd, chart_df)
+        _community_comparison_chart(st, px, pd, chart_df, normalize)
     with tabs[3]:
-        _community_comparison_chart(st, px, pd, chart_df)
-    with tabs[4]:
         _line_chart(st, px, chart_df, "paired_score", "Paired Distance vs Alpha")
-    with tabs[5]:
+    with tabs[4]:
         _scatter_chart(st, px, chart_df)
-    with tabs[6]:
+    with tabs[5]:
         summary_rows, _ = build_evaluation_tables(_records_for_evaluation(filtered))
         summary_df = pd.DataFrame(summary_rows)
         st.dataframe(summary_df, width="stretch")
         _summary_heatmap(st, px, summary_df)
-    with tabs[7]:
+    with tabs[6]:
         _, matrix_rows = build_evaluation_tables(_records_for_evaluation(filtered))
         st.dataframe(pd.DataFrame(matrix_rows), width="stretch")
-    with tabs[8]:
+    with tabs[7]:
         st.dataframe(filtered, width="stretch")
 
 
@@ -474,7 +475,7 @@ def _scatter_chart(st, px, df) -> None:
     st.plotly_chart(fig, width="stretch")
 
 
-def _seed_band_chart(st, px, pd, df) -> None:
+def _seed_band_chart(st, px, pd, df, normalize: bool = True) -> None:
     if df.empty:
         st.info("No successful rows available.")
         return
@@ -492,7 +493,14 @@ def _seed_band_chart(st, px, pd, df) -> None:
         return
     band_df = pd.DataFrame(table)
     band_df["workflow_label"] = band_df["workflow"].apply(lambda value: _display_label(WORKFLOW_LABELS, value))
+    if normalize:
+        scale = band_df.groupby("workflow_label")["mean"].transform("max").clip(lower=1e-12)
+        band_df = band_df.copy()
+        band_df["mean"] = band_df["mean"] / scale
+        band_df["std"] = band_df["std"] / scale
     max_seeds = int(band_df["n_seeds"].max())
+    y_label = "Normalized distribution score" if normalize else "Distribution score"
+    title_suffix = " (normalized per workflow)" if normalize else ""
     fig = px.line(
         band_df,
         x="alpha",
@@ -501,10 +509,12 @@ def _seed_band_chart(st, px, pd, df) -> None:
         error_y="std",
         markers=True,
         title=f"{_display_label(DATASET_LABELS, dataset)} / {_display_label(PERTURBATION_LABELS, perturbation)} "
-        f"- mean +/- std over up to {max_seeds} seeds",
+        f"- mean +/- std over up to {max_seeds} seeds{title_suffix}",
         category_orders={"workflow_label": list(WORKFLOW_LABELS.values())},
-        labels={"alpha": "Alpha", "mean": "Distribution score", "workflow_label": "Workflow"},
+        labels={"alpha": "Alpha", "mean": y_label, "workflow_label": "Workflow"},
     )
+    if normalize:
+        fig.update_yaxes(range=[0, 1.05])
     fig.update_layout(legend_title_text="Workflow", margin=dict(l=30, r=30, t=70, b=30))
     st.plotly_chart(fig, width="stretch")
     st.caption(
@@ -544,32 +554,47 @@ def _failure_map_panel(st, px, pd, records, run_dir) -> None:
     st.dataframe(fm_df, width="stretch")
 
 
-def _edit_distance_validation_chart(st, px, pd, df) -> None:
+def _edit_distance_validation_chart(st, px, pd, df, normalize: bool = True) -> None:
     rows = edit_distance_validation_rows(df.to_dict("records"))
     if not rows:
         st.info("No rows with finite edit_distance_weighted and distribution_score.")
         return
     chart_df = _add_display_labels(pd.DataFrame(rows))
+    if normalize:
+        chart_df = _add_normalized_metric(chart_df, "distribution_score", "distribution_score_norm")
+        y_col = "distribution_score_norm"
+        y_label = "Normalized distribution score"
+        title_suffix = " (normalized per workflow)"
+    else:
+        y_col = "distribution_score"
+        y_label = "Distribution score"
+        title_suffix = ""
     fig = px.scatter(
         chart_df,
         x="edit_distance_weighted",
-        y="distribution_score",
+        y=y_col,
         color="workflow_label",
-        facet_col="dataset_label",
-        hover_data={"perturbation": True, "alpha": True, "seed": True, "workflow": True},
+        facet_row="dataset_label",
+        hover_data={"perturbation": True, "alpha": True, "seed": True, "workflow": True, "distribution_score": ":.4g"},
         category_orders={
             "dataset_label": list(DATASET_LABELS.values()),
             "workflow_label": list(WORKFLOW_LABELS.values()),
         },
-        title="Edit-distance validation: distribution score vs importance-weighted edit distance",
+        title=f"Edit-distance validation: distribution score vs importance-weighted edit distance{title_suffix}",
         labels={
             "edit_distance_weighted": "Weighted edit distance (ground truth)",
-            "distribution_score": "Distribution score",
+            y_col: y_label,
             "workflow_label": "Workflow",
         },
     )
     _clean_facet_annotations(fig)
-    fig.update_layout(legend_title_text="Workflow", margin=dict(l=30, r=30, t=70, b=30))
+    if normalize:
+        fig.update_yaxes(range=[0, 1.05])
+    fig.update_layout(
+        height=_facet_chart_height(chart_df["dataset_label"].nunique()),
+        legend_title_text="Workflow",
+        margin=dict(l=30, r=30, t=70, b=30),
+    )
     st.plotly_chart(fig, width="stretch")
     st.caption(
         "A positive trend validates alpha: scores grow with how much important "
@@ -577,7 +602,7 @@ def _edit_distance_validation_chart(st, px, pd, df) -> None:
     )
 
 
-def _community_comparison_chart(st, px, pd, df) -> None:
+def _community_comparison_chart(st, px, pd, df, normalize: bool = True) -> None:
     rows = community_label_source_rows(df.to_dict("records"))
     if not rows:
         st.info("No community_weakening rows with a label_source.")
@@ -589,6 +614,15 @@ def _community_comparison_chart(st, px, pd, df) -> None:
         .sort_values(["dataset", "label_source", "alpha"])
     )
     grouped["dataset_label"] = grouped["dataset"].apply(lambda value: _display_label(DATASET_LABELS, value))
+    if normalize:
+        scale = grouped.groupby("dataset_label")["distribution_score"].transform("max").clip(lower=1e-12)
+        grouped = grouped.copy()
+        grouped["distribution_score"] = grouped["distribution_score"] / scale
+        y_label = "Normalized distribution score"
+        title_suffix = " (normalized per dataset)"
+    else:
+        y_label = "Distribution score"
+        title_suffix = ""
     fig = px.line(
         grouped,
         x="alpha",
@@ -596,14 +630,16 @@ def _community_comparison_chart(st, px, pd, df) -> None:
         color="dataset_label",
         line_dash="label_source",
         markers=True,
-        title="Community weakening: ground_truth (SBM) vs detected (ER/BA)",
+        title=f"Community weakening: ground_truth (SBM) vs detected (ER/BA){title_suffix}",
         labels={
             "alpha": "Alpha",
-            "distribution_score": "Distribution score",
+            "distribution_score": y_label,
             "dataset_label": "Dataset",
             "label_source": "Label source",
         },
     )
+    if normalize:
+        fig.update_yaxes(range=[0, 1.05])
     fig.update_layout(margin=dict(l=30, r=30, t=70, b=30))
     st.plotly_chart(fig, width="stretch")
     st.caption(

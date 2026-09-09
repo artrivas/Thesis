@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "experimentation"
+version = "0.1.0"
+description = "Sensitivity of graph-distribution comparison workflows to structural perturbations"
+requires-python = ">=3.11"
+# The core package and its SVG figure generator are pure standard library.
+dependencies = []
+
+[project.optional-dependencies]
+figures = ["pandas", "matplotlib", "numpy"]
+dashboard = ["streamlit", "plotly", "pandas"]
+
+[project.scripts]
+experimentation = "experimentation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# The package lives under src/; everything else (results/, data/, scripts/)
+# sits at the repo root, so all commands run from the repo root.
+pythonpath = ["src"]
+testpaths = ["tests"]

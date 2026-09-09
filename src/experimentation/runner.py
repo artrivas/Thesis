@@ -6,6 +6,7 @@ from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 import csv
 from dataclasses import asdict, replace
 from datetime import datetime, timezone
+import gzip
 import json
 import logging
 import multiprocessing
@@ -134,13 +135,13 @@ RESULT_COLUMNS = (
 )
 
 
-def run_debug_experiment(output_root: Path | str = Path("outputs/debug_experimentation")) -> Path:
+def run_debug_experiment(output_root: Path | str = Path("results/legacy/debug")) -> Path:
     """Run the debug grid and return the result CSV path."""
 
     return run_experiment(debug_config(output_root))
 
 
-def run_full_synthetic_experiment(output_root: Path | str = Path("outputs/experimentation_native_netlsd")) -> Path:
+def run_full_synthetic_experiment(output_root: Path | str = Path("results/legacy/full_synthetic")) -> Path:
     """Run the full synthetic-only grid and return the result CSV path."""
 
     return run_experiment(full_synthetic_config(output_root))
@@ -466,8 +467,28 @@ def write_result_rows(rows: list[dict[str, object]], output_path: Path | str) ->
     return path
 
 
+def resolve_result_csv(path: Path | str) -> Path:
+    """Return the readable result CSV for ``path``.
+
+    Large result sets are committed gzipped, so a ``results.csv`` that is absent
+    locally may still be available as ``results.csv.gz`` next to it.
+    """
+
+    path = Path(path)
+    if path.is_file():
+        return path
+    gz = path.with_suffix(path.suffix + ".gz")
+    if gz.is_file():
+        return gz
+    return path
+
+
 def read_result_rows(path: Path | str) -> list[dict[str, str]]:
-    with Path(path).open("r", newline="", encoding="utf-8") as handle:
+    resolved = resolve_result_csv(path)
+    if resolved.suffix == ".gz":
+        with gzip.open(resolved, "rt", newline="", encoding="utf-8") as handle:
+            return list(csv.DictReader(handle))
+    with resolved.open("r", newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
 
 
@@ -478,8 +499,9 @@ def _shard_result_csv(path: Path) -> Path:
     if path.is_file():
         return path
     for candidate in (path / "results.csv", path / "results" / "results.csv"):
-        if candidate.is_file():
-            return candidate
+        resolved = resolve_result_csv(candidate)
+        if resolved.is_file():
+            return resolved
     raise FileNotFoundError(f"No results.csv found for shard {path}")
 
 

@@ -79,8 +79,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Synthetic graph distribution experimentation")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    _add_legacy_run_parser(subparsers, "run_debug_experiment", "outputs/debug_experimentation")
-    _add_legacy_run_parser(subparsers, "run_full_synthetic_experiment", "outputs/experimentation_native_netlsd")
+    _add_legacy_run_parser(subparsers, "run_debug_experiment", "results/legacy/debug")
+    _add_legacy_run_parser(subparsers, "run_full_synthetic_experiment", "results/legacy/full_synthetic")
     _add_run_parser(subparsers)
     _add_merge_parser(subparsers)
 
@@ -114,7 +114,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _add_legacy_run_parser(subparsers, name: str, default_output_root: str) -> None:
-    legacy = subparsers.add_parser(name, help=f"Run the {name.replace('_', ' ')} (legacy outputs/ tree)")
+    legacy = subparsers.add_parser(name, help=f"Run the {name.replace('_', ' ')} (legacy flat output tree)")
     legacy.add_argument("--output-root", default=default_output_root)
     legacy.add_argument("--device", default="auto", help="Acceleration device: auto, cpu, cuda, or cuda:N")
     legacy.add_argument("--no-resume", action="store_true", help="Start a fresh result CSV instead of resuming")

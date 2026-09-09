@@ -82,9 +82,10 @@ def generate_figures(results_path: Path | str, output_dir: Path | str | None = N
         line_panels_svg(
             rows,
             "distribution_score",
-            "Figure 1: Score vs alpha (per-seed band)",
-            "distribution_score",
+            "Figure 1: Score vs alpha (per-seed band, normalized per workflow)",
+            "normalized distribution score",
             with_band=True,
+            normalize=True,
         ),
         encoding="utf-8",
     )
@@ -140,6 +141,7 @@ def line_panels_svg(
     y_label: str,
     *,
     with_band: bool = False,
+    normalize: bool = False,
 ) -> str:
     if not rows:
         return placeholder_svg(title, "No successful rows available")
@@ -176,6 +178,7 @@ def line_panels_svg(
                 panel_height - 45,
                 color_by_workflow,
                 with_band=with_band,
+                normalize=normalize,
             )
         )
 
@@ -473,6 +476,7 @@ def _line_panel(
     color_by_workflow: dict[str, str],
     *,
     with_band: bool = False,
+    normalize: bool = False,
 ) -> str:
     selected = [
         row
@@ -486,6 +490,17 @@ def _line_panel(
         if math.isfinite(value) and math.isfinite(alpha):
             grouped[str(row["workflow"])][alpha].append(value)
 
+    if normalize:
+        for workflow, by_alpha in grouped.items():
+            workflow_max = max(
+                (mean(values) for values in by_alpha.values()),
+                default=1.0,
+            ) or 1.0
+            grouped[workflow] = {
+                alpha: [v / workflow_max for v in values]
+                for alpha, values in by_alpha.items()
+            }
+
     alphas = sorted({alpha for by_alpha in grouped.values() for alpha in by_alpha})
     x_min = min(alphas, default=0.0)
     x_max = max(alphas, default=1.0)
@@ -498,7 +513,7 @@ def _line_panel(
         for by_alpha in grouped.values():
             for values in by_alpha.values():
                 y_candidates.append(mean(values) + _std(values))
-    y_max = max(y_candidates, default=1.0) or 1.0
+    y_max = (1.0 if normalize else max(y_candidates, default=1.0)) or 1.0
 
     def to_x(alpha: float) -> float:
         return x0 + ((alpha - x_min) / (x_max - x_min)) * width

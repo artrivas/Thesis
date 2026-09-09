@@ -1,2 +1,37 @@
+# --- Environments & caches -------------------------------------------------
 .venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Editor / agent local state --------------------------------------------
 .claude/
+
+# --- Downloaded datasets ----------------------------------------------------
+# Real TU datasets are fetched by scripts/fetch_imdb_binary.py and never
+# committed. Only the tiny TINYTU fixture under tests/fixtures/ is tracked.
+data/
+
+# --- Superseded material ----------------------------------------------------
+# Kept on disk for reference, never committed. See archive/README.md.
+archive/
+
+# --- Experiment run artifacts ----------------------------------------------
+# Traceable runs live in results/runs/<timestamp>_<cfghash>[_shard-A-B]/.
+# Track the manifest (reproducibility) and the figures/tables actually cited in
+# the thesis; never track the bulky regenerable artifacts.
+results/runs/*/results/
+results/runs/*/logs/
+results/runs/*/figures/
+results/runs/*/evaluation/
+
+# run_manifest.json sits at the run-directory root and stays tracked.
+!results/runs/*/run_manifest.json
+
+# The merged run is the thesis source of truth: keep its compressed results,
+# its evaluation tables, and the curated figure sets.
+!results/runs/2026-07-03_merged/results/
+results/runs/2026-07-03_merged/results/*
+!results/runs/2026-07-03_merged/results/results.csv.gz
+!results/runs/2026-07-03_merged/evaluation/

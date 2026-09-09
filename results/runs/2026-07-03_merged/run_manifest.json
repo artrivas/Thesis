@@ -1,0 +1,51 @@
+{
+  "run_id": "2026-07-03_merged",
+  "kind": "merge",
+  "status": "finished",
+  "description": "Thesis source of truth. Concatenation of the full synthetic grid and the IMDB-BINARY real-dataset run, produced with `experimentation.cli merge`. No experimental value was recomputed or altered during the merge.",
+  "created_at": "2026-07-03T08:55:00+00:00",
+  "shards": [
+    {
+      "run_id": "2026-07-01T0519_278e5a7d",
+      "config_hash": "278e5a7d",
+      "git_commit": "4f5249c01a3ccf2f5f7544464e70f08d79545c7c",
+      "rows": 19008,
+      "datasets": ["erdos_renyi", "stochastic_block_model", "barabasi_albert"]
+    },
+    {
+      "run_id": "2026-07-03T0159_3bb151a6",
+      "config_hash": "3bb151a6",
+      "git_commit": "94d00facacd94f37ecd15d065298df4f81d51e0b",
+      "rows": 1320,
+      "datasets": ["imdb_binary"]
+    }
+  ],
+  "result_path": "results/runs/2026-07-03_merged/results/results.csv",
+  "committed_result_path": "results/runs/2026-07-03_merged/results/results.csv.gz",
+  "rows": 20328,
+  "row_status_counts": {"success": 20328},
+  "grid": {
+    "datasets": ["barabasi_albert", "erdos_renyi", "imdb_binary", "stochastic_block_model"],
+    "workflows": [
+      "diversity_curves_shortest_path",
+      "native_netlsd",
+      "structural_statistics_mmd",
+      "wl_subtree_kernel_mmd"
+    ],
+    "perturbations": [
+      "community_weakening",
+      "edge_deletion",
+      "edge_insertion",
+      "hub_modification",
+      "triangle_deletion",
+      "triangle_insertion"
+    ],
+    "alpha_values": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "seed_count": 24
+  },
+  "library_versions": {
+    "python": "3.14.4",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43"
+  },
+  "hostname": "DESKTOP-AFQJDSS"
+}

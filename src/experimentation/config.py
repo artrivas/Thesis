@@ -107,11 +107,11 @@ class WorkflowConfig:
 class OutputConfig:
     """Filesystem locations for generated experiment artifacts."""
 
-    root: Path = Path("outputs/experimentation_native_netlsd")
-    results: Path = Path("outputs/experimentation_native_netlsd/results")
-    figures: Path = Path("outputs/experimentation_native_netlsd/figures")
-    logs: Path = Path("outputs/experimentation_native_netlsd/logs")
-    evaluation: Path = Path("outputs/experimentation_native_netlsd/evaluation")
+    root: Path = Path("results/legacy/full_synthetic")
+    results: Path = Path("results/legacy/full_synthetic/results")
+    figures: Path = Path("results/legacy/full_synthetic/figures")
+    logs: Path = Path("results/legacy/full_synthetic/logs")
+    evaluation: Path = Path("results/legacy/full_synthetic/evaluation")
 
     def create_directories(self) -> None:
         """Create configured output directories if they do not exist."""
@@ -182,7 +182,7 @@ def default_config() -> ExperimentConfig:
     return full_synthetic_config()
 
 
-def debug_config(output_root: Path | str = Path("outputs/debug_experimentation")) -> ExperimentConfig:
+def debug_config(output_root: Path | str = Path("results/legacy/debug")) -> ExperimentConfig:
     """Return a very small configuration for tests and local debugging."""
 
     root = Path(output_root)
@@ -195,7 +195,7 @@ def debug_config(output_root: Path | str = Path("outputs/debug_experimentation")
     )
 
 
-def full_synthetic_config(output_root: Path | str = Path("outputs/experimentation_native_netlsd")) -> ExperimentConfig:
+def full_synthetic_config(output_root: Path | str = Path("results/legacy/full_synthetic")) -> ExperimentConfig:
     """Return the full synthetic-only grid configuration."""
 
     root = Path(output_root)
@@ -209,7 +209,7 @@ def full_synthetic_config(output_root: Path | str = Path("outputs/experimentatio
 
 
 def replication_config(
-    output_root: Path | str = Path("outputs/experimentation_replication"),
+    output_root: Path | str = Path("results/legacy/replication"),
     seed_count: int = REPLICATION_SEED_COUNT,
 ) -> ExperimentConfig:
     """Full synthetic grid with a wide seed sweep for the alpha-vs-randomness defense.
@@ -243,7 +243,7 @@ def imdb_binary_dataset_config(num_graphs: int = 100, data_root: str = "data") -
 
 
 def imdb_config(
-    output_root: Path | str = Path("outputs/imdb_binary"),
+    output_root: Path | str = Path("results/legacy/imdb_binary"),
     data_root: str = "data",
     num_graphs: int = 100,
 ) -> ExperimentConfig:
