@@ -1,0 +1,27 @@
+# Normalize all text files to LF in the repository; Git still checks them
+# out using the platform's native line ending unless eol is pinned below.
+* text=auto
+
+# Source and text formats: force LF on checkout too, so Windows (Git Bash,
+# core.autocrlf=true) and WSL/Linux never disagree on stored bytes.
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
+*.toml text eol=lf
+*.svg text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+
+# Binary formats: never touch line endings or attempt text diffs.
+*.png binary
+*.pdf binary
+*.pptx binary
+*.gz binary
+*.npz binary
+*.zip binary
