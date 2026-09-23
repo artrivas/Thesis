@@ -1,0 +1,10 @@
+{
+  "source": "/home/artrivas/Thesis/results/runs/2026-09-16_zinc_smoke_validated/results/results.csv",
+  "sha256": "1cb3c8037fb507d886fda37631ac92c0e9feb60a35e500edcd98df41adc5a34b",
+  "rows": 144,
+  "settings": 24,
+  "figures": 24,
+  "steps_mean_opposes_absolute_majority": 0,
+  "steps_mean_opposes_more_nonzero": 0,
+  "scope": "Synthetic/ZINC settings present in source; seed-level distribution scores. No new p-values or graph-level inference."
+}

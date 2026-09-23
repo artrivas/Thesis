@@ -1,0 +1,19 @@
+{
+  "started_at": "2026-09-16T05:59:36.256053+00:00",
+  "samples": 65,
+  "peak_observed_sum_rss_kib": 2611364,
+  "per_run_peak_observed_sum_rss_kib": {
+    "2026-09-16_ba_pilot_validated": 974796,
+    "2026-09-16_er_pilot_validated": 984288,
+    "2026-09-16_zinc_pilot_validated": 2418588
+  },
+  "limitations": "Sampled every 30 seconds; shared pages may be double-counted; unobserved peaks may be missed.",
+  "last_sample_at": "2026-09-16T06:31:36.636134+00:00",
+  "last_processes": [],
+  "run_statuses": {
+    "2026-09-16_ba_pilot_validated": "finished",
+    "2026-09-16_er_pilot_validated": "finished",
+    "2026-09-16_zinc_pilot_validated": "finished"
+  },
+  "finished": true
+}

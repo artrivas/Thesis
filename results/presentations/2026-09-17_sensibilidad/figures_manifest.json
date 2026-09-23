@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "addition_sensitivity.json": "b03d3c616f3e6abc69dc75f8d10317c368b02bc2f055ccdcf9a035b5e555f831",
+    "kernel_substitutions.json": "36a4a5e53664d0357ceb963534f719a8c6724d232cafef517f5c822cfc667aa0",
+    "community_comparison.json": "84b4348c6bbcb5b1676dce744e7fcfc0b2a59d88d48556a4f9173067dd7810f8",
+    "community_descriptor_ablation.json": "ff1072144fe5e4ad3d52eca7ee883a37bd9042d1b793412df44e32c96bec2dfe"
+  },
+  "script_sha256": "94ab5c690e69fe8b6cfd87c604405334720cb9cac6a572cd74b110ae128c83fb",
+  "figures": [
+    "ancho_de_banda.png",
+    "ba_adiciones.png",
+    "comunidades_er.png",
+    "comunidades_sbm.png",
+    "comunidades_zinc.png",
+    "control_del_kernel.png",
+    "control_triangulos_sbm.png",
+    "respuesta_temprana.png",
+    "zinc_adiciones.png"
+  ],
+  "note": "Spanish scientific charts from existing corrected results. No new experiments."
+}

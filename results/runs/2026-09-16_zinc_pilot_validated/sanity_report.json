@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "source": "results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+  "rows": 792,
+  "expected_rows": 792,
+  "statuses": {
+    "success": 792
+  },
+  "cells": 198,
+  "graph_pairs": 19800,
+  "source_graph_instances_by_replicate": 300,
+  "unique_source_record_ids": 268,
+  "unique_labeled_topology_hashes": 268,
+  "source_id_overlap_between_replicates": [
+    {
+      "dataset": "zinc",
+      "replicate_a": "0",
+      "replicate_b": "1",
+      "shared_source_ids": 11
+    },
+    {
+      "dataset": "zinc",
+      "replicate_a": "0",
+      "replicate_b": "2",
+      "shared_source_ids": 11
+    },
+    {
+      "dataset": "zinc",
+      "replicate_a": "1",
+      "replicate_b": "2",
+      "shared_source_ids": 10
+    }
+  ],
+  "unique_perturbation_streams": 1800,
+  "positive_alpha_no_ops": {
+    "zinc/triangle_deletion": 2740,
+    "zinc/community_weakening": 2
+  },
+  "no_op_reasons": {
+    "no_feasible_change": 2740,
+    "rounded_budget_zero": 2
+  },
+  "graphstats_kernel_ranges": {
+    "xx": [
+      0.6888570848153334,
+      0.743427531350416
+    ],
+    "xy": [
+      0.00505738249666771,
+      0.7436042893100717
+    ],
+    "yy": [
+      0.4243920869135713,
+      0.8045075869577567
+    ]
+  },
+  "issues": [],
+  "interpretation": "Implementation and recorded-data checks; not proof of population independence or metric monotonicity"
+}

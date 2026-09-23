@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "source": "results/runs/2026-09-16_zinc_smoke_validated/results/results.csv",
+  "rows": 144,
+  "expected_rows": 144,
+  "statuses": {
+    "success": 144
+  },
+  "cells": 36,
+  "graph_pairs": 360,
+  "unique_source_graphs": 20,
+  "unique_perturbation_streams": 120,
+  "positive_alpha_no_ops": {
+    "zinc/triangle_deletion": 36
+  },
+  "no_op_reasons": {
+    "no_feasible_change": 36
+  },
+  "graphstats_kernel_ranges": {
+    "xx": [
+      0.6321857381459283,
+      0.887691694624272
+    ],
+    "xy": [
+      0.0058705966346956195,
+      0.887691694624272
+    ],
+    "yy": [
+      0.3861712665105119,
+      0.9181792376475691
+    ]
+  },
+  "issues": [],
+  "interpretation": "Implementation and recorded-data checks; not proof of population independence or metric monotonicity"
+}

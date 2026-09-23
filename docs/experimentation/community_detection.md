@@ -37,7 +37,7 @@ Only adjacent community pairs are considered, since merging non-adjacent
 communities always has `dQ < 0`. Community ids are remapped to a contiguous
 `0..k-1` range. Edgeless graphs return all-singleton labels (no intra edges to
 rewire). Complexity is comfortably within budget for the `n≈50` synthetic graphs
-and the variable-size IMDB-BINARY graphs.
+and variable-size real graphs such as ZINC.
 
 `detect_communities` recovers a planted two-block partition (verified on two
 6-cliques joined by a single bridge) — see

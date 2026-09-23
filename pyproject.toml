@@ -12,6 +12,8 @@ dependencies = []
 
 [project.optional-dependencies]
 figures = ["pandas", "matplotlib", "numpy"]
+analysis = ["pandas", "matplotlib", "numpy", "scipy"]
+zinc-import = ["torch"]
 dashboard = ["streamlit", "plotly", "pandas"]
 
 [project.scripts]

@@ -1,0 +1,58 @@
+[
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "native_netlsd",
+    "alpha_low": 0.5,
+    "alpha_high": 0.6,
+    "mean_change": -0.00038772020730890006,
+    "median_change": 0.00013778811992529953,
+    "positive": 2,
+    "negative": 1,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "structural_statistics_mmd",
+    "alpha_low": 0.8,
+    "alpha_high": 0.9,
+    "mean_change": 2.2304522097632968e-05,
+    "median_change": -0.0021009228793762,
+    "positive": 1,
+    "negative": 2,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "wl_subtree_kernel_mmd",
+    "alpha_low": 0.7,
+    "alpha_high": 0.8,
+    "mean_change": 0.018600000000000467,
+    "median_change": -0.006999999999998785,
+    "positive": 1,
+    "negative": 2,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "wl_subtree_kernel_mmd",
+    "alpha_low": 0.8,
+    "alpha_high": 0.9,
+    "mean_change": -0.08853333333333528,
+    "median_change": 0.09039999999999804,
+    "positive": 2,
+    "negative": 1,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  }
+]

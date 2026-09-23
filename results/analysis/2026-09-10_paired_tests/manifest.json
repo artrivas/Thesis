@@ -1,0 +1,66 @@
+{
+  "source_sha256": "78a169e3fc4265eec2dcaeae31801ef115d1229277321aee2b7d62f483457daa",
+  "assumptions_audit_sha256": "afdf971e0504dad1910d4d397538ff9f86697730fc9884f6ed9ebb55239ccc6b",
+  "source": "results/runs/2026-07-03_merged/results/results.csv.gz",
+  "scope": "Synthetic only; 72 endpoints and 720 adjacent contrasts; 24 paired seeds each",
+  "inference_status": "Exploratory: legacy random-stream reuse and data-informed eligibility preclude claiming calibrated confirmatory p-values.",
+  "holm_family_slots": 2376,
+  "summary": {
+    "endpoint": {
+      "paired_t": {
+        "run": 45,
+        "withheld": 27,
+        "adjusted_p_below_05": 41,
+        "positive": 41,
+        "negative": 0
+      },
+      "wilcoxon": {
+        "run": 38,
+        "withheld": 34,
+        "adjusted_p_below_05": 36,
+        "positive": 36,
+        "negative": 0
+      },
+      "sign": {
+        "run": 72,
+        "withheld": 0,
+        "adjusted_p_below_05": 65,
+        "positive": 65,
+        "negative": 0
+      }
+    },
+    "adjacent": {
+      "paired_t": {
+        "run": 352,
+        "withheld": 368,
+        "adjusted_p_below_05": 304,
+        "positive": 277,
+        "negative": 27
+      },
+      "wilcoxon": {
+        "run": 416,
+        "withheld": 304,
+        "adjusted_p_below_05": 358,
+        "positive": 327,
+        "negative": 31
+      },
+      "sign": {
+        "run": 644,
+        "withheld": 76,
+        "adjusted_p_below_05": 526,
+        "positive": 478,
+        "negative": 48
+      }
+    }
+  },
+  "elapsed_seconds": 13.696716156002367,
+  "t_screen": "Prior no_clear_flag, QQ r>=.97, no Tukey flags, nonconstant",
+  "wilcoxon_screen": "Nonconstant, at least 6 nonzero, absolute sample skew<=1, absolute Bowley<=.3, absolute tail asymmetry<=.3",
+  "eligibility_note": "Heuristic shape screens fixed before effect-test execution; they are not formal assumption certification. Not a select-the-smallest-p workflow.",
+  "ci_note": "95% pointwise, conditional on the relevant test assumptions; not simultaneous intervals",
+  "versions": {
+    "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+    "scipy": "1.18.1",
+    "numpy": "2.5.0"
+  }
+}

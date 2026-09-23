@@ -1,0 +1,10 @@
+{
+  "source": "/home/artrivas/Thesis/results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+  "sha256": "3619a5b00cdc72067695154cc4dc69a0bd0ea4cef1d51205ac5e1281e390e89c",
+  "rows": 792,
+  "settings": 24,
+  "figures": 24,
+  "steps_mean_opposes_absolute_majority": 3,
+  "steps_mean_opposes_more_nonzero": 3,
+  "scope": "Synthetic/ZINC settings present in source; seed-level distribution scores. No new p-values or graph-level inference."
+}

@@ -1,0 +1,2336 @@
+PAGE 1
+UNIVERSIDAD DE INGENIER´IA Y TECNOLOG´IA
+CARRERA DE CIENCIAS DE LA COMPUTACI ´ON
+Evaluaci´ on de funciones de comparaci´ on entre
+distribuciones de grafos bajo perturbaciones
+controladas
+TRABAJO DE INVESTIGACI ´ON
+Para optar el grado de licenciado en CIENCIAS DE LA
+COMPUTACI´ON
+AUTOR(ES)
+Dimael Antonio Rivas Chavez
+ASESOR(ES)
+Ariana Mirella Villegas Suarez
+Lima - Per´ u
+2026
+PAGE 2
+Dedicatoria:
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+XXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PAGE 3
+Agradecimientos:
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PAGE 4
+TABLA DE CONTENIDO
+P´ ag.
+RESUMEN. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+ABSTRACT. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+INTRODUCCI´ON. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Presentaci´ on del tema de investigaci´ on. . . . . . . . . . . . . . . . . . 3
+Descripci´ on de la situaci´ on problem´ atica. . . . . . . . . . . . . . . . . 4
+Formulaci´ on del problema. . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Objetivos de investigaci´ on. . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Justificaci´ on. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Alcance y limitaciones. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+CAP´ITULO I REVISI ´ON CR´ITICA DE LA LITERATURA 14
+1.1 De la evaluaci´ on de grafos generados a la comparaci´ on de distribuciones
+de grafos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+1.2 Distribuciones de grafos, representaciones y riesgo de agregaci´ on . . . . . 15
+1.3 MMD con descriptores estructurales como l´ ınea base . . . . . . . . . . . . 17
+1.4 M´ etodos espectrales y comparaci´ on multiescala . . . . . . . . . . . . . . . 18
+1.5 Weisfeiler–Lehman y Wasserstein–Weisfeiler–Lehman . . . . . . . . . . . 20
+1.6 Modelos sint´ eticos y estructura controlable . . . . . . . . . . . . . . . . . 21
+1.7 Comunidades reales, comunidades generativas y pseudo-etiquetas . . . . . 22
+1.8 Perturbaciones estructurales e intensidad de cambio . . . . . . . . . . . . 23
+1.9 Criterios cr´ ıticos de comparaci´ on entre m´ etricas . . . . . . . . . . . . . . 24
+iii
+PAGE 5
+1.10 S´ ıntesis cr´ ıtica y brecha de investigaci´ on . . . . . . . . . . . . . . . . . . . 26
+CAP´ITULO II MARCO TE ´ORICO 27
+2.1 Comparaci´ on de grafos como problema computacional . . . . . . . . . . . 27
+2.2 Comparaci´ on de distribuciones de grafos . . . . . . . . . . . . . . . . . . 28
+2.3 Escalas estructurales en grafos . . . . . . . . . . . . . . . . . . . . . . . . 30
+2.4 M´ etodos basados en estad´ ısticas estructurales y MMD . . . . . . . . . . . 30
+2.5 Kernels de grafos y Weisfeiler–Lehman . . . . . . . . . . . . . . . . . . . 32
+2.6 Transporte ´ optimo y Wasserstein–Weisfeiler–Lehman . . . . . . . . . . . . 32
+2.7 Representaciones espectrales y NetLSD . . . . . . . . . . . . . . . . . . . 33
+2.8 Representaciones multiescala y coarsening . . . . . . . . . . . . . . . . . . 34
+2.9 Modelos sint´ eticos de grafos . . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.9.1 Erd˝ os–R´ enyi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.9.2 Stochastic Block Model . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.9.3 Barab´ asi–Albert . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.9.4 Watts–Strogatz . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+2.9.5 Grid . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+2.9.6 Lobster . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+2.10 Comunidades, modularidad y pseudo-etiquetas . . . . . . . . . . . . . . . 36
+2.11 Perturbaciones controladas . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+2.12 An´ alisis pareado e inferencia estad´ ıstica . . . . . . . . . . . . . . . . . . . 38
+2.13 Criterios de evaluaci´ on de m´ etodos . . . . . . . . . . . . . . . . . . . . . . 39
+CAP´ITULO III MARCO REFERENCIAL (LEGAL, GEOGR ´AFI-
+CO, HIST ´ORICO) (opcional) 40
+3.1 Primer subt´ ıtulo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+CAP´ITULO IV MARCO METODOL´OGICO 41
+4.1 Dise˜ no general de la investigaci´ on . . . . . . . . . . . . . . . . . . . . . . 42
+4.2 Pregunta metodol´ ogica . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+iv
+PAGE 6
+4.3 Selecci´ on de workflows de comparaci´ on . . . . . . . . . . . . . . . . . . . 44
+4.4 Datasets y distribuciones base . . . . . . . . . . . . . . . . . . . . . . . . 46
+4.4.1 Distribuciones sint´ eticas . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+4.4.2 Dataset real . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+4.5 Tratamiento de comunidades . . . . . . . . . . . . . . . . . . . . . . . . . 48
+4.6 Operadores de perturbaci´ on controlada . . . . . . . . . . . . . . . . . . . 49
+4.6.1 Perturbaciones locales . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+4.6.2 Perturbaciones mesosc´ opicas . . . . . . . . . . . . . . . . . . . . . . . . 51
+4.6.3 Perturbaciones globales . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+4.6.4 Perturbaciones mixtas . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+4.6.5 Perturbaciones distribucionales . . . . . . . . . . . . . . . . . . . . . . . 52
+4.7 Protocolo experimental . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+4.8 Niveles de medici´ on y criterios de evaluaci´ on . . . . . . . . . . . . . . . . 54
+4.8.1 Discrepancia distribucional . . . . . . . . . . . . . . . . . . . . . . . . . 54
+4.8.2 Cambio promedio de representaci´ on . . . . . . . . . . . . . . . . . . . . 54
+4.8.3 Distancia pareada individual . . . . . . . . . . . . . . . . . . . . . . . . 55
+4.8.4 Distancia pareada agregada . . . . . . . . . . . . . . . . . . . . . . . . . 56
+4.8.5 Sensibilidad . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+4.8.6 Correlaci´ on entre intensidad y puntaje . . . . . . . . . . . . . . . . . . . 57
+4.8.7 Monotonicidad como criterio de consistencia . . . . . . . . . . . . . . . . 58
+4.8.8 Pruebas estad´ ısticas sobre diferencias pareadas . . . . . . . . . . . . . . 58
+4.8.9 Robustez . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+4.8.10Costo computacional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+4.8.11Interpretabilidad y an´ alisis de casos discordantes . . . . . . . . . . . . . 60
+4.9 Organizaci´ on de resultados por tipo de perturbaci´ on . . . . . . . . . . . . 61
+4.10 Reproducibilidad . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+4.11 Limitaciones metodol´ ogicas . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+4.12 Cierre del marco metodol´ ogico . . . . . . . . . . . . . . . . . . . . . . . . 64
+v
+PAGE 7
+CAP´ITULO V RESULTADOS PRELIMINARES 65
+5.1 Descripci´ on general del experimento preliminar . . . . . . . . . . . . . . . 65
+5.2 Figuras utilizadas en el an´ alisis preliminar . . . . . . . . . . . . . . . . . 67
+5.3 Resultados agregados por workflow . . . . . . . . . . . . . . . . . . . . . 70
+5.3.1 Rango de respuesta frente a magnitud de respuesta . . . . . . . . . . . . 70
+5.3.2 S´ ıntesis cualitativa . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+5.4 Resultados en perturbaciones locales . . . . . . . . . . . . . . . . . . . . . 73
+5.5 Resultados en perturbaciones mesosc´ opicas . . . . . . . . . . . . . . . . . 74
+5.6 Resultados en perturbaciones globales . . . . . . . . . . . . . . . . . . . . 75
+5.7 Perturbaciones no evaluadas en esta etapa . . . . . . . . . . . . . . . . . 76
+5.8 Relaci´ on con las hip´ otesis metodol´ ogicas . . . . . . . . . . . . . . . . . . . 77
+5.9 Limitaciones de los resultados preliminares . . . . . . . . . . . . . . . . . 77
+5.10 Validaciones pendientes . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+5.11 S´ ıntesis preliminar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+CONCLUSIONES. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+RECOMENDACIONES. . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+ANEXOS. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85
+vi
+PAGE 8
+´INDICE DE TABLAS
+Tabla 4.1 Funci´ on metodol´ ogica de las distribuciones sint´ eticas conside-
+radas. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Tabla 4.2 Dataset real considerado en la evaluaci´ on. . . . . . . . . . . . . 48
+Tabla 5.1 Magnitud m´ axima del puntaje distribucional crudo por work-
+flow en la corrida consolidada. Las magnitudes no son directamente
+comparables entre familias, ya que corresponden a construcciones dis-
+tintas (un estad´ ıstico MMD frente a distanciasL 2 entre representa-
+ciones); se reportan para evidenciar la escala de respuesta dentro de
+cada workflow, no para inducir un ordenamiento de superioridad. . . 71
+Tabla 5.2 Resumen comparativo de los workflows evaluados . . . . . . . . 72
+vii
+PAGE 9
+´INDICE DE FIGURAS
+Figura 4.1 Pipeline metodol´ ogico para la evaluaci´ on de funciones de com-
+paraci´ on entre distribuciones de grafos bajo perturbaciones controladas. 43
+Figura 5.1 Puntajenormalizado por workflowde discrepancia distribu-
+cional en funci´ on de la intensidad de perturbaci´ onα. La figura com-
+para la forma de la respuesta de cada workflow frente al incremento
+progresivo de perturbaci´ on; no representa magnitudes absolutas com-
+parables entre workflows (v´ ease la Tabla 5.1). . . . . . . . . . . . . . 68
+Figura 5.2 Distancia pareadapromedio(P α, normalizada por workflow)
+entre cada grafo original y su versi´ on perturbada. Esta figura com-
+plementa el an´ alisis agregado, ya que aprovecha la correspondencia
+inducida por el protocolo experimental; corresponde al promedio por
+celda y no a las distancias individualesp i,α. . . . . . . . . . . . . . . . 69
+Figura 5.3 Mapa de sensibilidad por granularidad estructural, entendi-
+da aqu´ ı como la correlaci´ on ordinal entreαy el puntaje (consisten-
+cia direccional). La figura resume el comportamiento relativo de los
+workflows frente a perturbaciones locales, mesosc´ opicas y globales; la
+cercan´ ıa entre workflows indica similitud de rango y no de magnitud
+de respuesta. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+viii
+PAGE 10
+RESUMEN
+Lorem ipsum dolor sit amet, cum tollit aeterno ut. Sea amet iuvaret placerat
+in, saperet impedit consulatu mei ne, quo no alii vituperatoribus. No mutat dolorum
+habemus pro, vis rebum accusam no, meis partiendo necessitatibus cu sit. Zril me-
+diocrem scriptorem cu quo, ex duo mucius doming legendos. Posse nemore cu cum.
+Et facer pertinax sed, atqui ignota antiopam in pro, dolore oportere ius ex.
+An justo nonumy mnesarchum quo, eruditi cotidieque in sed. Consulatu ur-
+banitas conceptam eam id, liber accusamus eu mel. Ius iusto albucius elaboraret id,
+dico partiendo contentiones nec in, sint eruditi per ne. No eruditi probatus cum, no
+mei sumo facer torquatos. Sea dicunt facilisis corrumpit at, audiam accusam eligendi
+qui ne.
+Facete officiis invenire sit ex, facete causae fabellas ei qui. Et pertinacia con-
+tentiones definitiones nam. Cum moderatius signiferumque in, blandit senserit cum
+no. Mea appareat posidonium contentiones an, no case accommodare cum, ei sea
+oporteat percipitur. Ea congue necessitatibus sed, no adhuc graeco usu. Eam ha-
+rum equidem fierent ne, duo id facer consequuntur signiferumque. Dolore molestie
+phaedrum nec ei, ei eos noluisse constituto. Eruditi propriae in mea, vero labora-
+mus cotidieque ad duo. Tacimates constituto est ex, ad mei clita sapientem evertitur.
+Palabras clave:
+Palabra clave 1; Palabra clave 2; Palabra clave 3; Palabra clave 4
+1
+PAGE 11
+ABSTRACT
+T´ITULO DE LA TESIS EN INGL ´ES
+Lorem ipsum dolor sit amet, with the eternal God, that takes away the.
+Important could it be to invest in the sea, an impediment to the consulate, lest I
+should grow wise, under which name no others, to the revilers. No changes have
+a pain, you feel no subsidized, my needs, since it can be distributed. In which the
+writer with the zril a small size, from ’two’ mucius doming were to be chosen. A man
+can do with him. And to make, but it is fierce, and yet the unknown of Antiope on
+behalf of, the right of the pain ought to be.
+Is this just mnesarchum running smoothly, but instructed the daily. Consulate
+refinement to this concept, a book accusing football honey. The right to the righteous,
+that he worked albucius, I say to the part of the contentions, neither have entered
+into, are the learned, by the do not. No approved as instructed, no curling but do
+take me. Antioxidants dough at sea say, I feel they should be chosen.
+Elegantly offices to find out, salty stories to the cause. For definitions and
+resolution of conflicts. When measured signiferumque to sit when he feels no. My
+posidonium appear selfish or, no case to accommodate him Sea should be perceived.
+Planning needs but that no further Greek practice. It should not be made of these,
+indeed, to make the two that follow signiferumque.
+Keywords:
+Keyword 1; Keyword 2; Keyword 3; Keyword 4
+2
+PAGE 12
+INTRODUCCI´ON
+Presentaci´ on del tema de investigaci´ on
+La comparaci´ on entre distribuciones de grafos constituye un problema re-
+levante en Ciencias de la Computaci´ on, especialmente en aprendizaje autom´ atico
+sobre estructuras discretas, evaluaci´ on de modelos generativos, detecci´ on de cam-
+bio distribucional y an´ alisis de robustez topol´ ogica. A diferencia de la comparaci´ on
+entre grafos individuales, este problema no busca determinar si dos grafos particu-
+lares son similares, sino evaluar si dos poblaciones de grafos presentan diferencias
+estructurales sistem´ aticas.
+SeaGel espacio de grafos simples, no dirigidos y finitos, considerados salvo
+isomorfismo. Una distribuci´ on de grafos puede entenderse como una medida de pro-
+babilidadPsobreG. En la pr´ actica, dicha distribuci´ on no se observa directamente,
+sino mediante una muestra finita:
+S={G 1, G2, . . . , Gn}, G i ∼ P.
+El presente trabajo estudia c´ omo distintas familias de funciones de compara-
+ci´ on responden cuando una distribuci´ on base de grafos es sometida a perturbacio-
+nes estructurales controladas. Para ello, se considera una familia de operadores de
+perturbaci´ onTα, dondeα∈[0,1] representa la intensidad de la perturbaci´ on. La
+distribuci´ on perturbada se denota como:
+Pα =T α(P).
+3
+PAGE 13
+A partir de esta formulaci´ on, el inter´ es central no consiste ´ unicamente en
+calcular una distancia entrePyP α, sino en caracterizar c´ omo cambia dicha distancia
+cuando la perturbaci´ on aumenta progresivamente. Es decir, se busca analizar el
+comportamiento emp´ ırico de una funci´ on de comparaci´ onD:
+dD(α) =D(P,P α).
+La investigaci´ on se concentra en familias metodol´ ogicas representativas para
+la comparaci´ on de distribuciones de grafos: m´ etodos basados en Maximum Mean
+Discrepancy con descriptores estructurales, m´ etodos espectrales o multiescala basa-
+dos en firmas laplacianas como NetLSD, y m´ etodos basados en Weisfeiler–Lehman,
+Wasserstein–Weisfeiler–Lehman o variantes relacionadas. Esta selecci´ on permite com-
+parar enfoques que privilegian distintas propiedades de los grafos: estad´ ısticas es-
+tructurales resumidas, organizaci´ on espectral global, patrones locales de vecindario
+y comportamiento multiescala.
+El prop´ osito de la tesis no es proponer una nueva m´ etrica ni establecer una
+m´ etrica universalmente superior. La contribuci´ on se orienta a evaluar emp´ ıricamen-
+te c´ omo distintas familias de comparaci´ on responden ante perturbaciones locales,
+mesosc´ opicas, globales, mixtas y distribucionales. Por ello, el an´ alisis no se limita
+a observar si las distancias aumentan con la intensidad de perturbaci´ on, sino que
+considera sensibilidad, detectabilidad pareada, robustez, interpretabilidad y costo
+computacional.
+Descripci´ on de la situaci´ on problem´ atica
+El problema metodol´ ogico surge porque no existe una ´ unica funci´ on de com-
+paraci´ on entre distribuciones de grafos que sea igualmente adecuada para todos los
+4
+PAGE 14
+tipos de cambio estructural. Una funci´ on puede ser sensible a modificaciones locales,
+como alteraciones de aristas, grados o vecindarios inmediatos, pero poco sensible a
+cambios globales, como debilitamiento de comunidades, variaci´ on de conectividad
+o modificaci´ on de propiedades espectrales. De forma inversa, una firma global pue-
+de detectar cambios en conectividad general, pero suavizar perturbaciones locales
+peque˜ nas.
+Dada una secuencia de intensidades:
+0 =α 0 < α1 <· · ·< α k ≤1,
+se obtiene una trayectoria de distribuciones perturbadas:
+Pα0,P α1, . . . ,Pαk,P α0 =P.
+Para una funci´ on de comparaci´ onDj, se calcula la serie:
+dj(αi) =D j(P,P αi), i= 0, . . . , k.
+Una primera expectativa razonable es que, si la perturbaci´ on aumenta, la dis-
+tancia tienda tambi´ en a aumentar. Sin embargo, esta propiedad no debe confundirse
+con el aporte principal de la investigaci´ on. La monotonicidad es ´ util como criterio de
+consistencia o control m´ ınimo del experimento, pero por s´ ı sola no basta para carac-
+terizar el comportamiento de una m´ etrica. En muchos protocolos controlados, que
+una curva promedio crezca conαpuede ser esperable, especialmente si los resultados
+se agregan por media.
+5
+PAGE 15
+Por ello, esta tesis prioriza una pregunta m´ as fina: qu´ e tan r´ apido, con qu´ e
+estabilidad y ante qu´ e tipo de perturbaci´ on responde cada familia de comparaci´ on.
+Adem´ as, se considera el an´ alisis pareado entre cada grafo originalGi y su versi´ on per-
+turbadaG α
+i , ya que el dise˜ no experimental conserva la relaci´ on directa entre ambos.
+Esta perspectiva permite evaluar no solo si dos muestras se separan en promedio, sino
+si cada grafo experimenta un cambio estructural progresivo bajo la representaci´ on
+utilizada.
+La dificultad aumenta porque las familias evaluadas capturan informaci´ on
+estructural distinta. Los m´ etodos basados en MMD con descriptores estructurales
+dependen de las estad´ ısticas seleccionadas, como grados, clustering, densidad o con-
+teo de tri´ angulos. Los m´ etodos espectrales, como NetLSD, resumen propiedades de
+difusi´ on, conectividad y estructura global mediante firmas laplacianas. Los m´ etodos
+basados en Weisfeiler–Lehman refinan informaci´ on de vecindarios y pueden respon-
+der con mayor sensibilidad a modificaciones locales o mesosc´ opicas. En consecuencia,
+no basta con comparar puntajes finales: es necesario estudiar perfiles de respuesta
+por tipo de perturbaci´ on, nivel de an´ alisis y costo computacional.
+Formulaci´ on del problema
+SeaPuna distribuci´ on de grafos sobreGy sea{T α}α∈[0,1] una familia de
+operadores de perturbaci´ on estructural. Para cada intensidadα, se define:
+Pα =T α(P).
+Dada una familia finita de funciones de comparaci´ on:
+D={D MMD, DSpec, DWL, DMulti},
+6
+PAGE 16
+donde cada elemento representa una familia metodol´ ogica: descriptores es-
+tructurales agregados mediante Maximum Mean Discrepancy, firmas espectrales,
+representaciones basadas en Weisfeiler–Lehman y representaciones multiescala. La
+variante Wasserstein–Weisfeiler–Lehman se considera una extensi´ on natural deDWL
+y se discute en el marco te´ orico, pero su evaluaci´ on emp´ ırica queda fuera del alcance
+de esta etapa por su costo computacional. A partir de esta familia se busca analizar
+el comportamiento de:
+dD(α) =D(P,P α), D∈ D.
+El problema general de investigaci´ on se formula de la siguiente manera:
+¿C´ omo responden distintas familias de funciones de comparaci´ on entre
+distribuciones de grafos ante perturbaciones estructurales controladas, y
+c´ omo var´ ıa su sensibilidad, detectabilidad pareada, robustez, interpreta-
+bilidad y costo computacional seg´ un el tipo de perturbaci´ on aplicada?
+De este problema general se derivan las siguientes preguntas espec´ ıficas:
+1. ¿Qu´ e perfiles de sensibilidad presentan las distintas familias de comparaci´ on
+ante perturbaciones locales, mesosc´ opicas, globales, mixtas y distribucionales?
+2. ¿Qu´ e m´ etodos detectan cambios estructurales con mayor rapidez cuando au-
+menta la intensidad de perturbaci´ onα?
+3. ¿La relaci´ on entre intensidad de perturbaci´ on y puntaje de discrepancia se
+mantiene cuando se analiza a nivel pareado, es decir, comparando cada grafo
+originalG i con su versi´ on perturbadaGα
+i ?
+7
+PAGE 17
+4. ¿La monotonicidad observada en curvas agregadas se conserva al analizar dis-
+tancias pareadas individuales, correlaciones por par y variabilidad entre semi-
+llas?
+5. ¿Qu´ e familias de comparaci´ on son m´ as adecuadas para perturbaciones locales,
+como inserci´ on o eliminaci´ on de aristas, modificaci´ on de vecindarios o altera-
+ci´ on de tri´ angulos?
+6. ¿Qu´ e familias de comparaci´ on son m´ as adecuadas para perturbaciones me-
+sosc´ opicas o globales, como debilitamiento de comunidades, modificaci´ on de
+hubs, rewiring preservando grado o cambios en conectividad?
+7. ¿Qu´ e costo computacional presenta cada familia en funci´ on del n´ umero de
+grafos, nodos, aristas y par´ ametros internos del m´ etodo?
+La hip´ otesis metodol´ ogica es que las familias de comparaci´ on no responder´ an
+de manera uniforme. Se espera que los m´ etodos basados en Weisfeiler–Lehman sean
+especialmente sensibles a perturbaciones que alteran vecindarios y subestructuras
+locales, debido al refinamiento iterativo de etiquetas. Se espera que los m´ etodos es-
+pectrales y multiescala respondan con mayor claridad ante perturbaciones que afec-
+tan conectividad global, difusi´ on, estructura comunitaria o distancias de caminos.
+Los m´ etodos MMD con descriptores estructurales se interpretan como l´ ıneas base:
+deber´ ıan responder bien cuando la perturbaci´ on afecta directamente las estad´ ısti-
+cas seleccionadas, pero podr´ ıan subestimar cambios que ocurren fuera de dichas
+estad´ ısticas. Estas hip´ otesis no implican superioridad universal de una familia, sino
+expectativas condicionadas al tipo de perturbaci´ on y al nivel de medici´ on.
+Objetivos de investigaci´ on
+Objetivo general.
+8
+PAGE 18
+Evaluar emp´ ıricamente el comportamiento de distintas familias de funciones
+de comparaci´ on entre distribuciones de grafos sometidas a perturbaciones estructu-
+rales controladas, considerando sensibilidad, detectabilidad pareada, monotonicidad
+como criterio de consistencia, robustez, interpretabilidad y costo computacional.
+Objetivos espec´ ıficos.
+1. Formalizar un protocolo experimental para generar distribuciones de grafos
+perturbadasP α a partir de una distribuci´ on basePmediante operadoresT α
+con intensidades discretas de perturbaci´ on.
+2. Implementar workflows representativos de comparaci´ on de distribuciones de
+grafos, incluyendo MMD con descriptores estructurales, firmas espectrales o
+multiescala, y m´ etodos basados en Weisfeiler–Lehman o Wasserstein–Weisfeiler–
+Lehman.
+3. Clasificar las perturbaciones estructurales seg´ un el nivel de organizaci´ on que
+afectan: local, mesosc´ opico, global, mixto o distribucional.
+4. Medir la sensibilidad de cada workflow frente a incrementos deα, consideran-
+do tanto curvas agregadas como cambios pareados entre grafos originales y
+perturbados.
+5. Evaluar la relaci´ on entreαy los puntajes producidos por cada m´ etodo median-
+te correlaciones ordinales, tales como Spearman-ρy Kendall-τ, interpret´ ando-
+las como indicadores de consistencia y no como evidencia suficiente de supe-
+rioridad.
+6. Incorporar an´ alisis pareado mediante distanciasd(ϕ(G i), ϕ(Gα
+i )) para evaluar
+si el cambio estructural es capturado a nivel individual y no solo mediante
+promedios distribucionales.
+9
+PAGE 19
+7. Aplicar pruebas estad´ ısticas apropiadas sobre diferencias pareadas cuando co-
+rresponda, con el fin de distinguir cambios observables de variaciones atribui-
+bles a ruido experimental o semillas aleatorias.
+8. Evaluar el costo computacional de cada familia registrando tiempo de ejecu-
+ci´ on, memoria aproximada y escalabilidad respecto de|S|,|V|,|E|y par´ ame-
+tros internos del m´ etodo.
+9. Proponer criterios emp´ ıricos de selecci´ on de funciones de comparaci´ on seg´ un el
+tipo de perturbaci´ on, la escala estructural afectada y las restricciones compu-
+tacionales.
+Justificaci´ on
+La investigaci´ on se justifica porque la comparaci´ on entre distribuciones de
+grafos sigue siendo metodol´ ogicamente delicada. Distintas m´ etricas pueden producir
+conclusiones diferentes sobre el mismo conjunto de grafos, no necesariamente porque
+una sea incorrecta, sino porque cada una preserva y compara informaci´ on estructural
+distinta. En evaluaci´ on de modelos generativos, por ejemplo, una m´ etrica basada
+en grados puede sugerir similitud aunque el modelo no reproduzca comunidades,
+caminos, tri´ angulos, hubs o diversidad estructural.
+Desde el punto de vista te´ orico, la tesis contribuye a organizar el an´ alisis
+de funciones de comparaci´ on seg´ un el tipo de estructura que capturan. MMD con
+descriptores estructurales representa una l´ ınea base interpretable, pero dependiente
+de la elecci´ on de estad´ ısticas. Las firmas espectrales, como NetLSD, permiten es-
+tudiar propiedades globales y multiescala asociadas a conectividad y difusi´ on. Los
+m´ etodos basados en Weisfeiler–Lehman y Wasserstein permiten analizar patrones
+de vecindario y distribuciones de representaciones locales.
+10
+PAGE 20
+Desde el punto de vista metodol´ ogico, el uso de perturbaciones controladas
+permite construir trayectorias experimentales con causa conocida:
+P → P α1 → · · · → P αk.
+Esta estrategia permite observar si una funci´ on de comparaci´ on responde
+de forma coherente cuando la estructura se aleja progresivamente de la distribuci´ on
+original. Sin embargo, la investigaci´ on no se limita a verificar que las curvas promedio
+aumenten. El an´ alisis considera tambi´ en la velocidad de respuesta, la estabilidad
+entre repeticiones, la evidencia pareada y los casos en los que una m´ etrica detecta o
+no detecta cambios esperados.
+Desde el punto de vista pr´ actico, los resultados pueden orientar la selecci´ on
+de m´ etricas para evaluaci´ on de modelos generativos de grafos, an´ alisis de robustez,
+comparaci´ on de datasets y detecci´ on de cambio distribucional. La contribuci´ on es-
+perada no es una regla universal, sino una caracterizaci´ on emp´ ırica de fortalezas,
+limitaciones y costos bajo un protocolo reproducible.
+Alcance y limitaciones
+El alcance de esta investigaci´ on se limita a una comparaci´ on experimental
+entre familias representativas de funciones de comparaci´ on de distribuciones de gra-
+fos. No se pretende cubrir exhaustivamente todas las m´ etricas existentes ni todas
+las variantes posibles de cada familia.
+El estudio considera dos tipos de conjuntos de grafos: datasets sint´ eticos, que
+constituyen el n´ ucleo del experimento, y datasets reales, utilizados como validaci´ on
+secundaria. La decisi´ on de utilizar principalmente datasets sint´ eticos responde a la
+necesidad de evaluar las funciones de comparaci´ on entre distribuciones de grafos
+11
+PAGE 21
+bajo un entorno controlado. En este contexto, los modelos sint´ eticos permiten co-
+nocer de antemano la estructura generativa del grafo y controlar expl´ ıcitamente las
+perturbaciones aplicadas, lo que facilita analizar de manera m´ as precisa propiedades
+como sensibilidad, monotonicidad, robustez, detectabilidad e interpretabilidad.
+Adem´ as, muchas estructuras presentes en grafos reales pueden entenderse
+como combinaciones o manifestaciones de patrones estructurales b´ asicos, tales como
+aleatoriedad, comunidades, hubs, regularidad geom´ etrica, estructuras tipo ´ arbol o
+propiedades de mundo peque˜ no. Por ello, los datasets sint´ eticos permiten aislar estos
+patrones y estudiar el comportamiento de las m´ etricas antes de enfrentar la mayor
+complejidad, ruido y heterogeneidad de los datasets reales. En ese sentido, el an´ alisis
+sint´ etico funciona como una etapa metodol´ ogica previa y controlada, necesaria para
+interpretar con mayor claridad los resultados obtenidos posteriormente en grafos
+naturales.
+Los datasets sint´ eticos considerados incluyen Erd˝ os–R´ enyi, Stochastic Block
+Model o Community, Barab´ asi–Albert, Watts–Strogatz, Grid y Lobster. Cada uno
+cumple una funci´ on metodol´ ogica espec´ ıfica: Erd˝ os–R´ enyi permite controlar la densi-
+dad y el ruido aleatorio; SBM o Community permite evaluar la estructura mesosc´ opi-
+ca y la presencia de comunidades; Barab´ asi–Albert introduce hubs y distribuciones
+de grado tipoheavy-tail; Watts–Strogatz permite analizar propiedades de mundo pe-
+que˜ no y procesos derewiring; mientras que Grid y Lobster representan estructuras
+regulares, geom´ etricas o similares a ´ arboles.
+Como complemento, la validaci´ on con datos reales se centra en IMDB-BINARY,
+un conjunto de grafos de coaparici´ on sin atributos complejos que resulta consistente
+con el espacioGde grafos simples y no etiquetados considerado en este trabajo.
+Este dataset no cumple el rol principal de controlar la perturbaci´ on, sino de verificar
+si los comportamientos observados en escenarios sint´ eticos se mantienen en grafos
+naturales con variabilidad estructural de tama˜ no y conectividad. Otros conjuntos de
+12
+PAGE 22
+referencia habituales como PROTEINS o ENZYMES para estructuras biol´ ogicas se
+contemplan como extensi´ on natural de esta validaci´ on, pero su incorporaci´ on queda
+fuera del alcance de la etapa actual. Se evita deliberadamente el uso de datasets
+cuya informaci´ on distintiva reside en atributos de nodos o aristas, como los grafos
+moleculares con atributos, dado que los workflows evaluados operan sobre estructura
+y no explotar´ ıan dicha informaci´ on. De este modo, los datasets sint´ eticos permiten
+construir una evaluaci´ on controlada y granular, mientras que IMDB-BINARY per-
+mite un primer contraste de la capacidad de generalizaci´ on de las conclusiones hacia
+dominios m´ as cercanos a aplicaciones reales.
+Las perturbaciones consideradas incluyen operaciones locales, como inserci´ on
+o eliminaci´ on de aristas y tri´ angulos; operaciones mesosc´ opicas, como debilitamien-
+to de comunidades; operaciones globales, como modificaci´ on de hubs, rewiring pre-
+servando grado o alteraci´ on de conectividad; y operaciones distribucionales, como
+colapso de modos o p´ erdida de diversidad de la muestra.
+En datasets que no proporcionen etiquetas expl´ ıcitas de comunidad, cualquier
+partici´ on obtenida mediante detecci´ on de comunidades se tratar´ a como pseudo-
+etiqueta estructural o partici´ on inferida. Estas particiones no ser´ an interpretadas
+como ground truth sem´ antico. Esta restricci´ on es importante para evitar atribuir
+significado real a comunidades generadas por un algoritmo auxiliar.
+Las conclusiones de la tesis ser´ an emp´ ıricas y estar´ an condicionadas a los
+modelos, perturbaciones, par´ ametros, tama˜ nos de muestra y workflows evaluados.
+Por ello, no se afirmar´ a que una m´ etrica es mejor en sentido universal. Las compa-
+raciones se formular´ an en funci´ on del tipo de perturbaci´ on, el criterio de evaluaci´ on
+y el contexto experimental.
+13
+PAGE 23
+CAP´ITULO I
+REVISI´ON CR´ITICA DE LA LITERATURA
+1.1 De la evaluaci´ on de grafos generados a la comparaci´ on de distribu-
+ciones de grafos
+La literatura sobre modelos generativos de grafos ha abordado tradicional-
+mente la evaluaci´ on desde una pregunta pr´ actica: determinar si un conjunto de grafos
+generados se parece suficientemente a un conjunto de grafos reales o de referencia.
+Este enfoque aparece con claridad en trabajos como GraphRNN, donde la calidad de
+generaci´ on se eval´ ua comparando conjuntos de grafos mediante estad´ ısticas estruc-
+turales, como distribuci´ on de grados, coeficiente de clustering y conteos de ´ orbitas,
+agregadas mediante Maximum Mean Discrepancy (MMD) [1].
+Sin embargo, la presente investigaci´ on se desplaza hacia una pregunta meto-
+dol´ ogicamente distinta. No se busca evaluar directamente si un modelo generativo
+produce grafos plausibles, sino estudiar si una funci´ on de comparaci´ on entre distribu-
+ciones de grafos es capaz de detectar, cuantificar y diferenciar cambios estructurales
+inducidos por perturbaciones controladas. En consecuencia, el objeto de an´ alisis no
+es el modelo generativo, sino el comportamiento de la funci´ on de comparaci´ on.
+SeaGel espacio de grafos simples, no dirigidos y finitos. Una distribuci´ on de
+grafos se representa como una medida de probabilidadPsobreG. Dado un operador
+de perturbaci´ onTα, con intensidadα∈[0,1], se define la distribuci´ on perturbada
+como:
+Pα =T α(P).
+PAGE 24
+El problema central consiste en estudiar el comportamiento de una funci´ on
+de comparaci´ on:
+D(P,P α)
+cuandoαaumenta progresivamente. Esta formulaci´ on transforma la evalua-
+ci´ on de calidad generativa en un problema de sensibilidad, detectabilidad, consis-
+tencia y discriminaci´ on entre distribuciones.
+Este cambio de enfoque es importante porque una m´ etrica ´ util para evaluar
+grafos generados no necesariamente es adecuada para caracterizar perturbaciones
+estructurales finas. Una medida puede detectar diferencias gruesas entre grafos reales
+y sint´ eticos, pero ser insuficiente para establecer qu´ e tipo de cambio fue capturado,
+desde qu´ e intensidad se vuelve detectable o si la respuesta se mantiene al analizar
+pares grafo original–grafo perturbado.
+1.2 Distribuciones de grafos, representaciones y riesgo de agregaci´ on
+Una parte significativa de la literatura estudia grafos individuales o colec-
+ciones de grafos como datos emp´ ıricos. No obstante, para analizar sensibilidad de
+m´ etricas se requiere trabajar con distribuciones generativas o muestras controladas.
+En este contexto, una familia de distribuciones de grafos puede escribirse como:
+{Pθ :θ∈Θ},
+dondeθrepresenta par´ ametros propios del modelo generativo base. Por ejem-
+plo, en Erd˝ os–R´ enyi,θpuede incluir el n´ umero de nodos y la probabilidad de arista;
+en Stochastic Block Model, puede incluir el n´ umero de bloques y las probabilidades
+15
+PAGE 25
+intra/intercomunidad; en Barab´ asi–Albert, puede incluir el mecanismo de crecimien-
+to y conexi´ on preferencial.
+En esta investigaci´ on debe distinguirse entre el par´ ametro generativoθy la
+intensidad de perturbaci´ onα. El primero define la familia base de grafos; el segundo
+controla el grado de alteraci´ on aplicado sobre una muestra o distribuci´ on. Para cada
+intensidadα i se obtiene una muestra perturbada:
+Sαi ={G (αi)
+1 , . . . , G(αi)
+n }, G (αi)
+j ∼ P αi.
+La comparaci´ on emp´ ırica se expresa como:
+bD(S0, Sαi)≈D(P,P αi).
+Sin embargo, existe un riesgo metodol´ ogico: si el an´ alisis se limita a promediar
+puntajes por cada valor deα, las curvas pueden mostrar una tendencia aparente-
+mente monot´ onica aun cuando los cambios individuales sean heterog´ eneos. Por ello,
+la evaluaci´ on no debe depender ´ unicamente de promedios distribucionales. Cuando
+el protocolo conserva correspondencia entre cada grafo original y su versi´ on pertur-
+bada, debe aprovecharse el an´ alisis pareado:
+pi,α =d
+ 
+ϕ(Gi), ϕ(Gα
+i )
+
+.
+Este nivel permite estudiar si la representaci´ onϕdetecta de manera progre-
+siva el cambio aplicado a cada grafo, y no solo si las medias de dos muestras se
+separan.
+16
+PAGE 26
+1.3 MMD con descriptores estructurales como l´ ınea base
+Maximum Mean Discrepancy se ha consolidado como una herramienta est´ andar
+para comparar distribuciones emp´ ıricas de grafos en evaluaci´ on de modelos genera-
+tivos. Su uso t´ ıpico consiste en extraer de cada grafo un descriptor estructural, como
+distribuci´ on de grados, clustering o conteo de motivos, y luego comparar las distri-
+buciones emp´ ıricas de dichos descriptores mediante un kernel [1–3].
+Dadas dos muestras de grafos:
+S={G 1, . . . , Gm}, S ′ ={G ′
+1, . . . , G′
+n},
+y una funci´ on descriptora:
+ϕ:G →R d,
+MMD compara las muestras transformadas:
+X={ϕ(G i)}m
+i=1, Y={ϕ(G ′
+j)}n
+j=1.
+El estimador emp´ ırico puede escribirse como:
+\MMD
+2
+(X, Y) = 1
+m2
+mX
+i=1
+mX
+i′=1
+k(xi, xi′) + 1
+n2
+nX
+j=1
+nX
+j′=1
+k(yj, yj′)− 2
+mn
+mX
+i=1
+nX
+j=1
+k(xi, yj),
+dondekes un kernel positivo definido, t´ ıpicamente RBF.
+17
+PAGE 27
+La fortaleza de este enfoque es su simplicidad, interpretabilidad y adopci´ on
+amplia como l´ ınea base. Si una perturbaci´ on altera directamente grados, densidad,
+clustering o conteos de tri´ angulos, un descriptor dise˜ nado para capturar esa propie-
+dad deber´ ıa responder de forma clara. No obstante, su limitaci´ on principal es que la
+distancia depende cr´ ıticamente del descriptor elegido. Siϕcaptura grados, pero no
+estructura comunitaria, la m´ etrica puede subestimar perturbaciones mesosc´ opicas.
+Si captura clustering, pero no caminos largos ni conectividad espectral, puede fallar
+ante perturbaciones globales.
+Por tanto, MMD con descriptores no debe entenderse como una distancia
+universal entre grafos, sino como una familia de pruebas dirigidas a propiedades
+espec´ ıficas. En esta tesis, su funci´ on ser´ a establecer una l´ ınea base interpretable frente
+a m´ etodos que incorporan mayor contenido estructural, como firmas espectrales,
+m´ etodos multiescala y enfoques basados en Weisfeiler–Lehman.
+1.4 M´ etodos espectrales y comparaci´ on multiescala
+Las distancias espectrales comparan grafos mediante autovalores asociados a
+matrices como la matriz de adyacencia, el Laplaciano combinatorio o el Laplaciano
+normalizado. Su fundamento es que el espectro codifica informaci´ on sobre conecti-
+vidad, componentes, cortes, comunidades y procesos de difusi´ on [4, 5].
+SeaG= (V, E) un grafo y seaLsu Laplaciano. Si:
+0 =λ 1 ≤λ 2 ≤ · · · ≤λ n
+son los autovalores deL, una distancia espectral b´ asica entre dos grafosGy
+Hpuede expresarse como:
+18
+PAGE 28
+dspec(G, H) =
+ kX
+i=1
+ 
+λi(G)−λ i(H)
+2
+!1/2
+.
+Esta distancia espectral b´ asica tiene una limitaci´ on pr´ actica: presupone espec-
+tros de igual longitud y alineados posici´ on a posici´ on, lo que no se cumple cuando los
+grafos comparados difieren en n´ umero de nodos. NetLSD constituye una alternativa
+espectral relevante precisamente porque evita esa dificultad: en lugar de comparar
+autovalores individuales, construye una firma continua en el tiempo de difusi´ ont
+a partir de la traza del kernel de calor asociado al Laplaciano, definida de manera
+consistente para grafos de distinto tama˜ no y susceptible de normalizaci´ on [6]. Su
+forma general puede escribirse como:
+hG(t) = Tr
+ 
+e−tL
+=
+nX
+i=1
+e−tλi,
+dondetcontrola la escala de observaci´ on. Valores peque˜ nos dettienden a
+capturar informaci´ on m´ as local, mientras que valores grandes reflejan propiedades
+globales de difusi´ on.
+Esta caracter´ ıstica hace que NetLSD sea especialmente pertinente para eva-
+luar perturbaciones estructurales. Una firma multiescala permite estudiar no solo
+si dos distribuciones son diferentes, sino tambi´ en si la diferencia aparece en escalas
+locales, intermedias o globales. No obstante, las m´ etricas espectrales tambi´ en tienen
+limitaciones. Pueden suavizar perturbaciones locales peque˜ nas si estas no alteran de
+manera significativa el espectro, y existen grafos no isomorfos con espectros iguales o
+muy similares. Por ello, deben compararse con m´ etodos m´ as sensibles a vecindarios
+y subestructuras.
+19
+PAGE 29
+1.5 Weisfeiler–Lehman y Wasserstein–Weisfeiler–Lehman
+Los m´ etodos basados en Weisfeiler–Lehman se apoyan en un procedimiento
+iterativo de refinamiento de etiquetas. En cada iteraci´ on, la representaci´ on de un
+nodo se actualiza combinando su etiqueta actual con las etiquetas de sus vecinos.
+De forma esquem´ atica:
+ch+1(v) = hash (ch(v),{ {ch(u) :u∈N(v)} }),
+dondec h(v) es la etiqueta del nodoven la iteraci´ onh,N(v) es su vecindario
+y{ {·} }representa un multiconjunto.
+Despu´ es dehiteraciones, la representaci´ on del grafo incorpora informaci´ on de
+vecindarios de radio creciente [7]. Esta propiedad ofrece una hip´ otesis natural para
+la presente investigaci´ on: los m´ etodos basados en Weisfeiler–Lehman deber´ ıan ser
+especialmente sensibles a perturbaciones locales y mesosc´ opicas, como recableado
+parcial, alteraci´ on de tri´ angulos, modificaci´ on de vecindarios o cambios en subes-
+tructuras repetidas.
+Wasserstein–Weisfeiler–Lehman extiende esta idea al comparar distribuciones
+de embeddings de nodos mediante distancia Wasserstein [8]. Dadas dos matrices de
+embeddings de nodos:
+XG ∈R nG×d, X H ∈R nH ×d,
+la distancia Wasserstein entre ambos conjuntos puede expresarse como:
+W1(XG, XH) = m´ ın
+P∈Γ(X G,XH)
+⟨P, M⟩,
+20
+PAGE 30
+dondeMcontiene los costos de transporte entre embeddings yPes un plan
+de transporte admisible.
+Para esta tesis, WWL es relevante porque ocupa una posici´ on intermedia en-
+tre comparaci´ on local y comparaci´ on distribucional. Captura patrones de vecindario
+mediante WL, pero compara distribuciones internas de representaciones mediante
+transporte ´ optimo. Su principal limitaci´ on es el costo computacional, por lo que su
+evaluaci´ on debe incluir tiempo de ejecuci´ on y escalabilidad.
+1.6 Modelos sint´ eticos y estructura controlable
+La elecci´ on de distribuciones base es decisiva. Si solo se eval´ ua una familia
+de grafos, los resultados pueden confundirse con propiedades particulares de esa
+familia. Por ello, la literatura sobre redes complejas utiliza modelos sint´ eticos para
+aislar mecanismos estructurales espec´ ıficos.
+El modelo Erd˝ os–R´ enyi permite estudiar grafos con aleatoriedad homog´ enea
+y probabilidad uniforme de arista [9]. Su utilidad en esta tesis consiste en funcionar
+como caso base donde no existen comunidades ni hubs marcados por construcci´ on.
+El Stochastic Block Model permite generar grafos con estructura de bloques
+o comunidades, controlando probabilidades de conexi´ on intra e intercomunidad [10].
+Este modelo es especialmente importante porque las etiquetas comunitarias forman
+parte del proceso generativo, por lo que pueden tratarse como ground truth estruc-
+tural dentro del experimento sint´ etico.
+El modelo Barab´ asi–Albert introduce crecimiento y conexi´ on preferencial,
+generando distribuciones de grado heterog´ eneas y presencia de hubs [11]. Este modelo
+permite evaluar perturbaciones sobre nodos de alta conectividad y observar si las
+m´ etricas capturan cambios con efectos globales.
+21
+PAGE 31
+El modelo Watts–Strogatz permite estudiar grafos con propiedades de mundo
+peque˜ no, combinando alto clustering y caminos relativamente cortos [12]. Es ´ util para
+evaluar perturbaciones que alteran clustering, recableado y estructura de caminos.
+Los grafos Grid permiten representar regularidad geom´ etrica y localidad es-
+tructural. Aunque no corresponden necesariamente a un modelo probabil´ ıstico com-
+plejo, sirven como familia controlada para estudiar perturbaciones sobre conectivi-
+dad regular y caminos.
+Los grafos tipolobsterpermiten estudiar estructuras arb´ oreas ramificadas.
+Un grafolobsterpuede entenderse como un ´ arbol que se transforma en un camino al
+remover hojas y luego remover nuevamente las hojas restantes. Esta familia es ´ util
+para perturbaciones sobre ramas, hojas, caminos y vecindarios locales sin introducir
+ciclos densos.
+Estos modelos no buscan reproducir toda la complejidad de las redes reales.
+Su funci´ on metodol´ ogica es aislar mecanismos estructurales para observar qu´ e fami-
+lias de comparaci´ on responden ante qu´ e tipo de cambio.
+1.7 Comunidades reales, comunidades generativas y pseudo-etiquetas
+Las perturbaciones dependientes de comunidad requieren una distinci´ on con-
+ceptual cuidadosa. No todas las comunidades utilizadas en un experimento tienen el
+mismo estatus.
+En modelos como Stochastic Block Model, las comunidades forman parte del
+proceso generativo. Por tanto, las etiquetas de comunidad pueden interpretarse como
+estructura conocida del experimento. En cambio, en datasets reales o en familias
+sint´ eticas que no proporcionan etiquetas comunitarias, cualquier partici´ on obtenida
+22
+PAGE 32
+mediante un algoritmo de detecci´ on debe tratarse como una comunidad inferida, no
+como ground truth.
+En aquellos conjuntos de grafos que no proporcionan etiquetas expl´ ıcitas de
+comunidades a nivel de nodos, puede utilizarse un procedimiento auxiliar de detec-
+ci´ on de comunidades basado en maximizaci´ on greedy de la modularidad, siguiendo
+el algoritmo de Clauset, Newman y Moore [13]. Esta decisi´ on no debe interpretarse
+como generaci´ on de comunidades reales ni como recuperaci´ on garantizada de una
+estructura sem´ antica. Su funci´ on es operacional: obtener particiones estructurales
+aproximadas sobre las cuales aplicar perturbaciones controladas dependientes de
+comunidad.
+En consecuencia, las comunidades obtenidas de esta manera se tratan como
+pseudo-etiquetas o particiones inferidas. Para que su uso sea metodol´ ogicamente
+defendible, deben reportarse el algoritmo utilizado, sus par´ ametros, si el procedi-
+miento es determin´ ıstico, el tratamiento de semillas aleatorias y cualquier medida
+de estabilidad o calidad de partici´ on que se utilice. Si las particiones inferidas no
+muestran una relaci´ on estructural clara con el grafo, las perturbaciones dependientes
+de comunidad deben interpretarse como an´ alisis exploratorio y no como evidencia
+concluyente sobre comunidades reales.
+1.8 Perturbaciones estructurales e intensidad de cambio
+Las perturbaciones controladas permiten transformar el problema de compa-
+raci´ on de grafos en un experimento con causa conocida. En lugar de comparar dos
+colecciones arbitrarias de grafos, se construye una trayectoria de muestras pertur-
+badas:
+S0, Sα1, . . . , Sαk.
+23
+PAGE 33
+Las perturbaciones pueden clasificarse seg´ un la escala estructural afectada.
+Las perturbaciones locales modifican aristas, grados, tri´ angulos, hojas, ramas
+o vecindarios inmediatos. Estas perturbaciones son relevantes para evaluar m´ etodos
+sensibles a patrones peque˜ nos o subestructuras repetidas.
+Las perturbaciones mesosc´ opicas alteran comunidades, bloques o patrones de
+cohesi´ on intermedia. El debilitamiento de comunidades pertenece a esta categor´ ıa, ya
+que puede preservar estad´ ısticas globales simples mientras degrada la organizaci´ on
+de grupos.
+Las perturbaciones globales modifican conectividad, caminos, hubs, compo-
+nentes o propiedades espectrales. La modificaci´ on de hubs o el rewiring preservando
+grado pueden producir cambios globales aun cuando algunas estad´ ısticas locales
+permanezcan estables.
+Las perturbaciones distribucionales modifican la composici´ on de la muestra,
+no necesariamente cada grafo individual. El colapso distribucional omode dropping
+ocurre cuando una muestra conserva grafos plausibles, pero pierde diversidad estruc-
+tural o deja de cubrir ciertos modos de la distribuci´ on original. Esta perturbaci´ on
+es relevante para evaluaci´ on de modelos generativos porque un modelo puede pro-
+ducir grafos individualmente razonables y, aun as´ ı, representar solo una parte de la
+distribuci´ on objetivo.
+1.9 Criterios cr´ ıticos de comparaci´ on entre m´ etricas
+La revisi´ on de la literatura permite identificar varios criterios necesarios para
+comparar funciones de discrepancia entre distribuciones de grafos.
+Sensibilidad.Mide si una funci´ on de comparaci´ on reacciona ante cambios
+estructurales relevantes. En esta tesis, la sensibilidad no se entiende ´ unicamente como
+24
+PAGE 34
+aumento del puntaje, sino como capacidad de detectar cambios desde intensidades
+bajas, diferenciar tipos de perturbaci´ on y producir respuestas consistentes con la
+escala estructural afectada.
+Detectabilidad pareada.Eval´ ua si el cambio entre cada grafo original y
+su versi´ on perturbada aumenta conforme creceα. Se define a nivel individual como:
+pi,α =d
+ 
+ϕ(Gi), ϕ(Gα
+i )
+
+.
+Este criterio evita depender ´ unicamente de promedios distribucionales y per-
+mite analizar la variabilidad de respuesta entre grafos.
+Monotonicidad.Eval´ ua si el puntaje tiende a aumentar cuando aumenta
+la intensidad de perturbaci´ on. Sin embargo, debe interpretarse como criterio de
+consistencia o sanity check, no como aporte central. Una respuesta monot´ onica en
+curvas agregadas puede ser esperable bajo perturbaciones controladas, especialmente
+si se trabaja con medias.
+Robustez.Mide la estabilidad de los resultados ante semillas, repeticiones
+experimentales y variaciones de configuraci´ on. Una m´ etrica sensible pero inestable
+puede ser menos ´ util que una m´ etrica moderadamente sensible pero reproducible.
+Interpretabilidad.Eval´ ua si el puntaje puede relacionarse con propiedades
+estructurales comprensibles, como grados, clustering, comunidades, hubs, caminos o
+difusi´ on espectral.
+Costo computacional.Considera tiempo de ejecuci´ on, memoria y escala-
+bilidad respecto del n´ umero de grafos, nodos, aristas y par´ ametros internos. Este
+criterio es indispensable porque algunas m´ etricas pueden ser expresivas pero poco
+viables para muestras grandes.
+25
+PAGE 35
+1.10 S´ ıntesis cr´ ıtica y brecha de investigaci´ on
+La literatura existente ofrece herramientas importantes para comparar gra-
+fos y distribuciones de grafos. MMD con descriptores estructurales es ampliamen-
+te utilizado y f´ acilmente interpretable, pero depende de las estad´ ısticas selecciona-
+das. NetLSD y otras firmas espectrales ofrecen descripciones globales y multiesca-
+la, pero pueden suavizar perturbaciones locales peque˜ nas. Los m´ etodos basados en
+Weisfeiler–Lehman y Wasserstein capturan vecindarios y distribuciones internas de
+representaciones, pero pueden presentar mayor costo computacional.
+La brecha que aborda esta tesis no consiste en proponer una nueva m´ etrica
+ni en repetir comparaciones generales entre m´ etodos. La contribuci´ on consiste en
+evaluar comparativamente c´ omo distintas familias de comparaci´ on responden an-
+te perturbaciones estructurales controladas, considerando no solo curvas promedio,
+sino tambi´ en an´ alisis pareado, sensibilidad por tipo de perturbaci´ on, evidencia es-
+tad´ ıstica, robustez, interpretabilidad y costo computacional.
+En consecuencia, la tesis no pregunta qu´ e m´ etrica es mejor en sentido univer-
+sal. Pregunta qu´ e familia de comparaci´ on resulta m´ as informativa bajo determinados
+tipos de perturbaci´ on y bajo determinados criterios de evaluaci´ on.
+26
+PAGE 36
+CAP´ITULO II
+MARCO TE ´ORICO
+La comparaci´ on de grafos constituye un problema central en diversas ´ areas de
+las Ciencias de la Computaci´ on, especialmente en aprendizaje autom´ atico, miner´ ıa
+de datos, an´ alisis de redes complejas y evaluaci´ on de modelos generativos. Aunque
+la teor´ ıa b´ asica de grafos proporciona el lenguaje formal para representar relaciones
+entre objetos, muchos problemas actuales no se limitan a estudiar grafos individua-
+les. Con frecuencia, el inter´ es se orienta a comparar colecciones de grafos, identificar
+cambios estructurales entre poblaciones y evaluar si dos conjuntos de redes compar-
+ten propiedades topol´ ogicas similares [1, 3, 14].
+Este cap´ ıtulo desarrolla los conceptos te´ oricos necesarios para comprender
+la comparaci´ on de distribuciones de grafos desde una perspectiva computacional.
+No se busca presentar una revisi´ on exhaustiva de todas las m´ etricas de grafos, sino
+introducir los fundamentos que justifican la metodolog´ ıa de la tesis: comparaci´ on
+entre muestras de grafos, representaciones estructurales, escalas topol´ ogicas, familias
+de m´ etricas, modelos sint´ eticos, perturbaciones controladas, comunidades inferidas
+y criterios de evaluaci´ on.
+2.1 Comparaci´ on de grafos como problema computacional
+Comparar grafos es m´ as complejo que comparar vectores o matrices con-
+vencionales. En primer lugar, la representaci´ on matricial de un grafo no es ´ unica.
+Un mismo grafo puede representarse mediante distintas matrices de adyacencia de-
+pendiendo del orden asignado a sus nodos. Por tanto, una funci´ on de comparaci´ on
+PAGE 37
+adecuada debe ser invariante a permutaciones de nodos, salvo que exista una corres-
+pondencia sem´ antica expl´ ıcita entre v´ ertices.
+En segundo lugar, los grafos pueden variar en tama˜ no. Dos grafos comparados
+pueden tener distinto n´ umero de nodos y aristas, lo que dificulta el uso directo de
+distancias matriciales. Esta variabilidad exige representaciones capaces de comparar
+estructuras sin depender exclusivamente de dimensiones id´ enticas.
+En tercer lugar, las dependencias estructurales de un grafo no son puramente
+locales. La modificaci´ on de una arista puede afectar caminos, ciclos, comunidades,
+componentes, centralidad y propiedades espectrales. De manera inversa, dos grafos
+pueden compartir estad´ ısticas locales y diferir globalmente. Esta tensi´ on entre es-
+tructura local y global explica por qu´ e existen m´ ultiples familias de m´ etodos para
+comparar grafos [6, 15].
+Finalmente, la comparaci´ on pr´ actica debe considerar restricciones compu-
+tacionales. M´ etodos expresivos como la distancia de edici´ on de grafos pueden ser
+conceptualmente atractivos, pero resultan costosos para colecciones grandes. Por es-
+ta raz´ on, la comparaci´ on de grafos suele recurrir a representaciones estructurales,
+kernels, firmas espectrales, descriptores estad´ ısticos o embeddings.
+2.2 Comparaci´ on de distribuciones de grafos
+En numerosos escenarios, el objetivo no consiste en comparar ´ unicamente
+dos grafos, sino dos conjuntos de grafos. Este problema aparece en la evaluaci´ on de
+modelos generativos, detecci´ on de cambio distribucional, an´ alisis de redes din´ amicas
+y comparaci´ on de datasets [1, 3].
+28
+PAGE 38
+SeaS={G 1, G2, . . . , Gn}una muestra de grafos de referencia, y seaT=
+{H1, H2, . . . , Hm}una segunda muestra. El problema consiste en estimar una medida
+de discrepancia entre ambas muestras:
+∆(S,T)≥0.
+En la pr´ actica, esta discrepancia rara vez se calcula directamente sobre los
+grafos originales. Usualmente, cada grafo se transforma primero en una representa-
+ci´ on estructural:
+ϕ:G → X,
+dondeXpuede ser un espacio vectorial, una firma espectral, un histograma,
+una distribuci´ on de embeddings o una curva multiescala. As´ ı, la comparaci´ on entre
+muestras de grafos puede entenderse como una comparaci´ on entre distribuciones
+inducidas por la representaci´ on:
+∆(S,T) =D
+ 
+{ϕ(Gi)}n
+i=1,{ϕ(H j)}m
+j=1
+
+.
+Esta formulaci´ on permite separar dos decisiones: la representaci´ onϕ, que
+determina qu´ e informaci´ on estructural se conserva, y la funci´ onD, que determina
+c´ omo se comparan las muestras representadas. Una comparaci´ on puede fallar porque
+la distancia no es adecuada, pero tambi´ en porque la representaci´ on no captura la
+propiedad estructural afectada.
+29
+PAGE 39
+2.3 Escalas estructurales en grafos
+La estructura de un grafo puede analizarse en distintas escalas. Esta distinci´ on
+es importante porque las funciones de comparaci´ on no son igualmente sensibles a
+todos los niveles estructurales.
+La escala local incluye propiedades asociadas a nodos, aristas y vecindarios
+peque˜ nos. Entre ellas se encuentran grado, clustering, tri´ angulos, motivos simples y
+vecindarios de primer o segundo orden [16].
+La escala mesosc´ opica se ubica entre lo local y lo global. Incluye comunidades,
+bloques, motivos extendidos y patrones de vecindario repetidos. Los m´ etodos basados
+en kernels de grafos y Weisfeiler–Lehman suelen ser relevantes en este nivel, porque
+agregan informaci´ on de vecindarios de manera iterativa [7, 8].
+La escala global comprende propiedades del grafo completo, como conecti-
+vidad, componentes, di´ ametro, estructura de caminos, hubs, cortes y espectro del
+Laplaciano. Los m´ etodos espectrales son especialmente relevantes porque los auto-
+valores de matrices asociadas al grafo contienen informaci´ on sobre conectividad y
+difusi´ on [4, 5].
+La perspectiva multiescala analiza la estructura del grafo en varios niveles de
+resoluci´ on. En lugar de reducir el grafo a una sola estad´ ıstica, observa c´ omo cambian
+ciertas propiedades cuando se modifica una escala, un tiempo de difusi´ on o un nivel
+de coarsening [6, 17].
+2.4 M´ etodos basados en estad´ ısticas estructurales y MMD
+Una estrategia com´ un para comparar distribuciones de grafos consiste en ex-
+traer estad´ ısticas estructurales de cada grafo y comparar las distribuciones emp´ ıricas
+30
+PAGE 40
+de dichas estad´ ısticas. Entre las estad´ ısticas frecuentes se encuentran grado prome-
+dio, distribuci´ on de grados, densidad, clustering, transitividad, tri´ angulos y compo-
+nentes conexas [1, 3].
+Este enfoque tiene una ventaja importante: sus resultados suelen ser inter-
+pretables. Si dos conjuntos difieren en distribuci´ on de grados, puede inferirse una
+diferencia en conectividad. Si difieren en clustering, puede interpretarse como una
+diferencia en cierre tri´ adico o cohesi´ on local. Sin embargo, esta claridad tiene una
+limitaci´ on: el m´ etodo solo puede detectar cambios reflejados en las estad´ ısticas se-
+leccionadas.
+Maximum Mean Discrepancy permite comparar distribuciones emp´ ıricas de
+descriptores estructurales [2]. Dadas dos muestras:
+X={x 1, x2, . . . , xm}, Y={y 1, y2, . . . , yn},
+y un kernel positivo definidok(·,·), el estimador emp´ ırico de MMD puede
+escribirse como:
+\MMD
+2
+(X, Y) = 1
+m2
+mX
+i=1
+mX
+j=1
+k(xi, xj) + 1
+n2
+nX
+i=1
+nX
+j=1
+k(yi, yj)− 2
+mn
+mX
+i=1
+nX
+j=1
+k(xi, yj).
+La expresi´ on anterior corresponde al estimador sesgado de tipoV, que in-
+cluye los t´ erminos diagonales de los dobles sumatorios; existe tambi´ en un estimador
+insesgado que los excluye y reemplaza los factores 1/m 2 y 1/n2 por 1/
+ 
+m(m−1)
+
+y 1/
+ 
+n(n−1)
+
+[2]. La elecci´ on entre ambos, as´ ı como el ancho de banda del kernel,
+forman parte de la configuraci´ on del workflow y deben documentarse por su efecto
+sobre el puntaje.
+31
+PAGE 41
+En esta tesis, MMD se interpreta como una l´ ınea base fuerte pero dependiente
+de la representaci´ on. Su comportamiento debe evaluarse seg´ un si la perturbaci´ on
+afecta o no las estad´ ısticas utilizadas.
+2.5 Kernels de grafos y Weisfeiler–Lehman
+Los kernels de grafos miden similitud entre grafos mediante subestructuras,
+como caminos, walks, sub´ arboles o vecindarios [15, 18, 19]. En lugar de comparar
+matrices directamente, estos m´ etodos descomponen los grafos en patrones internos
+y agregan similitudes entre ellos.
+El Weisfeiler–Lehman subtree kernel es uno de los enfoques m´ as influyentes.
+Se basa en un refinamiento iterativo de etiquetas de nodos [7]. Sic h(v) representa
+la etiqueta del nodoven la iteraci´ onh, entonces el refinamiento puede expresarse
+de forma esquem´ atica como:
+ch+1(v) = hash (ch(v),{ {ch(u) :u∈N(v)} }).
+Despu´ es dehiteraciones, cada nodo incorpora informaci´ on de vecindarios de
+radio creciente. Por ello, los m´ etodos basados en WL son adecuados para estudiar
+perturbaciones que alteran patrones locales o mesosc´ opicos. No obstante, dependen
+del n´ umero de iteraciones, de la codificaci´ on de etiquetas y de la forma en que se
+agregan las representaciones del grafo.
+2.6 Transporte ´ optimo y Wasserstein–Weisfeiler–Lehman
+El transporte ´ optimo proporciona un marco para comparar distribuciones
+considerando el costo m´ ınimo de transformar una distribuci´ on en otra [20, 21]. En el
+32
+PAGE 42
+contexto de grafos, puede utilizarse para comparar distribuciones de representaciones
+internas, por ejemplo, embeddings de nodos.
+Seanµyνdos distribuciones de probabilidad sobre un espacio m´ etrico (X, d).
+La distancia de Wasserstein de ordenpse define como:
+Wp(µ, ν) =
+
+´ ınf
+γ∈Π(µ,ν)
+Z
+X ×X
+d(x, y)p dγ(x, y)
+1/p
+,
+donde Π(µ, ν) es el conjunto de planes de transporte con marginalesµyν.
+Wasserstein–Weisfeiler–Lehman combina representaciones inspiradas en WL
+con distancia de Wasserstein para comparar grafos mediante distribuciones de re-
+presentaciones de nodos [8]. Esta idea es importante porque evita reducir necesa-
+riamente cada grafo a un ´ unico vector promedio. Su limitaci´ on principal es el costo
+computacional, especialmente cuando se comparan muchas muestras o grafos gran-
+des.
+2.7 Representaciones espectrales y NetLSD
+Las representaciones espectrales describen un grafo mediante autovalores o
+funciones de matrices asociadas, como el Laplaciano combinatorio o el Laplaciano
+normalizado [4, 5]. Estas representaciones son relevantes porque el espectro contiene
+informaci´ on sobre conectividad, componentes, cortes, comunidades y difusi´ on.
+SeaLuna matriz Laplaciana asociada a un grafoG, y sean sus autovalores:
+0 =λ 1 ≤λ 2 ≤ · · · ≤λ n.
+NetLSD propone una firma basada en la traza del heat kernel [6]:
+33
+PAGE 43
+hG(t) = tr
+ 
+e−tL
+=
+nX
+i=1
+e−tλi.
+El par´ ametrotfunciona como escala de observaci´ on. Valores peque˜ nos tien-
+den a reflejar informaci´ on local, mientras que valores grandes capturan propiedades
+globales de difusi´ on. Por ello, NetLSD resulta relevante para estudiar perturbaciones
+que afectan conectividad global, estructura comunitaria o propiedades multiescala.
+Sin embargo, como firma agregada, puede no responder con fuerza ante perturba-
+ciones locales peque˜ nas si estas no modifican significativamente el espectro.
+2.8 Representaciones multiescala y coarsening
+Los m´ etodos multiescala analizan c´ omo cambia una propiedad estructural
+cuando el grafo se observa a distintos niveles de resoluci´ on. En enfoques basados
+en coarsening, el grafo se simplifica progresivamente mediante operaciones como
+contracci´ on de aristas, y luego se estudia la evoluci´ on de una medida estructural.
+Las Diversity Curves utilizan esta idea para construir representaciones de
+grafos basadas en diversidad estructural a trav´ es de niveles de coarsening [17]. De
+manera general, cada grafo se transforma en una curva que resume c´ omo se conserva
+o pierde diversidad estructural conforme se reduce su resoluci´ on.
+Esta familia es relevante porque algunas diferencias no aparecen en una ´ unica
+escala. Dos grafos pueden parecer similares localmente, pero diferir globalmente; o
+compartir propiedades globales y diferir en organizaci´ on intermedia. Por ello, los
+m´ etodos multiescala complementan tanto a los descriptores simples como a las firmas
+espectrales.
+34
+PAGE 44
+2.9 Modelos sint´ eticos de grafos
+Los modelos sint´ eticos permiten evaluar funciones de comparaci´ on bajo con-
+diciones controladas. Su prop´ osito no es reproducir toda la complejidad de los grafos
+reales, sino aislar propiedades estructurales espec´ ıficas.
+2.9.1 Erd˝ os–R´ enyi
+El modelo Erd˝ os–R´ enyi genera grafos aleatorios a partir de una probabilidad
+uniforme de conexi´ on entre pares de nodos [9]. En su varianteG(n, p), cada arista
+aparece independientemente con probabilidadp. Este modelo sirve como l´ ınea base
+de aleatoriedad homog´ enea, sin comunidades ni hubs expl´ ıcitos.
+2.9.2 Stochastic Block Model
+El Stochastic Block Model genera grafos con estructura de bloques o comu-
+nidades [10]. Los nodos pertenecen a grupos latentes, y la probabilidad de arista
+depende de los bloques de origen y destino. Este modelo es importante porque las
+etiquetas comunitarias pertenecen al proceso generativo, por lo que las perturbacio-
+nes dependientes de comunidad est´ an estructuralmente justificadas.
+2.9.3 Barab´ asi–Albert
+El modelo Barab´ asi–Albert introduce crecimiento y conexi´ on preferencial,
+generando grafos con distribuci´ on de grado heterog´ enea y presencia de hubs [11]. Es
+´ util para evaluar perturbaciones sobre nodos altamente conectados y analizar si las
+m´ etricas capturan cambios con impacto global.
+35
+PAGE 45
+2.9.4 Watts–Strogatz
+El modelo Watts–Strogatz genera grafos con propiedades de mundo peque˜ no,
+combinando alto clustering con caminos relativamente cortos [12]. Permite estudiar
+perturbaciones que alteran cierre local, rewiring y estructura de caminos.
+2.9.5 Grid
+Los grafos Grid representan estructuras regulares con organizaci´ on geom´ etri-
+ca. Aunque son menos flexibles como modelo generativo, permiten evaluar pertur-
+baciones sobre conectividad local, caminos y regularidad estructural.
+2.9.6 Lobster
+Los grafos tipolobsterson ´ arboles que se reducen a un camino luego de remo-
+ver hojas y repetir la operaci´ on una vez m´ as. Son ´ utiles para estudiar perturbaciones
+en ramas, hojas y caminos sin introducir ciclos densos.
+2.10 Comunidades, modularidad y pseudo-etiquetas
+La noci´ on de comunidad se refiere, de manera general, a grupos de nodos con
+mayor densidad de conexiones internas que externas. En modelos generativos como
+SBM, las comunidades est´ an definidas por construcci´ on. En cambio, en datasets
+reales o en modelos que no incluyen etiquetas comunitarias, las comunidades deben
+ser inferidas mediante algoritmos de detecci´ on.
+36
+PAGE 46
+Una estrategia com´ un es maximizar la modularidad, que mide la calidad de
+una partici´ on comparando la densidad de aristas internas observada con la espera-
+da bajo un modelo nulo. El algoritmo de Clauset, Newman y Moore propone una
+aproximaci´ on greedy aglomerativa para detectar comunidades en redes grandes [13].
+2.11 Perturbaciones controladas
+Las perturbaciones controladas modifican grafos o muestras de grafos con una
+intensidad conocidaα. Su objetivo es generar escenarios donde la causa del cambio
+estructural sea expl´ ıcita.
+Las perturbaciones locales afectan aristas, grados, tri´ angulos, hojas o vecin-
+darios peque˜ nos. Sirven para evaluar sensibilidad a cambios de corto alcance.
+Las perturbaciones mesosc´ opicas afectan comunidades, bloques o cohesi´ on de
+grupos. El debilitamiento de comunidades pertenece a esta categor´ ıa.
+Las perturbaciones globales afectan conectividad general, hubs, caminos, com-
+ponentes o propiedades espectrales. Pueden tener efectos amplios incluso si la inter-
+venci´ on se concentra en pocos nodos.
+Las perturbaciones mixtas combinan efectos locales y globales, como el re-
+wiring preservando grado. En este caso, la secuencia de grados puede mantenerse
+relativamente estable mientras cambian caminos, clustering o comunidades.
+Las perturbaciones distribucionales modifican la composici´ on de la muestra.
+El colapso distribucional ocurre cuando una distribuci´ on perturbada pierde modos
+estructurales presentes en la distribuci´ on original. Este caso es relevante para evaluar
+si una funci´ on de comparaci´ on detecta p´ erdida de diversidad, incluso cuando los
+grafos individuales parecen plausibles.
+37
+PAGE 47
+2.12 An´ alisis pareado e inferencia estad´ ıstica
+Cuando el protocolo experimental genera una versi´ on perturbadaG α
+i para
+cada grafo originalG i, se obtiene una estructura pareada. Esta estructura permite
+definir una distancia individual:
+pi,α =d(ϕ(G i), ϕ(Gα
+i )).
+El an´ alisis pareado es importante porque evita depender ´ unicamente de pro-
+medios entre distribuciones. Dos muestras pueden separarse en promedio, pero no
+necesariamente mostrar cambios consistentes en cada trayectoria individual. Por ello,
+la relaci´ on entreαyp i,α puede analizarse mediante correlaciones ordinales por par
+o mediante distribuciones de puntajes pareados.
+Para comparar niveles de perturbaci´ on, pueden utilizarse pruebas estad´ ısticas
+sobre diferencias pareadas. Si las diferencias entre dos niveles de perturbaci´ on pre-
+sentan normalidad aproximada, puede aplicarse una prueba t pareada [22]. Si no se
+desea asumir normalidad, puede emplearse la prueba de rangos con signo de Wilco-
+xon como alternativa no param´ etrica [23]. Cuando se realizan m´ ultiples comparacio-
+nes entre m´ etricas, perturbaciones o niveles deα, debe considerarse una correcci´ on
+por comparaciones m´ ultiples, como el procedimiento de Benjamini–Hochberg para
+controlar la tasa de falsos descubrimientos [24].
+Estas pruebas no sustituyen el an´ alisis estructural. Su funci´ on es apoyar la
+interpretaci´ on emp´ ırica y reducir el riesgo de concluir diferencias a partir de fluc-
+tuaciones aleatorias.
+38
+PAGE 48
+2.13 Criterios de evaluaci´ on de m´ etodos
+La evaluaci´ on de funciones de comparaci´ on entre distribuciones de grafos
+requiere varios criterios complementarios.
+Sensibilidad.Eval´ ua si el m´ etodo responde ante cambios estructurales rele-
+vantes y desde qu´ e intensidad de perturbaci´ on se vuelve observable la respues-
+ta.
+Detectabilidad pareada.Eval´ ua si el cambio entre cada grafo original y su
+versi´ on perturbada aumenta de forma consistente conα.
+Monotonicidad.Eval´ ua si el puntaje evita disminuciones conforme aumenta
+la perturbaci´ on. En esta tesis, se interpreta como criterio de consistencia, no
+como aporte principal.
+Robustez.Eval´ ua estabilidad ante semillas, repeticiones y variaciones de con-
+figuraci´ on.
+Interpretabilidad.Eval´ ua si el puntaje puede relacionarse con propiedades
+estructurales comprensibles.
+Costo computacional.Eval´ ua tiempo de ejecuci´ on, memoria y escalabilidad.
+Granularidad estructural.Eval´ ua qu´ e tipo de perturbaciones detecta mejor
+cada familia: locales, mesosc´ opicas, globales, mixtas o distribucionales.
+En conjunto, estos criterios permiten evitar una comparaci´ on superficial basada
+´ unicamente en magnitudes absolutas. La tesis se orienta a caracterizar perfiles de
+comportamiento, no a declarar una m´ etrica universalmente superior.
+39
+PAGE 49
+CAP´ITULO III
+MARCO REFERENCIAL (LEGAL,
+GEOGR´AFICO, HIST ´ORICO) (opcional)
+Inicie aqu´ ı el texto, utilizando sangr´ ıa de 1.25 cm. en el primer p´ arrafo. Con-
+tin´ ue el segundo p´ arrafo.
+Contin´ ue el segundo p´ arrafo
+3.1 Primer subt´ ıtulo
+En la actualidad, las unidades de informaci´ on hacen frente a muchos cambios
+debido a los avances tecnol´ ogicos, explosi´ on informativa, nuevos recursos y soportes,
+por lo cual se implementan servicios innovadores que les permitan a sus usuarios
+tener acceso a muchas fuentes de informaci´ on. Para asegurar el acceso y uso de los
+servicios los usuarios requieren poseer una serie de habilidades que les permitan iden-
+tificar, recuperar, manejar, discernir, organizar, utilizar y comunicar la informaci´ on
+de manera eficaz para la toma de decisiones.
+Entre las causas se pueden considerar la falta de tiempo asignado al taller,
+las limitaciones en cuanto a laboratorios, el poco personal, la falta de una correcta
+selecci´ on de los contenidos, as´ ı como, una calificaci´ on que asegure el cumplimiento
+de los objetivos.
+PAGE 50
+CAP´ITULO IV
+MARCO METODOL ´OGICO
+El presente cap´ ıtulo describe el dise˜ no metodol´ ogico utilizado para evaluar
+funciones de comparaci´ on entre distribuciones de grafos sometidas a perturbaciones
+estructurales controladas.
+La investigaci´ on parte de una premisa central: una funci´ on de comparaci´ on
+entre distribuciones de grafos no debe evaluarse ´ unicamente por el valor escalar que
+produce, sino por el tipo de estructura que representa, la forma en que responde ante
+perturbaciones conocidas, la estabilidad de esa respuesta y el costo computacional
+requerido. Por ello, el estudio compara workflows completos de evaluaci´ on, entendi-
+dos como la combinaci´ on de una representaci´ on de grafo, una regla de comparaci´ on
+y un conjunto de criterios de an´ alisis.
+La metodolog´ ıa se organiza en torno a una trayectoria experimental contro-
+lada. A partir de una distribuci´ on base de grafos, se generan versiones perturbadas
+mediante operadores estructurales parametrizados por una intensidadα. Posterior-
+mente, cada workflow transforma los grafos en representaciones comparables y pro-
+duce puntajes de discrepancia en distintos niveles de medici´ on. La interpretaci´ on de
+los resultados considera sensibilidad, detectabilidad pareada, monotonicidad como
+criterio de consistencia, robustez, interpretabilidad y costo computacional.
+PAGE 51
+4.1 Dise˜ no general de la investigaci´ on
+La investigaci´ on es de tipo experimental, comparativa y cuantitativa. Es ex-
+perimental porque introduce perturbaciones estructurales controladas sobre colec-
+ciones de grafos; es comparativa porque contrasta familias metodol´ ogicas distintas; y
+es cuantitativa porque los resultados se expresan mediante puntajes de discrepancia,
+correlaciones, pruebas estad´ ısticas, medidas de estabilidad y tiempos de ejecuci´ on.
+SeaDuna muestra emp´ ırica de grafos de referencia:
+D={G 1, G2, . . . , Gn}.
+Para cada grafoG i se genera una versi´ on perturbadaGα
+i mediante un opera-
+dorT α, dondeαrepresenta la intensidad de perturbaci´ on. La muestra perturbada
+se define como:
+Dα ={G α
+1 , Gα
+2 , . . . , Gα
+n}.
+El objetivo metodol´ ogico es evaluar c´ omo distintos workflows estiman la dis-
+crepancia entreDyD α. Cada workflow se compone de dos elementos principales:
+una representaci´ on estructuralϕ(G) y una funci´ on de comparaci´ onF. En t´ erminos
+generales, el puntaje de discrepancia puede expresarse como:
+Sα =F({ϕ(G i)}n
+i=1,{ϕ(G α
+i )}n
+i=1).
+Esta formulaci´ on permite separar dos decisiones metodol´ ogicas. La primera
+es qu´ e informaci´ on estructural se conserva medianteϕ(G); la segunda es c´ omo se
+42
+PAGE 52
+comparan las representaciones resultantes medianteF. Esta separaci´ on es importan-
+te porque una funci´ on de comparaci´ on puede fallar no solo por la distancia utilizada,
+sino tambi´ en porque la representaci´ on elegida no captura la estructura afectada por
+la perturbaci´ on.
+Figura 4.1:Pipeline metodol´ ogico para la evaluaci´ on de funciones de compara-
+ci´ on entre distribuciones de grafos bajo perturbaciones controladas.
+El pipeline muestra que la unidad de an´ alisis es el comportamiento del work-
+flow completo frente a una trayectoria de perturbaciones.
+4.2 Pregunta metodol´ ogica
+La pregunta que orienta el dise˜ no experimental es la siguiente:
+¿C´ omo evaluar, de forma rigurosa y comparable, qu´ e workflows de com-
+paraci´ on detectan cambios locales, mesosc´ opicos, globales, mixtos o dis-
+tribucionales en muestras de grafos perturbadas?
+Esta pregunta exige una evaluaci´ on que vaya m´ as all´ a de un ´ unico puntaje
+final. Un valor escalar puede indicar que dos muestras de grafos difieren, pero no ne-
+cesariamente explica qu´ e tipo de diferencia fue detectada, si el cambio es consistente
+43
+PAGE 53
+a nivel pareado, si la respuesta se mantiene entre semillas, si el m´ etodo responde
+ante intensidades bajas o si el costo computacional es viable.
+Por esta raz´ on, el dise˜ no metodol´ ogico combina cuatro niveles de medici´ on:
+discrepancia distribucional, cambio promedio de representaci´ on, distancia pareada
+individual y distancia pareada agregada. Estos niveles permiten distinguir entre
+separaci´ on global de muestras, desplazamiento del centro de la representaci´ on y
+consistencia del cambio en cada par original–perturbado.
+4.3 Selecci´ on de workflows de comparaci´ on
+El estudio no pretende evaluar todas las m´ etricas existentes para comparar
+grafos. Una comparaci´ on exhaustiva producir´ ıa un dise˜ no dif´ ıcil de controlar y no
+necesariamente m´ as informativo. En su lugar, se adopta una selecci´ on por familias
+metodol´ ogicas. Cada familia representa una forma distinta de codificar y comparar
+estructura.
+Los workflows se seleccionan siguiendo cinco criterios:
+1.Pertinencia te´ orica: el m´ etodo debe estar conectado con las familias discu-
+tidas en el marco te´ orico.
+2.Escala estructural identificable: el m´ etodo debe asociarse razonablemente
+a informaci´ on local, mesosc´ opica, global o multiescala.
+3.Viabilidad computacional: el m´ etodo debe poder ejecutarse repetidamente
+bajo distintas perturbaciones, intensidades y semillas.
+4.Interpretabilidad: el resultado debe permitir alguna lectura estructural, aun-
+que sea parcial.
+44
+PAGE 54
+5.Reproducibilidad: el m´ etodo debe permitir registrar par´ ametros, semillas,
+configuraciones y versiones de implementaci´ on.
+Con base en estos criterios, se consideran los siguientes workflows principales:
+1.GraphStats + MMD: compara distribuciones de grafos a partir de descrip-
+tores estructurales y Maximum Mean Discrepancy.
+2.WLFeatures + MMD: compara distribuciones de representaciones deriva-
+das de Weisfeiler–Lehman mediante MMD.
+3.NetLSD: compara firmas espectrales basadas en trazas del heat kernel.
+4.Diversity Curve Distance: compara curvas de diversidad estructural obte-
+nidas mediante una representaci´ on multiescala.
+Esta selecci´ on permite cubrir familias con ´ enfasis distintos. GraphStats +
+MMD funciona como l´ ınea base interpretable. WLFeatures + MMD representa sen-
+sibilidad a vecindarios y subestructuras. NetLSD representa una firma espectral
+global y multiescala. Diversity Curve Distance representa un enfoque basado en
+evoluci´ on de diversidad estructural bajo distintos niveles de resoluci´ on.
+Es importante mencionar que en resultados preliminares los workflows se re-
+portan con los identificadores de implementaci´ on correspondientes: la firma espectral
+se denominaNativeNetLSD, en referencia a una implementaci´ on fiel a la formulaci´ on
+original de NetLSD basada en la traza delheat kernel, y el enfoque multiescala se
+denominaDiversityCurveDistance. Ambos nombres designan los mismos m´ etodos
+descritos en esta secci´ on.
+45
+PAGE 55
+4.4 Datasets y distribuciones base
+La evaluaci´ on utiliza dos tipos de datos: distribuciones sint´ eticas controla-
+das y datasets reales. La etapa sint´ etica prioriza validez interna, porque permite
+conocer el mecanismo generador y la perturbaci´ on aplicada. La etapa con datos
+reales permite evaluar si los patrones observados se mantienen en contextos menos
+idealizados.
+4.4.1 Distribuciones sint´ eticas
+Las distribuciones sint´ eticas se emplean para aislar propiedades estructurales
+espec´ ıficas.
+46
+PAGE 56
+Tabla 4.1:Funci´ on metodol´ ogica de las distribuciones sint´ eticas consideradas.
+Familia sint´ etica Propiedad controlada Funci´ on en el experimen-
+to
+Erd˝ os–R´ enyi Aleatoriedad homog´ enea
+y densidad
+Caso base sin comunidades ni
+hubs expl´ ıcitos.
+Stochastic Block
+Model
+Comunidades generati-
+vas
+Evaluar perturbaciones de-
+pendientes de comunidad con
+etiquetas estructurales cono-
+cidas.
+Barab´ asi–Albert Hubs y grado hete-
+rog´ eneo
+Evaluar sensibilidad ante mo-
+dificaci´ on de nodos de alta co-
+nectividad.
+Watts–Strogatz Clustering y mundo pe-
+que˜ no
+Evaluar cambios en cierre lo-
+cal y estructura de caminos.
+Grid Regularidad geom´ etrica Evaluar perturbaciones sobre
+conectividad local regular.
+Lobster Estructura arb´ orea rami-
+ficada
+Evaluar cambios en ramas,
+hojas y caminos.
+4.4.2 Dataset real
+La etapa con datos reales utilizar´ a el datasetIMDB-BINARY, pertene-
+ciente a la colecci´ on TUDataset [25]. Este dataset contiene grafos derivados de redes
+de colaboraci´ on entre actores, donde cada grafo representa una red ego asociada a
+una pel´ ıcula y la tarea original consiste en clasificarla en una de dos categor´ ıas.
+En esta tesis, IMDB-BINARY no se usar´ a con fines de clasificaci´ on supervisa-
+da, sino como conjunto de grafos reales para evaluar funciones de comparaci´ on bajo
+47
+PAGE 57
+perturbaciones controladas. Su inclusi´ on permite contrastar los patrones observados
+en distribuciones sint´ eticas con grafos emp´ ıricos que presentan variabilidad natural
+de tama˜ no y conectividad.
+Tabla 4.2:Dataset real considerado en la evaluaci´ on.
+Dataset Dominio Uso en la tesis
+IMDB-BINARY Redes de colabora-
+ci´ on de actores
+Evaluar si los workflows mantie-
+nen perfiles de sensibilidad en gra-
+fos reales con variabilidad estructu-
+ral natural.
+Si se incorporan datasets reales adicionales, deber´ an a˜ nadirse expl´ ıcitamente
+en la Tabla 4.2, indicando dominio, n´ umero de grafos, tama˜ no aproximado, dis-
+ponibilidad de etiquetas de nodos, disponibilidad de comunidades y justificaci´ on
+experimental. No se asumir´ an datasets reales no documentados.
+4.5 Tratamiento de comunidades
+Las perturbaciones dependientes de comunidad requieren distinguir entre co-
+munidades generativas, comunidades observadas y comunidades inferidas.
+En Stochastic Block Model, las comunidades forman parte del proceso ge-
+nerativo. Por tanto, las etiquetas de comunidad pueden tratarse como estructura
+conocida dentro del experimento sint´ etico. En cambio, en datasets reales o en mode-
+los sint´ eticos que no proporcionan etiquetas comunitarias, no se asumir´ a la existencia
+de comunidades ground truth.
+Cuando un conjunto de grafos no proporcione etiquetas expl´ ıcitas de comu-
+nidad a nivel de nodos, se utilizar´ a un procedimiento auxiliar de detecci´ on de co-
+munidades basado en maximizaci´ on greedy de modularidad, siguiendo el algoritmo
+48
+PAGE 58
+de Clauset, Newman y Moore [13]. Esta decisi´ on tiene una funci´ on operacional: ob-
+tener particiones estructurales aproximadas sobre las cuales aplicar perturbaciones
+controladas dependientes de comunidad.
+Las comunidades inferidas mediante este procedimiento se tratar´ an como
+pseudo-etiquetas. No se interpretar´ an como comunidades reales ni como anotacio-
+nes sem´ anticas del dominio original. Para cada experimento que dependa de estas
+particiones, se reportar´ a:
+1. el algoritmo utilizado para detectar comunidades;
+2. los par´ ametros relevantes del algoritmo;
+3. si el procedimiento es determin´ ıstico o depende de semilla;
+4. el criterio de calidad de partici´ on utilizado, cuando corresponda;
+5. la forma en que las pseudo-etiquetas se emplean para aplicar la perturbaci´ on.
+Si la partici´ on inferida no muestra una relaci´ on estructural razonable con
+el grafo, los resultados asociados se interpretar´ an como exploratorios y no como
+evidencia concluyente sobre estructura comunitaria real.
+4.6 Operadores de perturbaci´ on controlada
+Las perturbaciones se dise˜ nan como intervenciones estructurales parametri-
+zadas por una intensidadα. La intensidad toma valores discretos:
+α∈ {0.0,0.1,0.2, . . . ,1.0}.
+49
+PAGE 59
+Cuandoα= 0, la muestra perturbada debe ser equivalente a la muestra
+original. Cuandoα= 1, se aplica el nivel m´ aximo de perturbaci´ on definido para el
+operador correspondiente. El significado exacto deαdepende del operador: puede
+representar porcentaje de aristas modificadas, proporci´ on de tri´ angulos eliminados,
+intensidad de debilitamiento comunitario o p´ erdida de diversidad distribucional.
+Las perturbaciones se clasifican seg´ un la escala estructural que afectan. Esta
+clasificaci´ on no pretende ser absoluta, ya que algunas perturbaciones locales pueden
+tener efectos globales. Su funci´ on es organizar la interpretaci´ on experimental.
+4.6.1 Perturbaciones locales
+Las perturbaciones locales modifican aristas, tri´ angulos o vecindarios pe-
+que˜ nos. Su objetivo es evaluar si los workflows capturan cambios de corto alcance.
+1.Inserci´ on de aristas: a˜ nade un porcentaje controlado de aristas ausentes.
+2.Eliminaci´ on de aristas: elimina un porcentaje controlado de aristas existen-
+tes.
+3.Inserci´ on de tri´ angulos: modifica la red para aumentar cierre tri´ adico o
+clustering local.
+4.Eliminaci´ on de tri´ angulos: reduce estructuras triangulares preservando, en
+lo posible, otras propiedades.
+Estas perturbaciones permiten evaluar si m´ etodos como GraphStats + MMD
+o WLFeatures + MMD responden ante cambios directamente asociados a grados,
+clustering y vecindarios.
+50
+PAGE 60
+4.6.2 Perturbaciones mesosc´ opicas
+Las perturbaciones mesosc´ opicas afectan estructuras intermedias, especial-
+mente comunidades o bloques.
+1.Debilitamiento de comunidades: reduce progresivamente la separaci´ on en-
+tre grupos, por ejemplo, disminuyendo conexiones intracomunidad o aumen-
+tando conexiones intercomunidad.
+2.Reasignaci´ on estructural parcial: modifica la pertenencia de nodos a pseudo-
+comunidades cuando estas son inferidas, siempre reportando que no constitu-
+yen ground truth.
+En SBM, estas perturbaciones se aplican sobre etiquetas generativas cono-
+cidas. En datasets sin etiquetas, se aplican sobre pseudo-etiquetas inferidas y sus
+conclusiones se interpretan con cautela.
+4.6.3 Perturbaciones globales
+Las perturbaciones globales afectan propiedades de conectividad general,
+hubs, caminos o estructura espectral.
+1.Modificaci´ on de hubs: altera aristas incidentes a nodos de alta conectividad.
+2.Cambio de conectividad: modifica la estructura de componentes o caminos
+entre regiones del grafo.
+3.Perturbaci´ on de caminos: altera distancias de camino m´ ınimo mediante
+inserciones, eliminaciones o recableados dirigidos.
+Estas perturbaciones son especialmente relevantes para evaluar firmas espec-
+trales y m´ etodos multiescala, aunque tambi´ en pueden afectar estad´ ısticas locales.
+51
+PAGE 61
+4.6.4 Perturbaciones mixtas
+Las perturbaciones mixtas combinan efectos locales y globales. El caso prin-
+cipal es el rewiring preservando grado.
+1.Rewiring preservando grado: modifica la organizaci´ on de las aristas man-
+teniendo, en lo posible, la secuencia de grados.
+Esta perturbaci´ on es metodol´ ogicamente importante porque separa la distri-
+buci´ on de grados de otras propiedades estructurales. Si una m´ etrica depende fuer-
+temente del grado, podr´ ıa subestimar cambios producidos por este operador.
+4.6.5 Perturbaciones distribucionales
+Las perturbaciones distribucionales modifican la composici´ on de la muestra,
+no necesariamente cada grafo individual.
+1.Colapso distribucional: reduce la diversidad de la muestra eliminando o
+subrepresentando ciertos modos estructurales.
+Esta perturbaci´ on permite evaluar si una funci´ on de comparaci´ on detecta
+p´ erdida de cobertura distribucional. Es relevante en contextos de evaluaci´ on gene-
+rativa, donde un conjunto de grafos puede parecer plausible individualmente, pero
+no representar adecuadamente toda la distribuci´ on original.
+4.7 Protocolo experimental
+El protocolo experimental se aplica de forma uniforme a cada combinaci´ on de
+dataset, perturbaci´ on, intensidad y workflow. La secuencia general es la siguiente:
+52
+PAGE 62
+1. Seleccionar una distribuci´ on base o dataset de grafosD.
+2. Definir el operador de perturbaci´ onTα y su interpretaci´ on para cada valor de
+α.
+3. Generar muestras perturbadasD α para cada intensidad.
+4. Preservar la correspondencia pareada entre cada grafo originalG i y su versi´ on
+perturbadaG α
+i cuando el operador lo permita.
+5. Extraer representacionesϕ(G) para cada workflow.
+6. Calcular puntajes distribucionales, cambios de media y distancias pareadas.
+7. Evaluar sensibilidad, detectabilidad pareada, monotonicidad, robustez, costo
+computacional e interpretabilidad.
+8. Registrar semillas, par´ ametros, tiempos de ejecuci´ on y configuraci´ on experi-
+mental.
+El protocolo puede resumirse como:
+D → D α →Φ(D),Φ(D α)→S α, Mα, pi,α, Pα →criterios de evaluaci´ on.
+Esta formulaci´ on evita reducir la evaluaci´ on a un ´ unico n´ umero. El mismo
+workflow puede mostrar alta separaci´ on distribucional, pero baja consistencia pa-
+reada; o puede detectar cambios pareados sin producir una gran diferencia agregada
+entre distribuciones.
+53
+PAGE 63
+4.8 Niveles de medici´ on y criterios de evaluaci´ on
+Para simplificar la organizaci´ on del cap´ ıtulo, los niveles de medici´ on y los
+criterios de evaluaci´ on se presentan de manera integrada. Primero se definen los
+puntajes calculados; luego se explica c´ omo se interpretan.
+4.8.1 Discrepancia distribucional
+La discrepancia distribucional eval´ ua si la muestra original y la muestra per-
+turbada son distinguibles bajo un workflow determinado. Se define como:
+Sα =F(Φ(D),Φ(D α)),
+donde:
+Φ(D) ={ϕ(G i)}n
+i=1,Φ(D α) ={ϕ(G α
+i )}n
+i=1.
+Este nivel responde la pregunta general: si se observan dos muestras de grafos,
+¿el workflow puede distinguirlas?
+4.8.2 Cambio promedio de representaci´ on
+El cambio promedio de representaci´ on eval´ ua si el centro de la representaci´ on
+se desplaza como consecuencia de la perturbaci´ on. Se define como:
+Mα =d
+
+Φ(D), Φ(Dα)
+
+.
+54
+PAGE 64
+Esta medida permite observar desplazamientos agregados. Sin embargo, se
+interpreta con cautela porque dos distribuciones pueden tener medias similares y
+diferir en varianza, dispersi´ on, multimodalidad o estructura interna.
+Conviene precisar queS α yM α no son necesariamente independientes: su
+relaci´ on depende de c´ omo cada workflow agrega las representaciones. En los work-
+flows cuya regla de comparaci´ onFopera directamente como una distancia entre
+representaciones promedio como las firmas espectrales y las curvas multiescala eva-
+luadas en esta tesis la discrepancia distribucional y el cambio de media coinciden por
+construcci´ on, es decir,Sα =M α. En cambio, en los workflows basados en Maximum
+Mean Discrepancy,S α es un estad´ ıstico de dos muestras que incorpora momentos de
+orden superior a trav´ es del kernel, por lo que aporta informaci´ on distinta deMα. En
+consecuencia, los cuatro niveles de medici´ on no deben leerse siempre como cuatro
+fuentes de evidencia independientes: para los m´ etodos basados en promedios, el nivel
+distribucional y el de cambio de media constituyen una ´ unica se˜ nal. Esta distinci´ on
+se retoma al interpretar los resultados.
+4.8.3 Distancia pareada individual
+La distancia pareada individual aprovecha la correspondencia entre cada grafo
+original y su versi´ on perturbada:
+pi,α =d(ϕ(G i), ϕ(Gα
+i )).
+Este nivel es central en la tesis porque evita depender exclusivamente de
+promedios. Permite evaluar si el cambio estructural introducido porT α es capturado
+en la trayectoria individual de cada grafo, y constituye la base de las correlaciones
+por trayectoriaρ i y de las pruebas estad´ ısticas pareadas descritas m´ as adelante.
+55
+PAGE 65
+Debe se˜ nalarse que el aprovechamiento pleno de este nivel exige persistir
+las distanciasp i,α de cada grafo, no solo su promedio por celda. Esta persistencia
+granular es precisamente la contribuci´ on central que el dise˜ no metodol´ ogico habilita,
+y su ejecuci´ on completa se aborda en la fase posterior del trabajo; la etapa preliminar
+reportada en el Cap´ ıtulo V registra la forma agregadaP α y sienta las bases para el
+an´ alisis individual.
+4.8.4 Distancia pareada agregada
+La distancia pareada agregada resume las distancias individuales:
+Pα = 1
+n
+nX
+i=1
+pi,α.
+Este puntaje permite comparar tendencias globales manteniendo la l´ ogica
+pareada del dise˜ no experimental. Tambi´ en se reportar´ a la dispersi´ on depi,α para
+evitar que el promedio oculte comportamientos heterog´ eneos.
+4.8.5 Sensibilidad
+La sensibilidad eval´ ua si el workflow responde ante incrementos de la per-
+turbaci´ on. Conceptualmente, no se reduce al crecimiento monot´ onico del puntaje,
+sino que abarca tres componentes: la capacidad de detectar cambios desde intensi-
+dades bajas (velocidad o umbral de detecci´ on), la capacidad de diferenciar tipos de
+perturbaci´ on, y la coherencia de la respuesta con la escala estructural afectada.
+Es importante distinguir entre esta noci´ on amplia de sensibilidad y su ope-
+racionalizaci´ on en cada etapa del trabajo. En esta etapa, la sensibilidad se estima
+mediante la correlaci´ on ordinal entreαy el puntaje (Secci´ on 4.8.6), que captura
+56
+PAGE 66
+la componente de consistencia direccional pero no la velocidad ni el umbral de de-
+tecci´ on. La componente de velocidad requiere una m´ etrica expl´ ıcita de umbral y
+la componente de diferenciaci´ on fina requiere el an´ alisis pareado a nivel individual;
+ambas dependen de la persistencia de las distanciasp i,α por grafo y se incorporan
+como objetivo de la fase posterior del trabajo. Por tanto, cuando en los resultados
+preliminares se reporte una “sensibilidad” cuantitativa, debe entenderse como la
+componente de consistencia direccional, no como la noci´ on amplia completa.
+Se analizar´ a mediante curvas deSα,M α yP α, adem´ as de distribuciones de
+pi,α por nivel de perturbaci´ on cuando estas se encuentren disponibles.
+4.8.6 Correlaci´ on entre intensidad y puntaje
+La relaci´ on entre intensidad de perturbaci´ on y puntaje se evaluar´ a mediante
+Spearman-ρy Kendall-τ. Para el nivel distribucional:
+ρS = Spearman ((α0, . . . , αk),(S α0, . . . , Sαk)).
+Para el nivel pareado agregado:
+ρP = Spearman ((α0, . . . , αk),(P α0, . . . , Pαk)).
+Adem´ as, cuando sea posible, se calcular´ a una correlaci´ on por trayectoria in-
+dividual:
+ρi = Spearman ((α0, . . . , αk),(p i,α0, . . . , pi,αk)).
+57
+PAGE 67
+La distribuci´ on de los valoresρi permitir´ a evaluar si la relaci´ on entre pertur-
+baci´ on y distancia se mantiene a nivel granular o si solo aparece despu´ es de agregar
+los resultados.
+4.8.7 Monotonicidad como criterio de consistencia
+La monotonicidad se interpreta como un criterio complementario de consis-
+tencia, no como el aporte central de la tesis. Una respuesta monot´ onica indica que
+el puntaje tiende a aumentar conforme aumentaα, pero este comportamiento puede
+ser esperable en curvas agregadas.
+Se utilizar´ a la tasa de violaciones monot´ onicas:
+v= #{j:S αj+1 < S αj }
+k−1 .
+Un valor bajo devindica una respuesta ordenada. Sin embargo, una m´ etrica
+no ser´ a considerada superior ´ unicamente por tener menorv. La interpretaci´ on debe
+complementarse con sensibilidad, an´ alisis pareado, robustez y costo computacional.
+4.8.8 Pruebas estad´ ısticas sobre diferencias pareadas
+Para evaluar si los cambios entre niveles de perturbaci´ on son estad´ ısticamente
+distinguibles, se aplicar´ an pruebas sobre diferencias pareadas cuando corresponda.
+Para dos niveles consecutivosα j yα j+1, se comparan las distancias indivi-
+duales:
+{pi,αj }n
+i=1 y{p i,αj+1 }n
+i=1.
+58
+PAGE 68
+Si las diferencias pareadas presentan normalidad aproximada, se utilizar´ a una
+prueba t pareada. Si no se desea asumir normalidad, se utilizar´ a la prueba de rangos
+con signo de Wilcoxon. Cuando se realicen m´ ultiples comparaciones entre niveles,
+perturbaciones o workflows, se aplicar´ a una correcci´ on por comparaciones m´ ultiples,
+como Benjamini–Hochberg.
+Estas pruebas no sustituyen el an´ alisis estructural. Su funci´ on es evitar con-
+clusiones basadas ´ unicamente en inspecci´ on visual de curvas.
+4.8.9 Robustez
+La robustez eval´ ua la estabilidad de los resultados ante semillas y repeticiones
+experimentales. Para cada configuraci´ on se registrar´ an m´ ultiples ejecuciones cuan-
+do sea computacionalmente viable. Se reportar´ an medidas como media, desviaci´ on
+est´ andar y coeficiente de variaci´ on:
+CV= σ
+µ .
+Una m´ etrica sensible pero altamente inestable debe interpretarse con cautela.
+La robustez permite distinguir respuestas reproducibles de fluctuaciones dependien-
+tes de semillas.
+4.8.10 Costo computacional
+El costo computacional se evaluar´ a registrando tiempo de ejecuci´ on y, cuando
+sea posible, memoria aproximada. El an´ alisis considerar´ a el tama˜ no de la muestra
+|D|, el n´ umero de nodos|V|, el n´ umero de aristas|E|y los par´ ametros internos de
+cada workflow.
+59
+PAGE 69
+El objetivo no es solo identificar qu´ e m´ etodo produce mayor discrepancia,
+sino determinar si dicha respuesta es viable bajo restricciones computacionales ra-
+zonables. Para ello es muy importante, implementar fielmente los workflows, debido
+a que no se desea un an´ alisis sesgado por el no uso de optimizaciones al momento
+de calcularlas.
+4.8.11 Interpretabilidad y an´ alisis de casos discordantes
+La interpretabilidad eval´ ua si el resultado puede relacionarse con propieda-
+des estructurales comprensibles. Por ejemplo, un aumento en GraphStats + MMD
+puede vincularse con cambios en grados, clustering o componentes; una respuesta de
+NetLSD puede interpretarse en t´ erminos de conectividad y difusi´ on; una respuesta
+de WL puede asociarse con cambios de vecindario o subestructuras.
+Adem´ as, se realizar´ a un an´ alisis de casos discordantes o at´ ıpicos. Se revisar´ an
+especialmente configuraciones donde:
+1. una m´ etrica responde con fuerza ante una perturbaci´ on donde se esperaba baja
+sensibilidad;
+2. una m´ etrica no responde ante una perturbaci´ on donde se esperaba sensibilidad
+alta;
+3. las curvas agregadas sugieren monotonicidad, pero el an´ alisis pareado muestra
+alta variabilidad;
+4. WL o GraphStats detectan comportamientos que no aparecen en m´ etricas
+espectrales;
+5. NetLSD o Diversity Curves detectan cambios no capturados por descriptores
+simples.
+60
+PAGE 70
+Este an´ alisis es importante porque los resultados m´ as informativos no siempre
+son los esperados. Los casos raros pueden revelar limitaciones del dise˜ no, errores de
+implementaci´ on, sensibilidad no prevista o propiedades estructurales no consideradas
+inicialmente.
+4.9 Organizaci´ on de resultados por tipo de perturbaci´ on
+Los resultados se organizar´ an por tipo de perturbaci´ on, no ´ unicamente por
+m´ etrica. Esta decisi´ on evita que la secci´ on de resultados se convierta en una lista
+de m´ etodos sin hilo conductor. Para cada perturbaci´ on se analizar´ an los mismos
+elementos:
+1. Descripci´ on objetiva del experimento
+2. Workflows evaluados
+3. Comportamiento deS α
+4. Comportamiento deP α yp i,α
+5. Correlaci´ on entreαy los puntajes de las distribuciones
+6. Evidencia estad´ ıstica, cuando corresponda
+7. Interpretaci´ on seg´ un escala estructural afectada
+8. Limitaciones del resultado.
+Esta plantilla de an´ alisis aplica de forma completa a las perturbaciones que
+preservan la correspondencia entre cada grafo original y su versi´ on perturbada, esto
+es, las perturbaciones locales, mesosc´ opicas, globales y mixtas. Las perturbaciones
+distribucionales constituyen una excepci´ on: al modificar la composici´ on de la muestra
+61
+PAGE 71
+por ejemplo, mediante colapso de modos no inducen un emparejamiento uno a uno
+entre grafos, por lo que los niveles pareadosp i,α yP α no est´ an definidos en ese caso
+y su an´ alisis se limita a la discrepancia distribucionalS α. Esta distinci´ on se hace
+expl´ ıcita para no atribuir a estas perturbaciones un tipo de evidencia que su dise˜ no
+no permite generar.
+El objetivo no ser´ a afirmar que una m´ etrica es mejor de forma universal, sino
+caracterizar qu´ e familia responde mejor bajo qu´ e perturbaci´ on, con qu´ e estabilidad
+y bajo qu´ e costo.
+4.10 Reproducibilidad
+Para garantizar reproducibilidad, cada experimento deber´ a registrar:
+1. Dataset o familia sint´ etica utilizada
+2. N´ umero de grafos
+3. Distribuci´ on de tama˜ nos de grafos
+4. Par´ ametros generativos del modelo sint´ etico
+5. Operador de perturbaci´ on
+6. Valores deα
+7. N´ umero de semillas o repeticiones
+8. Par´ ametros de cada workflow
+9. Versi´ on de librer´ ıas utilizadas
+10. Tiempo de ejecuci´ on
+62
+PAGE 72
+11. Configuraci´ on de hardware, cuando sea relevante.
+En el caso de datasets reales, se registrar´ a tambi´ en si existen etiquetas de
+clase, atributos de nodos, atributos de aristas o etiquetas comunitarias expl´ ıcitas.
+Si se utilizan pseudo-etiquetas de comunidad, se reportar´ a el m´ etodo de inferencia
+correspondiente.
+4.11 Limitaciones metodol´ ogicas
+La metodolog´ ıa presenta varias limitaciones que deben considerarse al inter-
+pretar los resultados.
+Primero, los resultados ser´ an emp´ ıricos y depender´ an de los modelos sint´ eti-
+cos, datasets, perturbaciones, par´ ametros e implementaciones utilizadas. Por tanto,
+las conclusiones no ser´ an universales.
+Segundo, los datasets sint´ eticos simplifican la complejidad de los grafos reales.
+Esta simplificaci´ on es necesaria para controlar el experimento, pero puede omitir
+patrones presentes en datos emp´ ıricos.
+Tercero, los puntajes producidos por distintos workflows no siempre son com-
+parables en magnitud absoluta. Por esta raz´ on, el an´ alisis se concentrar´ a en tenden-
+cias, correlaciones, estabilidad, sensibilidad relativa y comportamiento por tipo de
+perturbaci´ on.
+Cuarto, algunas perturbaciones pueden afectar m´ as de una escala estructural.
+Por ejemplo, eliminar aristas es una operaci´ on local, pero puede alterar conectividad
+global si desconecta componentes. Por ello, la clasificaci´ on local, mesosc´ opica, global,
+mixta o distribucional se utilizar´ a como gu´ ıa interpretativa, no como divisi´ on r´ ıgida.
+63
+PAGE 73
+Quinto, las comunidades inferidas mediante maximizaci´ on de modularidad no
+ser´ an tratadas como ground truth. Su uso se limita a operacionalizar perturbaciones
+dependientes de comunidad en grafos sin etiquetas expl´ ıcitos.
+Sexto, algunos workflows dependen de hiperpar´ ametros relevantes, como n´ ume-
+ro de iteraciones WL, escalas temporales de NetLSD, niveles de coarsening o ancho
+de banda del kernel MMD. Las conclusiones deber´ an restringirse a las configuracio-
+nes evaluadas.
+4.12 Cierre del marco metodol´ ogico
+El marco metodol´ ogico propuesto articula la comparaci´ on de distribuciones
+de grafos como un problema de representaci´ on, perturbaci´ on, medici´ on e interpreta-
+ci´ on. Primero, se seleccionan distribuciones base sint´ eticas y reales. Luego, se aplican
+perturbaciones controladas con intensidadα. Posteriormente, distintos workflows
+transforman los grafos en representaciones estructurales y producen puntajes de
+discrepancia. Finalmente, los resultados se analizan mediante criterios de sensibili-
+dad, detectabilidad pareada, monotonicidad como control de consistencia, robustez,
+interpretabilidad y costo computacional.
+Con esta organizaci´ on, la tesis no se limita a verificar si las m´ etricas aumentan
+cuando aumenta la perturbaci´ on. El objetivo es caracterizar perfiles de comporta-
+miento: qu´ e tipo de estructura detecta cada workflow, desde qu´ e intensidad responde,
+qu´ e tan estable es, qu´ e costo computacional exige y en qu´ e condiciones sus resultados
+son interpretables.
+64
+PAGE 74
+CAP´ITULO V
+RESULTADOS PRELIMINARES
+5.1 Descripci´ on general del experimento preliminar
+El objetivo de esta etapa no es establecer conclusiones definitivas sobre la
+superioridad de una familia de m´ etricas, sino verificar si el protocolo experimental
+permite observar diferencias de comportamiento entre workflows de comparaci´ on de
+distribuciones de grafos bajo perturbaciones controladas.
+La corrida consolidada contiene 20,328 registros experimentales. Estos regis-
+tros corresponden a combinaciones de dataset, perturbaci´ on, intensidadα, semilla y
+workflow. La porci´ on sint´ etica contiene 19,008 filas, generadas a partir de tres fami-
+lias de grafos con 24 semillas; la porci´ on real contiene 1,320 filas correspondientes
+a IMDB-BINARY con 5 semillas. En todos los casos, se utilizaron once valores de
+intensidad:
+α∈ {0.0,0.1,0.2, . . . ,1.0}.
+Los datasets considerados en esta etapa fueron Erd˝ os–R´ enyi, Stochastic Block
+Model, Barab´ asi–Albert e IMDB-BINARY. Las familias sint´ eticas se ejecutaron con
+100 grafos por semilla. Erd˝ os–R´ enyi utiliz´ on= 50 y probabilidad de aristap=
+0.12; Stochastic Block Model utiliz´ on= 50, cuatro bloques,p in = 0.28 yp out =
+0.04; Barab´ asi–Albert utiliz´ on= 50 ym= 2. En IMDB-BINARY se emplearon
+subconjuntos de 100 grafos por semilla, con tama˜ nos variables entre 12 y 84 nodos.
+PAGE 75
+Las perturbaciones evaluadas fueron inserci´ on de aristas, eliminaci´ on de aris-
+tas, inserci´ on de tri´ angulos, eliminaci´ on de tri´ angulos, debilitamiento de comunida-
+des y modificaci´ on de hubs. Estas perturbaciones cubren cambios locales, mesosc´ opi-
+cos y globales. En esta etapa preliminar no se ejecutaron perturbaciones mixtas como
+rewiring preservando grado ni perturbaciones distribucionales como colapso de mo-
+dos. Por tanto, cualquier conclusi´ on sobre perturbaciones mixtas o distribucionales
+debe quedar pendiente.
+Los workflows evaluados fueron:
+1.GraphStats + MMD: MMD con kernel RBF sobre descriptores estructura-
+les.
+2.WLFeatures + MMD: MMD lineal sobre histogramas derivados de Weisfeiler–
+Lehman.
+3.NetLSD: distanciaL 2 entre firmas espectrales basadas en trazas de calor.
+4.Diversity Curve Distance: distanciaL 2 entre curvas de diversidad estruc-
+tural basadas en caminos m´ ınimos.
+Aun no se cuenta todav´ ıa con resultados para Wasserstein–Weisfeiler–Lehman.
+Por ello, aunque esta familia fue considerada conceptualmente en el marco te´ orico,
+no son considerados como resultado experimental en esta secci´ on.
+Conviene delimitar desde el inicio el alcance de esta corrida. El an´ alisis pa-
+reado se reporta ´ unicamente en su forma agregadaPα, es decir, como promedio por
+celda de las distancias individualesp i,α; en esta etapa dichas distancias individuales
+no fueron persistidas por grafo. En consecuencia, el nivel granular las correlaciones
+por trayectoriaρ i, las distribuciones dep i,α y las pruebas estad´ ısticas pareadas que
+constituye la contribuci´ on central de la tesis todav´ ıa no se ejecuta aqu´ ı, y se aborda
+66
+PAGE 76
+en la fase posterior del trabajo. Del mismo modo, la “sensibilidad” que se reporta
+corresponde a la correlaci´ on ordinal entreαy el puntaje, esto es, la componente de
+consistencia direccional definida en el marco metodol´ ogico, y no a la noci´ on amplia
+que incorpora velocidad de detecci´ on y diferenciaci´ on fina por tipo de perturba-
+ci´ on. Los resultados de esta etapa deben leerse, por tanto, como una validaci´ on del
+protocolo y una caracterizaci´ on inicial de perfiles agregados, no como la evaluaci´ on
+granular definitiva.
+5.2 Figuras utilizadas en el an´ alisis preliminar
+Para evitar una secci´ on de resultados sobrecargada, se seleccionan ´ unicamen-
+te las figuras que cumplen una funci´ on anal´ ıtica directa. La Figura 5.1 resume la
+respuesta agregada de los workflows frente al incremento deα. La Figura 5.2 mues-
+tra la distancia pareada promedio. La Figura 5.3 permite comparar sensibilidad por
+granularidad estructural.
+Las Figuras 5.1 y 5.2 presentan puntajes normalizados por workflow, de modo
+que comparan laformade la respuesta a lo largo deαy no la magnitud absolu-
+ta entre workflows. Esta convenci´ on es necesaria porque los puntajes crudos de los
+cuatro m´ etodos difieren en varios ´ ordenes de magnitud (v´ ease la Secci´ on 5.3.1 y
+la Tabla 5.1); sin normalizaci´ on, las curvas de los m´ etodos de menor escala ser´ ıan
+visualmente indistinguibles de una l´ ınea plana. La contrapartida es que la cercan´ ıa
+visual entre curvas normalizadas indica similitud deperfil, no equivalencia de inten-
+sidad de respuesta, lo cual debe tenerse presente al leer estas figuras y el mapa de
+la Figura 5.3.
+67
+PAGE 77
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+BA
+edge deletion
+ edge insertion
+ triangle deletion
+ triangle insertion
+ community weakening
+ hub modification
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+ER
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+SBM
+0 0.25 0.5 0.75 1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+IMDB-BINARY
+0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+α (intensidad de perturbación)
+Score normalizado (por workflow)
+Apendice A. Curvas completas de distribution_score vs α (4 datasets × 6 perturbaciones)
+GraphStats+MMD WL+MMD NetLSD Diversity Curves
+Figura 5.1:Puntajenormalizado por workflowde discrepancia distribucional
+en funci´ on de la intensidad de perturbaci´ onα. La figura compara la forma de la
+respuesta de cada workflow frente al incremento progresivo de perturbaci´ on; no
+representa magnitudes absolutas comparables entre workflows (v´ ease la Tabla 5.1).
+68
+PAGE 78
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+BA
+edge deletion
+ edge insertion
+ triangle deletion
+ triangle insertion
+ community weakening
+ hub modification
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+ER
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+SBM
+0 0.25 0.5 0.75 1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+IMDB-BINARY
+0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+ 0 0.25 0.5 0.75 1
+α (intensidad de perturbación)
+Score normalizado (por workflow)
+Apendice B. Curvas completas de paired_score vs α (4 datasets × 6 perturbaciones)
+GraphStats+MMD WL+MMD NetLSD Diversity Curves
+Figura 5.2:Distancia pareadapromedio(P α, normalizada por workflow) entre
+cada grafo original y su versi´ on perturbada. Esta figura complementa el an´ alisis
+agregado, ya que aprovecha la correspondencia inducida por el protocolo experi-
+mental; corresponde al promedio por celda y no a las distancias individualesp i,α.
+69
+PAGE 79
+local mesoscopic global Promedio
+WL+MMD
+GraphStats+MMD
+NetLSD
+Diversity Curves
+≈ 0.98 ≈ 0.87 0.70 ≈ 0.88
+0.54 0.50 0.57 0.59
+≈ 0.98 ≈ 0.89 0.66 ≈ 0.88
+≈ 0.98 ≈ 0.88 0.65 ≈ 0.88
+alto
+medio
+alto
+alto
+nivel
+── MMD-based (GraphStats+MMD, WL+MMD)
+── Mean-shift-based (NetLSD, Diversity Curves)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Sensibilidad promedio (0 = sin señal, 1 = detección monotónica fuerte)
+Valores casi idénticos (≈, recuadro punteado): local: WL+MMD, NetLSD, Diversity Curves (Δ≤0.03; valores 0.98, 0.98, 0.98) | mesoscopic: WL+MMD, NetLSD, Diversity Curves
+(Δ≤0.03; valores 0.87, 0.89, 0.88) | Promedio: WL+MMD, NetLSD, Diversity Curves (Δ≤0.03; valores 0.88, 0.88, 0.88)
+Figura 3. Granularidad estructural por workflow
+Figura 5.3:Mapa de sensibilidad por granularidad estructural, entendida aqu´ ı
+como la correlaci´ on ordinal entreαy el puntaje (consistencia direccional). La
+figura resume el comportamiento relativo de los workflows frente a perturbaciones
+locales, mesosc´ opicas y globales; la cercan´ ıa entre workflows indica similitud de
+rango y no de magnitud de respuesta.
+5.3 Resultados agregados por workflow
+5.3.1 Rango de respuesta frente a magnitud de respuesta
+Antes de resumir el comportamiento cualitativo, conviene separar dos lecturas
+que las figuras normalizadas tienden a confundir: laconsistencia de rangoentreα
+y el puntaje, y lamagnitud absolutade la respuesta de cada workflow. Ambas son
+leg´ ıtimas, pero responden preguntas distintas.
+La correlaci´ on ordinal empleada para estimar sensibilidad es invariante a la
+escala: reordena los valores antes de correlacionarlos, de modo que un workflow
+puede alcanzar una correlaci´ on cercana a la unidad tanto si su puntaje crudo var´ ıa
+en unidades como si lo hace en decenas de miles. Esto explica por qu´ e WLFeatures +
+70
+PAGE 80
+MMD, NativeNetLSD y DiversityCurveDistance aparecen con valores de sensibilidad
+casi id´ enticos en varias celdas de la Figura 5.3 pese a operar en escalas muy diferentes.
+La Tabla 5.1 reporta el m´ aximo del puntaje distribucional crudo de cada
+workflow en la corrida consolidada. Los valores difieren en aproximadamente cuatro
+´ ordenes de magnitud.
+Tabla 5.1:Magnitud m´ axima del puntaje distribucional crudo por workflow en
+la corrida consolidada. Las magnitudes no son directamente comparables entre fa-
+milias, ya que corresponden a construcciones distintas (un estad´ ıstico MMD frente
+a distanciasL 2 entre representaciones); se reportan para evidenciar la escala de
+respuesta dentro de cada workflow, no para inducir un ordenamiento de superio-
+ridad.
+Workflow M´ ax.distribution score
+WLFeatures + MMD 10 739.38
+DiversityCurveDistance 191.48
+NativeNetLSD 10.68
+GraphStats + MMD 1.87
+De esta contraposici´ on se desprende una observaci´ on que refuerza el hilo
+metodol´ ogico de la tesis: workflows que coinciden en elordenamientoinducido por
+αpueden diferir dr´ asticamente en laintensidadde su respuesta. Por consiguiente,
+ninguna afirmaci´ on comparativa de esta secci´ on debe apoyarse en la magnitud cruda
+entre familias, y la similitud de rango observada en las figuras normalizadas no debe
+leerse como equivalencia de comportamiento.
+5.3.2 S´ ıntesis cualitativa
+La Tabla 5.2 resume el comportamiento agregado de los cuatro workflows
+evaluados. Las etiquetas cualitativas provienen de la matriz final generada a par-
+tir de los resultados experimentales. Estas etiquetas no deben interpretarse como
+71
+PAGE 81
+propiedades universales de los m´ etodos, sino como una s´ ıntesis operacional bajo la
+configuraci´ on experimental evaluada.
+Tabla 5.2:Resumen comparativo de los workflows evaluados
+Workflow SensibilidadMonotonicidadPareado Robustez Eficiencia
+GraphStats +
+MMD
+Media Media Alta Alta Baja
+WLFeatures +
+MMD
+Alta Muy alta Muy alta Muy alta Muy alta
+NativeNetLSD Alta Muy alta Muy alta Muy alta Baja
+DiversityCurve
+Distance
+Alta Muy alta Muy alta Alta Baja
+Los resultados agregados sugieren que WLFeatures + MMD presenta el perfil
+preliminar m´ as equilibrado entre sensibilidad, monotonicidad, detectabilidad parea-
+da, robustez y eficiencia. Sin embargo, esta observaci´ on debe formularse con caute-
+la: no implica que WLFeatures + MMD sea universalmente superior, sino que bajo
+las perturbaciones y datasets evaluados mostr´ o un comportamiento consistente y
+computacionalmente favorable.
+NativeNetLSD y DiversityCurve Distance tambi´ en muestran alta sensibilidad
+y alta detectabilidad pareada, pero con menor eficiencia relativa. Adem´ as, en estos
+dos workflows el puntaje distribucional y el cambio de media coinciden operacional-
+mente, ya que ambos se calculan como una distancia entre representaciones medias.
+Por esta raz´ on, no debe interpretarse que existe evidencia independiente entre nivel
+distribucional y mean-shift para estos m´ etodos.
+GraphStats + MMD muestra un perfil m´ as irregular. Aunque mantiene de-
+tectabilidad pareada alta, su sensibilidad y monotonicidad agregadas son m´ as bajas
+que las de los otros workflows. Este resultado es metodol´ ogicamente importante por-
+que muestra que una l´ ınea base interpretable puede detectar cambios a nivel pareado
+y, al mismo tiempo, producir respuestas distribucionales menos estables bajo ciertas
+perturbaciones.
+72
+PAGE 82
+5.4 Resultados en perturbaciones locales
+Las perturbaciones locales evaluadas fueron inserci´ on de aristas, eliminaci´ on
+de aristas, inserci´ on de tri´ angulos y eliminaci´ on de tri´ angulos. En t´ erminos generales,
+la eliminaci´ on de aristas y la inserci´ on de aristas fueron detectadas por la mayor´ ıa
+de workflows con sensibilidad alta. Sin embargo, se observ´ o un caso discordante im-
+portante: GraphStats + MMD present´ o baja sensibilidad distribucional en inserci´ on
+de aristas para las familias sint´ eticas, mientras que su detectabilidad pareada se
+mantuvo alta.
+Este comportamiento indica que el descriptor estructural utilizado por GraphS-
+tats s´ ı registra cambios entre cada grafo original y su versi´ on perturbada, pero la
+agregaci´ on mediante MMD con kernel RBF no produce una curva distribucional
+igualmente estable. Una posible explicaci´ on es que la elecci´ on fija del ancho de ban-
+da del kernel afecte la respuesta distribucional. No obstante, esta explicaci´ on debe
+tratarse como hip´ otesis de diagn´ ostico, porque los resultados actuales no contienen
+un an´ alisis espec´ ıfico de sensibilidad al ancho de banda.
+En las perturbaciones basadas en tri´ angulos se observa un patr´ on similar.
+Para inserci´ on de tri´ angulos, GraphStats + MMD presenta sensibilidad negativa o
+cercana a cero en varias familias sint´ eticas, mientras que los otros workflows man-
+tienen valores altos. Este caso es relevante porque los tri´ angulos son una estructura
+que, en principio, deber´ ıa ser visible para estad´ ısticas estructurales. Por tanto, el re-
+sultado no debe interpretarse como una incapacidad directa de los descriptores, sino
+como una se˜ nal de que la combinaci´ on descriptor–kernel–par´ ametro puede producir
+comportamientos no monot´ onicos.
+Estos resultados apoyan una conclusi´ on preliminar: la monotonicidad agre-
+gada no basta para evaluar un workflow. Es necesario contrastar el puntaje distri-
+bucional con el an´ alisis pareado y revisar casos en los que ambos niveles producen
+73
+PAGE 83
+se˜ nales distintas.
+5.5 Resultados en perturbaciones mesosc´ opicas
+La perturbaci´ on mesosc´ opica evaluada fue el debilitamiento de comunida-
+des. Esta perturbaci´ on requiere una interpretaci´ on cuidadosa porque no todas las
+comunidades tienen el mismo estatus metodol´ ogico.
+En Stochastic Block Model, las comunidades corresponden a la partici´ on gene-
+rativa del modelo. Por tanto, el debilitamiento comunitario se aplica sobre etiquetas
+estructuralmente conocidas. En este escenario, los workflows muestran sensibilidad
+variable, con diferencias importantes entre m´ etodos. Esto sugiere que la degradaci´ on
+de comunidades no es capturada de manera uniforme por todas las representaciones.
+Conviene matizar el estatus de estas etiquetas a lo largo de la trayectoria de
+intensidad. Las etiquetas generativas describen la estructura de la muestra original;
+a medida queαcrece, el operador debilita progresivamente esa estructura, de mo-
+do que en intensidades altas la partici´ on de referencia deja de corresponder a una
+organizaci´ on comunitaria efectivamente presente en el grafo perturbado. Por ello,
+la etiqueta “conocida” es un ancla v´ alida del punto de partida y de la magnitud
+de la intervenci´ on aplicada, pero no debe leerse como una comunidad vigente en el
+extremo perturbado de la trayectoria.
+En Erd˝ os–R´ enyi, las comunidades utilizadas no son ground truth, sino par-
+ticiones detectadas. En este caso, las sensibilidades son bajas y el mapa de fallas
+marca la configuraci´ on como inestable. Este resultado es coherente con la funci´ on
+de Erd˝ os–R´ enyi como control negativo: al no existir comunidades generativas, una
+perturbaci´ on basada en comunidades detectadas no deber´ ıa necesariamente producir
+una se˜ nal estructural fuerte.
+74
+PAGE 84
+En IMDB-BINARY, las comunidades tambi´ en son detectadas, no anotaciones
+reales del dominio. Sin embargo, los resultados preliminares muestran sensibilidades
+m´ as altas que en Erd˝ os–R´ enyi. Esto puede indicar que las particiones detectadas
+capturan alguna organizaci´ on estructural ´ util en las redes de coaparici´ on. Aun as´ ı,
+esta interpretaci´ on debe mantenerse como operacional: las comunidades inferidas se
+tratan como pseudo-etiquetas, no como comunidades sem´ anticas reales.
+5.6 Resultados en perturbaciones globales
+La perturbaci´ on global evaluada fue la modificaci´ on de hubs. Esta categor´ ıa
+produjo algunos de los comportamientos m´ as d´ ebiles e inestables en las familias
+sint´ eticas. En Erd˝ os–R´ enyi y Stochastic Block Model, varios workflows mostraron
+sensibilidades menores que en perturbaciones locales o mesosc´ opicas, y el mapa de
+fallas identific´ o configuraciones inestables.
+Este resultado puede explicarse parcialmente por la naturaleza de los data-
+sets. En Erd˝ os–R´ enyi no existe una estructura de hubs marcada por construcci´ on,
+por lo que modificar nodos de mayor grado puede no producir una se˜ nal global tan
+clara como en grafos con distribuci´ on de grado heterog´ enea.
+Barab´ asi–Albert cumple aqu´ ı el papel de control positivo para esta pertur-
+baci´ on, ya que la presencia de hubs forma parte de su mecanismo generativo por
+conexi´ on preferencial. Es por tanto el dataset donde la modificaci´ on de hubs de-
+ber´ ıa producir la se˜ nal m´ as informativa, y su comportamiento es el que permite
+discriminar si la debilidad observada en Erd˝ os–R´ enyi y Stochastic Block Model res-
+ponde a una limitaci´ on de los workflows o, m´ as bien, a la ausencia de hubs sobre
+los cuales intervenir. En consecuencia, la lectura de la modificaci´ on de hubs debe
+anclarse en el resultado de Barab´ asi–Albert antes que en el de las familias sin hubs:
+una respuesta clara en Barab´ asi–Albert junto a respuestas d´ ebiles en Erd˝ os–R´ enyi
+75
+PAGE 85
+y Stochastic Block Model ser´ ıa coherente con un dise˜ no v´ alido en el que la se˜ nal
+aparece solo cuando existe la estructura pertinente; una respuesta igualmente d´ ebil
+en Barab´ asi–Albert, en cambio, obligar´ ıa a revisar la implementaci´ on del operador o
+la representaci´ on empleada. Por tratarse de una etapa preliminar, esta comparaci´ on
+se reporta como diagn´ ostico y se contrasta expl´ ıcitamente con el mapa de fallas antes
+de extraer conclusiones.
+En IMDB-BINARY, la modificaci´ on de hubs muestra mayor estabilidad que
+en Erd˝ os–R´ enyi y Stochastic Block Model. Esto sugiere que los nodos de alta co-
+nectividad en grafos reales de coaparici´ on pueden tener un papel estructural m´ as
+significativo. Sin embargo, esta interpretaci´ on sigue siendo preliminar y debe vali-
+darse con an´ alisis adicional sobre distribuci´ on de grados, centralidad y efectos de la
+perturbaci´ on.
+5.7 Perturbaciones no evaluadas en esta etapa
+Aunque el marco metodol´ ogico considera perturbaciones mixtas y distribucio-
+nales, estas no fueron ejecutadas en la corrida preliminar analizada. En particular,
+no existen resultados para rewiring preservando grado, mode dropping ni colapso
+distribucional.
+Esta ausencia debe explicitarse porque afecta el alcance de los resultados.
+Las conclusiones actuales solo cubren perturbaciones locales, mesosc´ opicas y una
+perturbaci´ on global basada en hubs. Por tanto, cualquier afirmaci´ on sobre robustez
+ante perturbaciones mixtas o p´ erdida de diversidad distribucional debe quedar como
+validaci´ on pendiente.
+76
+PAGE 86
+5.8 Relaci´ on con las hip´ otesis metodol´ ogicas
+Los resultados preliminares apoyan parcialmente las hip´ otesis metodol´ ogicas
+de la tesis. En primer lugar, los m´ etodos basados en Weisfeiler–Lehman muestran un
+comportamiento consistente frente a perturbaciones locales y de motivo, lo cual es
+compatible con su dise˜ no basado en refinamiento de vecindarios. En segundo lugar,
+NetLSD y DiversityCurveDistance muestran sensibilidad alta en varias configura-
+ciones, lo que sugiere que las representaciones espectrales y multiescala capturan
+cambios estructurales de manera estable en el protocolo evaluado.
+Sin embargo, los resultados no permiten sostener todav´ ıa que una familia
+sea superior en sentido general. La evidencia muestra perfiles de comportamiento,
+no jerarqu´ ıas universales. Por ejemplo, GraphStats + MMD es menos estable en
+algunos puntajes distribucionales, pero mantiene interpretabilidad alta y detecta-
+bilidad pareada alta. WLFeatures + MMD es eficiente y estable en esta corrida,
+pero no reemplaza necesariamente a m´ etodos espectrales o multiescala cuando la
+interpretaci´ on requiere propiedades globales de difusi´ on o diversidad estructural.
+La hip´ otesis m´ as fuerte que s´ ı se refuerza es metodol´ ogica: el an´ alisis agregado
+debe complementarse con an´ alisis pareado y diagn´ ostico por perturbaci´ on. Los casos
+discordantes de GraphStats + MMD muestran que una curva distribucional puede
+ocultar o distorsionar se˜ nales que aparecen claramente en el nivel pareado.
+5.9 Limitaciones de los resultados preliminares
+Los resultados presentados tienen varias limitaciones.
+Primero, la sensibilidad calculada corresponde a una correlaci´ on entreαy
+el puntaje, pero no mide directamente la velocidad de detecci´ on. Dos workflows
+pueden obtener alta sensibilidad aunque uno detecte cambios desdeα= 0.1 y otro
+77
+PAGE 87
+reci´ en responda con claridad en intensidades mayores. Por ello, falta incorporar una
+m´ etrica expl´ ıcita de umbral o velocidad de detecci´ on.
+Segundo, el an´ alisis pareado actual se conserva ´ unicamente como promedio
+por celda. No se han persistido las distancias individuales por grafo. Esto impide
+aplicar pruebas estad´ ısticas pareadas a nivel de grafo, como t-test pareado o Wilco-
+xon signed-rank.
+Tercero, queda pendiente el an´ alisis en la memoria utilizada por los workflows.
+El criterio de costo computacional se limita por ahora al tiempo de ejecuci´ on.
+Cuarto, GraphStats + MMD utiliza un ancho de banda RBF fijo. Dado que
+este workflow muestra comportamientos no monot´ onicos en algunas perturbaciones,
+es necesario realizar un an´ alisis de sensibilidad respecto al ancho de banda antes de
+atribuir el comportamiento exclusivamente al tipo de descriptor estructural.
+5.10 Validaciones pendientes
+Antes de formular conclusiones definitivas, se requieren las siguientes valida-
+ciones:
+1. Persistir las distancias pareadas individualesp i,α para cada grafo y cada inten-
+sidad.
+2. Aplicar pruebas estad´ ısticas pareadas entre niveles de perturbaci´ on y entre
+workflows, usando t-test pareado o Wilcoxon seg´ un corresponda.
+3. Incorporar correcci´ on por m´ ultiples comparaciones, por ejemplo Benjamini–
+Hochberg.
+4. Definir una m´ etrica de velocidad o umbral de detecci´ on para distinguir m´ etodos
+que responden temprano de m´ etodos que solo son monot´ onicos en el agregado.
+78
+PAGE 88
+5. Diagnosticar el efecto del ancho de banda fijo en GraphStats + MMD.
+6. Ejecutar perturbaciones mixtas, especialmente rewiring preservando grado.
+7. Ejecutar perturbaciones distribucionales, especialmente colapso de modos.
+5.11 S´ ıntesis preliminar
+Los resultados preliminares muestran que el protocolo experimental es capaz
+de producir diferencias observables entre workflows de comparaci´ on de distribuciones
+de grafos. La evidencia no debe interpretarse como una demostraci´ on de superiori-
+dad universal de una m´ etrica, sino como una caracterizaci´ on inicial de perfiles de
+respuesta.
+WLFeatures + MMD presenta el comportamiento preliminar m´ as equilibrado
+en sensibilidad, detectabilidad pareada, robustez y eficiencia. NetLSD y Diversity-
+CurveDistance muestran respuestas estables y alta sensibilidad en varias configura-
+ciones, aunque con mayor costo computacional relativo. GraphStats + MMD con-
+serva alta interpretabilidad y detectabilidad pareada, pero exhibe comportamientos
+distribucionales no monot´ onicos en inserci´ on de aristas e inserci´ on de tri´ angulos.
+La conclusi´ on metodol´ ogica m´ as importante es que la monotonicidad agre-
+gada no debe ser el centro del an´ alisis. Los resultados m´ as informativos surgen al
+contrastar sensibilidad agregada, distancia pareada, tipo de perturbaci´ on, estabili-
+dad entre semillas y costo computacional. Esta lectura es coherente con el objetivo
+de la tesis: evaluar c´ omo distintas familias de funciones de comparaci´ on respon-
+den ante perturbaciones estructurales controladas, sin asumir que una de ellas es
+universalmente mejor.
+79
+PAGE 89
+CONCLUSIONES
+Lorem ipsum dolor sit amet, dicant volutpat vulputate sea at. Et nam vo-
+lumus voluptua, ea noster omnesque has. Qui ut graeci melius platonem. Sit fugit
+prompta dignissim cu. Soluta meliore repudiare vis in, eum id liber maiestatis con-
+tentiones.
+Ea sit suas melius verear. Fugit facilisis at vel, apeirian appellantur ex nec.
+Vis id quis elit qualisque. Ludus sadipscing eu eum.
+Ea inani insolens dissentiunt eos, wisi efficiendi ex vim, modus justo inani
+et pro. Eam at modus definiebas, id eos philosophia disputationi, eu qui facete
+habemus. In dico unum neglegentur mea, ne phaedrum disputationi his. Tibique
+deseruisse mel ne, latine aperiri phaedrum duo ex. Erant corrumpit ut duo, in erant
+possim reprehendunt nec. Aeque nonumes minimum te eam, possim constituto qui
+ei, in has suas quidam molestie.
+Vel no intellegat voluptaria, ei sed causae scaevola comprehensam. No erant
+cetero dissentiet per, mei an nulla scaevola. Euismod delicata vis eu, in odio docendi
+persecuti sea. Eos fabellas accusata at. His eu reque altera sadipscing, id ius regione
+lobortis expetenda, minim timeam dignissim vix eu.
+Unum duis definitiones vel in. Nulla dicit mei ea, odio nulla an pri. Cu docendi
+torquatos usu. Possit maiorum rationibus ea duo, eu vitae primis postulant sed, mel
+erat officiis principes an. Pro saepe regione volumus id, debet reformidans ex his.
+Sale altera moderatius duo ea, an fastidii volutpat per, et mel maiorum corpora.
+Modo malis et eam. Veniam equidem mei ad, mucius facilisi et pro. Postea
+eripuit neglegentur vis no. Id vis quis eleifend appellantur, sit integre singulis ei.
+80
+PAGE 90
+RECOMENDACIONES
+Lorem ipsum dolor sit amet, mei no laboramus gloriatur, no timeam euri-
+pidis qui, eu eos aperiam patrioque accommodare. Mei probo accommodare an, ex
+case minim salutatus sit. Ad doming impetus mei, placerat verterem has no. His
+assum quaeque et, ea aliquid dissentiet eum. Copiosae evertitur cum te, sea clita
+disputationi ea.
+Libris ridens malorum cu vis. Per vitae eirmod cotidieque cu. Cum unum
+mucius alterum eu, nam enim regione appellantur id. Cum putant dignissim te, est
+dolore essent definiebas ei. Facilisi convenire vix in, dictas delenit et per. Pro tota
+affert argumentum cu.
+81
+PAGE 91
+REFERENCIAS BIBLIOGR ´AFICAS
+[1] J. You, R. Ying, X. Ren, W. L. Hamilton, and J. Leskovec, “GraphRNN: Ge-
+nerating realistic graphs with deep auto-regressive models,” inProceedings of
+the 35th International Conference on Machine Learning, ser. Proceedings of
+Machine Learning Research, vol. 80. PMLR, 2018, pp. 5708–5717.
+[2] A. Gretton, K. M. Borgwardt, M. J. Rasch, B. Sch¨ olkopf, and A. Smola, “A
+kernel two-sample test,”Journal of Machine Learning Research, vol. 13, pp.
+723–773, 2012.
+[3] R. Thompson, B. Knyazev, E. Ghalebi, J. Kim, and G. W. Taylor, “On eva-
+luation metrics for graph generative models,” inInternational Conference on
+Learning Representations, 2022.
+[4] F. R. K. Chung,Spectral Graph Theory, ser. CBMS Regional Conference Series
+in Mathematics. American Mathematical Society, 1997, vol. 92.
+[5] U. von Luxburg, “A tutorial on spectral clustering,”Statistics and Computing,
+vol. 17, no. 4, pp. 395–416, 2007.
+[6] A. Tsitsulin, D. Mottin, P. Karras, A. Bronstein, and E. M¨ uller, “NetLSD:
+Hearing the shape of a graph,” inProceedings of the 24th ACM SIGKDD Inter-
+national Conference on Knowledge Discovery and Data Mining, ser. KDD ’18.
+Association for Computing Machinery, 2018, pp. 2347–2356.
+82
+PAGE 92
+[7] N. Shervashidze, P. Schweitzer, E. J. van Leeuwen, K. Mehlhorn, and K. M.
+Borgwardt, “Weisfeiler–lehman graph kernels,”Journal of Machine Learning
+Research, vol. 12, pp. 2539–2561, 2011.
+[8] M. Togninalli, E. Ghisu, F. Llinares-L´ opez, B. Rieck, and K. Borgwardt, “Was-
+serstein weisfeiler–lehman graph kernels,” inAdvances in Neural Information
+Processing Systems, vol. 32, 2019.
+[9] P. Erd˝ os and A. R´ enyi, “On random graphs i,”Publicationes Mathematicae
+Debrecen, vol. 6, pp. 290–297, 1959.
+[10] P. W. Holland, K. B. Laskey, and S. Leinhardt, “Stochastic blockmodels: First
+steps,”Social Networks, vol. 5, no. 2, pp. 109–137, 1983.
+[11] A.-L. Barab´ asi and R. Albert, “Emergence of scaling in random networks,”
+Science, vol. 286, no. 5439, pp. 509–512, 1999.
+[12] D. J. Watts and S. H. Strogatz, “Collective dynamics of ‘small-world’ networks,”
+Nature, vol. 393, no. 6684, pp. 440–442, 1998.
+[13] A. Clauset, M. E. J. Newman, and C. Moore, “Finding community structure in
+very large networks,”Physical Review E, vol. 70, no. 6, p. 066111, 2004.
+[14] P. Wills and F. G. Meyer, “Metrics for graph comparison: A practitioner’s
+guide,”PLOS ONE, vol. 15, no. 2, p. e0228728, 2020.
+[15] S. V. N. Vishwanathan, N. N. Schraudolph, R. Kondor, and K. M. Borgwardt,
+“Graph kernels,”Journal of Machine Learning Research, vol. 11, pp. 1201–1242,
+2010.
+[16] M. E. J. Newman,Networks: An Introduction. Oxford University Press, 2010.
+[17] K. Limbeck, N. H¨ ausermann, M. Carrasco, G. Wolf, and B. Rieck, “Diversity
+curves for graph representation learning,” 2026.
+83
+PAGE 93
+[18] K. M. Borgwardt and H.-P. Kriegel, “Shortest-path kernels on graphs,” inPro-
+ceedings of the Fifth IEEE International Conference on Data Mining, ser. ICDM
+’05. IEEE, 2005, pp. 74–81.
+[19] N. M. Kriege, F. D. Johansson, and C. Morris, “A survey on graph kernels,”
+Applied Network Science, vol. 5, no. 1, p. 6, 2020.
+[20] C. Villani,Optimal Transport: Old and New, ser. Grundlehren der mathematis-
+chen Wissenschaften. Springer, 2009, vol. 338.
+[21] G. Peyr´ e and M. Cuturi, “Computational optimal transport,”Foundations and
+Trends in Machine Learning, vol. 11, no. 5–6, pp. 355–607, 2019.
+[22] Student, “The probable error of a mean,”Biometrika, vol. 6, no. 1, pp. 1–25,
+1908.
+[23] F. Wilcoxon, “Individual comparisons by ranking methods,”Biometrics Bulle-
+tin, vol. 1, no. 6, pp. 80–83, 1945.
+[24] Y. Benjamini and Y. Hochberg, “Controlling the false discovery rate: A practical
+and powerful approach to multiple testing,”Journal of the Royal Statistical
+Society: Series B (Methodological), vol. 57, no. 1, pp. 289–300, 1995.
+[25] C. Morris, N. M. Kriege, F. Bause, K. Kersting, P. Mutzel, and M. Neumann,
+“TUDataset: A collection of benchmark datasets for learning with graphs,” in
+ICML 2020 Workshop on Graph Representation Learning and Beyond (GRL+
+2020), 2020.
+84
+PAGE 94
+ANEXOS
+Los algoritmos desarrollados .....
+85

@@ -1,0 +1,40 @@
+{
+  "source": "results/runs/2026-07-03_merged/results/results.csv.gz",
+  "source_sha256": "78a169e3fc4265eec2dcaeae31801ef115d1229277321aee2b7d62f483457daa",
+  "rows_analyzed": 19008,
+  "settings": 72,
+  "counts": {
+    "endpoint": {
+      "total": 72,
+      "constant": 0,
+      "all_zero": 0,
+      "shapiro_below_05": 9,
+      "absolute_skew_above_1": 11,
+      "review_shape": 11,
+      "no_clear_flag": 61,
+      "nonconstant_with_zeros": 0,
+      "one_to_five_nonzero": 0
+    },
+    "adjacent": {
+      "total": 720,
+      "constant": 76,
+      "all_zero": 76,
+      "shapiro_below_05": 79,
+      "absolute_skew_above_1": 69,
+      "review_shape": 87,
+      "no_clear_flag": 557,
+      "nonconstant_with_zeros": 24,
+      "one_to_five_nonzero": 20
+    }
+  },
+  "versions": {
+    "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+    "numpy": "2.5.0",
+    "scipy": "1.18.1",
+    "pandas": "3.0.3"
+  },
+  "scope": "Distribution score; synthetic only. ZINC data not present in this source.",
+  "screen": "Review if Shapiro p<.05 OR absolute sample skewness>1. Diagnostic convention, not automatic test selection or proof of invalidity. No-clear-flag does not establish normality or symmetry.",
+  "symmetry": "Bowley and 10/90 tail balance are descriptive. Reflection plots assess shape about the sample median. No symmetry p-value or pass/fail is claimed.",
+  "normality_pvalues": "Unadjusted exploratory shape diagnostics, not effect p-values. Independence across seeds is not established; Shapiro reference p-values also rely on independent sampling."
+}

@@ -1,0 +1,715 @@
+{
+  "source_sha256": "78a169e3fc4265eec2dcaeae31801ef115d1229277321aee2b7d62f483457daa",
+  "dataset": "barabasi_albert",
+  "perturbation": "triangle_insertion",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "graph_count_per_seed": 100,
+  "descriptor_columns": [
+    "nodes",
+    "edges",
+    "density",
+    "mean_degree",
+    "degree_variance",
+    "clustering",
+    "triangles",
+    "transitivity",
+    "components"
+  ],
+  "graph_rows": 3300,
+  "matched_workflow_rows": 66,
+  "max_score_reproduction_error": 1.1368683772161603e-13,
+  "max_paired_reproduction_error": 5.684341886080802e-14,
+  "contribution_definition": "Signed, sample-dependent paired decomposition whose mean is empirical MMD\u00b2. Not a graph distance, independent observation, or causal importance measure.",
+  "transitions": [
+    {
+      "seed": 0,
+      "workflow": "graphstats",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 100,
+      "paired_distance_decreases": 0,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 15.781252311661724,
+      "median_paired_distance_change": 15.777226643329378,
+      "contribution_increases": 24,
+      "contribution_decreases": 76,
+      "mmd_change": -0.02545115383147444
+    },
+    {
+      "seed": 0,
+      "workflow": "wl",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 94,
+      "paired_distance_decreases": 6,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 1.7079898814447665,
+      "median_paired_distance_change": 1.5311476210923107,
+      "contribution_increases": 100,
+      "contribution_decreases": 0,
+      "mmd_change": 79.88440000000003
+    },
+    {
+      "seed": 1,
+      "workflow": "graphstats",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 100,
+      "paired_distance_decreases": 0,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 16.181138467749633,
+      "median_paired_distance_change": 15.82473105868307,
+      "contribution_increases": 40,
+      "contribution_decreases": 60,
+      "mmd_change": -0.013237391950293886
+    },
+    {
+      "seed": 1,
+      "workflow": "wl",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 96,
+      "paired_distance_decreases": 4,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 1.6225542282895062,
+      "median_paired_distance_change": 1.491680479364085,
+      "contribution_increases": 100,
+      "contribution_decreases": 0,
+      "mmd_change": 77.13820000000004
+    },
+    {
+      "seed": 2,
+      "workflow": "graphstats",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 100,
+      "paired_distance_decreases": 0,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 15.89888181617448,
+      "median_paired_distance_change": 15.793296657464836,
+      "contribution_increases": 19,
+      "contribution_decreases": 81,
+      "mmd_change": -0.03654960106427891
+    },
+    {
+      "seed": 2,
+      "workflow": "wl",
+      "alpha_low": 0.3,
+      "alpha_high": 0.4,
+      "graphs": 100,
+      "paired_distance_increases": 96,
+      "paired_distance_decreases": 4,
+      "paired_distance_unchanged": 0,
+      "mean_paired_distance_change": 1.8832925943985304,
+      "median_paired_distance_change": 1.8770362385888273,
+      "contribution_increases": 100,
+      "contribution_decreases": 0,
+      "mmd_change": 88.22600000000003
+    }
+  ],
+  "checks": [
+    {
+      "seed": 0,
+      "alpha": 0.0,
+      "workflow": "GraphStats",
+      "score": -2.6645352591003756e-17,
+      "score_error": 2.6645352591003756e-17,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.0,
+      "workflow": "WL",
+      "score": 0.0,
+      "score_error": 0.0,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.1,
+      "workflow": "GraphStats",
+      "score": 0.991913619771808,
+      "score_error": 4.440892098500626e-16,
+      "paired_score": 14.310643913957312,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.1,
+      "workflow": "WL",
+      "score": 50.60540000000001,
+      "score_error": 2.1316282072803006e-14,
+      "paired_score": 19.39062673188083,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.2,
+      "workflow": "GraphStats",
+      "score": 1.6365059826642432,
+      "score_error": 0.0,
+      "paired_score": 30.416159444321337,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.2,
+      "workflow": "WL",
+      "score": 149.98600000000002,
+      "score_error": 0.0,
+      "paired_score": 22.516415244909417,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 0,
+      "alpha": 0.3,
+      "workflow": "GraphStats",
+      "score": 1.6349236989118783,
+      "score_error": 6.661338147750939e-16,
+      "paired_score": 47.32650420996389,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.3,
+      "workflow": "WL",
+      "score": 252.19560000000004,
+      "score_error": 0.0,
+      "paired_score": 24.951932923570197,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.4,
+      "workflow": "GraphStats",
+      "score": 1.6094725450804033,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 63.10775652162563,
+      "paired_error": 7.105427357601002e-15
+    },
+    {
+      "seed": 0,
+      "alpha": 0.4,
+      "workflow": "WL",
+      "score": 332.0800000000001,
+      "score_error": 0.0,
+      "paired_score": 26.65992280501496,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.5,
+      "workflow": "GraphStats",
+      "score": 1.5748404622583485,
+      "score_error": 0.0,
+      "paired_score": 81.82229885937429,
+      "paired_error": 1.4210854715202004e-14
+    },
+    {
+      "seed": 0,
+      "alpha": 0.5,
+      "workflow": "WL",
+      "score": 400.0092000000001,
+      "score_error": 0.0,
+      "paired_score": 28.008998588880313,
+      "paired_error": 7.105427357601002e-15
+    },
+    {
+      "seed": 0,
+      "alpha": 0.6,
+      "workflow": "GraphStats",
+      "score": 1.5447808673882586,
+      "score_error": 0.0,
+      "paired_score": 101.40739407942347,
+      "paired_error": 1.4210854715202004e-14
+    },
+    {
+      "seed": 0,
+      "alpha": 0.6,
+      "workflow": "WL",
+      "score": 466.73040000000003,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 29.1510169795782,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.7,
+      "workflow": "GraphStats",
+      "score": 1.5482732019709857,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 119.9825349245657,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.7,
+      "workflow": "WL",
+      "score": 514.1312000000001,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 30.023143610202283,
+      "paired_error": 1.0658141036401503e-14
+    },
+    {
+      "seed": 0,
+      "alpha": 0.8,
+      "workflow": "GraphStats",
+      "score": 1.507026546339854,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 141.5659877699046,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.8,
+      "workflow": "WL",
+      "score": 557.0932,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 30.791471453556774,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 0,
+      "alpha": 0.9,
+      "workflow": "GraphStats",
+      "score": 1.4689684322826608,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 164.3311883361627,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 0.9,
+      "workflow": "WL",
+      "score": 589.8952000000002,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 31.296944666728738,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 0,
+      "alpha": 1.0,
+      "workflow": "GraphStats",
+      "score": 1.4222694706927062,
+      "score_error": 0.0,
+      "paired_score": 188.1217805403671,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 0,
+      "alpha": 1.0,
+      "workflow": "WL",
+      "score": 624.7078,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 31.88384406309754,
+      "paired_error": 1.0658141036401503e-14
+    },
+    {
+      "seed": 1,
+      "alpha": 0.0,
+      "workflow": "GraphStats",
+      "score": -1.1102230246251566e-17,
+      "score_error": 1.1102230246251566e-17,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.0,
+      "workflow": "WL",
+      "score": 0.0,
+      "score_error": 0.0,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.1,
+      "workflow": "GraphStats",
+      "score": 0.8689313195251098,
+      "score_error": 1.1102230246251565e-16,
+      "paired_score": 14.292978119786689,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.1,
+      "workflow": "WL",
+      "score": 51.7244,
+      "score_error": 1.4210854715202004e-14,
+      "paired_score": 19.540147736276037,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 1,
+      "alpha": 0.2,
+      "workflow": "GraphStats",
+      "score": 1.5032025118775352,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 30.44975559541575,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.2,
+      "workflow": "WL",
+      "score": 151.3312,
+      "score_error": 2.842170943040401e-14,
+      "paired_score": 22.711042673293882,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 1,
+      "alpha": 0.3,
+      "workflow": "GraphStats",
+      "score": 1.512462212562684,
+      "score_error": 4.440892098500626e-16,
+      "paired_score": 47.38892970266157,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.3,
+      "workflow": "WL",
+      "score": 260.0374,
+      "score_error": 0.0,
+      "paired_score": 25.14764860233116,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.4,
+      "workflow": "GraphStats",
+      "score": 1.4992248206123895,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 63.5700681704112,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.4,
+      "workflow": "WL",
+      "score": 337.17560000000003,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 26.770202830620665,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.5,
+      "workflow": "GraphStats",
+      "score": 1.491829275016414,
+      "score_error": 0.0,
+      "paired_score": 81.79942833701341,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.5,
+      "workflow": "WL",
+      "score": 411.48240000000004,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 28.21483207405554,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 1,
+      "alpha": 0.6,
+      "workflow": "GraphStats",
+      "score": 1.4846887045271444,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 101.61269167042326,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.6,
+      "workflow": "WL",
+      "score": 462.06840000000005,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 29.145029367880394,
+      "paired_error": 7.105427357601002e-15
+    },
+    {
+      "seed": 1,
+      "alpha": 0.7,
+      "workflow": "GraphStats",
+      "score": 1.4448959031765884,
+      "score_error": 0.0,
+      "paired_score": 120.05121448010965,
+      "paired_error": 1.4210854715202004e-14
+    },
+    {
+      "seed": 1,
+      "alpha": 0.7,
+      "workflow": "WL",
+      "score": 510.4752,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 29.98825418924187,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.8,
+      "workflow": "GraphStats",
+      "score": 1.4186058211894428,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 141.98495913114203,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.8,
+      "workflow": "WL",
+      "score": 550.251,
+      "score_error": 0.0,
+      "paired_score": 30.601539723756684,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 0.9,
+      "workflow": "GraphStats",
+      "score": 1.388004834051145,
+      "score_error": 4.440892098500626e-16,
+      "paired_score": 165.55782478482507,
+      "paired_error": 5.684341886080802e-14
+    },
+    {
+      "seed": 1,
+      "alpha": 0.9,
+      "workflow": "WL",
+      "score": 586.5057999999999,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 31.294212021868415,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 1,
+      "alpha": 1.0,
+      "workflow": "GraphStats",
+      "score": 1.3789165818892035,
+      "score_error": 0.0,
+      "paired_score": 189.8166248593097,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 1,
+      "alpha": 1.0,
+      "workflow": "WL",
+      "score": 616.6738,
+      "score_error": 0.0,
+      "paired_score": 31.720666405478024,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.0,
+      "workflow": "GraphStats",
+      "score": 2.886579864025407e-17,
+      "score_error": 2.886579864025407e-17,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.0,
+      "workflow": "WL",
+      "score": 0.0,
+      "score_error": 0.0,
+      "paired_score": 0.0,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.1,
+      "workflow": "GraphStats",
+      "score": 0.9901073813220301,
+      "score_error": 1.1102230246251565e-16,
+      "paired_score": 14.306627363549913,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.1,
+      "workflow": "WL",
+      "score": 50.1388,
+      "score_error": 0.0,
+      "paired_score": 19.40865775233561,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.2,
+      "workflow": "GraphStats",
+      "score": 1.6356830256093449,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 30.64444616300255,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.2,
+      "workflow": "WL",
+      "score": 143.4768,
+      "score_error": 2.842170943040401e-14,
+      "paired_score": 22.34599271499399,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.3,
+      "workflow": "GraphStats",
+      "score": 1.6328037130747148,
+      "score_error": 0.0,
+      "paired_score": 47.38535543211441,
+      "paired_error": 7.105427357601002e-15
+    },
+    {
+      "seed": 2,
+      "alpha": 0.3,
+      "workflow": "WL",
+      "score": 239.3046,
+      "score_error": 0.0,
+      "paired_score": 24.636143845932665,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.4,
+      "workflow": "GraphStats",
+      "score": 1.5962541120104354,
+      "score_error": 6.661338147750939e-16,
+      "paired_score": 63.28423724828888,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.4,
+      "workflow": "WL",
+      "score": 327.5306,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 26.519436440331198,
+      "paired_error": 7.105427357601002e-15
+    },
+    {
+      "seed": 2,
+      "alpha": 0.5,
+      "workflow": "GraphStats",
+      "score": 1.5654763056247452,
+      "score_error": 0.0,
+      "paired_score": 81.4483997272817,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.5,
+      "workflow": "WL",
+      "score": 401.21159999999986,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 27.872903642791304,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.6,
+      "workflow": "GraphStats",
+      "score": 1.532076903954138,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 100.9136189873475,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.6,
+      "workflow": "WL",
+      "score": 463.0342,
+      "score_error": 0.0,
+      "paired_score": 29.072610762262297,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.7,
+      "workflow": "GraphStats",
+      "score": 1.4760435521595539,
+      "score_error": 4.440892098500626e-16,
+      "paired_score": 119.47322691420922,
+      "paired_error": 1.4210854715202004e-14
+    },
+    {
+      "seed": 2,
+      "alpha": 0.7,
+      "workflow": "WL",
+      "score": 509.02200000000005,
+      "score_error": 5.684341886080802e-14,
+      "paired_score": 29.814010772741284,
+      "paired_error": 3.552713678800501e-15
+    },
+    {
+      "seed": 2,
+      "alpha": 0.8,
+      "workflow": "GraphStats",
+      "score": 1.44961517254887,
+      "score_error": 0.0,
+      "paired_score": 141.09227379399127,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.8,
+      "workflow": "WL",
+      "score": 551.3734,
+      "score_error": 0.0,
+      "paired_score": 30.59227768149537,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 0.9,
+      "workflow": "GraphStats",
+      "score": 1.4163582624096227,
+      "score_error": 2.220446049250313e-16,
+      "paired_score": 163.7284876648073,
+      "paired_error": 2.842170943040401e-14
+    },
+    {
+      "seed": 2,
+      "alpha": 0.9,
+      "workflow": "WL",
+      "score": 590.0974,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 31.25227761519844,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 1.0,
+      "workflow": "GraphStats",
+      "score": 1.369761914687424,
+      "score_error": 0.0,
+      "paired_score": 188.4438998181925,
+      "paired_error": 0.0
+    },
+    {
+      "seed": 2,
+      "alpha": 1.0,
+      "workflow": "WL",
+      "score": 620.1378000000001,
+      "score_error": 1.1368683772161603e-13,
+      "paired_score": 31.71063600040158,
+      "paired_error": 7.105427357601002e-15
+    }
+  ]
+}

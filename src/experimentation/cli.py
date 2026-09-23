@@ -13,9 +13,10 @@ from experimentation.config import (
     build_run_output_config,
     debug_config,
     full_synthetic_config,
-    imdb_config,
     output_config_for_root,
     replication_config,
+    zinc_config, zinc_debug_config, zinc_pilot_config,
+    ba_pilot_config, er_pilot_config,
 )
 from experimentation.evaluation import evaluate_results
 from experimentation.figures import generate_figures
@@ -26,7 +27,11 @@ CONFIG_BUILDERS = {
     "debug": debug_config,
     "full": full_synthetic_config,
     "replication": replication_config,
-    "imdb": imdb_config,
+    "zinc": zinc_config,
+    "zinc-debug": zinc_debug_config,
+    "zinc-pilot": zinc_pilot_config,
+    "ba-pilot": ba_pilot_config,
+    "er-pilot": er_pilot_config,
 }
 DEFAULT_RESULTS_ROOT = "results/runs"
 
@@ -137,6 +142,8 @@ def _add_run_parser(subparsers) -> None:
     run.add_argument("--output-root", default=None, help="Legacy: write directly into this directory")
     run.add_argument("--workers", type=int, default=default_workers(), help="CPU worker processes (1 = serial)")
     run.add_argument("--seed-count", type=int, default=None, help="Override the seed sweep breadth (deterministic)")
+    run.add_argument("--data-root", default=None, help="Real dataset cache directory")
+    run.add_argument("--master-seed", type=int, default=None, help="Master seed for versioned streams")
     run.add_argument("--seed-range", default=None, help="Half-open index slice A:B into the resolved seed list")
     run.add_argument("--device", default="cpu", help="Acceleration device (CPU-only target): cpu, auto, cuda:N")
     run.add_argument("--resume", action="store_true", help="Resume an existing run dir (default; explicit for clarity)")
@@ -177,6 +184,11 @@ def _run_legacy(args) -> int:
 
 def _run(args) -> int:
     config = _with_workflows(CONFIG_BUILDERS[args.config](), args.workflow)
+    if args.data_root is not None or args.master_seed is not None:
+        config = replace(config, dataset_configs=tuple(replace(dc,
+            data_root=args.data_root if args.data_root is not None else dc.data_root,
+            master_seed=args.master_seed if args.master_seed is not None else dc.master_seed)
+            for dc in config.dataset_configs))
     if args.seed_count is not None:
         config = replace(config, seed_count=args.seed_count)
     seed_range = _parse_seed_range(args.seed_range)

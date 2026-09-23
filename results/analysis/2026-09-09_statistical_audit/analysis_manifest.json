@@ -1,0 +1,15 @@
+{
+  "source": "results/runs/2026-07-03_merged/results/results.csv.gz",
+  "source_sha256": "78a169e3fc4265eec2dcaeae31801ef115d1229277321aee2b7d62f483457daa",
+  "rows": 20328,
+  "groups": 96,
+  "versions": {
+    "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+    "scipy": "1.18.1",
+    "numpy": "2.5.0",
+    "pandas": "3.0.3"
+  },
+  "inference_status": "Exploratory. Sign-test p-values assume independent seeds; legacy perturbation random streams overlap across seeds.",
+  "tests": "Two-sided exact sign tests on positive-alpha within-seed Spearman correlations and on score(1)-score(.1), Holm correction separately across 96 settings per family.",
+  "normality": "Shapiro-Wilk and shape diagnostics on paired differences only. No automatic t/Wilcoxon selection."
+}

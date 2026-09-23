@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import random
 
 from experimentation.graph import Graph
 from experimentation.perturbations import PerturbationResult, perturb_graph
-from experimentation.real_datasets import REAL_DATASET_FAMILIES, load_tu_dataset
+from experimentation.randomness import STREAM_PROTOCOL, LEGACY_PROTOCOL, graph_stream
 
 
 @dataclass(frozen=True)
@@ -21,10 +21,15 @@ class SyntheticDatasetConfig:
     p_out: float = 0.03
     m: int = 2
     seed: int = 0
-    # Real-dataset fields (empty for the synthetic families). A non-empty
-    # ``data_root`` switches the family to a disk-loaded TU dataset.
+    # Disk-backed dataset fields (empty for generated families; used by ``zinc``).
     data_root: str = ""
     dataset_name: str = ""
+    randomness_protocol: str = STREAM_PROTOCOL
+    master_seed: int = 20260916
+    dataset_variant: str = ""
+    dataset_split: str = ""
+    dataset_fingerprint: str = ""
+    projection: str = "simple_undirected_topology_v1"
 
 
 @dataclass(frozen=True)
@@ -39,33 +44,18 @@ def generate_graph_distribution(dataset_config: SyntheticDatasetConfig) -> list[
     """Generate a synthetic graph distribution using a common interface."""
 
     family = dataset_config.family
+    if dataset_config.randomness_protocol not in (STREAM_PROTOCOL, LEGACY_PROTOCOL):
+        raise ValueError("Unknown randomness protocol")
+    if family == "zinc":
+        from experimentation.zinc_dataset import sample_zinc
+        return sample_zinc(dataset_config)
     if family == "erdos_renyi":
         return _generate_erdos_renyi(dataset_config)
     if family == "stochastic_block_model":
         return _generate_stochastic_block_model(dataset_config)
     if family == "barabasi_albert":
         return _generate_barabasi_albert(dataset_config)
-    if family in REAL_DATASET_FAMILIES or dataset_config.data_root:
-        return _load_real_distribution(dataset_config)
     raise ValueError(f"Unknown synthetic dataset family: {family}")
-
-
-def _load_real_distribution(config: SyntheticDatasetConfig) -> list[Graph]:
-    """Load a real TU dataset and (optionally) seed-subsample to ``num_graphs``.
-
-    The original graphs come from disk, so different seeds select a different
-    subsample of real graphs (giving genuine across-seed replication variation)
-    while perturbations vary by seed as usual. Loading is deterministic per seed.
-    """
-
-    name = config.dataset_name or REAL_DATASET_FAMILIES.get(config.family, config.family)
-    data_root = config.data_root or "data"
-    graphs = load_tu_dataset(data_root, name, family=config.family)
-    if config.num_graphs and 0 < config.num_graphs < len(graphs):
-        rng = random.Random(config.seed)
-        indices = sorted(rng.sample(range(len(graphs)), config.num_graphs))
-        graphs = [graphs[index] for index in indices]
-    return graphs
 
 
 def generate_paired_distribution(
@@ -80,7 +70,12 @@ def generate_paired_distribution(
     perturbed_graphs: list[Graph] = []
     perturbation_metadata: list[dict[str, object]] = []
     for index, graph in enumerate(original_graphs):
-        result = perturb_graph(graph, alpha, perturbation_type, seed + index, graph.metadata)
+        graph_id = graph.metadata.get("source_id", graph.metadata.get("graph_index", index))
+        perturbation_seed = (seed + index if dataset_config.randomness_protocol == LEGACY_PROTOCOL
+                             else graph_stream(replace(dataset_config, seed=seed), "perturbation", graph_id, perturbation_type))
+        result = perturb_graph(graph, alpha, perturbation_type, perturbation_seed, graph.metadata)
+        result.metadata["perturbation_seed"] = str(perturbation_seed)
+        result.metadata["graph_id"] = graph_id
         perturbed_graphs.append(result.graph)
         perturbation_metadata.append(result.metadata)
     first_metadata = perturbation_metadata[0] if perturbation_metadata else {}
@@ -95,6 +90,8 @@ def generate_paired_distribution(
             "perturbation_direction": first_metadata.get("perturbation_direction"),
             "alpha": alpha,
             "seed": seed,
+            "randomness_protocol": dataset_config.randomness_protocol,
+            "master_seed": dataset_config.master_seed,
             "num_pairs": len(original_graphs),
             "perturbations": perturbation_metadata,
         },
@@ -105,6 +102,8 @@ def _generate_erdos_renyi(config: SyntheticDatasetConfig) -> list[Graph]:
     rng = random.Random(config.seed)
     graphs = []
     for graph_index in range(config.num_graphs):
+        if config.randomness_protocol != LEGACY_PROTOCOL:
+            rng = random.Random(graph_stream(config, "graph_generation", graph_index))
         graph = Graph(config.num_nodes, metadata={"family": config.family, "graph_index": graph_index})
         for u in range(config.num_nodes):
             for v in range(u + 1, config.num_nodes):
@@ -123,6 +122,8 @@ def _generate_stochastic_block_model(config: SyntheticDatasetConfig) -> list[Gra
 
     graphs = []
     for graph_index in range(config.num_graphs):
+        if config.randomness_protocol != LEGACY_PROTOCOL:
+            rng = random.Random(graph_stream(config, "graph_generation", graph_index))
         graph = Graph(
             config.num_nodes,
             metadata={
@@ -149,6 +150,8 @@ def _generate_barabasi_albert(config: SyntheticDatasetConfig) -> list[Graph]:
     rng = random.Random(config.seed)
     graphs = []
     for graph_index in range(config.num_graphs):
+        if config.randomness_protocol != LEGACY_PROTOCOL:
+            rng = random.Random(graph_stream(config, "graph_generation", graph_index))
         graph = Graph(config.num_nodes, metadata={"family": config.family, "graph_index": graph_index})
         for u in range(config.m + 1):
             for v in range(u + 1, config.m + 1):

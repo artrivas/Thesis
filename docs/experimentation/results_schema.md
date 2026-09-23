@@ -1,5 +1,14 @@
 # Results Schema
 
+Corrected runs use `graph_records_v1`. They additionally include
+`schema_version`, `code_fingerprint`, `randomness_protocol`, `graph_artifact`, `graph_sha256`,
+`workflow_artifact`, `workflow_sha256`, and `diagnostic_seconds`. Artifact paths
+are relative to the result CSV directory. Dataset parameters carry master seed,
+stream protocol, and (for ZINC) variant, split, projection, and dataset fingerprint.
+See [corrected runs](corrected_runs.md) for sidecar contents, resume rules, and
+ZINC interpretation. Historical rows remain readable but cannot be resumed or
+merged into corrected runs.
+
 Each completed workflow run should emit one row per dataset, perturbation,
 alpha, seed, and workflow combination.
 

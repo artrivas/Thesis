@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "source": "results/runs/2026-09-16_ba_pilot_validated/results/results.csv",
+  "rows": 132,
+  "expected_rows": 132,
+  "statuses": {
+    "success": 132
+  },
+  "cells": 33,
+  "graph_pairs": 3300,
+  "source_graph_instances_by_replicate": 300,
+  "unique_source_record_ids": 300,
+  "unique_labeled_topology_hashes": 300,
+  "source_id_overlap_between_replicates": [
+    {
+      "dataset": "barabasi_albert",
+      "replicate_a": "0",
+      "replicate_b": "1",
+      "shared_source_ids": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "replicate_a": "0",
+      "replicate_b": "2",
+      "shared_source_ids": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "replicate_a": "1",
+      "replicate_b": "2",
+      "shared_source_ids": 0
+    }
+  ],
+  "unique_perturbation_streams": 300,
+  "positive_alpha_no_ops": {},
+  "no_op_reasons": {},
+  "graphstats_kernel_ranges": {
+    "xx": [
+      0.8023256365722146,
+      0.8369113220850725
+    ],
+    "xy": [
+      1.1072911230378312e-61,
+      0.8369113220850725
+    ],
+    "yy": [
+      0.4963464692091558,
+      0.8369113220850725
+    ]
+  },
+  "issues": [],
+  "interpretation": "Implementation and recorded-data checks; not proof of population independence or metric monotonicity"
+}

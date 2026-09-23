@@ -11,7 +11,7 @@ class PerturbationTests(unittest.TestCase):
             SyntheticDatasetConfig("erdos_renyi", num_graphs=1, num_nodes=12, edge_probability=0.4, seed=5)
         )[0]
 
-        result = perturb_graph(graph, 0.0, "edge_addition_deletion", seed=1)
+        result = perturb_graph(graph, 0.0, "edge_insertion", seed=1)
 
         self.assertIsNot(result.graph, graph)
         self.assertTrue(result.graph.structurally_equal(graph))
@@ -22,7 +22,7 @@ class PerturbationTests(unittest.TestCase):
         )[0]
         expected_budget = int(0.4 * graph.number_of_edges())
 
-        result = perturb_graph(graph, 0.4, "edge_addition_deletion", seed=9)
+        result = perturb_graph(graph, 0.4, "edge_insertion", seed=9)
         changed = len(set(graph.edges()).symmetric_difference(set(result.graph.edges())))
 
         self.assertGreaterEqual(changed, expected_budget)

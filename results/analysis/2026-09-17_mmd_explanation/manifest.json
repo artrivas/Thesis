@@ -1,0 +1,22 @@
+{
+  "corrected_sources": [
+    {
+      "path": "results/runs/2026-09-16_ba_pilot_validated/results/results.csv",
+      "sha256": "8d72bf35ced838841c3e3ac1c39300f1f94643c1781e6d6a2f658412fd9b7cbd"
+    },
+    {
+      "path": "results/runs/2026-09-16_er_pilot_validated/results/results.csv",
+      "sha256": "226e304f0f92f1bb68517aae02cdfc9300d6d58620089cef3124524d65aef63d"
+    },
+    {
+      "path": "results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+      "sha256": "3619a5b00cdc72067695154cc4dc69a0bd0ea4cef1d51205ac5e1281e390e89c"
+    }
+  ],
+  "additional_inputs": {
+    "results/analysis/2026-09-16_structural_insights/mechanism_decompositions.json": "2a82aac60f905c2468a5e23e6fad6c9f54767adf7c96439f98fb54c091ad117e",
+    "results/analysis/2026-09-16_structural_insights/targeted_probes.json": "f5747663de90327d10e24e64d54f326a90b4cbe96715a94804d6fc36e0dbc3c9"
+  },
+  "script_sha256": "ce6e17e4e7d4ecdfc76f346e05554649e71f7189c4d21ca271366aa5c64b5e57",
+  "scope": "Corrected pilots and corrected targeted probes only. Three replicates, descriptive correlations, no p-values. Kernel substitutions isolate aggregation changes without selecting new defaults."
+}

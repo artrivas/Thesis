@@ -1,0 +1,44 @@
+[
+  {
+    "dataset": "zinc",
+    "perturbation": "community_weakening",
+    "workflow": "diversity_curves_shortest_path",
+    "alpha_low": 0.9,
+    "alpha_high": 1.0,
+    "mean_change": 0.07980466719670225,
+    "median_change": -0.012250531812702192,
+    "positive": 1,
+    "negative": 2,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  },
+  {
+    "dataset": "zinc",
+    "perturbation": "community_weakening",
+    "workflow": "native_netlsd",
+    "alpha_low": 0.9,
+    "alpha_high": 1.0,
+    "mean_change": 0.00846529884739052,
+    "median_change": -0.007789687783101518,
+    "positive": 1,
+    "negative": 2,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  },
+  {
+    "dataset": "zinc",
+    "perturbation": "community_weakening",
+    "workflow": "structural_statistics_mmd",
+    "alpha_low": 0.8,
+    "alpha_high": 0.9,
+    "mean_change": 0.00011245050786066792,
+    "median_change": -0.001145706255442705,
+    "positive": 1,
+    "negative": 2,
+    "zero": 0,
+    "mean_opposes_more_nonzero_seeds": true,
+    "mean_opposes_absolute_majority": true
+  }
+]

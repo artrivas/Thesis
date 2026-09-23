@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "checkpointed_rows_preserved_exactly": 384,
+  "final_rows": 792,
+  "duplicate_rows": 0
+}

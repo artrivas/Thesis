@@ -51,7 +51,7 @@ def tiny_figure_config(root: Path):
         dataset_configs=(
             SyntheticDatasetConfig("erdos_renyi", num_graphs=2, num_nodes=6, edge_probability=0.5, seed=0),
         ),
-        perturbations=PerturbationConfig(methods=("edge_addition_deletion",), alpha_values=(0.0, 0.5)),
+        perturbations=PerturbationConfig(methods=("edge_insertion",), alpha_values=(0.0, 0.5)),
         workflows=WorkflowConfig(names=("structural_statistics_mmd",)),
         seeds=(0,),
         seed_count=None,  # explicit seeds: clear the inherited debug seed_count

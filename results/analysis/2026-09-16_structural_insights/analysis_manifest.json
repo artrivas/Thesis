@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "path": "results/runs/2026-09-16_ba_pilot_validated/results/results.csv",
+      "sha256": "8d72bf35ced838841c3e3ac1c39300f1f94643c1781e6d6a2f658412fd9b7cbd"
+    },
+    {
+      "path": "results/runs/2026-09-16_er_pilot_validated/results/results.csv",
+      "sha256": "226e304f0f92f1bb68517aae02cdfc9300d6d58620089cef3124524d65aef63d"
+    },
+    {
+      "path": "results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+      "sha256": "3619a5b00cdc72067695154cc4dc69a0bd0ea4cef1d51205ac5e1281e390e89c"
+    },
+    {
+      "path": "results/runs/2026-07-03_merged/results/results.csv",
+      "sha256": "ebd00a4dbe07afbebb7a353d8945e35e37f8dc04ac3a7a1f1e067159f0a1cec9",
+      "used_rows": 19008,
+      "interpretation": "Historical exploratory only; shared perturbation streams and old NetLSD solver"
+    }
+  ],
+  "corrected_rows": 1056,
+  "corrected_cells": 264,
+  "additional_probe_cells": 198,
+  "probe_master_seed": 20260917,
+  "probe_graphs_per_cell": 100,
+  "probe_replicates": 3,
+  "elapsed_seconds": 293.18890047073364,
+  "script_sha256": "a1891ae8df8e26cb60014dfdfaa3fff4d0b3b83d7becea49b0162bee4d89cd8c",
+  "numpy": "2.5.0",
+  "scope": "Descriptive mechanism analysis; no p-values, no changes to experiment source or original results. Targeted probes omit Diversity Curves and are not full four-workflow runs."
+}

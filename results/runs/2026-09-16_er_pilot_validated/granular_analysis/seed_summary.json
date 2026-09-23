@@ -1,0 +1,74 @@
+[
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "diversity_curves_shortest_path",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 3,
+    "seeds_nondecreasing_positive_alpha": 0,
+    "mean_opposes_absolute_majority_steps": 0,
+    "mean_opposes_more_nonzero_steps": 0,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      0.7,
+      0.8,
+      0.4
+    ],
+    "figure": "seed_figures/erdos_renyi__community_weakening__diversity_curves_shortest_path.png"
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "native_netlsd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 3,
+    "seeds_nondecreasing_positive_alpha": 0,
+    "mean_opposes_absolute_majority_steps": 1,
+    "mean_opposes_more_nonzero_steps": 1,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      0.4,
+      0.8,
+      0.4
+    ],
+    "figure": "seed_figures/erdos_renyi__community_weakening__native_netlsd.png"
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "structural_statistics_mmd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 3,
+    "seeds_nondecreasing_positive_alpha": 0,
+    "mean_opposes_absolute_majority_steps": 1,
+    "mean_opposes_more_nonzero_steps": 1,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      0.7,
+      0.3,
+      0.3
+    ],
+    "figure": "seed_figures/erdos_renyi__community_weakening__structural_statistics_mmd.png"
+  },
+  {
+    "dataset": "erdos_renyi",
+    "perturbation": "community_weakening",
+    "workflow": "wl_subtree_kernel_mmd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 3,
+    "seeds_nondecreasing_positive_alpha": 0,
+    "mean_opposes_absolute_majority_steps": 2,
+    "mean_opposes_more_nonzero_steps": 2,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      0.9,
+      0.9,
+      0.6
+    ],
+    "figure": "seed_figures/erdos_renyi__community_weakening__wl_subtree_kernel_mmd.png"
+  }
+]

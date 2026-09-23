@@ -221,10 +221,12 @@ The default perturbation grid now uses:
 - `community_weakening`
 - `hub_modification`
 
-Legacy mixed perturbations are still callable for backward compatibility:
-
-- `edge_addition_deletion`
-- `triangle_injection_removal`
+The legacy mixed perturbations (`edge_addition_deletion`, `triangle_injection_removal`)
+were removed on 2026-09-23 (see
+[../../agent/decisions/2026-09-23-remove-edge-addition-deletion.md](../../agent/decisions/2026-09-23-remove-edge-addition-deletion.md)
+and
+[../../agent/decisions/2026-09-23-remove-triangle-injection-removal.md](../../agent/decisions/2026-09-23-remove-triangle-injection-removal.md));
+historical result rows may still reference them.
 
 Every new perturbation row records:
 

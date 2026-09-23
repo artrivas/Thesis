@@ -1,0 +1,91 @@
+[
+  {
+    "run": "2026-09-16_ba_pilot_validated",
+    "rows": 132,
+    "replicates": 3,
+    "workers": 3,
+    "previous_execution_segments": [],
+    "wall_seconds": 1762.283566,
+    "result_bytes": 2901275,
+    "workflow_seconds_sum": {
+      "structural_statistics_mmd": 134.77573390299222,
+      "wl_subtree_kernel_mmd": 33.08573731999786,
+      "native_netlsd": 70.4410839270422,
+      "diversity_curves_shortest_path": 4928.787728832001
+    },
+    "workflow_seconds_mean": {
+      "structural_statistics_mmd": 4.084113148575522,
+      "wl_subtree_kernel_mmd": 1.0025981006059959,
+      "native_netlsd": 2.1345783008194608,
+      "diversity_curves_shortest_path": 149.35720390400004
+    },
+    "max_traced_python_memory_mb": 7.702973365783691,
+    "projection_same_settings_24_replicates": {
+      "wall_hours_point_estimate": 3.916185702222222,
+      "result_bytes_point_estimate": 23210200
+    },
+    "limitations": "Linear planning projection for the same settings and observed worker schedule, not a guaranteed runtime. Concurrent pilots shared this machine. Earlier segments, if any, are included in wall time. Python traced memory excludes native allocations. Synthetic pilots do not cover all settings; ZINC production samples a different split."
+  },
+  {
+    "run": "2026-09-16_er_pilot_validated",
+    "rows": 132,
+    "replicates": 3,
+    "workers": 3,
+    "previous_execution_segments": [],
+    "wall_seconds": 2007.518129,
+    "result_bytes": 3785180,
+    "workflow_seconds_sum": {
+      "structural_statistics_mmd": 130.8946988100506,
+      "wl_subtree_kernel_mmd": 33.42858460501884,
+      "native_netlsd": 71.88526589200774,
+      "diversity_curves_shortest_path": 5682.567466402965
+    },
+    "workflow_seconds_mean": {
+      "structural_statistics_mmd": 3.9665060245469883,
+      "wl_subtree_kernel_mmd": 1.0129874122732982,
+      "native_netlsd": 2.178341390666901,
+      "diversity_curves_shortest_path": 172.19901413342316
+    },
+    "max_traced_python_memory_mb": 8.236825942993164,
+    "projection_same_settings_24_replicates": {
+      "wall_hours_point_estimate": 4.461151397777778,
+      "result_bytes_point_estimate": 30281440
+    },
+    "limitations": "Linear planning projection for the same settings and observed worker schedule, not a guaranteed runtime. Concurrent pilots shared this machine. Earlier segments, if any, are included in wall time. Python traced memory excludes native allocations. Synthetic pilots do not cover all settings; ZINC production samples a different split."
+  },
+  {
+    "run": "2026-09-16_zinc_pilot_validated",
+    "rows": 792,
+    "replicates": 3,
+    "workers": 8,
+    "previous_execution_segments": [
+      {
+        "started_at": "2026-09-16T05:49:10.981501+00:00",
+        "ended_at": "2026-09-16T06:22:38.673595+00:00",
+        "workers": 2,
+        "rows_completed": 384,
+        "reason": "Reallocate cores from completed synthetic pilots; resume same inputs and code"
+      }
+    ],
+    "wall_seconds": 2535.722697,
+    "result_bytes": 12139441,
+    "workflow_seconds_sum": {
+      "structural_statistics_mmd": 137.63818590603478,
+      "wl_subtree_kernel_mmd": 58.634599871962564,
+      "native_netlsd": 220.63206488000287,
+      "diversity_curves_shortest_path": 7547.058913064044
+    },
+    "workflow_seconds_mean": {
+      "structural_statistics_mmd": 0.6951423530607818,
+      "wl_subtree_kernel_mmd": 0.29613434278768974,
+      "native_netlsd": 1.1143033579798125,
+      "diversity_curves_shortest_path": 38.11645915688911
+    },
+    "max_traced_python_memory_mb": 3.0697555541992188,
+    "projection_same_settings_24_replicates": {
+      "wall_hours_point_estimate": 5.634939326666667,
+      "result_bytes_point_estimate": 97115528
+    },
+    "limitations": "Linear planning projection for the same settings and observed worker schedule, not a guaranteed runtime. Concurrent pilots shared this machine. Earlier segments, if any, are included in wall time. Python traced memory excludes native allocations. Synthetic pilots do not cover all settings; ZINC production samples a different split."
+  }
+]

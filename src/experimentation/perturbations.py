@@ -32,14 +32,10 @@ def perturb_graph(
         result = _edge_insertion(graph, alpha, seed)
     elif perturbation_type == "edge_deletion":
         result = _edge_deletion(graph, alpha, seed)
-    elif perturbation_type == "edge_addition_deletion":
-        result = _edge_addition_deletion(graph, alpha, seed)
     elif perturbation_type == "triangle_insertion":
         result = _triangle_insertion(graph, alpha, seed)
     elif perturbation_type == "triangle_deletion":
         result = _triangle_deletion(graph, alpha, seed)
-    elif perturbation_type == "triangle_injection_removal":
-        result = _triangle_injection_removal(graph, alpha, seed)
     elif perturbation_type == "community_weakening":
         result = _community_weakening(graph, alpha, seed, context)
     elif perturbation_type == "hub_modification":
@@ -50,6 +46,16 @@ def perturb_graph(
     # Record the exact net edited edges for importance-weighted edit distance.
     # This is the symmetric difference of edge sets, so add-then-remove cancels.
     result.metadata["edited_edges"] = edited_edge_ops(graph, result.graph)
+    if "requested_operations" not in result.metadata:
+        base = max(1, graph.number_of_edges()) if perturbation_type.startswith("triangle") else graph.number_of_edges()
+        result.metadata["requested_operations"] = math.floor(alpha * base)
+    net_edits = len(result.metadata["edited_edges"])
+    result.metadata["net_edge_edits"] = net_edits
+    result.metadata["no_op_reason"] = (
+        None if net_edits else "alpha_zero" if alpha == 0 else
+        "rounded_budget_zero" if result.metadata["requested_operations"] == 0 else
+        "operations_cancelled" if result.metadata["edges_added"] or result.metadata["edges_removed"] else
+        "no_feasible_change")
     return result
 
 
@@ -106,31 +112,6 @@ def _edge_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
     return PerturbationResult(perturbed, info)
 
 
-def _edge_addition_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
-    rng = random.Random(seed)
-    perturbed = graph.copy()
-    info = _base_metadata(alpha, "edge_addition_deletion", family="edge", direction="mixed")
-    edge_count = graph.number_of_edges()
-    changes = math.floor(alpha * edge_count)
-    if changes == 0:
-        return PerturbationResult(perturbed, info)
-
-    edges = graph.edges()
-    rng.shuffle(edges)
-    remove_count = min(len(edges), changes // 2)
-    for u, v in edges[:remove_count]:
-        if perturbed.remove_edge(u, v):
-            info["edges_removed"] = int(info["edges_removed"]) + 1
-
-    non_edges = graph.non_edges()
-    rng.shuffle(non_edges)
-    add_count = min(len(non_edges), changes - remove_count)
-    for u, v in non_edges[:add_count]:
-        if perturbed.add_edge(u, v):
-            info["edges_added"] = int(info["edges_added"]) + 1
-    return PerturbationResult(perturbed, info)
-
-
 def _triangle_insertion(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
     rng = random.Random(seed)
     perturbed = graph.copy()
@@ -169,36 +150,6 @@ def _triangle_deletion(graph: Graph, alpha: float, seed: int) -> PerturbationRes
     return PerturbationResult(perturbed, info)
 
 
-def _triangle_injection_removal(graph: Graph, alpha: float, seed: int) -> PerturbationResult:
-    rng = random.Random(seed)
-    perturbed = graph.copy()
-    info = _base_metadata(alpha, "triangle_injection_removal", family="triangle", direction="mixed")
-    budget = math.floor(alpha * max(1, graph.number_of_edges()))
-    if budget == 0:
-        return PerturbationResult(perturbed, info)
-
-    open_wedges = graph.open_wedges()
-    rng.shuffle(open_wedges)
-    injection_budget = budget // 2 + budget % 2
-    for u, v in open_wedges[:injection_budget]:
-        if perturbed.add_edge(u, v):
-            info["edges_added"] = int(info["edges_added"]) + 1
-            info["triangles_affected"] = int(info["triangles_affected"]) + 1
-
-    triangle_edges = list(perturbed.triangle_edges())
-    rng.shuffle(triangle_edges)
-    removal_budget = budget // 2
-    removed = 0
-    for u, v in triangle_edges:
-        if removed >= removal_budget:
-            break
-        if perturbed.remove_edge(u, v):
-            removed += 1
-            info["edges_removed"] = int(info["edges_removed"]) + 1
-            info["triangles_affected"] = int(info["triangles_affected"]) + 1
-    return PerturbationResult(perturbed, info)
-
-
 def _community_weakening(
     graph: Graph,
     alpha: float,
@@ -220,9 +171,11 @@ def _community_weakening(
         labels = detect_communities(graph)
         info["label_source"] = "detected"
     info["num_communities"] = len(set(labels))
+    info["community_labels"] = labels
 
     intra_edges = [(u, v) for u, v in graph.edges() if labels[u] == labels[v]]
     rewires = math.floor(alpha * len(intra_edges))
+    info["requested_operations"] = rewires
     rng.shuffle(intra_edges)
     inter_non_edges = [
         (u, v)

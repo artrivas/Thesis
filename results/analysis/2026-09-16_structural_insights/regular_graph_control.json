@@ -1,0 +1,67 @@
+{
+  "description": "One 6-cycle versus two disjoint triangles: both 6 nodes and degree 2; not a saved experiment",
+  "scores": {
+    "wl_subtree_kernel_mmd": 0.0,
+    "structural_statistics_mmd": 0.06878916748486708,
+    "native_netlsd": 1.5749546917032098,
+    "diversity_curves_shortest_path": 1.4268757670330874
+  },
+  "wl_levels": [
+    {
+      "level": 0,
+      "score": 0.0,
+      "xx": 36.0,
+      "yy": 36.0,
+      "xy": 36.0,
+      "mean_feature_cosine": 1.0
+    },
+    {
+      "level": 1,
+      "score": 0.0,
+      "xx": 36.0,
+      "yy": 36.0,
+      "xy": 36.0,
+      "mean_feature_cosine": 1.0
+    },
+    {
+      "level": 2,
+      "score": 0.0,
+      "xx": 36.0,
+      "yy": 36.0,
+      "xy": 36.0,
+      "mean_feature_cosine": 1.0
+    },
+    {
+      "level": 3,
+      "score": 0.0,
+      "xx": 36.0,
+      "yy": 36.0,
+      "xy": 36.0,
+      "mean_feature_cosine": 1.0
+    }
+  ],
+  "descriptors": [
+    [
+      6.0,
+      6.0,
+      0.4,
+      2.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      6.0,
+      6.0,
+      0.4,
+      2.0,
+      0.0,
+      1.0,
+      2.0,
+      1.0,
+      2.0
+    ]
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "source": "results/runs/2026-09-16_er_pilot_validated/results/results.csv",
+  "rows": 132,
+  "expected_rows": 132,
+  "statuses": {
+    "success": 132
+  },
+  "cells": 33,
+  "graph_pairs": 3300,
+  "source_graph_instances_by_replicate": 300,
+  "unique_source_record_ids": 300,
+  "unique_labeled_topology_hashes": 300,
+  "source_id_overlap_between_replicates": [
+    {
+      "dataset": "erdos_renyi",
+      "replicate_a": "0",
+      "replicate_b": "1",
+      "shared_source_ids": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "replicate_a": "0",
+      "replicate_b": "2",
+      "shared_source_ids": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "replicate_a": "1",
+      "replicate_b": "2",
+      "shared_source_ids": 0
+    }
+  ],
+  "unique_perturbation_streams": 300,
+  "positive_alpha_no_ops": {},
+  "no_op_reasons": {},
+  "graphstats_kernel_ranges": {
+    "xx": [
+      0.35620989102937733,
+      0.3930016022703819
+    ],
+    "xy": [
+      0.3384599430674883,
+      0.3930016022703819
+    ],
+    "yy": [
+      0.32676100669881236,
+      0.396131117560254
+    ]
+  },
+  "issues": [],
+  "interpretation": "Implementation and recorded-data checks; not proof of population independence or metric monotonicity"
+}

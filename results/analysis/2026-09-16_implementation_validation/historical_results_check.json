@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "files": 181,
+  "bytes": 91052691,
+  "verification": "Both historical originals and snapshot match the pre-implementation SHA-256 inventory"
+}

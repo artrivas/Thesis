@@ -142,7 +142,7 @@ def rbf_kernel_is_nearly_constant(
 def median_heuristic_bandwidth(vectors: list[Vector]) -> float:
     """Median pairwise L2 distance: the standard RBF-MMD bandwidth heuristic.
 
-    Recommended for variable-size real datasets (e.g. IMDB-BINARY) where a fixed
+    Recommended for variable-size real datasets (e.g. ZINC) where a fixed
     bandwidth tuned for n=50 can saturate or collapse the kernel. Returns ``1.0``
     when there are fewer than two vectors or all distances are zero, keeping the
     bandwidth positive. The default synthetic workflows do not use this so their
@@ -214,6 +214,7 @@ class Workflow:
     def run(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> dict[str, object]:
         start = time.perf_counter()
         parameters = self.parameters()
+        representations = None
         try:
             if self._uses_cached_representations():
                 original = self.compute_representations(original_graphs)
@@ -221,6 +222,8 @@ class Workflow:
                 distribution = self.distribution_score_from_representations(original, perturbed)
                 mean_shift = representation_mean_distance(original, perturbed)
                 paired = paired_representation_distance(original, perturbed)
+                if getattr(self, "_capture_details", False):
+                    representations = (original, perturbed)
             else:
                 distribution = self.distribution_score(original_graphs, perturbed_graphs)
                 mean_shift = self.mean_shift_score(original_graphs, perturbed_graphs)
@@ -244,7 +247,16 @@ class Workflow:
             "memory_mb": None,
             "status": status,
             "error_message": error_message,
+            "_representations": representations,
         }
+
+    def run_with_details(self, original_graphs, perturbed_graphs):
+        """Retain representations already computed, for untimed diagnostics."""
+        self._capture_details = True
+        try:
+            return self.run(original_graphs, perturbed_graphs)
+        finally:
+            self._capture_details = False
 
     def _uses_cached_representations(self) -> bool:
         return type(self).distribution_score_from_representations is not Workflow.distribution_score_from_representations
@@ -342,11 +354,14 @@ class WLSubtreeMMDWorkflow(Workflow):
     def run(self, original_graphs: list[Graph], perturbed_graphs: list[Graph]) -> dict[str, object]:
         start = time.perf_counter()
         parameters = self.parameters()
+        representations = None
         try:
             original, perturbed = self._joint_representations(original_graphs, perturbed_graphs)
             distribution = sparse_linear_mmd(original, perturbed)
             mean_shift = sparse_l2(sparse_mean(original), sparse_mean(perturbed))
             paired = paired_representation_distance(original, perturbed)
+            if getattr(self, "_capture_details", False):
+                representations = (original, perturbed)
             status = "success"
             error_message = None
         except Exception as exc:  # pragma: no cover - exercised through runner status behavior.
@@ -366,6 +381,7 @@ class WLSubtreeMMDWorkflow(Workflow):
             "memory_mb": None,
             "status": status,
             "error_message": error_message,
+            "_representations": representations,
         }
 
     def parameters(self) -> dict[str, object]:
@@ -401,12 +417,16 @@ class NetLSDWorkflow(Workflow):
         bandwidth: float | None = None,
         normalization: str = "empty",
         laplacian: str = "normalized",
+        eigensolver: str = "auto",
     ) -> None:
         super().__init__(NATIVE_NETLSD_WORKFLOW)
         if normalization not in NETLSD_NORMALIZATION_MODES:
             raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
         if laplacian != "normalized":
             raise ValueError("NetLSD currently implements the normalized Laplacian from the paper")
+        if eigensolver not in ("auto", "numpy", "legacy_jacobi"):
+            raise ValueError("Unsupported NetLSD eigensolver")
+        self.eigensolver = eigensolver
         if timescales is not None:
             self.timescales = tuple(timescales)
         else:
@@ -420,7 +440,7 @@ class NetLSDWorkflow(Workflow):
 
     def compute_representations(self, graphs: list[Graph]) -> list[Vector]:
         return [
-            netlsd_signature(graph, self.timescales, normalization=self.normalization)
+            netlsd_signature(graph, self.timescales, normalization=self.normalization, eigensolver=self.eigensolver)
             for graph in graphs
         ]
 
@@ -449,6 +469,7 @@ class NetLSDWorkflow(Workflow):
             "heat_signature": "heat_trace",
             "eigenvalue_mode": "full_spectrum",
             "eigenvalue_count": "all",
+            "eigenvalue_solver": eigenvalue_solver_name(self.eigensolver),
             "distribution_distance": "l2_between_mean_signatures",
         }
 
@@ -694,10 +715,11 @@ def netlsd_signature(
     timescales: Iterable[float],
     *,
     normalization: str = "empty",
+    eigensolver: str = "auto",
 ) -> Vector:
     if normalization not in NETLSD_NORMALIZATION_MODES:
         raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
-    eigenvalues = normalized_laplacian_eigenvalues(graph)
+    eigenvalues = normalized_laplacian_eigenvalues(graph, eigensolver=eigensolver)
     signature = []
     for time_value in timescales:
         if not math.isfinite(time_value) or time_value < 0.0:
@@ -720,10 +742,26 @@ def netlsd_neutral_heat_trace(num_nodes: int, time_value: float, normalization: 
     raise ValueError(f"normalization must be one of {sorted(NETLSD_NORMALIZATION_MODES)}")
 
 
-def normalized_laplacian_eigenvalues(graph: Graph) -> list[float]:
-    accelerated = _accelerated_laplacian_eigenvalues(graph)
-    if accelerated is not None:
-        return accelerated
+def eigenvalue_solver_name(eigensolver="auto"):
+    if eigensolver == "legacy_jacobi":
+        return "legacy_jacobi_1000_unchecked"
+    if eigensolver == "auto" and _torch_device_name() is not None:
+        return "torch_eigvalsh_" + str(_torch_device_name())
+    try:
+        import numpy
+    except ImportError:
+        if eigensolver == "numpy":
+            raise RuntimeError("NumPy eigensolver requested but NumPy is unavailable")
+        return "jacobi_convergence_checked"
+    return "numpy_eigvalsh_cpu"
+
+
+def normalized_laplacian_eigenvalues(graph: Graph, *, eigensolver="auto") -> list[float]:
+    if eigensolver not in ("auto", "numpy", "legacy_jacobi"):
+        raise ValueError("Unsupported NetLSD eigensolver")
+    backend = eigenvalue_solver_name(eigensolver)
+    if backend.startswith("torch"):
+        return _accelerated_laplacian_eigenvalues(graph)
 
     n = graph.num_nodes
     if n == 0:
@@ -737,10 +775,15 @@ def normalized_laplacian_eigenvalues(graph: Graph) -> list[float]:
             value = -1.0 / math.sqrt(degrees[u] * degrees[v])
             matrix[u][v] = value
             matrix[v][u] = value
-    return jacobi_eigenvalues(matrix)
+    if backend == "numpy_eigvalsh_cpu":
+        import numpy as np
+        return sorted(max(0., float(v)) for v in np.linalg.eigvalsh(np.asarray(matrix, dtype=float)))
+    if eigensolver == "legacy_jacobi":
+        return jacobi_eigenvalues(matrix, check_convergence=False)
+    return jacobi_eigenvalues(matrix, max_iterations=max(1000, 50*n*n), check_convergence=True)
 
 
-def jacobi_eigenvalues(matrix: list[list[float]], tolerance: float = 1e-10, max_iterations: int = 1000) -> list[float]:
+def jacobi_eigenvalues(matrix: list[list[float]], tolerance: float = 1e-10, max_iterations: int = 1000, *, check_convergence: bool = True) -> list[float]:
     n = len(matrix)
     if n <= 1:
         return [matrix[0][0]] if n else []
@@ -773,6 +816,8 @@ def jacobi_eigenvalues(matrix: list[list[float]], tolerance: float = 1e-10, max_
                 a[r][q] = a[q][r] = arq
         a[p][p] = app
         a[q][q] = aqq
+    if check_convergence and max(abs(a[i][j]) for i in range(n) for j in range(i+1, n)) >= tolerance:
+        raise RuntimeError("Jacobi eigensolver did not converge; use NumPy or increase iteration budget")
     return sorted(max(0.0, a[i][i]) for i in range(n))
 
 

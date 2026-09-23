@@ -151,7 +151,8 @@ class ExperimentConfig:
         """Return concrete synthetic dataset configs for the runner."""
 
         if self.dataset_configs:
-            return self.dataset_configs
+            from experimentation.zinc_dataset import resolve_zinc_config
+            return tuple(resolve_zinc_config(dc) if dc.family == "zinc" else dc for dc in self.dataset_configs)
         return default_synthetic_dataset_configs(
             num_graphs=self.datasets.graphs_per_distribution,
             num_nodes=50,
@@ -188,7 +189,7 @@ def debug_config(output_root: Path | str = Path("results/legacy/debug")) -> Expe
     root = Path(output_root)
     return ExperimentConfig(
         datasets=DatasetConfig(graphs_per_distribution=5),
-        dataset_configs=default_synthetic_dataset_configs(num_graphs=5, num_nodes=8),
+        dataset_configs=tuple(replace(dc, master_seed=20260917) for dc in default_synthetic_dataset_configs(num_graphs=5, num_nodes=8)),
         perturbations=PerturbationConfig(alpha_values=(0.0, 0.5, 1.0)),
         seed_count=DEBUG_SEED_COUNT,
         outputs=output_config_for_root(root),
@@ -231,40 +232,6 @@ def replication_config(
     )
 
 
-def imdb_binary_dataset_config(num_graphs: int = 100, data_root: str = "data") -> SyntheticDatasetConfig:
-    """Return a dataset config that loads IMDB-BINARY from disk into the grid."""
-
-    return SyntheticDatasetConfig(
-        family="imdb_binary",
-        num_graphs=num_graphs,
-        data_root=data_root,
-        dataset_name="IMDB-BINARY",
-    )
-
-
-def imdb_config(
-    output_root: Path | str = Path("results/legacy/imdb_binary"),
-    data_root: str = "data",
-    num_graphs: int = 100,
-) -> ExperimentConfig:
-    """Full grid on the real IMDB-BINARY family (perturbations/workflows unchanged).
-
-    Community labels are absent (IMDB-BINARY is unlabeled), so community_weakening
-    uses detected communities. Requires the dataset on disk; fetch it with
-    scripts/fetch_imdb_binary.py. See docs/experimentation/real_datasets.md for
-    the MMD-bandwidth / NetLSD-normalization sensitivity to variable graph sizes.
-    """
-
-    root = Path(output_root)
-    return ExperimentConfig(
-        datasets=DatasetConfig(families=("imdb_binary",), graphs_per_distribution=num_graphs),
-        dataset_configs=(imdb_binary_dataset_config(num_graphs=num_graphs, data_root=data_root),),
-        perturbations=PerturbationConfig(alpha_values=DEFAULT_ALPHA_VALUES),
-        seeds=DEFAULT_SEEDS,
-        outputs=output_config_for_root(root),
-    )
-
-
 def resolved_config_payload(config: ExperimentConfig) -> dict[str, object]:
     """Return a JSON-serializable, seed-normalized view of a config.
 
@@ -275,14 +242,54 @@ def resolved_config_payload(config: ExperimentConfig) -> dict[str, object]:
     """
 
     return {
+        "schema_version": "graph_records_v1",
         "dataset_configs": [asdict(replace(dc, seed=0)) for dc in config.resolved_dataset_configs()],
         "perturbations": {
             "methods": list(config.perturbations.methods),
             "alpha_values": [float(value) for value in config.perturbations.alpha_values],
         },
         "workflows": list(config.workflows.names),
+        "wl_label_initialization": "degree" if any(dc.family == "zinc" for dc in config.resolved_dataset_configs()) else "node_label_or_degree",
         "seeds": [int(seed) for seed in config.resolved_seeds()],
     }
+
+
+def zinc_config(output_root="results/legacy/zinc", *, data_root="data", mode="production"):
+    if mode not in ("debug", "pilot", "production"):
+        raise ValueError("Unknown ZINC experiment mode")
+    debug = mode == "debug"
+    production = mode == "production"
+    count = 10 if debug else 100
+    return ExperimentConfig(
+        datasets=DatasetConfig(families=("zinc",), graphs_per_distribution=count),
+        dataset_configs=(SyntheticDatasetConfig("zinc", num_graphs=count, data_root=data_root,
+            dataset_name="ZINC", dataset_variant="subset12k", dataset_split="train" if production else "val",
+            master_seed=20260916 if production else 20260917),),
+        perturbations=PerturbationConfig(alpha_values=(0., .5, 1.) if debug else DEFAULT_ALPHA_VALUES),
+        seed_count=2 if debug else (24 if production else 3), outputs=output_config_for_root(output_root))
+
+
+def zinc_debug_config(output_root="results/legacy/zinc-debug"):
+    return zinc_config(output_root, mode="debug")
+
+
+def zinc_pilot_config(output_root="results/legacy/zinc-pilot"):
+    return zinc_config(output_root, mode="pilot")
+
+
+def ba_pilot_config(output_root="results/legacy/ba-pilot"):
+    return _synthetic_pilot(output_root, "barabasi_albert", "triangle_insertion")
+
+
+def er_pilot_config(output_root="results/legacy/er-pilot"):
+    return _synthetic_pilot(output_root, "erdos_renyi", "community_weakening")
+
+
+def _synthetic_pilot(output_root, family, perturbation):
+    dc = next(dc for dc in default_synthetic_dataset_configs() if dc.family == family)
+    return ExperimentConfig(dataset_configs=(replace(dc, master_seed=20260917),),
+        datasets=DatasetConfig(families=(family,)), seed_count=3,
+        perturbations=PerturbationConfig(methods=(perturbation,)), outputs=output_config_for_root(output_root))
 
 
 def config_hash(config: ExperimentConfig) -> str:

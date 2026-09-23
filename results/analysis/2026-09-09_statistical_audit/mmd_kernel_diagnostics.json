@@ -1,0 +1,1322 @@
+[
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.0,
+    "xx": 0.8528025238456833,
+    "yy": 0.8528025238456833,
+    "xy": 0.8528025238456833,
+    "mmd2": 0.0,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 0.0,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.0,
+      "density": 0.0,
+      "mean_degree": 0.0,
+      "degree_variance": 0.3152860183557818,
+      "clustering": 0.00019185754245743068,
+      "triangles": 0.6845097430901363,
+      "transitivity": 1.2381011624361847e-05,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.0,
+      "10.0": 0.0,
+      "100.0": 0.0,
+      "1000.0": 0.0
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 0.0
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.1,
+    "xx": 0.8528025238456833,
+    "yy": 0.840187506142777,
+    "xy": 0.3505382051083264,
+    "mmd2": 0.9919136197718076,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 14.310643913957312,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3351303277595308,
+      "density": 2.2332716552068453e-07,
+      "mean_degree": 0.0005362085244151939,
+      "degree_variance": 0.050637968111268104,
+      "clustering": 3.3432929767147714e-05,
+      "triangles": 0.6136542469724591,
+      "transitivity": 7.59237539413955e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.1562569127427214,
+      "10.0": 0.9919136197718076,
+      "100.0": 0.02019153030039078,
+      "1000.0": 0.00020367678020427604
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.1592724861769936
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.2,
+    "xx": 0.8528025238456833,
+    "yy": 0.8161818806520589,
+    "xy": 0.01623921091674945,
+    "mmd2": 1.6365059826642434,
+    "reproduction_abs_error": 2.220446049250313e-16,
+    "paired_l2": 30.416159444321337,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.37445949460999783,
+      "density": 2.495356898692074e-07,
+      "mean_degree": 0.0005991351913759203,
+      "degree_variance": 0.015235164148460748,
+      "clustering": 1.0890454137673062e-05,
+      "triangles": 0.6096897627044056,
+      "transitivity": 5.3033559324331105e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.14573202167261345,
+      "10.0": 1.6365059826642434,
+      "100.0": 0.08977901049819126,
+      "1000.0": 0.0009221290891310296
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.1498749469554066
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.3,
+    "xx": 0.8528025238456833,
+    "yy": 0.7822614225406077,
+    "xy": 7.012373720657274e-05,
+    "mmd2": 1.6349236989118778,
+    "reproduction_abs_error": 2.220446049250313e-16,
+    "paired_l2": 47.32650420996389,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3685972026893778,
+      "density": 2.4562912299168357e-07,
+      "mean_degree": 0.0005897555243030636,
+      "degree_variance": 0.008905755537216004,
+      "clustering": 6.249524142577874e-06,
+      "triangles": 0.621896849749977,
+      "transitivity": 3.941345860544746e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.13549945708784158,
+      "10.0": 1.6349236989118778,
+      "100.0": 0.21042614905204116,
+      "1000.0": 0.0022329669978633504
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.128046426829023
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.4,
+    "xx": 0.8528025238456833,
+    "yy": 0.7566701415188953,
+    "xy": 6.014208766094757e-08,
+    "mmd2": 1.6094725450804035,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 63.10775652162563,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3584699150201982,
+      "density": 2.388804098426859e-07,
+      "mean_degree": 0.0005735518640322442,
+      "degree_variance": 0.006883580088785642,
+      "clustering": 4.227783325383705e-06,
+      "triangles": 0.6340653590552531,
+      "transitivity": 3.1273079957102185e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.13226971054247594,
+      "10.0": 1.6094725450804035,
+      "100.0": 0.35874753218229416,
+      "1000.0": 0.0039718177806313815
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.1115244922968106
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.5,
+    "xx": 0.8528025238456833,
+    "yy": 0.7220379384160819,
+    "xy": 1.708389842491042e-12,
+    "mmd2": 1.5748404622583485,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 81.82229885937429,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.341603225040189,
+      "density": 2.2764063309629318e-07,
+      "mean_degree": 0.0005465651600642046,
+      "degree_variance": 0.005856868044520859,
+      "clustering": 3.040948594107113e-06,
+      "triangles": 0.651987592290863,
+      "transitivity": 2.4808751358289953e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.1254527801939056,
+      "10.0": 1.5748404622583485,
+      "100.0": 0.5650154252554433,
+      "1000.0": 0.006673396078386018
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.0796306940671687
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.6,
+    "xx": 0.8528025238456833,
+    "yy": 0.6919783435425753,
+    "xy": 5.799310317854061e-19,
+    "mmd2": 1.5447808673882586,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 101.40739407942347,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3253850591195681,
+      "density": 2.168330256523671e-07,
+      "mean_degree": 0.0005206160945913611,
+      "degree_variance": 0.005163456435759785,
+      "clustering": 2.363492307544596e-06,
+      "triangles": 0.6689262950159541,
+      "transitivity": 1.993008793389662e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.1263512631108115,
+      "10.0": 1.5447808673882586,
+      "100.0": 0.7981001323611998,
+      "1000.0": 0.010243394485195179
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.0677778369222204
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.7,
+    "xx": 0.8528025238456833,
+    "yy": 0.6954706781253022,
+    "xy": 1.545218297440247e-26,
+    "mmd2": 1.5482732019709855,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 119.9825349245657,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3106541605884754,
+      "density": 2.0701651684367316e-07,
+      "mean_degree": 0.0004970466569415448,
+      "degree_variance": 0.004598488942582418,
+      "clustering": 1.859220407413782e-06,
+      "triangles": 0.6842465634578042,
+      "transitivity": 1.6741172721712668e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.12373629383271055,
+      "10.0": 1.5482732019709855,
+      "100.0": 1.0193876599363345,
+      "1000.0": 0.014329869380816707
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.0813252896635788
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.8,
+    "xx": 0.8528025238456833,
+    "yy": 0.6542240224941709,
+    "xy": 4.182261409496348e-37,
+    "mmd2": 1.5070265463398542,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 141.5659877699046,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.29490192192496995,
+      "density": 1.9651939820075062e-07,
+      "mean_degree": 0.00047184307507990405,
+      "degree_variance": 0.004294690967051789,
+      "clustering": 1.4384438129939588e-06,
+      "triangles": 0.7003285281044286,
+      "transitivity": 1.3809652586057463e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.12264172853226984,
+      "10.0": 1.5070265463398542,
+      "100.0": 1.2561287541966375,
+      "1000.0": 0.01992107012730604
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.0592781261089803
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 0.9,
+    "xx": 0.8528025238456833,
+    "yy": 0.6161659084369773,
+    "xy": 1.5248220168042962e-47,
+    "mmd2": 1.4689684322826606,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 164.3311883361627,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.2795106598267813,
+      "density": 1.8626283037185736e-07,
+      "mean_degree": 0.0004472170557229183,
+      "degree_variance": 0.004041196278437837,
+      "clustering": 1.1505678258257433e-06,
+      "triangles": 0.7159984353884233,
+      "transitivity": 1.1546199783165103e-06,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.11880154778724097,
+      "10.0": 1.4689684322826606,
+      "100.0": 1.4696916864581202,
+      "1000.0": 0.026799018502075223
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 1.0236392262542464
+  },
+  {
+    "dataset": "barabasi_albert",
+    "seed": 0,
+    "alpha": 1.0,
+    "xx": 0.8528025238456833,
+    "yy": 0.5694669468470229,
+    "xy": 5.60114588850891e-60,
+    "mmd2": 1.4222694706927062,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 188.1217805403671,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.26518376203613947,
+      "density": 1.767155432143748e-07,
+      "mean_degree": 0.0004242940192577313,
+      "degree_variance": 0.003823900204041443,
+      "clustering": 9.329745966657804e-07,
+      "triangles": 0.7305659604683606,
+      "transitivity": 9.735820609553837e-07,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.11453416350040094,
+      "10.0": 1.4222694706927062,
+      "100.0": 1.6441705463821845,
+      "1000.0": 0.035046202079954236
+    },
+    "reference_scaled_median_bandwidth": 2.322007328208038,
+    "reference_scaled_mmd2": 0.9835445500422031
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.0,
+    "xx": 0.3723626120760918,
+    "yy": 0.3723626120760918,
+    "xy": 0.3723626120760918,
+    "mmd2": 0.0,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 0.0,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.5786422185696437,
+      "density": 3.8560081204139963e-07,
+      "mean_degree": 0.0009258275497114304,
+      "degree_variance": 0.004829920978113345,
+      "clustering": 2.6863781696045373e-06,
+      "triangles": 0.41522896098724177,
+      "transitivity": 1.6293578046038225e-06,
+      "components": 0.00036837057850358534
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.0,
+      "10.0": 0.0,
+      "100.0": 0.0,
+      "1000.0": 0.0
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.0
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.1,
+    "xx": 0.3723626120760918,
+    "yy": 0.3200255452404868,
+    "xy": 0.18945448210553303,
+    "mmd2": 0.3134791931055126,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 25.44840908669302,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.41997213728824356,
+      "density": 2.798648145194417e-07,
+      "mean_degree": 0.0006719554196611942,
+      "degree_variance": 0.003151003780132559,
+      "clustering": 2.6305642618758428e-06,
+      "triangles": 0.5760579643991947,
+      "transitivity": 1.80110413555399e-06,
+      "components": 0.00014222757955606357
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027473916085381262,
+      "10.0": 0.3134791931055126,
+      "100.0": 0.05891014487554669,
+      "1000.0": 0.0006438037349023595
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.38646062935202574
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.2,
+    "xx": 0.3723626120760918,
+    "yy": 0.27718846500034694,
+    "xy": 0.03102822415224655,
+    "mmd2": 0.5874946287719457,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 53.57244719683371,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.33356565557140244,
+      "density": 2.2228448517877352e-07,
+      "mean_degree": 0.000533705048914242,
+      "degree_variance": 0.0020955573716506023,
+      "clustering": 2.1329973547406745e-06,
+      "triangles": 0.6637530242688876,
+      "transitivity": 1.5342051529974367e-06,
+      "components": 4.8168252152192e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.03028733809282542,
+      "10.0": 0.5874946287719457,
+      "100.0": 0.24428576298669502,
+      "1000.0": 0.0028570147053907924
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.8602573751828675
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.3,
+    "xx": 0.3723626120760918,
+    "yy": 0.23350826382587692,
+    "xy": 0.0021891574270420933,
+    "mmd2": 0.6014925610478845,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 84.23495095931031,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.28905118256831985,
+      "density": 1.9262052982478298e-07,
+      "mean_degree": 0.0004624818921093158,
+      "degree_variance": 0.001765946526532975,
+      "clustering": 1.6824252202212937e-06,
+      "triangles": 0.7086958534995614,
+      "transitivity": 1.2025672424577865e-06,
+      "components": 2.1457900483904752e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.028852193251611105,
+      "10.0": 0.6014925610478845,
+      "100.0": 0.5371240305904104,
+      "1000.0": 0.0070596058579339704
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 1.0005030886871182
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.4,
+    "xx": 0.3723626120760918,
+    "yy": 0.19976028213716443,
+    "xy": 0.00021576699719833144,
+    "mmd2": 0.5716913602188596,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 117.11829453894585,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.26034325707694583,
+      "density": 1.734898839329863e-07,
+      "mean_degree": 0.0004165492113231141,
+      "degree_variance": 0.0015660481560579678,
+      "clustering": 1.2959177335967108e-06,
+      "triangles": 0.7376602272304649,
+      "transitivity": 9.34730887749654e-07,
+      "components": 1.1514186703004526e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027707126477583426,
+      "10.0": 0.5716913602188596,
+      "100.0": 0.8796595840427186,
+      "1000.0": 0.013623050706313977
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.9801408251461338
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.5,
+    "xx": 0.3723626120760918,
+    "yy": 0.16924152342789708,
+    "xy": 1.3486021844023855e-06,
+    "mmd2": 0.54160143829962,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 153.61845059301277,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.23502260687414234,
+      "density": 1.5661648104898897e-07,
+      "mean_degree": 0.0003760361709986241,
+      "degree_variance": 0.0013650288509921634,
+      "clustering": 1.0328782233428652e-06,
+      "triangles": 0.7632275868607363,
+      "transitivity": 7.388380694518192e-07,
+      "components": 6.812910356736018e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027460672640640477,
+      "10.0": 0.54160143829962,
+      "100.0": 1.2120074407270498,
+      "1000.0": 0.023372895963805984
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.9420577702204755
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.6,
+    "xx": 0.3723626120760918,
+    "yy": 0.14711679402676509,
+    "xy": 6.786490387144017e-13,
+    "mmd2": 0.5194794061014997,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 191.18849950585926,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.21605169591171286,
+      "density": 1.4397447457673376e-07,
+      "mean_degree": 0.00034568271345874015,
+      "degree_variance": 0.0012827635387147247,
+      "clustering": 8.072709487946406e-07,
+      "triangles": 0.7823138765456213,
+      "transitivity": 5.884962207606115e-07,
+      "components": 4.441548848315174e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02698112834006809,
+      "10.0": 0.5194794061014997,
+      "100.0": 1.458306537916976,
+      "1000.0": 0.03606894989505305
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.8966758754290928
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.7,
+    "xx": 0.3723626120760918,
+    "yy": 0.12090567847943659,
+    "xy": 2.8982424715123683e-21,
+    "mmd2": 0.49326829055552834,
+    "reproduction_abs_error": 5.551115123125783e-17,
+    "paired_l2": 233.79621278238167,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.19543063198902833,
+      "density": 1.3023282431588452e-07,
+      "mean_degree": 0.00031268901118244825,
+      "degree_variance": 0.0011808616667619404,
+      "clustering": 6.38457892737406e-07,
+      "triangles": 0.803071583436802,
+      "transitivity": 4.801232882175499e-07,
+      "components": 2.985082220020445e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027098419854985914,
+      "10.0": 0.49326829055552834,
+      "100.0": 1.6127089388547058,
+      "1000.0": 0.05364872280525801
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.8529088884858421
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.8,
+    "xx": 0.3723626120760918,
+    "yy": 0.1045157217681078,
+    "xy": 1.581368710174252e-32,
+    "mmd2": 0.4768783338441996,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 280.1769262944327,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.1773510281157864,
+      "density": 1.1818477508756608e-07,
+      "mean_degree": 0.00028376164498525753,
+      "degree_variance": 0.0010893848976409935,
+      "clustering": 5.166657432911007e-07,
+      "triangles": 0.8212727077446712,
+      "transitivity": 3.960747065879338e-07,
+      "components": 2.086671691428167e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.026269878374812723,
+      "10.0": 0.4768783338441996,
+      "100.0": 1.682906478633427,
+      "1000.0": 0.07651644043151307
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.814677435067306
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 0.9,
+    "xx": 0.3723626120760918,
+    "yy": 0.09056388165402635,
+    "xy": 2.5455979210029775e-54,
+    "mmd2": 0.4629264937301181,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 328.87076733174837,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.16240581382754066,
+      "density": 1.0822544861476718e-07,
+      "mean_degree": 0.00025984930212406626,
+      "degree_variance": 0.0009744043372098796,
+      "clustering": 4.263488715950953e-07,
+      "triangles": 0.8363575503173596,
+      "transitivity": 3.297808936281818e-07,
+      "components": 1.5178605520892063e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.026308131786828677,
+      "10.0": 0.4629264937301181,
+      "100.0": 1.690914042684483,
+      "1000.0": 0.10451934013666087
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.7850813399148173
+  },
+  {
+    "dataset": "erdos_renyi",
+    "seed": 0,
+    "alpha": 1.0,
+    "xx": 0.3723626120760918,
+    "yy": 0.07747625806009198,
+    "xy": 8.051999961642129e-78,
+    "mmd2": 0.44983887013618373,
+    "reproduction_abs_error": 5.551115123125783e-17,
+    "paired_l2": 384.89411937146133,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.147084331007396,
+      "density": 9.801538092954191e-08,
+      "mean_degree": 0.00023533492961183333,
+      "degree_variance": 0.0009035571996914983,
+      "clustering": 3.4902728830469877e-07,
+      "triangles": 0.8517749441679959,
+      "transitivity": 2.7573604557360124e-07,
+      "components": 1.1099165901232607e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025922041374349343,
+      "10.0": 0.44983887013618373,
+      "100.0": 1.665726435405768,
+      "1000.0": 0.1415052313268137
+    },
+    "reference_scaled_median_bandwidth": 3.3294683024686815,
+    "reference_scaled_mmd2": 0.754808685321937
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.0,
+    "xx": 0.424104924532021,
+    "yy": 0.424104924532021,
+    "xy": 0.424104924532021,
+    "mmd2": 0.0,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 0.0,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.5344581543820758,
+      "density": 3.56157037489086e-07,
+      "mean_degree": 0.0008551330470113332,
+      "degree_variance": 0.0034316088029274993,
+      "clustering": 7.723631992927947e-06,
+      "triangles": 0.4600434124919668,
+      "transitivity": 6.131544886950711e-06,
+      "components": 0.0011974799421012132
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.0,
+      "10.0": 0.0,
+      "100.0": 0.0,
+      "1000.0": 0.0
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.0
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.1,
+    "xx": 0.424104924532021,
+    "yy": 0.36695344489474846,
+    "xy": 0.2693766616764169,
+    "mmd2": 0.25230504607393567,
+    "reproduction_abs_error": 1.6653345369377348e-16,
+    "paired_l2": 18.877432758206385,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.4374825368481046,
+      "density": 2.9153355225195814e-07,
+      "mean_degree": 0.0006999720589569749,
+      "degree_variance": 0.0031156873460611674,
+      "clustering": 6.326186137196558e-06,
+      "triangles": 0.558148711284304,
+      "transitivity": 4.4488663890216525e-06,
+      "components": 0.0005420258764947002
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.024314039206415696,
+      "10.0": 0.25230504607393567,
+      "100.0": 0.03322435920057232,
+      "1000.0": 0.0003542013233690522
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.2603765820919015
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.2,
+    "xx": 0.424104924532021,
+    "yy": 0.3241389129073884,
+    "xy": 0.08253759632595424,
+    "mmd2": 0.5831686447875009,
+    "reproduction_abs_error": 2.220446049250313e-16,
+    "paired_l2": 39.356615877663295,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.37922812351990454,
+      "density": 2.52713451741707e-07,
+      "mean_degree": 0.000606764997631849,
+      "degree_variance": 0.0025845905772683047,
+      "clustering": 4.875917033593492e-06,
+      "triangles": 0.617368194742897,
+      "transitivity": 3.157257830725786e-06,
+      "components": 0.00020404027398214703
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027259537409459706,
+      "10.0": 0.5831686447875009,
+      "100.0": 0.13958479816997538,
+      "1000.0": 0.0015436802747250677
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.7018064282222711
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.3,
+    "xx": 0.424104924532021,
+    "yy": 0.2858777247552746,
+    "xy": 0.014065930895906522,
+    "mmd2": 0.6818507874954826,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 61.18035753695319,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3421691849634884,
+      "density": 2.2801778256625391e-07,
+      "mean_degree": 0.0005474706959415763,
+      "degree_variance": 0.0023770528516999924,
+      "clustering": 3.6672805883058593e-06,
+      "triangles": 0.6548043810349489,
+      "transitivity": 2.3089432282889523e-06,
+      "components": 9.57062123220736e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02750611870738392,
+      "10.0": 0.6818507874954826,
+      "100.0": 0.31668377939379466,
+      "1000.0": 0.003729749224680612
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.9254500748970759
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.4,
+    "xx": 0.424104924532021,
+    "yy": 0.24426839171672046,
+    "xy": 0.0018438099124095182,
+    "mmd2": 0.6646856964239224,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 84.63288308961174,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.3143000563421848,
+      "density": 2.0944610168575248e-07,
+      "mean_degree": 0.0005028800901474954,
+      "degree_variance": 0.002162546242748491,
+      "clustering": 2.870985765059448e-06,
+      "triangles": 0.6829773208047419,
+      "transitivity": 1.7298620970985502e-06,
+      "components": 5.238622621356513e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.027168054465760136,
+      "10.0": 0.6646856964239224,
+      "100.0": 0.5507966588553337,
+      "1000.0": 0.00712978202057557
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.9670166704883569
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.5,
+    "xx": 0.424104924532021,
+    "yy": 0.21715007845025366,
+    "xy": 8.976320798332513e-05,
+    "mmd2": 0.641075476566308,
+    "reproduction_abs_error": 2.220446049250313e-16,
+    "paired_l2": 109.4261545225061,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.293440664456328,
+      "density": 1.9554563229075627e-07,
+      "mean_degree": 0.00046950506313012233,
+      "degree_variance": 0.0019951956065565484,
+      "clustering": 2.213647082893411e-06,
+      "triangles": 0.7040587877326899,
+      "transitivity": 1.3230017112593702e-06,
+      "components": 3.2114946869014664e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025997193294525316,
+      "10.0": 0.641075476566308,
+      "100.0": 0.8152323474897731,
+      "1000.0": 0.011902718462616813
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.9502039403616765
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.6,
+    "xx": 0.424104924532021,
+    "yy": 0.18900723070170314,
+    "xy": 8.493058900288068e-07,
+    "mmd2": 0.6131104566219441,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 135.62784182681222,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.27276108760247764,
+      "density": 1.8176498965595785e-07,
+      "mean_degree": 0.00043641774016396065,
+      "degree_variance": 0.0018553214669100667,
+      "clustering": 1.7254130149478898e-06,
+      "triangles": 0.7249230260093701,
+      "transitivity": 1.0553767179826595e-06,
+      "components": 2.1184626355755215e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02597016767999421,
+      "10.0": 0.6131104566219441,
+      "100.0": 1.077001650410109,
+      "1000.0": 0.018252220706191258
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.9192186272464056
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.7,
+    "xx": 0.424104924532021,
+    "yy": 0.16469919598956326,
+    "xy": 1.1946409715898153e-10,
+    "mmd2": 0.588804120282656,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 163.7097177823267,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.2540099909698925,
+      "density": 1.6926946503616187e-07,
+      "mean_degree": 0.00040641598555182437,
+      "degree_variance": 0.0017470120626227978,
+      "clustering": 1.381571740750832e-06,
+      "triangles": 0.7438195164404087,
+      "transitivity": 8.500749912426922e-07,
+      "components": 1.4663625327127456e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025714431082051792,
+      "10.0": 0.588804120282656,
+      "100.0": 1.3116141105128758,
+      "1000.0": 0.026529421315411694
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.8727028650896538
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.8,
+    "xx": 0.424104924532021,
+    "yy": 0.14018877148515416,
+    "xy": 8.185673751063163e-17,
+    "mmd2": 0.564293696017175,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 193.78333457053841,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.236126556710307,
+      "density": 1.5735214108142025e-07,
+      "mean_degree": 0.00037780249073649116,
+      "degree_variance": 0.0016334366571000743,
+      "clustering": 1.1127158437339116e-06,
+      "triangles": 0.7618497345101746,
+      "transitivity": 6.941372567304548e-07,
+      "components": 1.050542644020356e-05
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025611455732333907,
+      "10.0": 0.564293696017175,
+      "100.0": 1.489492418084842,
+      "1000.0": 0.037049490665561624
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.8270113068608839
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 0.9,
+    "xx": 0.424104924532021,
+    "yy": 0.12939684880390082,
+    "xy": 6.318425163333606e-24,
+    "mmd2": 0.5535017733359218,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 226.062906760174,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.21922755242749714,
+      "density": 1.460908304389783e-07,
+      "mean_degree": 0.0003507640838839926,
+      "degree_variance": 0.0015406738426724056,
+      "clustering": 8.966238414638115e-07,
+      "triangles": 0.778871640076013,
+      "transitivity": 5.758836083198639e-07,
+      "components": 7.750971653335482e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025461179973235694,
+      "10.0": 0.5535017733359218,
+      "100.0": 1.6170479504989022,
+      "1000.0": 0.05022926566875663
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.8013818811183474
+  },
+  {
+    "dataset": "stochastic_block_model",
+    "seed": 0,
+    "alpha": 1.0,
+    "xx": 0.424104924532021,
+    "yy": 0.11817365850770398,
+    "xy": 6.38168562651164e-36,
+    "mmd2": 0.542278583039725,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 262.5475446104968,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.0,
+      "edges": 0.20217627545714764,
+      "density": 1.3472804695186407e-07,
+      "mean_degree": 0.0003234820407314351,
+      "degree_variance": 0.0014554210810262564,
+      "clustering": 7.314994285933231e-07,
+      "triangles": 0.7960377068463854,
+      "transitivity": 4.818118799787253e-07,
+      "components": 5.766535353655189e-06
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025518215299739827,
+      "10.0": 0.542278583039725,
+      "100.0": 1.6954712829347707,
+      "1000.0": 0.06741278243004989
+    },
+    "reference_scaled_median_bandwidth": 3.4254465168560952,
+    "reference_scaled_mmd2": 0.7729394618178014
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.0,
+    "xx": 0.06763892901560752,
+    "yy": 0.06763892901560752,
+    "xy": 0.06763892901560752,
+    "mmd2": 0.0,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 0.0,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.00011008225873530481,
+      "edges": 0.011201300471969013,
+      "density": 8.089640517800559e-08,
+      "mean_degree": 3.9281402660257844e-05,
+      "degree_variance": 0.00023399663939864052,
+      "clustering": 1.8522897509277055e-09,
+      "triangles": 0.9884152218483702,
+      "transitivity": 3.463017169459494e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.0,
+      "10.0": 0.0,
+      "100.0": 0.0,
+      "1000.0": 0.0
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.0
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.1,
+    "xx": 0.06763892901560752,
+    "yy": 0.060375602241525425,
+    "xy": 0.058970224296298196,
+    "mmd2": 0.010074082664536549,
+    "reproduction_abs_error": 4.85722573273506e-17,
+    "paired_l2": 14.653586984551064,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.00010958290623610437,
+      "edges": 0.011412568838216132,
+      "density": 8.171150274450009e-08,
+      "mean_degree": 3.92335644420254e-05,
+      "degree_variance": 0.00020357761024443092,
+      "clustering": 1.0787033813611743e-08,
+      "triangles": 0.9882349089462679,
+      "transitivity": 3.5636056979160095e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02715078439307231,
+      "10.0": 0.010074082664536549,
+      "100.0": 0.0030185574488357236,
+      "1000.0": 0.00014277308295329583
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.477650369868425
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.2,
+    "xx": 0.06763892901560752,
+    "yy": 0.0550971461654565,
+    "xy": 0.049863340933936115,
+    "mmd2": 0.023009393313191795,
+    "reproduction_abs_error": 9.367506770274758e-17,
+    "paired_l2": 38.083320273810365,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.00010807810511895093,
+      "edges": 0.01160906432286512,
+      "density": 8.49950540042886e-08,
+      "mean_degree": 3.954183042157324e-05,
+      "degree_variance": 0.00018485833275716404,
+      "clustering": 2.3768919392071457e-08,
+      "triangles": 0.9880583104286269,
+      "transitivity": 3.8216236861470345e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02488309292886906,
+      "10.0": 0.023009393313191795,
+      "100.0": 0.015518815873306835,
+      "1000.0": 0.0008964221551501783
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.719497413354177
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.3,
+    "xx": 0.06763892901560752,
+    "yy": 0.04647174084832254,
+    "xy": 0.040277531417134665,
+    "mmd2": 0.03355560702966073,
+    "reproduction_abs_error": 3.469446951953614e-17,
+    "paired_l2": 68.44787347312293,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.00010498221423555701,
+      "edges": 0.011735756333612393,
+      "density": 8.82901959726966e-08,
+      "mean_degree": 4.001239171812536e-05,
+      "degree_variance": 0.00017274399497675173,
+      "clustering": 3.127065552964761e-08,
+      "triangles": 0.9879463465659192,
+      "transitivity": 3.893868653373926e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.0257971368902965,
+      "10.0": 0.03355560702966073,
+      "100.0": 0.038435169381895506,
+      "1000.0": 0.0026191101631907188
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.6734565007943478
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.4,
+    "xx": 0.06763892901560752,
+    "yy": 0.040787369334103735,
+    "xy": 0.030464633756676882,
+    "mmd2": 0.047497030836357486,
+    "reproduction_abs_error": 8.326672684688674e-17,
+    "paired_l2": 106.2102013898004,
+    "cross_distance_feature_fraction": {
+      "nodes": 0.00010042796010769751,
+      "edges": 0.011753798472560487,
+      "density": 9.251204809383093e-08,
+      "mean_degree": 4.046622803267963e-05,
+      "degree_variance": 0.00016426312665326033,
+      "clustering": 3.5095357900645834e-08,
+      "triangles": 0.9879408779207064,
+      "transitivity": 3.868453354912436e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025002563884945116,
+      "10.0": 0.047497030836357486,
+      "100.0": 0.0787127881255123,
+      "1000.0": 0.00573121406287469
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.5726824497610589
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.5,
+    "xx": 0.06763892901560752,
+    "yy": 0.037821540196890206,
+    "xy": 0.025972442577436857,
+    "mmd2": 0.053515584057624,
+    "reproduction_abs_error": 0.0,
+    "paired_l2": 153.94528527168302,
+    "cross_distance_feature_fraction": {
+      "nodes": 9.329139552420372e-05,
+      "edges": 0.011503912322324589,
+      "density": 9.595546778947597e-08,
+      "mean_degree": 4.034825980206189e-05,
+      "degree_variance": 0.0001545454253760581,
+      "clustering": 3.2719153632847044e-08,
+      "triangles": 0.9882077366784007,
+      "transitivity": 3.724395094166331e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.025761093397451685,
+      "10.0": 0.053515584057624,
+      "100.0": 0.13280397828653157,
+      "1000.0": 0.010610555660783616
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.4909558146886697
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.6,
+    "xx": 0.06763892901560752,
+    "yy": 0.03560388792867979,
+    "xy": 0.022313906478753393,
+    "mmd2": 0.05861500398678052,
+    "reproduction_abs_error": 1.3877787807814457e-17,
+    "paired_l2": 199.04972883773618,
+    "cross_distance_feature_fraction": {
+      "nodes": 8.544467145030477e-05,
+      "edges": 0.01107184732432321,
+      "density": 9.676139019217297e-08,
+      "mean_degree": 3.9376169264211477e-05,
+      "degree_variance": 0.0001423645107233497,
+      "clustering": 2.9528434850826342e-08,
+      "triangles": 0.9886608054577883,
+      "transitivity": 3.557662577302767e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.02678483313875877,
+      "10.0": 0.05861500398678052,
+      "100.0": 0.19126345299910452,
+      "1000.0": 0.016964038464432063
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.4347696437469818
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.7,
+    "xx": 0.06763892901560752,
+    "yy": 0.03809451376901792,
+    "xy": 0.018582298224665478,
+    "mmd2": 0.06856884633529448,
+    "reproduction_abs_error": 6.938893903907228e-17,
+    "paired_l2": 234.19535389693235,
+    "cross_distance_feature_fraction": {
+      "nodes": 8.451610607335118e-05,
+      "edges": 0.011295896885731028,
+      "density": 1.0476889639443737e-07,
+      "mean_degree": 4.086856990235366e-05,
+      "degree_variance": 0.00014207616182606677,
+      "clustering": 2.779984016958885e-08,
+      "triangles": 0.9884364731065535,
+      "transitivity": 3.6601177248743485e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.029994456858739915,
+      "10.0": 0.06856884633529448,
+      "100.0": 0.26316324621784215,
+      "1000.0": 0.025423850376373736
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.4356178759744176
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.8,
+    "xx": 0.06763892901560752,
+    "yy": 0.0417985202760655,
+    "xy": 0.016032934546607636,
+    "mmd2": 0.07737158019845775,
+    "reproduction_abs_error": 4.163336342344337e-17,
+    "paired_l2": 267.5731101787141,
+    "cross_distance_feature_fraction": {
+      "nodes": 8.370039034600201e-05,
+      "edges": 0.011564396740901133,
+      "density": 1.1150804280510095e-07,
+      "mean_degree": 4.242544978580009e-05,
+      "degree_variance": 0.0001422550893597852,
+      "clustering": 2.5934315094094475e-08,
+      "triangles": 0.9881670473359345,
+      "transitivity": 3.755131491306715e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.03530172387797414,
+      "10.0": 0.07737158019845775,
+      "100.0": 0.3309300169283934,
+      "1000.0": 0.03450841138839644
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.46554061430387317
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 0.9,
+    "xx": 0.06763892901560752,
+    "yy": 0.051937780932183736,
+    "xy": 0.014566754342861848,
+    "mmd2": 0.09044320126206756,
+    "reproduction_abs_error": 6.938893903907228e-17,
+    "paired_l2": 294.58229727957837,
+    "cross_distance_feature_fraction": {
+      "nodes": 8.299638044294917e-05,
+      "edges": 0.01185006193292841,
+      "density": 1.1545987472485605e-07,
+      "mean_degree": 4.3676237453280745e-05,
+      "degree_variance": 0.0001420222730833423,
+      "clustering": 2.3801707963609817e-08,
+      "triangles": 0.9878810665786147,
+      "transitivity": 3.733589454794179e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.045420867479839575,
+      "10.0": 0.09044320126206756,
+      "100.0": 0.38669937659334713,
+      "1000.0": 0.04282971767029431
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.46918230913216125
+  },
+  {
+    "dataset": "imdb_binary",
+    "seed": 0,
+    "alpha": 1.0,
+    "xx": 0.06763892901560752,
+    "yy": 0.0510022181091156,
+    "xy": 0.012678451831734761,
+    "mmd2": 0.09328424346125361,
+    "reproduction_abs_error": 1.1102230246251565e-16,
+    "paired_l2": 320.8335939551861,
+    "cross_distance_feature_fraction": {
+      "nodes": 8.231240106940587e-05,
+      "edges": 0.012162168245253093,
+      "density": 1.18383921827816e-07,
+      "mean_degree": 4.491962383161985e-05,
+      "degree_variance": 0.00014061734642347294,
+      "clustering": 2.0983451472053544e-08,
+      "triangles": 0.9875698065188713,
+      "transitivity": 3.64971779075083e-08,
+      "components": 0.0
+    },
+    "raw_bandwidth_sweep": {
+      "1.0": 0.04637093869692542,
+      "10.0": 0.09328424346125361,
+      "100.0": 0.43149476610575044,
+      "1000.0": 0.05177176331926403
+    },
+    "reference_scaled_median_bandwidth": 2.5503687622359426,
+    "reference_scaled_mmd2": 0.443368003904747
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source_files_unchanged_since_analysis": 4,
+  "report_local_links_exist": true,
+  "key_count_checks_passed": true,
+  "implementation_source_sha256": {
+    "src/experimentation/datasets.py": "78da8a1ec7d4d6a148415d84cfcdbe4e75259e95021661a0aaa04cc7ca6f8b23",
+    "src/experimentation/randomness.py": "bd6dedfa692bd334464e558eb821ec470d385ddeff136cf6d5039e1f0a70f787",
+    "src/experimentation/perturbations.py": "5d9fc0fd879f34dfe6ee1c92f59f39cc48015ee2d79ff5486960efa5a6b93cfd",
+    "src/experimentation/workflows.py": "e806231acc49a886f85e7f05ac5d97424fd6319440811058ae403eef7ae62b0a",
+    "src/experimentation/artifacts.py": "fe0abcaaed62ea82772ed76c0f0bd88e7eb9b9ebb33df68e3adada379dd38960",
+    "src/experimentation/graph.py": "b4e1cc3567d3890774d5d4d731e29f263ea44e3e3b44b356bfcd5720acaa124f",
+    "src/experimentation/config.py": "336168f30f55ab2cad8c4b9ab2d753b92554e20b3c77afe3c8ccaaf80d7c2f30"
+  }
+}

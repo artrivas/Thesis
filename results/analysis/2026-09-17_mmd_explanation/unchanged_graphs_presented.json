@@ -1,0 +1,1100 @@
+{
+  "definition": "Same node count and exact labeled edge set as original; not graph isomorphism or equality of metric score. Repeated graph-alpha cases, not independent graphs.",
+  "source": "Saved topology audit for BA triangle and ER community; reproduction of original pilot master 20260917 for BA edge and SBM community, checked against prior mean edit counts.",
+  "summaries": [
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "positive_alpha_no_ops": 0,
+      "positive_alpha_cases": 3000,
+      "alpha_zero_no_ops": 300,
+      "alpha_zero_cases": 300
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "positive_alpha_no_ops": 0,
+      "positive_alpha_cases": 3000,
+      "alpha_zero_no_ops": 300,
+      "alpha_zero_cases": 300
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "positive_alpha_no_ops": 0,
+      "positive_alpha_cases": 3000,
+      "alpha_zero_no_ops": 300,
+      "alpha_zero_cases": 300
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "positive_alpha_no_ops": 0,
+      "positive_alpha_cases": 3000,
+      "alpha_zero_no_ops": 300,
+      "alpha_zero_cases": 300
+    }
+  ],
+  "records": [
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 0,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 1,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "edge_insertion",
+      "seed": 2,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.0,
+      "graphs": 100,
+      "no_ops": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.1,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.2,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.3,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.4,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.5,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.6,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.7,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.8,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.9,
+      "graphs": 100,
+      "no_ops": 0
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 1.0,
+      "graphs": 100,
+      "no_ops": 0
+    }
+  ],
+  "source_hashes": {
+    "cell_structure.json": "643ce39cf367103a8a924bbf21bae38c98ee2cb2a13740cfc0997b8ad41af3b3",
+    "targeted_probes.json": "f5747663de90327d10e24e64d54f326a90b4cbe96715a94804d6fc36e0dbc3c9"
+  }
+}

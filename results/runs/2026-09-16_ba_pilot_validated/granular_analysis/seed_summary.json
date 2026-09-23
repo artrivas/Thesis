@@ -1,0 +1,74 @@
+[
+  {
+    "dataset": "barabasi_albert",
+    "perturbation": "triangle_insertion",
+    "workflow": "diversity_curves_shortest_path",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 0,
+    "seeds_nondecreasing_positive_alpha": 3,
+    "mean_opposes_absolute_majority_steps": 0,
+    "mean_opposes_more_nonzero_steps": 0,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "figure": "seed_figures/barabasi_albert__triangle_insertion__diversity_curves_shortest_path.png"
+  },
+  {
+    "dataset": "barabasi_albert",
+    "perturbation": "triangle_insertion",
+    "workflow": "native_netlsd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 0,
+    "seeds_nondecreasing_positive_alpha": 3,
+    "mean_opposes_absolute_majority_steps": 0,
+    "mean_opposes_more_nonzero_steps": 0,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "figure": "seed_figures/barabasi_albert__triangle_insertion__native_netlsd.png"
+  },
+  {
+    "dataset": "barabasi_albert",
+    "perturbation": "triangle_insertion",
+    "workflow": "structural_statistics_mmd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 3,
+    "seeds_nondecreasing_positive_alpha": 0,
+    "mean_opposes_absolute_majority_steps": 0,
+    "mean_opposes_more_nonzero_steps": 0,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      0.3,
+      0.3,
+      0.3
+    ],
+    "figure": "seed_figures/barabasi_albert__triangle_insertion__structural_statistics_mmd.png"
+  },
+  {
+    "dataset": "barabasi_albert",
+    "perturbation": "triangle_insertion",
+    "workflow": "wl_subtree_kernel_mmd",
+    "seed_count": 3,
+    "positive_alpha_interval_count": 9,
+    "seeds_with_any_decrease_positive_alpha": 0,
+    "seeds_nondecreasing_positive_alpha": 3,
+    "mean_opposes_absolute_majority_steps": 0,
+    "mean_opposes_more_nonzero_steps": 0,
+    "unchanged_score_with_increasing_edit_count_cells": 0,
+    "first_peak_alpha_by_seed": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "figure": "seed_figures/barabasi_albert__triangle_insertion__wl_subtree_kernel_mmd.png"
+  }
+]

@@ -1,0 +1,144 @@
+{
+  "acceleration": "cpu",
+  "checkpoint_path": "results/runs/2026-09-16_zinc_pilot_validated/logs/checkpoint.json",
+  "code_changed_during_run": false,
+  "code_fingerprint": "dca9f6d270a4255bb91762cbbb875a4867587a7c0d891a3a97790e60ba781ff5",
+  "config": {
+    "dataset_configs": [
+      {
+        "data_root": "data",
+        "dataset_fingerprint": "1a97cb33f8552a5b692e74c7efbcb4b2bc5e6c70551cc59cc8363049047432ef",
+        "dataset_name": "ZINC",
+        "dataset_split": "val",
+        "dataset_variant": "subset12k",
+        "edge_probability": 0.1,
+        "family": "zinc",
+        "m": 2,
+        "master_seed": 20260917,
+        "num_blocks": 3,
+        "num_graphs": 100,
+        "num_nodes": 50,
+        "p_in": 0.25,
+        "p_out": 0.03,
+        "projection": "simple_undirected_topology_v1",
+        "randomness_protocol": "sha256_streams_v1",
+        "seed": 0
+      }
+    ],
+    "perturbations": {
+      "alpha_values": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "methods": [
+        "edge_insertion",
+        "edge_deletion",
+        "triangle_insertion",
+        "triangle_deletion",
+        "community_weakening",
+        "hub_modification"
+      ]
+    },
+    "schema_version": "graph_records_v1",
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "wl_label_initialization": "degree",
+    "workflows": [
+      "structural_statistics_mmd",
+      "wl_subtree_kernel_mmd",
+      "native_netlsd",
+      "diversity_curves_shortest_path"
+    ]
+  },
+  "config_hash": "f7a93293",
+  "ended_at": "2026-09-16T06:31:29.739111+00:00",
+  "git_commit": "51ee08851d073563c8d0707f17e3b117196fa8aa",
+  "hostname": "DESKTOP-AFQJDSS",
+  "library_versions": {
+    "numpy": "2.5.0",
+    "pandas": "3.0.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "plotly": "6.8.0",
+    "python": "3.14.4",
+    "streamlit": "1.58.0",
+    "torch": "2.14.0+cpu"
+  },
+  "output_root": "results/runs/2026-09-16_zinc_pilot_validated",
+  "result_path": "results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+  "run_id": "2026-09-16_zinc_pilot_validated",
+  "schema_version": "graph_records_v1",
+  "seed_range": null,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "started_at": "2026-09-16T06:22:41.708508+00:00",
+  "status": "finished",
+  "workers": 8,
+  "workflow_parameters": {
+    "diversity_curves_shortest_path": {
+      "distance_metric": "shortest_path",
+      "distribution_distance": "l2_between_mean_curves",
+      "diversity_contraction_mode": "random_edge",
+      "diversity_curve_definition": "shortest_path_spread",
+      "diversity_repetitions": 3,
+      "diversity_scale_count": "dataset_max_nodes",
+      "diversity_scale_schedule": "all_integer_cardinalities",
+      "diversity_upsampling_enabled": true,
+      "implementation_mode": "paper_faithful",
+      "method": "diversity_curves_shortest_path",
+      "random_seed": 0
+    },
+    "native_netlsd": {
+      "distribution_distance": "l2_between_mean_signatures",
+      "eigenvalue_count": "all",
+      "eigenvalue_mode": "full_spectrum",
+      "eigenvalue_solver": "numpy_eigvalsh_cpu",
+      "heat_signature": "heat_trace",
+      "implementation_mode": "paper_faithful",
+      "laplacian_type": "normalized",
+      "method": "native_netlsd",
+      "netlsd_normalization": "empty",
+      "netlsd_time_scale_count": 250,
+      "netlsd_time_scale_max": 100.0,
+      "netlsd_time_scale_min": 0.01,
+      "netlsd_time_scale_schedule": "logspace"
+    },
+    "structural_statistics_mmd": {
+      "bandwidth": 10.0,
+      "feature_count": 9,
+      "implementation_mode": "descriptor_baseline",
+      "kernel": "rbf_mmd",
+      "method": "structural_statistics_mmd"
+    },
+    "wl_subtree_kernel_mmd": {
+      "implementation_mode": "paper_faithful",
+      "method": "wl_subtree_kernel_mmd",
+      "wl_compression": "shared_canonical_dictionary_per_comparison",
+      "wl_feature_construction": "subtree_histograms_across_iterations",
+      "wl_iterations": 3,
+      "wl_kernel_distance_mode": "linear_mmd",
+      "wl_label_initialization": "degree",
+      "wl_node_label_key": "node_labels"
+    }
+  },
+  "workflows": [
+    "structural_statistics_mmd",
+    "wl_subtree_kernel_mmd",
+    "native_netlsd",
+    "diversity_curves_shortest_path"
+  ]
+}

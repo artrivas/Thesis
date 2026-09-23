@@ -1,0 +1,10 @@
+{
+  "source": "results/runs/2026-07-03_merged/results/results.csv.gz",
+  "sha256": "78a169e3fc4265eec2dcaeae31801ef115d1229277321aee2b7d62f483457daa",
+  "rows": 19008,
+  "settings": 72,
+  "figures": 72,
+  "steps_mean_opposes_absolute_majority": 8,
+  "steps_mean_opposes_more_nonzero": 9,
+  "scope": "Synthetic datasets only; seed-level distribution scores. No new p-values or graph-level inference."
+}

@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "source": "results/runs/2026-09-16_synthetic_debug_streams_v1/results/results.csv",
+  "rows": 432,
+  "expected_rows": 432,
+  "statuses": {
+    "success": 432
+  },
+  "cells": 108,
+  "graph_pairs": 540,
+  "unique_source_graphs": 30,
+  "unique_perturbation_streams": 180,
+  "positive_alpha_no_ops": {
+    "erdos_renyi/edge_insertion": 4,
+    "erdos_renyi/edge_deletion": 4,
+    "erdos_renyi/triangle_insertion": 14,
+    "erdos_renyi/triangle_deletion": 20,
+    "erdos_renyi/community_weakening": 4,
+    "erdos_renyi/hub_modification": 4,
+    "stochastic_block_model/edge_insertion": 5,
+    "stochastic_block_model/edge_deletion": 5,
+    "stochastic_block_model/triangle_insertion": 16,
+    "stochastic_block_model/triangle_deletion": 20,
+    "stochastic_block_model/community_weakening": 11,
+    "stochastic_block_model/hub_modification": 5
+  },
+  "no_op_reasons": {
+    "rounded_budget_zero": 58,
+    "no_feasible_change": 54
+  },
+  "graphstats_kernel_ranges": {
+    "xx": [
+      0.9560527750563403,
+      0.9950631274509248
+    ],
+    "xy": [
+      0.00018035981949505992,
+      0.9958859395424373
+    ],
+    "yy": [
+      0.848747275913398,
+      1.0
+    ]
+  },
+  "issues": [],
+  "interpretation": "Implementation and recorded-data checks; not proof of population independence or metric monotonicity"
+}

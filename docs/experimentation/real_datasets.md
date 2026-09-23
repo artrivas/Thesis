@@ -1,5 +1,13 @@
 # Real Datasets: IMDB-BINARY via the TUDataset Loader
 
+> **Retired 2026-09-23.** IMDB-BINARY and its generic TU-format loader
+> (`real_datasets.py`) were removed from the codebase as an uninformative
+> benchmark — see
+> [../../agent/decisions/2026-09-23-remove-imdb-binary.md](../../agent/decisions/2026-09-23-remove-imdb-binary.md).
+> This document is kept for historical reference when interpreting old
+> `imdb_binary` result rows; the loader, `config.imdb_config`, and the
+> `--config imdb` CLI target it describes no longer exist on `main`.
+
 ## Why IMDB-BINARY
 
 The synthetic families (ER, SBM, BA) are where the protocol has *ground truth*:
@@ -99,3 +107,11 @@ graphs vary widely (≈12–130+ nodes), which interacts with two design choices
 single-edge graphs) with correct structure and labels; a missing dataset raises
 an actionable error; the real family flows through `generate_graph_distribution`
 and a full `run_experiment` (detected communities, edit distances) unchanged.
+# ZINC implementation
+
+ZINC now has a dedicated checked JSON-cache loader, topology projection,
+`zinc-debug` / `zinc-pilot` / `zinc` configurations, and graph-level logging.
+See [corrected runs and ZINC](corrected_runs.md) for import commands, sanity
+checks, dataset provenance, and the distinction between no-op perturbations and
+metric insensitivity. IMDB-BINARY remains available for historical reproduction
+but is excluded from the forthcoming thesis production experiments.

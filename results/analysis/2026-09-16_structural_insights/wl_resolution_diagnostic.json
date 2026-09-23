@@ -1,0 +1,1364 @@
+{
+  "records": [
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 48.29959999999983,
+          "xx": 711.3498,
+          "yy": 529.893,
+          "xy": 596.4716000000001,
+          "mean_feature_cosine": 0.9715252047752047,
+          "unique_labels_pooled": 25,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 25,
+          "within_sample_diagonal_term": 12.9882,
+          "off_diagonal_plus_cross_term": 35.31139999999983
+        },
+        {
+          "level": 1,
+          "score": 1.6869999999999994,
+          "xx": 7.8646,
+          "yy": 4.4632000000000005,
+          "xy": 5.3204,
+          "mean_feature_cosine": 0.8980133460945607,
+          "unique_labels_pooled": 3998,
+          "fraction_node_labels_occurring_only_once": 0.3042,
+          "shared_label_types": 683,
+          "within_sample_diagonal_term": 1.3148,
+          "off_diagonal_plus_cross_term": 0.3721999999999994
+        },
+        {
+          "level": 2,
+          "score": 1.0559999999999998,
+          "xx": 0.5424,
+          "yy": 0.5192,
+          "xy": 0.0028,
+          "mean_feature_cosine": 0.005276316623844075,
+          "unique_labels_pooled": 9694,
+          "fraction_node_labels_occurring_only_once": 0.9417,
+          "shared_label_types": 27,
+          "within_sample_diagonal_term": 1.061,
+          "off_diagonal_plus_cross_term": -0.0050000000000001155
+        },
+        {
+          "level": 3,
+          "score": 1.0594000000000001,
+          "xx": 0.5408000000000001,
+          "yy": 0.5186000000000001,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9732,
+          "fraction_node_labels_occurring_only_once": 0.9492,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0594,
+          "off_diagonal_plus_cross_term": 2.220446049250313e-16
+        }
+      ]
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 0,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 597.3602000000001,
+          "xx": 711.3498,
+          "yy": 210.8394,
+          "xy": 162.4145,
+          "mean_feature_cosine": 0.41937960544635167,
+          "unique_labels_pooled": 31,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 25,
+          "within_sample_diagonal_term": 9.9178,
+          "off_diagonal_plus_cross_term": 587.4424000000001
+        },
+        {
+          "level": 1,
+          "score": 7.7652,
+          "xx": 7.8646,
+          "yy": 0.5676,
+          "xy": 0.3335,
+          "mean_feature_cosine": 0.15784699751756323,
+          "unique_labels_pooled": 6677,
+          "fraction_node_labels_occurring_only_once": 0.6058,
+          "shared_label_types": 152,
+          "within_sample_diagonal_term": 1.212,
+          "off_diagonal_plus_cross_term": 6.5532
+        },
+        {
+          "level": 2,
+          "score": 1.0426,
+          "xx": 0.5424,
+          "yy": 0.5002,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9811,
+          "fraction_node_labels_occurring_only_once": 0.9645,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.042,
+          "off_diagonal_plus_cross_term": 0.0005999999999999339
+        },
+        {
+          "level": 3,
+          "score": 1.041,
+          "xx": 0.5408000000000001,
+          "yy": 0.5002,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9819,
+          "fraction_node_labels_occurring_only_once": 0.9661,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.041,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ]
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 49.28620000000001,
+          "xx": 720.31,
+          "yy": 536.5128,
+          "xy": 603.7683,
+          "mean_feature_cosine": 0.97122653959535,
+          "unique_labels_pooled": 27,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 27,
+          "within_sample_diagonal_term": 13.1918,
+          "off_diagonal_plus_cross_term": 36.09440000000001
+        },
+        {
+          "level": 1,
+          "score": 1.594800000000001,
+          "xx": 7.343,
+          "yy": 4.4076,
+          "xy": 5.0779,
+          "mean_feature_cosine": 0.8925782351360848,
+          "unique_labels_pooled": 3961,
+          "fraction_node_labels_occurring_only_once": 0.2967,
+          "shared_label_types": 687,
+          "within_sample_diagonal_term": 1.3214,
+          "off_diagonal_plus_cross_term": 0.2734000000000012
+        },
+        {
+          "level": 2,
+          "score": 1.0606,
+          "xx": 0.5428000000000001,
+          "yy": 0.5212,
+          "xy": 0.0017000000000000001,
+          "mean_feature_cosine": 0.0031961473886469353,
+          "unique_labels_pooled": 9697,
+          "fraction_node_labels_occurring_only_once": 0.9424,
+          "shared_label_types": 17,
+          "within_sample_diagonal_term": 1.064,
+          "off_diagonal_plus_cross_term": -0.0034000000000000696
+        },
+        {
+          "level": 3,
+          "score": 1.0622,
+          "xx": 0.5418000000000001,
+          "yy": 0.5204,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9723,
+          "fraction_node_labels_occurring_only_once": 0.9476,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0622,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ]
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 1,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 620.5365999999999,
+          "xx": 720.31,
+          "yy": 216.8474,
+          "xy": 158.3104,
+          "mean_feature_cosine": 0.40056464496158933,
+          "unique_labels_pooled": 30,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 27,
+          "within_sample_diagonal_term": 10.1154,
+          "off_diagonal_plus_cross_term": 610.4211999999999
+        },
+        {
+          "level": 1,
+          "score": 7.258799999999999,
+          "xx": 7.343,
+          "yy": 0.5726,
+          "xy": 0.3284,
+          "mean_feature_cosine": 0.16015507770790108,
+          "unique_labels_pooled": 6678,
+          "fraction_node_labels_occurring_only_once": 0.6042,
+          "shared_label_types": 136,
+          "within_sample_diagonal_term": 1.2108,
+          "off_diagonal_plus_cross_term": 6.047999999999999
+        },
+        {
+          "level": 2,
+          "score": 1.0436,
+          "xx": 0.5428000000000001,
+          "yy": 0.5008,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9811,
+          "fraction_node_labels_occurring_only_once": 0.9647,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0436,
+          "off_diagonal_plus_cross_term": 0.0
+        },
+        {
+          "level": 3,
+          "score": 1.0426000000000002,
+          "xx": 0.5418000000000001,
+          "yy": 0.5008,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9816,
+          "fraction_node_labels_occurring_only_once": 0.9657,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0426,
+          "off_diagonal_plus_cross_term": 2.220446049250313e-16
+        }
+      ]
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 47.534400000000005,
+          "xx": 718.8204000000001,
+          "yy": 539.5084,
+          "xy": 605.3972000000001,
+          "mean_feature_cosine": 0.9721451316121538,
+          "unique_labels_pooled": 25,
+          "fraction_node_labels_occurring_only_once": 0.0002,
+          "shared_label_types": 22,
+          "within_sample_diagonal_term": 13.1988,
+          "off_diagonal_plus_cross_term": 34.33560000000001
+        },
+        {
+          "level": 1,
+          "score": 1.6199999999999992,
+          "xx": 7.6610000000000005,
+          "yy": 4.493,
+          "xy": 5.267,
+          "mean_feature_cosine": 0.8977437243596709,
+          "unique_labels_pooled": 3985,
+          "fraction_node_labels_occurring_only_once": 0.3017,
+          "shared_label_types": 659,
+          "within_sample_diagonal_term": 1.2964,
+          "off_diagonal_plus_cross_term": 0.3235999999999992
+        },
+        {
+          "level": 2,
+          "score": 1.0639999999999998,
+          "xx": 0.5484,
+          "yy": 0.5214,
+          "xy": 0.0029000000000000002,
+          "mean_feature_cosine": 0.005423301654748527,
+          "unique_labels_pooled": 9673,
+          "fraction_node_labels_occurring_only_once": 0.9388,
+          "shared_label_types": 29,
+          "within_sample_diagonal_term": 1.0698,
+          "off_diagonal_plus_cross_term": -0.005800000000000249
+        },
+        {
+          "level": 3,
+          "score": 1.068,
+          "xx": 0.547,
+          "yy": 0.521,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9711,
+          "fraction_node_labels_occurring_only_once": 0.9464,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.068,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ]
+    },
+    {
+      "dataset": "barabasi_albert",
+      "perturbation": "triangle_insertion",
+      "seed": 2,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 611.6602,
+          "xx": 718.8204000000001,
+          "yy": 212.5914,
+          "xy": 159.8758,
+          "mean_feature_cosine": 0.4089777560748113,
+          "unique_labels_pooled": 29,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 23,
+          "within_sample_diagonal_term": 9.9968,
+          "off_diagonal_plus_cross_term": 601.6634
+        },
+        {
+          "level": 1,
+          "score": 7.6164000000000005,
+          "xx": 7.6610000000000005,
+          "yy": 0.5734,
+          "xy": 0.309,
+          "mean_feature_cosine": 0.14743035251072753,
+          "unique_labels_pooled": 6635,
+          "fraction_node_labels_occurring_only_once": 0.598,
+          "shared_label_types": 138,
+          "within_sample_diagonal_term": 1.1978,
+          "off_diagonal_plus_cross_term": 6.4186000000000005
+        },
+        {
+          "level": 2,
+          "score": 1.0488,
+          "xx": 0.5484,
+          "yy": 0.5004000000000001,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9794,
+          "fraction_node_labels_occurring_only_once": 0.9619,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0488,
+          "off_diagonal_plus_cross_term": 0.0
+        },
+        {
+          "level": 3,
+          "score": 1.0474,
+          "xx": 0.547,
+          "yy": 0.5004000000000001,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9801,
+          "fraction_node_labels_occurring_only_once": 0.9633,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0474,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.5797999999999774,
+          "xx": 321.0172,
+          "yy": 315.7642,
+          "xy": 318.10080000000005,
+          "mean_feature_cosine": 0.9991234796745989,
+          "unique_labels_pooled": 17,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.2916,
+          "off_diagonal_plus_cross_term": -6.711800000000022
+        },
+        {
+          "level": 1,
+          "score": 0.9116000000000002,
+          "xx": 1.2534,
+          "yy": 1.2778,
+          "xy": 0.8098,
+          "mean_feature_cosine": 0.639884345329387,
+          "unique_labels_pooled": 5867,
+          "fraction_node_labels_occurring_only_once": 0.4359,
+          "shared_label_types": 1095,
+          "within_sample_diagonal_term": 1.0296,
+          "off_diagonal_plus_cross_term": -0.11799999999999988
+        },
+        {
+          "level": 2,
+          "score": 1.0018,
+          "xx": 0.5018,
+          "yy": 0.5098,
+          "xy": 0.0049,
+          "mean_feature_cosine": 0.009687926515934118,
+          "unique_labels_pooled": 9971,
+          "fraction_node_labels_occurring_only_once": 0.9954,
+          "shared_label_types": 10,
+          "within_sample_diagonal_term": 1.0008,
+          "off_diagonal_plus_cross_term": 0.001000000000000112
+        },
+        {
+          "level": 3,
+          "score": 1.0030000000000001,
+          "xx": 0.5016,
+          "yy": 0.5094000000000001,
+          "xy": 0.004,
+          "mean_feature_cosine": 0.00791319298098042,
+          "unique_labels_pooled": 9983,
+          "fraction_node_labels_occurring_only_once": 0.9978,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0008,
+          "off_diagonal_plus_cross_term": 0.002200000000000202
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 0,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.0643999999999778,
+          "xx": 321.0172,
+          "yy": 304.83,
+          "xy": 312.3914,
+          "mean_feature_cosine": 0.9986333492887209,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 15,
+          "within_sample_diagonal_term": 7.1796,
+          "off_diagonal_plus_cross_term": -6.115200000000022
+        },
+        {
+          "level": 1,
+          "score": 0.9894000000000001,
+          "xx": 1.2534,
+          "yy": 1.1898,
+          "xy": 0.7269,
+          "mean_feature_cosine": 0.5952410051461406,
+          "unique_labels_pooled": 6012,
+          "fraction_node_labels_occurring_only_once": 0.4554,
+          "shared_label_types": 990,
+          "within_sample_diagonal_term": 1.0286,
+          "off_diagonal_plus_cross_term": -0.0391999999999999
+        },
+        {
+          "level": 2,
+          "score": 1.0030000000000001,
+          "xx": 0.5018,
+          "yy": 0.5094000000000001,
+          "xy": 0.0041,
+          "mean_feature_cosine": 0.008109406258841044,
+          "unique_labels_pooled": 9981,
+          "fraction_node_labels_occurring_only_once": 0.9974,
+          "shared_label_types": 2,
+          "within_sample_diagonal_term": 1.0008,
+          "off_diagonal_plus_cross_term": 0.002200000000000202
+        },
+        {
+          "level": 3,
+          "score": 1.0030000000000001,
+          "xx": 0.5016,
+          "yy": 0.5094000000000001,
+          "xy": 0.004,
+          "mean_feature_cosine": 0.00791319298098042,
+          "unique_labels_pooled": 9983,
+          "fraction_node_labels_occurring_only_once": 0.9978,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0008,
+          "off_diagonal_plus_cross_term": 0.002200000000000202
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.25900000000001455,
+          "xx": 312.65479999999997,
+          "yy": 307.5072,
+          "xy": 309.9515,
+          "mean_feature_cosine": 0.9996168029987937,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.076,
+          "off_diagonal_plus_cross_term": -6.816999999999985
+        },
+        {
+          "level": 1,
+          "score": 0.9590000000000003,
+          "xx": 1.223,
+          "yy": 1.209,
+          "xy": 0.7365,
+          "mean_feature_cosine": 0.6056843778337867,
+          "unique_labels_pooled": 6049,
+          "fraction_node_labels_occurring_only_once": 0.4567,
+          "shared_label_types": 1023,
+          "within_sample_diagonal_term": 1.0228,
+          "off_diagonal_plus_cross_term": -0.06379999999999963
+        },
+        {
+          "level": 2,
+          "score": 0.9968,
+          "xx": 0.5112,
+          "yy": 0.5092,
+          "xy": 0.011800000000000001,
+          "mean_feature_cosine": 0.023128229450936805,
+          "unique_labels_pooled": 9971,
+          "fraction_node_labels_occurring_only_once": 0.9962,
+          "shared_label_types": 8,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0035999999999999366
+        },
+        {
+          "level": 3,
+          "score": 0.998,
+          "xx": 0.511,
+          "yy": 0.509,
+          "xy": 0.011000000000000001,
+          "mean_feature_cosine": 0.02156866891328267,
+          "unique_labels_pooled": 9980,
+          "fraction_node_labels_occurring_only_once": 0.9979,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0023999999999999577
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 1,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 2.0112000000000307,
+          "xx": 312.65479999999997,
+          "yy": 299.0038,
+          "xy": 304.8237,
+          "mean_feature_cosine": 0.9969602118024634,
+          "unique_labels_pooled": 17,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 6.9974,
+          "off_diagonal_plus_cross_term": -4.986199999999969
+        },
+        {
+          "level": 1,
+          "score": 1.0256,
+          "xx": 1.223,
+          "yy": 1.2550000000000001,
+          "xy": 0.7262000000000001,
+          "mean_feature_cosine": 0.5861667141988748,
+          "unique_labels_pooled": 6148,
+          "fraction_node_labels_occurring_only_once": 0.4735,
+          "shared_label_types": 948,
+          "within_sample_diagonal_term": 1.0264,
+          "off_diagonal_plus_cross_term": -0.0007999999999999119
+        },
+        {
+          "level": 2,
+          "score": 0.9985999999999999,
+          "xx": 0.5112,
+          "yy": 0.5096,
+          "xy": 0.0111,
+          "mean_feature_cosine": 0.02174767561699592,
+          "unique_labels_pooled": 9975,
+          "fraction_node_labels_occurring_only_once": 0.9969,
+          "shared_label_types": 2,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0018000000000000238
+        },
+        {
+          "level": 3,
+          "score": 0.9982,
+          "xx": 0.511,
+          "yy": 0.5092,
+          "xy": 0.011000000000000001,
+          "mean_feature_cosine": 0.02156443270212264,
+          "unique_labels_pooled": 9979,
+          "fraction_node_labels_occurring_only_once": 0.9977,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0021999999999999797
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 0.1,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.44259999999997035,
+          "xx": 310.521,
+          "yy": 302.5904,
+          "xy": 306.3344,
+          "mean_feature_cosine": 0.9993617156482899,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.119,
+          "off_diagonal_plus_cross_term": -6.676400000000029
+        },
+        {
+          "level": 1,
+          "score": 0.9286000000000003,
+          "xx": 1.2388000000000001,
+          "yy": 1.1608,
+          "xy": 0.7355,
+          "mean_feature_cosine": 0.6133429518579926,
+          "unique_labels_pooled": 6188,
+          "fraction_node_labels_occurring_only_once": 0.4774,
+          "shared_label_types": 998,
+          "within_sample_diagonal_term": 1.0278,
+          "off_diagonal_plus_cross_term": -0.09919999999999973
+        },
+        {
+          "level": 2,
+          "score": 1.0014,
+          "xx": 0.503,
+          "yy": 0.5134000000000001,
+          "xy": 0.0075,
+          "mean_feature_cosine": 0.01475874192721434,
+          "unique_labels_pooled": 9979,
+          "fraction_node_labels_occurring_only_once": 0.9974,
+          "shared_label_types": 4,
+          "within_sample_diagonal_term": 1.0002,
+          "off_diagonal_plus_cross_term": 0.0012000000000000899
+        },
+        {
+          "level": 3,
+          "score": 1.0018,
+          "xx": 0.503,
+          "yy": 0.5132,
+          "xy": 0.0072,
+          "mean_feature_cosine": 0.014171152774701433,
+          "unique_labels_pooled": 9983,
+          "fraction_node_labels_occurring_only_once": 0.9982,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0002,
+          "off_diagonal_plus_cross_term": 0.0016000000000000458
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "perturbation": "community_weakening",
+      "seed": 2,
+      "alpha": 1.0,
+      "kind": "recorded_pilot",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.6699999999999591,
+          "xx": 310.521,
+          "yy": 300.3868,
+          "xy": 305.1189,
+          "mean_feature_cosine": 0.9990407423637686,
+          "unique_labels_pooled": 18,
+          "fraction_node_labels_occurring_only_once": 0.0001,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.1014,
+          "off_diagonal_plus_cross_term": -6.431400000000041
+        },
+        {
+          "level": 1,
+          "score": 1.0182,
+          "xx": 1.2388000000000001,
+          "yy": 1.1596,
+          "xy": 0.6901,
+          "mean_feature_cosine": 0.5757809948009139,
+          "unique_labels_pooled": 6238,
+          "fraction_node_labels_occurring_only_once": 0.4837,
+          "shared_label_types": 971,
+          "within_sample_diagonal_term": 1.027,
+          "off_diagonal_plus_cross_term": -0.008799999999999919
+        },
+        {
+          "level": 2,
+          "score": 1.0015999999999998,
+          "xx": 0.503,
+          "yy": 0.5138,
+          "xy": 0.0076,
+          "mean_feature_cosine": 0.014949702483757423,
+          "unique_labels_pooled": 9976,
+          "fraction_node_labels_occurring_only_once": 0.9968,
+          "shared_label_types": 5,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": 0.0009999999999998899
+        },
+        {
+          "level": 3,
+          "score": 1.0024,
+          "xx": 0.503,
+          "yy": 0.5138,
+          "xy": 0.0072,
+          "mean_feature_cosine": 0.014162876037243876,
+          "unique_labels_pooled": 9980,
+          "fraction_node_labels_occurring_only_once": 0.9976,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": 0.0018000000000000238
+        }
+      ]
+    },
+    {
+      "dataset": "erdos_renyi",
+      "seed": 0,
+      "comparison_replicate": 100,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.0249999999999773,
+          "xx": 321.0172,
+          "yy": 309.3872,
+          "xy": 314.6897,
+          "mean_feature_cosine": 0.9985439993809518,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.1986,
+          "off_diagonal_plus_cross_term": -6.173600000000023
+        },
+        {
+          "level": 1,
+          "score": 1.0390000000000001,
+          "xx": 1.2534,
+          "yy": 1.1840000000000002,
+          "xy": 0.6992,
+          "mean_feature_cosine": 0.573958805720194,
+          "unique_labels_pooled": 6001,
+          "fraction_node_labels_occurring_only_once": 0.454,
+          "shared_label_types": 993,
+          "within_sample_diagonal_term": 1.025,
+          "off_diagonal_plus_cross_term": 0.014000000000000234
+        },
+        {
+          "level": 2,
+          "score": 1.0072,
+          "xx": 0.5018,
+          "yy": 0.5158,
+          "xy": 0.005200000000000001,
+          "mean_feature_cosine": 0.010221093149843175,
+          "unique_labels_pooled": 9980,
+          "fraction_node_labels_occurring_only_once": 0.9975,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": 0.006600000000000161
+        },
+        {
+          "level": 3,
+          "score": 1.0070000000000001,
+          "xx": 0.5016,
+          "yy": 0.5158,
+          "xy": 0.005200000000000001,
+          "mean_feature_cosine": 0.010223130644760221,
+          "unique_labels_pooled": 9981,
+          "fraction_node_labels_occurring_only_once": 0.9977,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": 0.006400000000000183
+        }
+      ],
+      "graphstats": {
+        "xx": 0.3930016022703819,
+        "yy": 0.38166008824840053,
+        "xy": 0.38420349512587737,
+        "score": 0.00625470026702768
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "erdos_renyi",
+      "seed": 1,
+      "comparison_replicate": 101,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.33600000000001273,
+          "xx": 312.65479999999997,
+          "yy": 311.8602,
+          "xy": 312.0895,
+          "mean_feature_cosine": 0.99946279149779,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.1372,
+          "off_diagonal_plus_cross_term": -6.801199999999987
+        },
+        {
+          "level": 1,
+          "score": 0.9720000000000004,
+          "xx": 1.223,
+          "yy": 1.2002000000000002,
+          "xy": 0.7256,
+          "mean_feature_cosine": 0.5989040284493308,
+          "unique_labels_pooled": 6060,
+          "fraction_node_labels_occurring_only_once": 0.4586,
+          "shared_label_types": 994,
+          "within_sample_diagonal_term": 1.0246,
+          "off_diagonal_plus_cross_term": -0.052599999999999536
+        },
+        {
+          "level": 2,
+          "score": 0.999,
+          "xx": 0.5112,
+          "yy": 0.5188,
+          "xy": 0.015500000000000002,
+          "mean_feature_cosine": 0.030097906720122095,
+          "unique_labels_pooled": 9971,
+          "fraction_node_labels_occurring_only_once": 0.9965,
+          "shared_label_types": 2,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": -0.0015999999999999348
+        },
+        {
+          "level": 3,
+          "score": 0.9988,
+          "xx": 0.511,
+          "yy": 0.5186000000000001,
+          "xy": 0.015400000000000002,
+          "mean_feature_cosine": 0.029915344919114205,
+          "unique_labels_pooled": 9974,
+          "fraction_node_labels_occurring_only_once": 0.9971,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0006,
+          "off_diagonal_plus_cross_term": -0.0017999999999999128
+        }
+      ],
+      "graphstats": {
+        "xx": 0.37740169997653916,
+        "yy": 0.3686017650916494,
+        "xy": 0.3691700747836222,
+        "score": 0.007663315500944234
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "erdos_renyi",
+      "seed": 2,
+      "comparison_replicate": 102,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.1400000000001,
+          "xx": 310.521,
+          "yy": 317.3456,
+          "xy": 313.3633,
+          "mean_feature_cosine": 0.9982432987423028,
+          "unique_labels_pooled": 16,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 7.1866,
+          "off_diagonal_plus_cross_term": -6.0465999999999
+        },
+        {
+          "level": 1,
+          "score": 1.0446000000000002,
+          "xx": 1.2388000000000001,
+          "yy": 1.2506000000000002,
+          "xy": 0.7224,
+          "mean_feature_cosine": 0.5803873349156491,
+          "unique_labels_pooled": 6062,
+          "fraction_node_labels_occurring_only_once": 0.4652,
+          "shared_label_types": 945,
+          "within_sample_diagonal_term": 1.0248,
+          "off_diagonal_plus_cross_term": 0.019800000000000262
+        },
+        {
+          "level": 2,
+          "score": 0.9994000000000001,
+          "xx": 0.503,
+          "yy": 0.5048,
+          "xy": 0.004200000000000001,
+          "mean_feature_cosine": 0.008335000395123445,
+          "unique_labels_pooled": 9985,
+          "fraction_node_labels_occurring_only_once": 0.9981,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0009999999999998899
+        },
+        {
+          "level": 3,
+          "score": 0.9992000000000001,
+          "xx": 0.503,
+          "yy": 0.5046,
+          "xy": 0.004200000000000001,
+          "mean_feature_cosine": 0.008336652034968275,
+          "unique_labels_pooled": 9986,
+          "fraction_node_labels_occurring_only_once": 0.9983,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0004,
+          "off_diagonal_plus_cross_term": -0.0011999999999998678
+        }
+      ],
+      "graphstats": {
+        "xx": 0.3562098910293773,
+        "yy": 0.3831615209216879,
+        "xy": 0.36298710294510217,
+        "score": 0.013397206060860922
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "seed": 0,
+      "comparison_replicate": 100,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.2582000000001017,
+          "xx": 371.9258,
+          "yy": 358.1846,
+          "xy": 364.42609999999996,
+          "mean_feature_cosine": 0.9984535504100276,
+          "unique_labels_pooled": 14,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 13,
+          "within_sample_diagonal_term": 8.217,
+          "off_diagonal_plus_cross_term": -6.958799999999899
+        },
+        {
+          "level": 1,
+          "score": 1.0728000000000009,
+          "xx": 3.5062,
+          "yy": 3.3852,
+          "xy": 2.9093,
+          "mean_feature_cosine": 0.844457890713583,
+          "unique_labels_pooled": 3619,
+          "fraction_node_labels_occurring_only_once": 0.2307,
+          "shared_label_types": 962,
+          "within_sample_diagonal_term": 1.0972,
+          "off_diagonal_plus_cross_term": -0.02439999999999909
+        },
+        {
+          "level": 2,
+          "score": 0.9970000000000001,
+          "xx": 0.56,
+          "yy": 0.5756,
+          "xy": 0.0693,
+          "mean_feature_cosine": 0.12206153536461176,
+          "unique_labels_pooled": 9882,
+          "fraction_node_labels_occurring_only_once": 0.9832,
+          "shared_label_types": 23,
+          "within_sample_diagonal_term": 1.0038,
+          "off_diagonal_plus_cross_term": -0.006799999999999917
+        },
+        {
+          "level": 3,
+          "score": 0.9986000000000002,
+          "xx": 0.5566,
+          "yy": 0.5716,
+          "xy": 0.0648,
+          "mean_feature_cosine": 0.11488340388356194,
+          "unique_labels_pooled": 9936,
+          "fraction_node_labels_occurring_only_once": 0.9921,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0036,
+          "off_diagonal_plus_cross_term": -0.004999999999999893
+        }
+      ],
+      "graphstats": {
+        "xx": 0.45924703536225625,
+        "yy": 0.41726343558647533,
+        "xy": 0.43185712134670795,
+        "score": 0.012796228255315678
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "seed": 1,
+      "comparison_replicate": 101,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.8464000000000169,
+          "xx": 367.34880000000004,
+          "yy": 364.6968,
+          "xy": 365.5996,
+          "mean_feature_cosine": 0.9988503424194236,
+          "unique_labels_pooled": 14,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 14,
+          "within_sample_diagonal_term": 8.2068,
+          "off_diagonal_plus_cross_term": -7.3603999999999825
+        },
+        {
+          "level": 1,
+          "score": 1.0176000000000007,
+          "xx": 3.3154000000000003,
+          "yy": 3.3646000000000003,
+          "xy": 2.8312,
+          "mean_feature_cosine": 0.8476876633091692,
+          "unique_labels_pooled": 3574,
+          "fraction_node_labels_occurring_only_once": 0.2249,
+          "shared_label_types": 957,
+          "within_sample_diagonal_term": 1.088,
+          "off_diagonal_plus_cross_term": -0.07039999999999935
+        },
+        {
+          "level": 2,
+          "score": 0.9990000000000001,
+          "xx": 0.5608000000000001,
+          "yy": 0.5674,
+          "xy": 0.06459999999999999,
+          "mean_feature_cosine": 0.11452066198399605,
+          "unique_labels_pooled": 9901,
+          "fraction_node_labels_occurring_only_once": 0.986,
+          "shared_label_types": 16,
+          "within_sample_diagonal_term": 1.005,
+          "off_diagonal_plus_cross_term": -0.005999999999999783
+        },
+        {
+          "level": 3,
+          "score": 0.9982,
+          "xx": 0.5576,
+          "yy": 0.5656,
+          "xy": 0.0625,
+          "mean_feature_cosine": 0.11129199675246781,
+          "unique_labels_pooled": 9936,
+          "fraction_node_labels_occurring_only_once": 0.9921,
+          "shared_label_types": 2,
+          "within_sample_diagonal_term": 1.0048,
+          "off_diagonal_plus_cross_term": -0.006599999999999939
+        }
+      ],
+      "graphstats": {
+        "xx": 0.4277109108731322,
+        "yy": 0.43781047070598506,
+        "xy": 0.4310875587701427,
+        "score": 0.003346264038831759
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "stochastic_block_model",
+      "seed": 2,
+      "comparison_replicate": 102,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.3509999999999991,
+          "xx": 362.87539999999996,
+          "yy": 361.8114,
+          "xy": 362.1679,
+          "mean_feature_cosine": 0.9995167301463698,
+          "unique_labels_pooled": 14,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 14,
+          "within_sample_diagonal_term": 8.1508,
+          "off_diagonal_plus_cross_term": -7.799800000000001
+        },
+        {
+          "level": 1,
+          "score": 0.9780000000000006,
+          "xx": 3.6806,
+          "yy": 3.3478000000000003,
+          "xy": 3.0252,
+          "mean_feature_cosine": 0.8618169438202757,
+          "unique_labels_pooled": 3608,
+          "fraction_node_labels_occurring_only_once": 0.2308,
+          "shared_label_types": 958,
+          "within_sample_diagonal_term": 1.0918,
+          "off_diagonal_plus_cross_term": -0.11379999999999946
+        },
+        {
+          "level": 2,
+          "score": 1.0016000000000003,
+          "xx": 0.6026,
+          "yy": 0.5654,
+          "xy": 0.0832,
+          "mean_feature_cosine": 0.14253806556825316,
+          "unique_labels_pooled": 9887,
+          "fraction_node_labels_occurring_only_once": 0.9843,
+          "shared_label_types": 19,
+          "within_sample_diagonal_term": 1.0046,
+          "off_diagonal_plus_cross_term": -0.0029999999999996696
+        },
+        {
+          "level": 3,
+          "score": 1.002,
+          "xx": 0.6008,
+          "yy": 0.5612,
+          "xy": 0.08,
+          "mean_feature_cosine": 0.13777365939344352,
+          "unique_labels_pooled": 9930,
+          "fraction_node_labels_occurring_only_once": 0.9915,
+          "shared_label_types": 1,
+          "within_sample_diagonal_term": 1.0046,
+          "off_diagonal_plus_cross_term": -0.0025999999999999357
+        }
+      ],
+      "graphstats": {
+        "xx": 0.423440336109803,
+        "yy": 0.42535874670204266,
+        "xy": 0.4224157007507484,
+        "score": 0.003967681310348858
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "seed": 0,
+      "comparison_replicate": 100,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.145799999999781,
+          "xx": 711.3498,
+          "yy": 708.8613999999999,
+          "xy": 709.5327,
+          "mean_feature_cosine": 0.9991947523375827,
+          "unique_labels_pooled": 26,
+          "fraction_node_labels_occurring_only_once": 0.0002,
+          "shared_label_types": 24,
+          "within_sample_diagonal_term": 14.7138,
+          "off_diagonal_plus_cross_term": -13.56800000000022
+        },
+        {
+          "level": 1,
+          "score": 1.362,
+          "xx": 7.8646,
+          "yy": 7.486400000000001,
+          "xy": 6.9945,
+          "mean_feature_cosine": 0.9115528245423065,
+          "unique_labels_pooled": 3424,
+          "fraction_node_labels_occurring_only_once": 0.2599,
+          "shared_label_types": 610,
+          "within_sample_diagonal_term": 1.4006,
+          "off_diagonal_plus_cross_term": -0.03859999999999997
+        },
+        {
+          "level": 2,
+          "score": 1.0844,
+          "xx": 0.5424,
+          "yy": 0.5424,
+          "xy": 0.0002,
+          "mean_feature_cosine": 0.00036873156342182896,
+          "unique_labels_pooled": 9617,
+          "fraction_node_labels_occurring_only_once": 0.9274,
+          "shared_label_types": 2,
+          "within_sample_diagonal_term": 1.0842,
+          "off_diagonal_plus_cross_term": 0.00019999999999997797
+        },
+        {
+          "level": 3,
+          "score": 1.0818,
+          "xx": 0.5408000000000001,
+          "yy": 0.541,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9634,
+          "fraction_node_labels_occurring_only_once": 0.9308,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0818,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ],
+      "graphstats": {
+        "xx": 0.8350467843162261,
+        "yy": 0.8286893529785324,
+        "xy": 0.8316727742138741,
+        "score": 0.00039058886701037743
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "seed": 1,
+      "comparison_replicate": 101,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 1.4126000000001113,
+          "xx": 720.31,
+          "yy": 697.549,
+          "xy": 708.2231999999999,
+          "mean_feature_cosine": 0.9991324562690288,
+          "unique_labels_pooled": 27,
+          "fraction_node_labels_occurring_only_once": 0.0004,
+          "shared_label_types": 21,
+          "within_sample_diagonal_term": 14.744,
+          "off_diagonal_plus_cross_term": -13.331399999999888
+        },
+        {
+          "level": 1,
+          "score": 1.355599999999999,
+          "xx": 7.343,
+          "yy": 8.0708,
+          "xy": 7.029100000000001,
+          "mean_feature_cosine": 0.9130712432935526,
+          "unique_labels_pooled": 3408,
+          "fraction_node_labels_occurring_only_once": 0.2579,
+          "shared_label_types": 563,
+          "within_sample_diagonal_term": 1.406,
+          "off_diagonal_plus_cross_term": -0.05040000000000089
+        },
+        {
+          "level": 2,
+          "score": 1.0822,
+          "xx": 0.5428000000000001,
+          "yy": 0.5394,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9634,
+          "fraction_node_labels_occurring_only_once": 0.9309,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0818,
+          "off_diagonal_plus_cross_term": 0.00039999999999995595
+        },
+        {
+          "level": 3,
+          "score": 1.0792000000000002,
+          "xx": 0.5418000000000001,
+          "yy": 0.5374,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9648,
+          "fraction_node_labels_occurring_only_once": 0.9336,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0792,
+          "off_diagonal_plus_cross_term": 2.220446049250313e-16
+        }
+      ],
+      "graphstats": {
+        "xx": 0.8023256365722146,
+        "yy": 0.8742541932852753,
+        "xy": 0.8333403677838287,
+        "score": 0.009899094289832489
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    },
+    {
+      "dataset": "barabasi_albert",
+      "seed": 2,
+      "comparison_replicate": 102,
+      "kind": "independent_unperturbed_reference",
+      "levels": [
+        {
+          "level": 0,
+          "score": 0.25040000000012697,
+          "xx": 718.8204000000001,
+          "yy": 713.8112000000001,
+          "xy": 716.1906,
+          "mean_feature_cosine": 0.9998313285075241,
+          "unique_labels_pooled": 26,
+          "fraction_node_labels_occurring_only_once": 0.0,
+          "shared_label_types": 23,
+          "within_sample_diagonal_term": 14.8792,
+          "off_diagonal_plus_cross_term": -14.628799999999874
+        },
+        {
+          "level": 1,
+          "score": 1.5282,
+          "xx": 7.6610000000000005,
+          "yy": 7.304,
+          "xy": 6.7184,
+          "mean_feature_cosine": 0.8981373220747892,
+          "unique_labels_pooled": 3443,
+          "fraction_node_labels_occurring_only_once": 0.2611,
+          "shared_label_types": 569,
+          "within_sample_diagonal_term": 1.404,
+          "off_diagonal_plus_cross_term": 0.12420000000000009
+        },
+        {
+          "level": 2,
+          "score": 1.0936,
+          "xx": 0.5484,
+          "yy": 0.5452,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9601,
+          "fraction_node_labels_occurring_only_once": 0.9258,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.0936,
+          "off_diagonal_plus_cross_term": 0.0
+        },
+        {
+          "level": 3,
+          "score": 1.09,
+          "xx": 0.547,
+          "yy": 0.543,
+          "xy": 0.0,
+          "mean_feature_cosine": 0.0,
+          "unique_labels_pooled": 9618,
+          "fraction_node_labels_occurring_only_once": 0.9291,
+          "shared_label_types": 0,
+          "within_sample_diagonal_term": 1.09,
+          "off_diagonal_plus_cross_term": 0.0
+        }
+      ],
+      "graphstats": {
+        "xx": 0.8369113220850726,
+        "yy": 0.8493102468401932,
+        "xy": 0.8389137932648848,
+        "score": 0.008393982395496158
+      },
+      "master_seed": 20260917,
+      "graphs_per_sample": 100
+    }
+  ],
+  "sources": [
+    {
+      "path": "results/runs/2026-09-16_ba_pilot_validated/results/results.csv",
+      "sha256": "8d72bf35ced838841c3e3ac1c39300f1f94643c1781e6d6a2f658412fd9b7cbd"
+    },
+    {
+      "path": "results/runs/2026-09-16_er_pilot_validated/results/results.csv",
+      "sha256": "226e304f0f92f1bb68517aae02cdfc9300d6d58620089cef3124524d65aef63d"
+    },
+    {
+      "path": "results/runs/2026-09-16_zinc_pilot_validated/results/results.csv",
+      "sha256": "3619a5b00cdc72067695154cc4dc69a0bd0ea4cef1d51205ac5e1281e390e89c"
+    }
+  ],
+  "script_sha256": "86369605582a7b001b84f4ac79d69a34b1f1cef859275df80d3909dd9947632e",
+  "interpretation": "Descriptive diagnostics; empirical MMD includes self-kernel terms. Independent reference draws are not significance thresholds."
+}
